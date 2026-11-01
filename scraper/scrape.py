@@ -340,7 +340,7 @@ def scrape_navy(_known: dict) -> list[dict]:
         hint = re.sub(r"^\d{2}-\d{2}-\d{4}-|\.(jpe?g|png|pdf)$", "", hint, flags=re.I)
         detail = f": {clean(hint[3:])}" if hint.upper().startswith("AD ") else ""
         out.append(make_job(
-            source="navy", key=ad_url, title=f"Join Pak Navy as {name}{detail}",
+            source="navy", key=f"{name}|{ad_url}", title=f"Join Pak Navy as {name}{detail}",
             org="Pakistan Navy", url=base, category="armed", cities=["All Pakistan"],
             qualification=NAVY_QUAL.get(name.lower(), "Any"),
             advertImage=ad_url, criteriaUrl=urljoin(base, crit["href"]) if crit else None,

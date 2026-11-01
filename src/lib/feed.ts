@@ -1,5 +1,5 @@
 import { FEED_URL } from './config';
-import { detectArmy, detectOnDevice } from './detect';
+import { detectOnDevice, mergePhoneSources } from './detect';
 import { useApp } from './store';
 import type { Feed, Job } from './types';
 
@@ -31,22 +31,14 @@ export function refreshJobs(): Promise<RefreshResult> {
     const { jobs, ingest } = useApp.getState();
     try {
       const feed = await fetchFeed();
-      // joinpakarmy.gov.pk blocks the (foreign) GitHub runner, so Army is always checked from the phone
-      const army = await detectArmy().catch(() => null);
-      if (army) {
-        const known = new Map([...jobs, ...feed.jobs].filter((j) => j.source === 'army').map((j) => [j.title, j]));
-        for (const j of army) {
-          const prev = known.get(j.title);
-          if (prev) Object.assign(j, { id: prev.id, firstSeen: prev.firstSeen });
-        }
-        feed.jobs = [...army, ...feed.jobs.filter((j) => j.source !== 'army')];
-      }
-      // keep jobs the device detected itself that the feed doesn't know yet
+      // PPSC / Army / Navy block the foreign servers that build the feed - the phone checks them itself
+      feed.jobs = (await mergePhoneSources(feed.jobs, jobs)).jobs;
+      // keep NJP jobs the device found itself (offline fallback) that the feed doesn't know yet
       const ids = new Set(feed.jobs.map((j) => j.id));
       const urls = new Set(feed.jobs.map((j) => j.url + j.title));
       const today = new Date(Date.now() + 5 * 3600_000).toISOString().slice(0, 10);
-      const extras = jobs.filter((j) => j.id.startsWith('dev-') && !ids.has(j.id) && !urls.has(j.url + j.title)
-        && (!j.lastDate || j.lastDate >= today));
+      const extras = jobs.filter((j) => j.source === 'njp' && j.id.startsWith('dev-') && !ids.has(j.id)
+        && !urls.has(j.url + j.title) && (!j.lastDate || j.lastDate >= today));
       // a job the device already found must not alert again when the feed catches up with a new id
       const devUrls = new Set(jobs.filter((j) => j.id.startsWith('dev-')).map((j) => j.url + j.title));
       const adopted = feed.jobs.filter((j) => devUrls.has(j.url + j.title)).map((j) => j.id);

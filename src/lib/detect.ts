@@ -175,25 +175,118 @@ export async function detectArmy(): Promise<Job[]> {
     });
 }
 
-/** Returns current jobs = cached jobs (still open) + anything newly detected. */
+const cellText = (html: string) => decode(html.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+
+function dmy(s?: string): string | undefined {
+  const m = s?.match(/(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})/);
+  return m ? `${m[3]}-${m[2]!.padStart(2, '0')}-${m[1]!.padStart(2, '0')}` : undefined;
+}
+
+/** PPSC current adverts table: SR | AD NO | CASE NO | POST | FEE | DEPARTMENT | AD DATE | CLOSING DATE */
+export async function detectPpsc(): Promise<Job[]> {
+  const base = 'https://www.ppsc.gop.pk/';
+  const html = await (await get(`${base}Jobs.aspx`)).text();
+  const out: Job[] = [];
+  for (const row of html.split(/<tr[\s>]/i).slice(1)) {
+    const cells = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((m) => cellText(m[1]!));
+    if (cells.length < 8 || !/^\d+$/.test(cells[0]!)) continue;
+    const [, adNo, caseNo, post, fee, dept, adDate, closing] = cells as string[];
+    const href = row.match(/href="([^"]+)"/i)?.[1];
+    out.push({
+      id: hash(`ppsc|${adNo}|${caseNo}`),
+      source: 'ppsc',
+      title: post!,
+      organization: dept || 'Punjab Public Service Commission',
+      category: 'psc',
+      cities: ['Punjab'],
+      qualification: detectQual(post!),
+      url: href ? new URL(decode(href), base).toString() : `${base}Jobs.aspx`,
+      applyUrl: 'https://ppsc.gop.pk/',
+      advertNo: adNo,
+      caseNo,
+      fee: fee ? `Rs ${fee}` : undefined,
+      postedDate: dmy(adDate),
+      lastDate: dmy(closing),
+      description: `PPSC Advertisement ${adNo}, Case No. ${caseNo}. Department: ${dept}.`,
+      firstSeen: new Date().toISOString(),
+    });
+  }
+  return out;
+}
+
+const NAVY_QUAL: Record<string, string> = { 'pn cadet': 'Intermediate', ssc: 'Bachelor', sailors: 'Matric', marines: 'Matric' };
+
+/** Join Pak Navy cadre cards that currently carry a "View Ad" link. Titles match the server scraper. */
+export async function detectNavy(): Promise<Job[]> {
+  const base = 'https://www.joinpaknavy.gov.pk/';
+  const html = await (await get(base)).text();
+  const out: Job[] = [];
+  for (const box of html.split(/class="advertisement_box"/i).slice(1)) {
+    const ad = box.match(/<a[^>]*href="([^"]+)"[^>]*>\s*View Ad\s*</i)?.[1];
+    if (!ad) continue;
+    const name = cellText(box.match(/<h4[^>]*>([\s\S]*?)<\/h4>/i)?.[1] ?? 'Pakistan Navy');
+    const crit = box.match(/<a[^>]*href="([^"]+)"[^>]*>\s*View Criteria\s*</i)?.[1];
+    const adUrl = decode(ad);
+    const file = adUrl.split('/').pop()!.replace(/^\d{2}-\d{2}-\d{4}-|\.(jpe?g|png|pdf)$/gi, '');
+    const detail = /^AD /i.test(file) ? `: ${file.slice(3).replace(/\s+/g, ' ').trim()}` : '';
+    out.push({
+      id: hash(`navy|${name}|${adUrl}`),
+      source: 'navy',
+      title: `Join Pak Navy as ${name}${detail}`,
+      organization: 'Pakistan Navy',
+      category: 'armed',
+      cities: ['All Pakistan'],
+      qualification: NAVY_QUAL[name.toLowerCase()] ?? 'Any',
+      url: base,
+      applyUrl: `${base}registrationform`,
+      advertImage: adUrl,
+      criteriaUrl: crit ? decode(crit) : undefined,
+      postedDate: dmy(adUrl.match(/(\d{2}-\d{2}-\d{4})/)?.[1]),
+      description: `Pakistan Navy has announced induction as ${name}. See the official advertisement and selection criteria for age, height and qualification requirements.`,
+      firstSeen: new Date().toISOString(),
+    });
+  }
+  return out;
+}
+
+// These sites block foreign servers (GitHub, AWS), so the phone in Pakistan checks them itself.
+const PHONE_SOURCES = { army: detectArmy, ppsc: detectPpsc, navy: detectNavy } as const;
+
+const reuseKey = (j: Job) => `${j.source}|${j.title}|${j.advertNo ?? ''}`;
+
+/**
+ * Replaces each phone-checked source in `base` with what the phone sees right now.
+ * A source that fails keeps its previous jobs. Known jobs keep their id + firstSeen so they never re-alert.
+ */
+export async function mergePhoneSources(base: Job[], known: Job[]): Promise<{ jobs: Job[]; ok: number }> {
+  const names = Object.keys(PHONE_SOURCES) as (keyof typeof PHONE_SOURCES)[];
+  const results = await Promise.allSettled(names.map((n) => PHONE_SOURCES[n]()));
+  const prev = new Map([...known, ...base].map((j) => [reuseKey(j), j]));
+  let jobs = base;
+  let ok = 0;
+  results.forEach((r, i) => {
+    if (r.status !== 'fulfilled') return;
+    ok++;
+    for (const j of r.value) {
+      const p = prev.get(reuseKey(j));
+      if (p) Object.assign(j, { id: p.id, firstSeen: p.firstSeen });
+    }
+    jobs = [...r.value, ...jobs.filter((j) => j.source !== names[i])];
+  });
+  return { jobs, ok };
+}
+
+/** Full on-device detection when the hosted feed is unreachable. */
 export async function detectOnDevice(cached: Job[]): Promise<Job[]> {
   const known = new Set(cached.map((j) => j.url));
-  const [njp, army] = await Promise.allSettled([detectNjp(known), detectArmy()]);
-  if (njp.status === 'rejected' && army.status === 'rejected') throw new Error('offline');
-  const fresh = [...(njp.status === 'fulfilled' ? njp.value : []), ...(army.status === 'fulfilled' ? army.value : [])];
-  // reuse server ids for army courses we already know, so they don't re-alert
-  const prevArmy = new Map(cached.filter((j) => j.source === 'army').map((j) => [j.title, j]));
-  for (const j of fresh) {
-    const prev = j.source === 'army' ? prevArmy.get(j.title) : undefined;
-    if (prev) Object.assign(j, { id: prev.id, firstSeen: prev.firstSeen });
-  }
-  const byKey = new Map<string, Job>();
-  // army records are replaced wholesale (dates change); everything else keeps first-seen data
-  const keep = army.status === 'fulfilled' ? cached.filter((j) => j.source !== 'army') : cached;
-  for (const j of [...keep, ...fresh]) {
-    const k = j.source === 'army' ? j.title : j.url;
-    if (!byKey.has(k)) byKey.set(k, j);
-  }
+  const njp = await detectNjp(known).catch(() => null);
+  const { jobs, ok } = await mergePhoneSources([...(njp ?? []), ...cached], cached);
+  if (!njp && !ok) throw new Error('offline');
+  const seen = new Set<string>();
   const today = new Date(Date.now() + 5 * 3600_000).toISOString().slice(0, 10);
-  return [...byKey.values()].filter((j) => !j.lastDate || j.lastDate >= today);
+  return jobs.filter((j) => {
+    if (seen.has(j.id)) return false;
+    seen.add(j.id);
+    return !j.lastDate || j.lastDate >= today;
+  });
 }
