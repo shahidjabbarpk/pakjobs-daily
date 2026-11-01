@@ -150,7 +150,7 @@ const ARMY_KIND: Record<string, [string, string | null]> = {
   afns_comission: ['AFNS Nursing', 'Intermediate'],
 };
 
-async function detectArmy(): Promise<Job[]> {
+export async function detectArmy(): Promise<Job[]> {
   const data: any[] = await (await get('https://joinpakarmy.gov.pk/api/course_list/')).json();
   return data
     .filter((c) => c.visibility_status && c.status)

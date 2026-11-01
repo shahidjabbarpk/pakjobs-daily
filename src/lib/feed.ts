@@ -1,5 +1,5 @@
 import { FEED_URL } from './config';
-import { detectOnDevice } from './detect';
+import { detectArmy, detectOnDevice } from './detect';
 import { useApp } from './store';
 import type { Feed, Job } from './types';
 
@@ -31,6 +31,16 @@ export function refreshJobs(): Promise<RefreshResult> {
     const { jobs, ingest } = useApp.getState();
     try {
       const feed = await fetchFeed();
+      // joinpakarmy.gov.pk blocks the (foreign) GitHub runner, so Army is always checked from the phone
+      const army = await detectArmy().catch(() => null);
+      if (army) {
+        const known = new Map([...jobs, ...feed.jobs].filter((j) => j.source === 'army').map((j) => [j.title, j]));
+        for (const j of army) {
+          const prev = known.get(j.title);
+          if (prev) Object.assign(j, { id: prev.id, firstSeen: prev.firstSeen });
+        }
+        feed.jobs = [...army, ...feed.jobs.filter((j) => j.source !== 'army')];
+      }
       // keep jobs the device detected itself that the feed doesn't know yet
       const ids = new Set(feed.jobs.map((j) => j.id));
       const urls = new Set(feed.jobs.map((j) => j.url + j.title));
