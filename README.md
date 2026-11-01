@@ -20,7 +20,7 @@ Pakistan job alerts app. It detects new vacancies from official sites on its own
 | Pak Navy (joinpaknavy.gov.pk) | Advert cards | Advert image + criteria PDF |
 | PPSC / FPSC / KPPSC | Advert tables | Picked up automatically whenever adverts are open |
 
-- **Geo-blocking:** PPSC, Join Pak Army and Join Pak Navy refuse connections from GitHub's foreign runners (timeouts or 403). NJP, FPSC and KPPSC work from GitHub. The app therefore always checks the Army API from the phone, which works from Pakistan. To cover PPSC and Navy on the server as well, run the scraper from a Pakistani IP, for example a self-hosted GitHub Actions runner on a PC in Pakistan (`runs-on: self-hosted`), or Task Scheduler running `python scraper/scrape.py` followed by a `git push`.
+- **Geo-blocking:** PPSC, Join Pak Army and Join Pak Navy refuse connections from servers outside Pakistan, including GitHub and AWS Singapore (both tested). So the app checks these three sources **from the user's phone** on every refresh (`mergePhoneSources` in `src/lib/detect.ts`), while the hosted feed covers NJP, FPSC and KPPSC. No server in Pakistan is needed. Optionally, `scripts/local-feed-bot.ps1` and `install-feed-bot.ps1` push a complete feed from any PC in Pakistan.
 - **Dedup:** every job gets a stable id (`sha1(source|key)`). Ids already seen are never notified twice, by the server (`firstSeen`) or by the phone (`seenIds`).
 - **Notifications:** `expo-background-task` runs about every 30 min (the OS decides the exact time). It sends notifications only for the user's chosen categories and city. Taps deep-link to `pakjobs://job/<id>`.
 - **Deadline reminder:** the bell on the job detail page schedules a local notification for 9 AM PKT on the day before the deadline.
