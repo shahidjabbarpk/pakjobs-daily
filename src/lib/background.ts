@@ -8,12 +8,14 @@ import { BACKGROUND_INTERVAL_MIN, BACKGROUND_TASK } from './config';
 import { refreshJobs } from './feed';
 import { notifyNewJobs } from './notify';
 import { waitForHydration } from './store';
+import { notifyUpdates, refreshUpdates } from './updates';
 
 TaskManager.defineTask(BACKGROUND_TASK, async () => {
   try {
     await waitForHydration();
     const { fresh } = await refreshJobs();
     await notifyNewJobs(fresh);
+    await refreshUpdates().then(notifyUpdates).catch(() => {});
     return BackgroundTask.BackgroundTaskResult.Success;
   } catch {
     return BackgroundTask.BackgroundTaskResult.Failed;

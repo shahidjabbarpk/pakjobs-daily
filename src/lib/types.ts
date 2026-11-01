@@ -1,8 +1,8 @@
 export type Category =
-  | 'govt' | 'psc' | 'armed' | 'banking' | 'police' | 'education' | 'health' | 'private';
+  | 'govt' | 'psc' | 'armed' | 'banking' | 'police' | 'education' | 'health' | 'it' | 'private';
 
 /** 'user' = private job posted inside the app (Firestore). */
-export type Source = 'njp' | 'ppsc' | 'fpsc' | 'kppsc' | 'army' | 'navy' | 'user';
+export type Source = 'njp' | 'ppsc' | 'fpsc' | 'kppsc' | 'spsc' | 'bpsc' | 'army' | 'navy' | 'paf' | 'nts' | 'user';
 
 export interface Job {
   id: string;
@@ -64,6 +64,19 @@ export interface Report {
   reason: string;
   uid: string;
   createdAt: number;
+}
+
+export type UpdateKind = 'rollno' | 'result' | 'interview' | 'schedule';
+
+/** Result / roll-no slip / exam schedule notice from a commission or NTS. */
+export interface Update {
+  id: string;
+  source: Source;
+  kind: UpdateKind;
+  title: string;
+  url: string;
+  date: string | null;
+  firstSeen: string;
 }
 
 export interface Feed {

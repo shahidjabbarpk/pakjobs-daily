@@ -65,6 +65,7 @@ export const CATEGORY_META: Record<Category, { icon: string; colors: [string, st
   police: { icon: 'police-badge', colors: ['#1E3A8A', '#3B82F6'] },
   education: { icon: 'school', colors: ['#7C3AED', '#C084FC'] },
   health: { icon: 'hospital-box', colors: ['#BE123C', '#FB7185'] },
+  it: { icon: 'laptop', colors: ['#4338CA', '#818CF8'] },
   private: { icon: 'briefcase', colors: ['#0E7490', '#22D3EE'] },
 };
 

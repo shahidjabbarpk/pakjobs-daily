@@ -34,7 +34,8 @@ service cloud.firestore {
 
       allow create: if signedIn() && notBanned()
         && data().ownerUid == me()
-        && data().status == 'pending'
+        // admins may publish directly; everyone else starts as pending
+        && (data().status == 'pending' || (isAdmin() && data().status == 'approved'))
         && data().featured == false
         && data().featureRequested is bool
         && str(data().title, 3, 120)

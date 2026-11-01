@@ -44,3 +44,7 @@ export function jobInCity(job: Job, place: string | null): boolean {
   if (!place) return false;
   return job.cities.some((c) => c.toLowerCase() === place.toLowerCase());
 }
+
+/** Source filter chips: [job.source, label]. */
+export const SOURCE_CHIPS: [string, string][] = [['ppsc', 'PPSC'], ['spsc', 'SPSC'], ['kppsc', 'KPPSC'], ['bpsc', 'BPSC'], ['fpsc', 'FPSC'],
+  ['nts', 'NTS'], ['army', 'Army'], ['navy', 'Navy'], ['paf', 'PAF'], ['njp', 'NJP'], ['user', 'Private']];

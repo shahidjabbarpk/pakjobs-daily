@@ -13,6 +13,7 @@ import { startAds } from '@/lib/ads';
 import { registerBackgroundDetector } from '@/lib/background';
 import { isAdmin } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
+import { refreshUpdates } from '@/lib/updates';
 import { setupNotifications } from '@/lib/notify';
 import { useApp, waitForHydration } from '@/lib/store';
 import { useTheme } from '@/lib/theme';
@@ -23,8 +24,9 @@ function useNotificationTaps() {
   useEffect(() => {
     if (Platform.OS === 'web') return;
     const openJob = (r: Notifications.NotificationResponse | null) => {
-      const jobId = r?.notification.request.content.data?.jobId;
-      if (typeof jobId === 'string') router.push(`/job/${jobId}`);
+      const data = r?.notification.request.content.data;
+      if (typeof data?.jobId === 'string') router.push(`/job/${data.jobId}`);
+      else if (typeof data?.screen === 'string') router.push(data.screen as any);
     };
     // cold start from a notification tap, then taps while running
     Notifications.getLastNotificationResponseAsync().then(openJob).catch(() => {});
@@ -58,6 +60,7 @@ export default function RootLayout() {
       setHydrated(true);
       // fresh jobs + private posts on every launch; admin flag for the moderation panel
       refreshJobs().catch(() => {});
+      refreshUpdates().catch(() => {});
       isAdmin().then((admin) => useApp.getState().set({ admin })).catch(() => {});
       if (Platform.OS === 'web') return;
       startAds();
@@ -85,6 +88,10 @@ export default function RootLayout() {
         <Stack.Screen name="post-job" options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="my-posts" />
         <Stack.Screen name="admin" />
+        <Stack.Screen name="updates" />
+        <Stack.Screen name="prep" />
+        <Stack.Screen name="quiz/[subject]" options={{ animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="cv" />
       </Stack>
     </GestureHandlerRootView>
   );

@@ -8,6 +8,7 @@ import { JobCard } from '@/components/JobCard';
 import { Chip, EmptyState, Icon, Tap } from '@/components/ui';
 import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
+import { communityReady } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
@@ -85,7 +86,7 @@ export default function PrivateJobs() {
             </Animated.View>
           </View>
         }
-        ListEmptyComponent={<EmptyState icon="briefcase-search-outline" title={t('nothingHere')} hint={t('postJob')} />}
+        ListEmptyComponent={<EmptyState icon="briefcase-search-outline" title={t('nothingHere')} hint={communityReady() ? t('postJob') : t('communityOff')} />}
         ListFooterComponent={<View style={{ height: 24 }} />}
         showsVerticalScrollIndicator={false}
       />

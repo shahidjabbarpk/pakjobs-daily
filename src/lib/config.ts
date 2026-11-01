@@ -7,11 +7,14 @@ export const FEED_URL =
   process.env.EXPO_PUBLIC_FEED_URL ??
   'https://raw.githubusercontent.com/shahidjabbarpk/pakjobs-daily/main/data/jobs.json';
 
+export const STORE_URL = 'https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza';
+export const PRIVACY_URL = 'https://shahidjabbarpk.github.io/pakjobs-daily/privacy.html';
+
 export const BACKGROUND_TASK = 'pakjobs-detect-new-jobs';
 export const BACKGROUND_INTERVAL_MIN = 30; // Android/iOS treat this as a minimum, not exact
 
-export const INTERSTITIAL_GAP_MS = 3 * 60 * 1000;
-export const NATIVE_AD_EVERY = 4;
+export const INTERSTITIAL_GAP_MS = 2 * 60 * 1000;
+export const NATIVE_AD_EVERY = 3;
 
 // Replace with your real AdMob unit IDs before publishing; empty = Google test ads.
 export const PROD_AD_UNITS = {
@@ -19,15 +22,12 @@ export const PROD_AD_UNITS = {
   ios: { banner: '', native: '', interstitial: '', rewarded: '' },
 };
 
-// Firebase web config is public by design; access is enforced by firebase/firestore.rules.
-export const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyCshEboijGLAT9Eei8QSdaN6k-xtJ9yTJc',
-  authDomain: 'pakjobs-daily-pk.firebaseapp.com',
-  projectId: 'pakjobs-daily-pk',
-  storageBucket: 'pakjobs-daily-pk.firebasestorage.app',
-  messagingSenderId: '449808741466',
-  appId: '1:449808741466:web:7ada91ae611cd804c51463',
-};
+// Firebase web config (public by design; access is enforced by firebase/firestore.rules).
+// Written by `node scripts/setup-firebase.mjs` for the shahidjabbarpk@gmail.com project.
+// null = community features (private jobs, comments) show "being set up".
+export const FIREBASE_CONFIG: {
+  apiKey: string; authDomain: string; projectId: string; storageBucket: string; messagingSenderId: string; appId: string;
+} | null = null;
 
 /** Private job posts stay visible this long. */
 export const POST_LIFETIME_DAYS = 30;
@@ -38,7 +38,7 @@ export const POST_LIFETIME_DAYS = 30;
  */
 export const FEATURED = {
   pricePkr: 1000,
-  days: 7,
-  payTo: 'JazzCash / Easypaisa: 03XX-XXXXXXX (Account title)',
-  adminWhatsapp: '', // e.g. '923001234567' - shown as "Send payment proof" button
+  days: 30,
+  payTo: 'Easypaisa: 0302-4534929 (Shahid Jabbar)',
+  adminWhatsapp: '923024534929', // payment screenshots go here
 };

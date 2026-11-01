@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CityPicker } from '@/components/CityPicker';
 import { FeaturedPayInfo, Field, ProfileForm, useProfile } from '@/components/community';
 import { Chip, Icon, Tap } from '@/components/ui';
-import { createPost } from '@/lib/community';
+import { communityReady, createPost, updatePost } from '@/lib/community';
 import { FEATURED } from '@/lib/config';
 import { useI18n } from '@/lib/i18n';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
@@ -21,19 +21,22 @@ export default function PostJob() {
   const insets = useSafeAreaInsets();
   const [profile] = useProfile();
   const homeCity = useApp((s) => s.homeCity);
+  const admin = useApp((s) => s.admin);
+  const { edit } = useLocalSearchParams<{ edit?: string }>();
+  const editing = useApp((s) => (edit ? s.jobs.find((j) => j.id === edit) : undefined));
 
-  const [title, setTitle] = useState('');
-  const [company, setCompany] = useState('');
-  const [category, setCategory] = useState<Category>('private');
-  const [city, setCity] = useState<string | null>(homeCity);
-  const [salary, setSalary] = useState('');
-  const [qualification, setQualification] = useState<string | null>(null);
-  const [jobType, setJobType] = useState('');
-  const [vacancies, setVacancies] = useState('');
-  const [lastDate, setLastDate] = useState('');
-  const [description, setDescription] = useState('');
-  const [phone, setPhone] = useState('');
-  const [whatsapp, setWhatsapp] = useState(profile?.whatsapp ?? '');
+  const [title, setTitle] = useState(editing?.title ?? '');
+  const [company, setCompany] = useState(editing?.organization ?? '');
+  const [category, setCategory] = useState<Category>(editing?.category ?? 'private');
+  const [city, setCity] = useState<string | null>(editing?.cities[0] ?? homeCity);
+  const [salary, setSalary] = useState(editing?.salary ?? '');
+  const [qualification, setQualification] = useState<string | null>(editing?.qualification ?? null);
+  const [jobType, setJobType] = useState(editing?.jobType ?? '');
+  const [vacancies, setVacancies] = useState(editing?.vacancies ? String(editing.vacancies) : '');
+  const [lastDate, setLastDate] = useState(editing?.lastDate ?? '');
+  const [description, setDescription] = useState(editing?.description ?? '');
+  const [phone, setPhone] = useState(editing?.phone ?? '');
+  const [whatsapp, setWhatsapp] = useState(editing?.whatsapp ?? profile?.whatsapp ?? '');
   const [feature, setFeature] = useState(false);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -49,12 +52,17 @@ export default function PostJob() {
     setBusy(true);
     setErr(null);
     try {
-      const id = await createPost({
+      const input = {
         title, company, category, city, salary: salary.trim(), qualification, jobType: jobType.trim(),
         vacancies: Number(vacancies) || null, lastDate: lastDate || null, description,
         phone: phone.trim(), whatsapp: whatsapp.trim(),
-      }, profile!.name, feature);
-      setDoneId(id);
+      };
+      if (editing && admin) {
+        await updatePost(editing.id, input);
+        router.back();
+        return;
+      }
+      setDoneId(await createPost(input, profile!.name, feature, admin));
     } catch {
       setErr(t('errorGeneric'));
     } finally {
@@ -67,7 +75,7 @@ export default function PostJob() {
       <Tap onPress={() => router.back()} style={[styles.back, { backgroundColor: c.card }]}>
         <Icon name="arrow-left" size={22} color={c.text} />
       </Tap>
-      <Text style={[styles.h1, tf('bold'), { color: c.text }]}>{t('postJob')}</Text>
+      <Text style={[styles.h1, tf('bold'), { color: c.text }]}>{editing ? t('editPost') : t('postJob')}</Text>
     </View>
   );
 
@@ -95,7 +103,9 @@ export default function PostJob() {
     <KeyboardAvoidingView style={{ flex: 1, backgroundColor: c.bg }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={{ paddingBottom: 40 + insets.bottom }} keyboardShouldPersistTaps="handled">
         {header}
-        {!profile ? (
+        {!communityReady() ? (
+          <Text style={[tf(), { color: c.sub, textAlign: 'center', padding: 30, fontSize: 14 }]}>{t('communityOff')}</Text>
+        ) : !profile ? (
           <ProfileForm />
         ) : (
           <Animated.View entering={FadeIn} style={{ paddingHorizontal: 16 }}>
@@ -104,6 +114,12 @@ export default function PostJob() {
               <Text style={[tf(), { color: c.danger, fontSize: 12.5, flex: 1 }]}>{t('scamWarning')}</Text>
             </View>
 
+            {admin && (
+              <View style={[styles.warn, { backgroundColor: c.gold + '1F' }]}>
+                <Icon name="shield-crown-outline" size={18} color={c.gold} />
+                <Text style={[tf('bold'), { color: c.text, fontSize: 12.5, flex: 1 }]}>{t('adminPost')}</Text>
+              </View>
+            )}
             <Field label={t('jobTitle')} value={title} onChange={setTitle} required maxLength={120} placeholder="Sales Executive, Driver, Teacher…" />
             <Field label={t('company')} value={company} onChange={setCompany} required maxLength={120} />
 

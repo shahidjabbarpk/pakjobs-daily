@@ -21,7 +21,7 @@ import { NATIVE_AD_EVERY } from '@/lib/config';
 import { refreshJobs } from '@/lib/feed';
 import { isNew, sortJobs, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
-import { jobInCity } from '@/lib/places';
+import { jobInCity, SOURCE_CHIPS } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
 import { CATEGORY_META, font, useTheme } from '@/lib/theme';
 import type { Job } from '@/lib/types';
@@ -41,6 +41,7 @@ export default function Home() {
   const insets = useSafeAreaInsets();
   const jobs = useApp((s) => s.jobs);
   const homeCity = useApp((s) => s.homeCity);
+  const updates = useApp((s) => s.updates);
   const [refreshing, setRefreshing] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const scrollY = useSharedValue(0);
@@ -51,6 +52,11 @@ export default function Home() {
     () => sortJobs(live.filter((j) => ['today', 'urgent', 'soon'].includes(urgency(j))), 'deadline').slice(0, 10),
     [live],
   );
+  const sourceCounts = useMemo(() => {
+    const m: Record<string, number> = {};
+    for (const j of live) m[j.source] = (m[j.source] ?? 0) + 1;
+    return m;
+  }, [live]);
   const featured = useMemo(() => live.filter((j) => j.featured).slice(0, 10), [live]);
   const cityJobs = useMemo(() => sortJobs(live.filter((j) => jobInCity(j, homeCity)), 'newest').slice(0, 12), [live, homeCity]);
   const newCount = useMemo(() => live.filter((j) => isNew(j)).length, [live]);
@@ -146,6 +152,25 @@ export default function Home() {
         ))}
       </View>
 
+      <View style={styles.tools}>
+        {([
+          ['clipboard-text-clock-outline', t('updates'), '#0E7490', '/updates', updates.filter((u) => Date.now() - Date.parse(u.firstSeen) < 2 * 86_400_000).length],
+          ['school-outline', t('preparation'), '#7C3AED', '/prep', 0],
+          ['file-account-outline', t('cvBuilder'), '#1E3A8A', '/cv', 0],
+          ['briefcase-plus-outline', t('postJob'), '#B45309', '/post-job', 0],
+        ] as [IconName, string, string, string, number][]).map(([icon, label, col, href, badge], i) => (
+          <Animated.View key={href} entering={FadeIn.delay(200 + i * 70)} style={{ flex: 1 }}>
+            <Tap onPress={() => router.push(href as any)} style={[styles.tool, { backgroundColor: c.card, borderColor: c.border }]}>
+              <View style={[styles.toolIcon, { backgroundColor: col + '1A' }]}>
+                <Icon name={icon} size={22} color={col} />
+                {badge > 0 && <View style={[styles.toolBadge, { backgroundColor: c.danger }]}><Text style={styles.toolBadgeText}>{badge > 9 ? '9+' : badge}</Text></View>}
+              </View>
+              <Text style={[styles.toolText, tf(), { color: c.text }]} numberOfLines={2}>{label}</Text>
+            </Tap>
+          </Animated.View>
+        ))}
+      </View>
+
       <SectionTitle title={t('categories')} />
       <View style={styles.grid}>
         {ALL_CATEGORIES.map((cat, i) => {
@@ -167,6 +192,20 @@ export default function Home() {
           );
         })}
       </View>
+
+      <SectionTitle title={`🏛️ ${t('commissions')}`} />
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList}>
+        {SOURCE_CHIPS.filter(([k]) => k !== 'user' && k !== 'njp').map(([k, label], i) => (
+          <Animated.View key={k} entering={FadeInRight.delay(i * 40)}>
+            <Tap style={[styles.cityChip, { backgroundColor: c.card, borderColor: c.border }]}
+              onPress={() => router.push({ pathname: '/search', params: { source: k } })}>
+              <Icon name="bank-outline" size={16} color={c.primary} />
+              <Text style={[styles.cityText, { color: c.text }]}>{label}</Text>
+              {!!sourceCounts[k] && <Text style={[styles.srcCount, { color: c.primary, backgroundColor: c.primarySoft }]}>{sourceCounts[k]}</Text>}
+            </Tap>
+          </Animated.View>
+        ))}
+      </ScrollView>
 
       <SectionTitle title={t('byCity')} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList}>
@@ -277,13 +316,20 @@ const styles = StyleSheet.create({
   statNum: { fontFamily: font.bold, fontSize: 22, marginTop: 6 },
   statLabel: { fontSize: 11.5 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 10 },
-  cell: { width: '25%', padding: 4 },
+  cell: { width: '33.33%', padding: 4 },
   cellInner: { alignItems: 'center', gap: 6, paddingVertical: 6 },
   catIcon: { width: 58, height: 58, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
   catCount: { position: 'absolute', top: -5, right: -7, minWidth: 22, height: 20, borderRadius: 10, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 5, elevation: 2, shadowOpacity: 0.15, shadowRadius: 4 },
   catCountText: { fontFamily: font.bold, fontSize: 10.5 },
   catLabel: { fontSize: 11.5, textAlign: 'center' },
   hList: { paddingHorizontal: 16, gap: 10 },
+  tools: { flexDirection: 'row', gap: 8, paddingHorizontal: 16, marginTop: 14 },
+  tool: { alignItems: 'center', gap: 6, paddingVertical: 12, paddingHorizontal: 4, borderRadius: 16, borderWidth: 1, minHeight: 92 },
+  toolIcon: { width: 42, height: 42, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
+  toolBadge: { position: 'absolute', top: -4, right: -6, minWidth: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
+  toolBadgeText: { color: '#fff', fontFamily: font.bold, fontSize: 9.5 },
+  toolText: { fontSize: 11, textAlign: 'center' },
+  srcCount: { fontFamily: font.bold, fontSize: 11, paddingHorizontal: 7, paddingVertical: 1, borderRadius: 8, overflow: 'hidden' },
   cityChip: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, height: 40, borderRadius: 20, borderWidth: 1 },
   cityText: { fontFamily: font.medium, fontSize: 13 },
   closeCard: { width: 252, borderRadius: 20, padding: 14, gap: 10, borderWidth: 1, shadowOpacity: 0.06, shadowRadius: 12, elevation: 2, marginBottom: 4 },

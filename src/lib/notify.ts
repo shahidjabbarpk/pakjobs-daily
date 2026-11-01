@@ -75,31 +75,36 @@ export async function notifyNewJobs(jobs: Job[]): Promise<void> {
   }
 }
 
-/** Local reminder at 9 AM PKT the day before the deadline. Returns false if too late. */
+/** Local reminders at 9 AM PKT, 3 days and 1 day before the deadline. Returns false if both are already past. */
 export async function scheduleDeadlineReminder(job: Job): Promise<boolean> {
   const end = deadlineMs(job);
   if (end == null) return false;
-  const at = new Date(Date.parse(`${job.lastDate}T09:00:00+05:00`) - 86_400_000);
-  if (at.getTime() < Date.now() + 60_000) return false;
-  const { reminders, lang, set } = useApp.getState();
-  if (reminders[job.id]) await Notifications.cancelScheduledNotificationAsync(reminders[job.id]!).catch(() => {});
-  const id = await Notifications.scheduleNotificationAsync({
-    content: {
-      title: `⏰ ${translate(lang, 'reminderTitle')}`,
-      body: `${job.title} — ${job.organization}`,
-      data: { url: `pakjobs://job/${job.id}`, jobId: job.id },
-    },
-    trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: at, channelId: 'reminders' },
-  });
-  set({ reminders: { ...reminders, [job.id]: id } });
+  await cancelReminder(job.id);
+  const { lang } = useApp.getState();
+  const ids: string[] = [];
+  for (const days of [3, 1]) {
+    const at = new Date(Date.parse(`${job.lastDate}T09:00:00+05:00`) - days * 86_400_000);
+    if (at.getTime() < Date.now() + 60_000) continue;
+    ids.push(await Notifications.scheduleNotificationAsync({
+      content: {
+        title: days === 1 ? `⏰ ${translate(lang, 'reminderTitle')}` : `⏳ ${days} ${translate(lang, 'daysLeft')}`,
+        body: `${job.title} — ${job.organization}`,
+        data: { url: `pakjobs://job/${job.id}`, jobId: job.id },
+      },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: at, channelId: 'reminders' },
+    }));
+  }
+  if (!ids.length) return false;
+  const { reminders, set } = useApp.getState();
+  set({ reminders: { ...reminders, [job.id]: ids.join(',') } });
   return true;
 }
 
 export async function cancelReminder(jobId: string) {
   const { reminders, set } = useApp.getState();
-  const id = reminders[jobId];
-  if (!id) return;
-  await Notifications.cancelScheduledNotificationAsync(id).catch(() => {});
+  const stored = reminders[jobId];
+  if (!stored) return;
+  for (const id of stored.split(',')) await Notifications.cancelScheduledNotificationAsync(id).catch(() => {});
   const next = { ...reminders };
   delete next[jobId];
   set({ reminders: next });

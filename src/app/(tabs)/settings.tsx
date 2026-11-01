@@ -9,6 +9,7 @@ import { CityPicker } from '@/components/CityPicker';
 import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
+import { PRIVACY_URL } from '@/lib/config';
 import { currentUid, ensureUser } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { useI18n } from '@/lib/i18n';
@@ -21,8 +22,12 @@ const SOURCES: [string, string, IconName][] = [
   ['PPSC', 'https://www.ppsc.gop.pk/', 'file-document-edit-outline'],
   ['FPSC', 'https://www.fpsc.gov.pk/', 'file-document-edit-outline'],
   ['KPPSC', 'https://www.kppsc.gov.pk/', 'file-document-edit-outline'],
+  ['SPSC', 'https://spsc.gov.pk/', 'file-document-edit-outline'],
+  ['BPSC', 'https://www.bpsc.gob.pk/', 'file-document-edit-outline'],
+  ['NTS', 'https://www.nts.org.pk/', 'pencil-box-outline'],
   ['Join Pak Army', 'https://joinpakarmy.gov.pk/', 'shield-star-outline'],
   ['Join Pak Navy', 'https://www.joinpaknavy.gov.pk/', 'anchor'],
+  ['Join PAF', 'https://www.joinpaf.gov.pk/', 'airplane'],
 ];
 const ALERT_CITIES = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Punjab', 'Sindh', 'KPK', 'Balochistan'];
 
@@ -181,6 +186,16 @@ export default function Settings() {
       )}
 
       <Card>
+        <View style={styles.between}>
+          <View style={{ flex: 1 }}>
+            <Label icon="clipboard-text-clock-outline" text={t('updatesAlerts')} />
+            <Text style={[styles.hint, tf(), { color: c.sub }]}>{t('updatesAlertsHint')}</Text>
+          </View>
+          <Switch value={s.notifyUpdates} onValueChange={(v) => s.set({ notifyUpdates: v })} trackColor={{ true: c.primary, false: c.border }} thumbColor="#fff" />
+        </View>
+      </Card>
+
+      <Card>
         <Label icon="theme-light-dark" text={t('theme')} />
         <View style={styles.segment}>
           {(['system', 'light', 'dark'] as const).map((m) => (
@@ -219,6 +234,11 @@ export default function Settings() {
       <Card>
         <Label icon="information-outline" text={t('disclaimerTitle')} />
         <Text style={[styles.disclaimer, tf(), { color: c.sub }]}>{t('disclaimer')}</Text>
+        <Tap onPress={() => WebBrowser.openBrowserAsync(PRIVACY_URL)} style={[styles.row, { backgroundColor: c.cardAlt, marginTop: 12 }]}>
+          <Icon name="shield-lock-outline" size={18} color={c.primary} />
+          <Text style={[styles.rowText, tf(), { color: c.text }]}>{t('privacy')}</Text>
+          <Icon name="open-in-new" size={16} color={c.faint} />
+        </Tap>
         <Tap onPress={copyId} haptic={false} style={{ marginTop: 12 }}>
           <Text style={[styles.version, { color: c.faint, marginTop: 0 }]} numberOfLines={1}>
             {t('yourId')}: {uid ?? '—'} {copied ? `✓ ${t('copied')}` : '⧉'}

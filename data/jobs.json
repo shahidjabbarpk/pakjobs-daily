@@ -1,6 +1,124 @@
 {
- "updatedAt": "2026-11-02T03:47:56+05:00",
+ "updatedAt": "2026-11-02T03:51:49+05:00",
  "jobs": [
+  {
+   "id": "aaf0fdca773f8f1e",
+   "source": "spsc",
+   "title": "SPSC Advertisement 06/26 - Various Posts",
+   "organization": "Sindh Public Service Commission",
+   "category": "psc",
+   "cities": [
+    "Sindh"
+   ],
+   "qualification": null,
+   "url": "https://spsc.gov.pk/advertisement/2026/adv-06-2026.pdf",
+   "advertImage": "https://spsc.gov.pk/advertisement/2026/adv-06-2026.pdf",
+   "advertNo": "06/26",
+   "lastDate": "2026-11-11",
+   "applyUrl": "https://spsc.gov.pk/",
+   "description": "Sindh Public Service Commission advertisement. Open the official advertisement PDF for posts, eligibility, age limit and how to apply.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "d117e852cddd2251",
+   "source": "paf",
+   "title": "Join PAF - Officers Induction (8 courses open)",
+   "organization": "Pakistan Air Force",
+   "category": "armed",
+   "cities": [
+    "All Pakistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.joinpaf.gov.pk/",
+   "applyUrl": "https://www.joinpaf.gov.pk/",
+   "description": "Pakistan Air Force has 8 officers induction course(s) open for registration. Sign up on joinpaf.gov.pk to see eligibility, age limits and closing dates for each course.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "77fe68d98e972a76",
+   "source": "nts",
+   "title": "Multinational Oil and Gas Company (Induction of Field Production Trainees)",
+   "organization": "National Testing Service (NTS)",
+   "category": "govt",
+   "cities": [],
+   "qualification": null,
+   "url": "https://nts.org.pk/Test&Products/Announced/07_26/UEP_June2026_Online/UEP.php",
+   "applyUrl": "https://nts.org.pk/Test&Products/Announced/07_26/UEP_June2026_Online/UEP.php",
+   "description": "Recruitment test conducted through NTS. Open the official NTS page for posts, eligibility, test date and online application.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "447fa1e6f3691646",
+   "source": "nts",
+   "title": "Child Protection Welfare Bureau, Punjab October 2026 (Vacancy Announcement)",
+   "organization": "National Testing Service (NTS)",
+   "category": "govt",
+   "cities": [
+    "Punjab"
+   ],
+   "qualification": null,
+   "url": "https://portal.nts.org.pk/Alldetail/MTAxMzcy",
+   "applyUrl": "https://portal.nts.org.pk/Alldetail/MTAxMzcy",
+   "description": "Recruitment test conducted through NTS. Open the official NTS page for posts, eligibility, test date and online application.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "ebc29afb48463cba",
+   "source": "nts",
+   "title": "Govt. Of The Punjab Specialized Healthcare & Medical Education Department Vacancy Announcement (College-Of-Ophthalmology-&-Allied-Vision-Sciences-Lahore-KEMU/MAYO Hospital Lahore)",
+   "organization": "National Testing Service (NTS)",
+   "category": "education",
+   "cities": [
+    "Lahore",
+    "Punjab"
+   ],
+   "qualification": null,
+   "url": "https://portal.nts.org.pk/Alldetail/MTAxMzc0",
+   "applyUrl": "https://portal.nts.org.pk/Alldetail/MTAxMzc0",
+   "description": "Recruitment test conducted through NTS. Open the official NTS page for posts, eligibility, test date and online application.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "7a62fd7fae97c308",
+   "source": "nts",
+   "title": "Independent System & Market Operator (ISMO) (Exciting Job Opportunities)",
+   "organization": "National Testing Service (NTS)",
+   "category": "govt",
+   "cities": [],
+   "qualification": null,
+   "url": "https://nts.org.pk/Test&Products/Announced/06_26/ISMO_June2026_Online/ISMO.php",
+   "applyUrl": "https://nts.org.pk/Test&Products/Announced/06_26/ISMO_June2026_Online/ISMO.php",
+   "description": "Recruitment test conducted through NTS. Open the official NTS page for posts, eligibility, test date and online application.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "ac9833b616a13646",
+   "source": "nts",
+   "title": "National Testing Service - Pakistan (Job Opportunities)",
+   "organization": "National Testing Service (NTS)",
+   "category": "govt",
+   "cities": [],
+   "qualification": null,
+   "url": "https://nts.org.pk/Test&Products/Announced/09_26/NTS_Sep_2026/NTS.php",
+   "applyUrl": "https://nts.org.pk/Test&Products/Announced/09_26/NTS_Sep_2026/NTS.php",
+   "description": "Recruitment test conducted through NTS. Open the official NTS page for posts, eligibility, test date and online application.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "341055543ff0f46e",
+   "source": "nts",
+   "title": "Sindh Social Protection Authority, Government of Sindh (Vacancies Announcement)",
+   "organization": "National Testing Service (NTS)",
+   "category": "govt",
+   "cities": [
+    "Sindh"
+   ],
+   "qualification": null,
+   "url": "https://nts.org.pk/Test&Products/Announced/07_26/SPU_Aug2026_Online/SPU.php",
+   "applyUrl": "https://nts.org.pk/Test&Products/Announced/07_26/SPU_Aug2026_Online/SPU.php",
+   "description": "Recruitment test conducted through NTS. Open the official NTS page for posts, eligibility, test date and online application.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
   {
    "id": "d8e8afa919687474",
    "source": "njp",
@@ -23,7 +141,7 @@
    "lastDate": "2026-11-15",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Establishment-Division-4607871309220236.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/10417",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "4399e6efde6e8ff0",
@@ -46,7 +164,7 @@
    "lastDate": "2026-11-15",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Overseas-Pakistanis-&-Human-Resource-Development-970052508211103.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/10416",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "98ddf66652451f31",
@@ -68,7 +186,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-15",
    "applyUrl": "https://www.njp.gov.pk/jobs/10415",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "f090eac5e67a5a15",
@@ -90,7 +208,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-15",
    "applyUrl": "https://www.njp.gov.pk/jobs/10414",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "d701329f1accab53",
@@ -112,7 +230,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-15",
    "applyUrl": "https://www.njp.gov.pk/jobs/10413",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "f1b1eada1678a0ff",
@@ -134,7 +252,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-15",
    "applyUrl": "https://www.njp.gov.pk/jobs/10412",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "2cc659701f3db46d",
@@ -156,7 +274,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-15",
    "applyUrl": "https://www.njp.gov.pk/jobs/10411",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "e1f85bea5409735e",
@@ -178,7 +296,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-15",
    "applyUrl": "https://www.njp.gov.pk/jobs/10410",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "95bf45d5d8f65685",
@@ -200,7 +318,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-15",
    "applyUrl": "https://www.njp.gov.pk/jobs/10409",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "b1975b26511eda1f",
@@ -223,7 +341,7 @@
    "lastDate": "2026-11-15",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Science-Foundation-(PSF)-1553460912210111.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/10408",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "63f90fa0b4f010ca",
@@ -244,7 +362,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9890",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "b33cec14792fe235",
@@ -265,7 +383,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9891",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "5824b4cad8bda59f",
@@ -286,7 +404,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9892",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "7a5e5b746bea9e6e",
@@ -307,7 +425,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9893",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "25c2b30787b24b30",
@@ -328,7 +446,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9894",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "25f7915d48dba3bf",
@@ -349,7 +467,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9895",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "9f7241078669c1e8",
@@ -370,7 +488,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9896",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "ffcf37e9a3a8372c",
@@ -391,7 +509,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9897",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "4a5c5e3dd730a416",
@@ -412,7 +530,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9898",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "d9938cef4c2f8bed",
@@ -433,7 +551,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9899",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "de16911143a8dbcf",
@@ -454,7 +572,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9900",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "153990f8eaa835c4",
@@ -475,7 +593,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9901",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "54e6f5ce7b9dc789",
@@ -496,7 +614,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9902",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "de43f3c26bfb95f1",
@@ -517,7 +635,7 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9903",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "54b92b7bc9c52ada",
@@ -538,10 +656,10 @@
    "postedDate": "2026-11-01",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9904",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
-   "id": "c840ca1b58754dab",
+   "id": "5d3f46f84a6e8e70",
    "source": "navy",
    "title": "Join Pak Navy as SSC: SSC 27 A and M Cadet 12th batch",
    "organization": "Pakistan Navy",
@@ -556,10 +674,10 @@
    "postedDate": "2026-10-30",
    "applyUrl": "https://www.joinpaknavy.gov.pk/registrationform",
    "description": "Pakistan Navy has announced induction as SSC. See the official advertisement and selection criteria for age, height and qualification requirements.",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
-   "id": "986e556aa1c5a9aa",
+   "id": "50755a8d8812a81c",
    "source": "navy",
    "title": "Join Pak Navy as Civilians",
    "organization": "Pakistan Navy",
@@ -574,7 +692,25 @@
    "postedDate": "2026-10-30",
    "applyUrl": "https://www.joinpaknavy.gov.pk/registrationform",
    "description": "Pakistan Navy has announced induction as Civilians. See the official advertisement and selection criteria for age, height and qualification requirements.",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "54f62033afccdbfd",
+   "source": "navy",
+   "title": "Join Pak Navy as M Cadet: SSC 27 A and M Cadet 12th batch",
+   "organization": "Pakistan Navy",
+   "category": "armed",
+   "cities": [
+    "All Pakistan"
+   ],
+   "qualification": "Any",
+   "url": "https://www.joinpaknavy.gov.pk/",
+   "advertImage": "https://www.joinpaknavy.gov.pk/storage/uploads/Ads/30-10-2026-AD SSC 27 A and M Cadet 12th batch.jpg",
+   "criteriaUrl": "https://www.joinpaknavy.gov.pk/storage/uploads/Ads/Criteria/30-10-2026-M CADET CRITERIA 12TH BATCH.pdf",
+   "postedDate": "2026-10-30",
+   "applyUrl": "https://www.joinpaknavy.gov.pk/registrationform",
+   "description": "Pakistan Navy has announced induction as M Cadet. See the official advertisement and selection criteria for age, height and qualification requirements.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "00cb21af9fefd779",
@@ -600,7 +736,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9863",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "e6dd208f0f654585",
@@ -626,7 +762,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9881",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "95438302b8643196",
@@ -652,7 +788,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9882",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "c1c7cc39c28bbb42",
@@ -678,7 +814,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9883",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "280a3079667f49ad",
@@ -704,7 +840,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9884",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "eebcd7c58211d30c",
@@ -730,7 +866,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9885",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "48dc52cd72c672e1",
@@ -756,7 +892,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9886",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "0ab62e18802da9b8",
@@ -782,7 +918,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9887",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "f00b9cec40d8ba0a",
@@ -808,7 +944,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9888",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "52df7f2d23bdd5e1",
@@ -834,7 +970,7 @@
    "lastDate": "2026-11-12",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Meteorological-Department---6644951904231222.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9889",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "71f96c17543bd102",
@@ -857,7 +993,7 @@
    "postedDate": "2026-10-29",
    "lastDate": "2026-11-12",
    "applyUrl": "https://www.njp.gov.pk/jobs/9870",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "da1faab5cfa83f7a",
@@ -880,7 +1016,7 @@
    "postedDate": "2026-10-29",
    "lastDate": "2026-11-12",
    "applyUrl": "https://www.njp.gov.pk/jobs/9876",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "33be3bdf7ecdc0a1",
@@ -903,7 +1039,7 @@
    "postedDate": "2026-10-29",
    "lastDate": "2026-11-12",
    "applyUrl": "https://www.njp.gov.pk/jobs/9913",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "e8955ae362e38c1a",
@@ -926,7 +1062,7 @@
    "postedDate": "2026-10-29",
    "lastDate": "2026-11-12",
    "applyUrl": "https://www.njp.gov.pk/jobs/9916",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "b1eaf47821aa0173",
@@ -949,7 +1085,7 @@
    "postedDate": "2026-10-29",
    "lastDate": "2026-11-12",
    "applyUrl": "https://www.njp.gov.pk/jobs/9917",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "11a9e1ea0c1b34fe",
@@ -972,7 +1108,7 @@
    "postedDate": "2026-10-29",
    "lastDate": "2026-11-12",
    "applyUrl": "https://www.njp.gov.pk/jobs/9919",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "88a2edccb10b010b",
@@ -995,7 +1131,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-11",
    "applyUrl": "https://www.njp.gov.pk/jobs/9875",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "ebe7261e548afada",
@@ -1018,7 +1154,7 @@
    "lastDate": "2026-11-11",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Defence-(Defence-Division)-3293690406221225.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9918",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "4d0b7d3df445d1cd",
@@ -1041,7 +1177,7 @@
    "lastDate": "2026-11-11",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Defence-(Defence-Division)-3293690406221225.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9920",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "6abe23d0fd67785c",
@@ -1063,7 +1199,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-22",
    "applyUrl": "https://www.njp.gov.pk/jobs/9928",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "7f4818d649cda3fa",
@@ -1085,7 +1221,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-22",
    "applyUrl": "https://www.njp.gov.pk/jobs/9929",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "148ea3731b2730e7",
@@ -1107,7 +1243,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-22",
    "applyUrl": "https://www.njp.gov.pk/jobs/9930",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "826b9ffeae812e48",
@@ -1129,7 +1265,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-22",
    "applyUrl": "https://www.njp.gov.pk/jobs/9931",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "aa51b7c919b9cc4e",
@@ -1151,7 +1287,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-22",
    "applyUrl": "https://www.njp.gov.pk/jobs/9932",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "e4d18da477a52802",
@@ -1173,7 +1309,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-22",
    "applyUrl": "https://www.njp.gov.pk/jobs/9933",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "f5d784a3aa81875c",
@@ -1195,7 +1331,7 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-22",
    "applyUrl": "https://www.njp.gov.pk/jobs/9935",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "f32eb43965743d2d",
@@ -1217,14 +1353,14 @@
    "postedDate": "2026-10-28",
    "lastDate": "2026-11-12",
    "applyUrl": "https://www.njp.gov.pk/jobs/9927",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "c8348e76a858573f",
    "source": "njp",
    "title": "Accountant",
    "organization": "Higher Education Commission",
-   "category": "armed",
+   "category": "govt",
    "cities": [
     "Balochistan"
    ],
@@ -1239,14 +1375,14 @@
    "postedDate": "2026-10-27",
    "lastDate": "2026-11-10",
    "applyUrl": "https://www.njp.gov.pk/jobs/9925",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "d639915cc0f13b4e",
    "source": "njp",
    "title": "Lower Division Clerk",
    "organization": "Higher Education Commission",
-   "category": "armed",
+   "category": "govt",
    "cities": [
     "Balochistan"
    ],
@@ -1261,7 +1397,7 @@
    "postedDate": "2026-10-27",
    "lastDate": "2026-11-10",
    "applyUrl": "https://www.njp.gov.pk/jobs/9926",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "1afe29316cd11340",
@@ -1284,7 +1420,7 @@
    "lastDate": "2026-11-26",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Office-of-the-Controller-General-of-Accounts-5112112909220224.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9862",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "f583b7d2acba9e41",
@@ -1306,7 +1442,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-19",
    "applyUrl": "https://www.njp.gov.pk/jobs/9871",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "ac41fb9f35281969",
@@ -1328,7 +1464,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-19",
    "applyUrl": "https://www.njp.gov.pk/jobs/9872",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "18f524bc2fca67d2",
@@ -1350,7 +1486,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-19",
    "applyUrl": "https://www.njp.gov.pk/jobs/9873",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "17a4f31ed472e152",
@@ -1372,14 +1508,14 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-19",
    "applyUrl": "https://www.njp.gov.pk/jobs/9874",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "06efd337b8e3271b",
    "source": "njp",
    "title": "Chief Software Architect",
    "organization": "Pakistan Digital Authority",
-   "category": "govt",
+   "category": "it",
    "cities": [],
    "qualification": "Bachelor",
    "url": "https://www.njp.gov.pk/jobs/9905",
@@ -1390,7 +1526,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9905",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "0aa68b7440944a90",
@@ -1408,7 +1544,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9906",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "39ae4ecd35f55537",
@@ -1426,14 +1562,14 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9907",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "a1a912fc860dae4a",
    "source": "njp",
    "title": "Chief AI Officer",
    "organization": "Pakistan Digital Authority",
-   "category": "govt",
+   "category": "it",
    "cities": [],
    "qualification": "Bachelor",
    "url": "https://www.njp.gov.pk/jobs/9908",
@@ -1444,7 +1580,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9908",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "4e36e2f9494de2cc",
@@ -1462,7 +1598,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9909",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "53aa68ce4bb732fa",
@@ -1480,7 +1616,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9910",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "57fffdb0e6d2efee",
@@ -1502,7 +1638,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-08",
    "applyUrl": "https://www.njp.gov.pk/jobs/9921",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "e291a8428988e766",
@@ -1524,7 +1660,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-08",
    "applyUrl": "https://www.njp.gov.pk/jobs/9922",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "c6f22d2f784a0001",
@@ -1546,7 +1682,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-08",
    "applyUrl": "https://www.njp.gov.pk/jobs/9923",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "11383d86a2a36021",
@@ -1568,7 +1704,7 @@
    "postedDate": "2026-10-26",
    "lastDate": "2026-11-08",
    "applyUrl": "https://www.njp.gov.pk/jobs/9924",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "8156dc3625a56af2",
@@ -1587,7 +1723,7 @@
    "lastDate": "2026-11-08",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Petroleum-Division-(Ministry-of-Energy)-1127132510211139.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9848",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "2a3b72177e5775d9",
@@ -1606,7 +1742,7 @@
    "lastDate": "2026-11-08",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Petroleum-Division-(Ministry-of-Energy)-1127132510211139.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9849",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "4db99cbaa0b0e165",
@@ -1625,7 +1761,7 @@
    "lastDate": "2026-11-08",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Petroleum-Division-(Ministry-of-Energy)-1127132510211139.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9850",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "650eaf4eebefcc51",
@@ -1644,7 +1780,7 @@
    "lastDate": "2026-11-08",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Petroleum-Division-(Ministry-of-Energy)-1127132510211139.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9851",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "4d610cb35973703b",
@@ -1663,7 +1799,7 @@
    "lastDate": "2026-11-15",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-National-Shipping-corporation-(PNSC)-1127392510210315.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9852",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "f9b5abb0ad466243",
@@ -1686,7 +1822,7 @@
    "lastDate": "2026-11-10",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Cabinet-Division-7685942212230111.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9854",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "21ba06310ff8a374",
@@ -1709,7 +1845,7 @@
    "lastDate": "2026-11-10",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Cabinet-Division-7685942212230111.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9855",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "7f72435e95959405",
@@ -1731,7 +1867,7 @@
    "postedDate": "2026-10-25",
    "lastDate": "2026-11-10",
    "applyUrl": "https://www.njp.gov.pk/jobs/9856",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "da299f8a77cb56e8",
@@ -1754,7 +1890,7 @@
    "lastDate": "2026-11-17",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-National-Telecommunication-Corporation-(NTC)-1131192910211132.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9860",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "0aab2285d21455bb",
@@ -1777,7 +1913,7 @@
    "lastDate": "2026-11-17",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-National-Telecommunication-Corporation-(NTC)-1131192910211132.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9861",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "51a7218f37247644",
@@ -1799,7 +1935,7 @@
    "postedDate": "2026-10-25",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9877",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "864fa2417b9e219e",
@@ -1821,7 +1957,7 @@
    "postedDate": "2026-10-25",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9878",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "e60a6848a59d4baa",
@@ -1843,7 +1979,7 @@
    "postedDate": "2026-10-25",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9879",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "3fc26782429c1a65",
@@ -1865,14 +2001,14 @@
    "postedDate": "2026-10-25",
    "lastDate": "2026-11-09",
    "applyUrl": "https://www.njp.gov.pk/jobs/9880",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "831919ad02b9e95a",
    "source": "njp",
    "title": "Creative Lead (PPS-08)",
    "organization": "Pakistan Software Export Board (PSEB)",
-   "category": "govt",
+   "category": "it",
    "cities": [],
    "qualification": "Masters",
    "url": "https://www.njp.gov.pk/jobs/9847",
@@ -1885,7 +2021,7 @@
    "lastDate": "2026-11-05",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-Software-Export-Board-(PSEB)-976250109211057.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/9847",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "78c9b5aee85d1133",
@@ -1904,7 +2040,7 @@
    "postedDate": "2026-10-21",
    "lastDate": "2026-11-04",
    "applyUrl": "https://www.njp.gov.pk/jobs/9845",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "a616619baab7d128",
@@ -1924,7 +2060,7 @@
    "lastDate": "2026-11-15",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Cadet-College-Hasanabdal-1743750402220235.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9846",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "06c4dfdb5ab8459c",
@@ -1945,7 +2081,7 @@
    "lastDate": "2026-11-04",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-EXIM-Bank-of-Pakistan-1657610809230329.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9843",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "eee22b3be6f0f43d",
@@ -1966,7 +2102,7 @@
    "lastDate": "2026-11-04",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-EXIM-Bank-of-Pakistan-1657610809230329.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9844",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "b897cf61ba6a5701",
@@ -1985,7 +2121,7 @@
    "postedDate": "2026-10-19",
    "lastDate": "2026-11-02",
    "applyUrl": "https://www.njp.gov.pk/jobs/9840",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "a7ad0df566fa7d2e",
@@ -2004,7 +2140,41 @@
    "postedDate": "2026-10-19",
    "lastDate": "2026-11-02",
    "applyUrl": "https://www.njp.gov.pk/jobs/9842",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "5fc6881b4facd763",
+   "source": "bpsc",
+   "title": "BPSC Advertisement no 09-2026",
+   "organization": "Balochistan Public Service Commission",
+   "category": "psc",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": null,
+   "url": "https://www.bpsc.gob.pk/uploads/Jobs/1791632671.pdf",
+   "advertImage": "https://www.bpsc.gob.pk/uploads/Jobs/1791632671.pdf",
+   "postedDate": "2026-10-10",
+   "applyUrl": "https://www.bpsc.gob.pk/",
+   "description": "Balochistan Public Service Commission advertisement. Open the official advertisement for posts, eligibility, age limit and last date.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
+  },
+  {
+   "id": "4b85dc9a06f1227e",
+   "source": "bpsc",
+   "title": "BPSC Public Notice / Advertisement No. 08/2026 Regarding Departmental Exams for Serving Officers / Officials (23-09-2026)",
+   "organization": "Balochistan Public Service Commission",
+   "category": "psc",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": null,
+   "url": "https://www.bpsc.gob.pk/uploads/Jobs/1790153404.pdf",
+   "advertImage": "https://www.bpsc.gob.pk/uploads/Jobs/1790153404.pdf",
+   "postedDate": "2026-09-23",
+   "applyUrl": "https://www.bpsc.gob.pk/",
+   "description": "Balochistan Public Service Commission advertisement. Open the official advertisement for posts, eligibility, age limit and last date.",
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "b88f9b8247079fed",
@@ -2022,7 +2192,7 @@
    "description": "Registration: 2026-09-14 to 2026-11-01. Tests: 2026-10-05 to 2026-12-15. Date of birth between 2005-05-01 and 2010-05-01 (age cut-off 2027-05-01).",
    "applyUrl": "https://joinpakarmy.gov.pk/course?com_type=reg_comission",
    "ageLimit": "Born 2005-05-01 – 2010-05-01",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "881e3a8066d102e6",
@@ -2040,7 +2210,7 @@
    "description": "Registration: 2026-09-01 to 2026-11-23. Tests: 2026-09-01 to 2026-11-23. Date of birth between 2003-11-24 and 2009-05-24 (age cut-off 2026-11-24).",
    "applyUrl": "https://joinpakarmy.gov.pk/course?com_type=sldr_recruitment",
    "ageLimit": "Born 2003-11-24 – 2009-05-24",
-   "firstSeen": "2026-11-02T01:11:22+05:00"
+   "firstSeen": "2026-11-02T03:50:38+05:00"
   }
  ]
 }

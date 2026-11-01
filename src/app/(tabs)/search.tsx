@@ -9,6 +9,7 @@ import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { sortJobs, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
+import { SOURCE_CHIPS } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 import type { Category, Job } from '@/lib/types';
@@ -17,20 +18,20 @@ const QUALS = ['Middle', 'Matric', 'Intermediate', 'DAE', 'Bachelor', 'Masters',
 const CITIES = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Rawalpindi', 'Multan', 'Faisalabad', 'Hyderabad',
   'Gwadar', 'Turbat', 'Punjab', 'Sindh', 'KPK', 'Balochistan', 'AJK', 'GB'];
 const RANK = Object.fromEntries(QUALS.map((q, i) => [q, i]));
-
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
 
 export default function Search() {
   const c = useTheme();
   const { t, tf, qual, isUr } = useI18n();
   const insets = useSafeAreaInsets();
-  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string }>();
+  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string }>();
   const jobs = useApp((s) => s.jobs);
 
   const [q, setQ] = useState('');
   const [cat, setCat] = useState<Category | null>(null);
   const [qualF, setQualF] = useState<string | null>(null);
   const [city, setCity] = useState<string | null>(null);
+  const [source, setSource] = useState<string | null>(null);
   const [sort, setSort] = useState<'newest' | 'deadline'>('newest');
   const [showClosed, setShowClosed] = useState(false);
 
@@ -39,13 +40,15 @@ export default function Search() {
     if (params.cat) setCat(params.cat as Category);
     if (params.city) setCity(params.city);
     if (params.sort === 'deadline' || params.sort === 'newest') setSort(params.sort);
-  }, [params.cat, params.city, params.sort]);
+    if (params.source) setSource(params.source);
+  }, [params.cat, params.city, params.sort, params.source]);
 
   const results = useMemo(() => {
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
     const list = jobs.filter((j) => {
       if (!showClosed && urgency(j) === 'closed') return false;
       if (cat && j.category !== cat) return false;
+      if (source && j.source !== source) return false;
       // "Matric" shows jobs whose minimum requirement is Matric or lower
       if (qualF && j.qualification && j.qualification !== 'Any' && (RANK[j.qualification] ?? 0) > RANK[qualF]!) return false;
       if (city && !j.cities.includes('All Pakistan') && !j.cities.some((x) => x.toLowerCase() === city.toLowerCase())) return false;
@@ -56,7 +59,7 @@ export default function Search() {
       return true;
     });
     return sortJobs(list, sort);
-  }, [jobs, q, cat, qualF, city, sort, showClosed]);
+  }, [jobs, q, cat, qualF, city, source, sort, showClosed]);
 
   const rows = useMemo<Row[]>(() => {
     const out: Row[] = [];
@@ -67,8 +70,8 @@ export default function Search() {
     return out;
   }, [results]);
 
-  const active = [cat, qualF, city, q].filter(Boolean).length;
-  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); };
+  const active = [cat, qualF, city, source, q].filter(Boolean).length;
+  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); setSource(null); };
 
   const filters = (
     <View>
@@ -92,6 +95,10 @@ export default function Search() {
       <FilterRow label={t('category')}>
         <Chip label={t('all')} active={!cat} onPress={() => setCat(null)} />
         {ALL_CATEGORIES.map((k) => <Chip key={k} label={t(`cat.${k}`)} active={cat === k} onPress={() => setCat(cat === k ? null : k)} />)}
+      </FilterRow>
+      <FilterRow label={t('commissions')}>
+        <Chip label={t('all')} active={!source} onPress={() => setSource(null)} />
+        {SOURCE_CHIPS.map(([k, label]) => <Chip key={k} label={label} active={source === k} onPress={() => setSource(source === k ? null : k)} />)}
       </FilterRow>
       <FilterRow label={t('qualification')}>
         <Chip label={t('all')} active={!qualF} onPress={() => setQualF(null)} />

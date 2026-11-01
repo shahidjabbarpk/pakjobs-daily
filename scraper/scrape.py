@@ -31,6 +31,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 JOBS_FILE = DATA / "jobs.json"
 NEW_FILE = DATA / "new.json"
+UPDATES_FILE = DATA / "updates.json"
+UPDATES_KEEP_DAYS = 45
 META_FILE = DATA / "meta.json"
 
 KEEP_DAYS_AFTER_DEADLINE = 3      # keep expired jobs briefly so users see "closed"
@@ -143,10 +145,12 @@ def detect_cities(text: str) -> list[str]:
 
 def detect_category(source: str, text: str) -> str:
     t = text.lower()
-    if source in {"army", "navy", "paf"} or re.search(r"\b(army|navy|air force|paf|fc|rangers|cadet|sepoy|sailor|commission)\b", t):
-        return "armed"
     if source in {"ppsc", "fpsc", "kppsc", "spsc", "bpsc"}:
         return "psc"
+    if source in {"army", "navy", "paf"} or re.search(r"\b(army|navy|air force|paf|fc|rangers|cadet|sepoy|sailor|short service commission)\b", t):
+        return "armed"
+    if re.search(r"\b(it|ict)\b|software|developer|programmer|network admin|database|cyber|data scien|web |artificial intelligence|\bai\b|information technology|system analyst", t):
+        return "it"
     if re.search(r"\bbank|state bank|sbp|nbp|hbl|ubl|mcb|meezan|finance officer|teller", t):
         return "banking"
     if re.search(r"\bpolice|asi\b|constable|sub inspector|motorway|ctd\b", t):
@@ -383,6 +387,89 @@ def scrape_army(_known: dict) -> list[dict]:
     return out
 
 
+def scrape_spsc(_known: dict) -> list[dict]:
+    base = "https://spsc.gov.pk/"
+    s = soup(base)
+    out, seen = [], set()
+    for a in s.find_all("a", href=re.compile(r"advertisement/\d{4}/adv-[\w-]+\.pdf", re.I)):
+        url = urljoin(base, a["href"].strip())
+        text = clean(a.get_text(" "))
+        m = re.match(r"(Advertisement\s+\d+/\d+)(.*)", text, re.I)
+        if not m or url in seen:
+            continue
+        tail = m.group(2)
+        closing = re.search(r"closing\s*d(?:a)?t(?:e)?[:.\s]*([\d.\-/]+\d)", tail, re.I)
+        if not closing:  # "Closed" adverts carry no closing date
+            continue
+        seen.add(url)
+        out.append(make_job(
+            source="spsc", key=url, title=f"SPSC {m.group(1).title()} - Various Posts",
+            org="Sindh Public Service Commission", url=url, category="psc", cities=["Sindh"],
+            advertImage=url, advertNo=m.group(1).split()[-1], lastDate=parse_date(closing.group(1)),
+            applyUrl="https://spsc.gov.pk/",
+            description="Sindh Public Service Commission advertisement. Open the official advertisement PDF for posts, eligibility, age limit and how to apply.",
+        ))
+    return out
+
+
+def scrape_bpsc(_known: dict) -> list[dict]:
+    base = "https://www.bpsc.gob.pk/"
+    s = soup(base + "BPSC/pages?jobs")
+    out = []
+    for tr in s.select("table tr"):
+        a = tr.find("a", href=True)
+        title = clean(tr.find("td").get_text(" ")) if tr.find("td") else ""
+        if not a or not re.search(r"advertisement", title, re.I) or re.search(r"cancel|withdraw|corrigendum|maint", title, re.I):
+            continue
+        url = urljoin(base, a["href"])
+        ts = re.search(r"/(\d{10})\.\w+$", url)  # the upload time is the file name
+        posted = datetime.fromtimestamp(int(ts.group(1)), PKT).date().isoformat() if ts else None
+        if posted and date.fromisoformat(posted) < date.today() - timedelta(days=40):
+            continue
+        out.append(make_job(
+            source="bpsc", key=url, title=f"BPSC {title}", org="Balochistan Public Service Commission", url=url,
+            category="psc", cities=["Balochistan"], advertImage=url, postedDate=posted,
+            applyUrl="https://www.bpsc.gob.pk/",
+            description="Balochistan Public Service Commission advertisement. Open the official advertisement for posts, eligibility, age limit and last date.",
+        ))
+    return out[:10]
+
+
+def scrape_paf(_known: dict) -> list[dict]:
+    # course details need a login; the public API only says how many courses are open
+    counts = fetch("https://www.joinpaf.gov.pk/api/count-courses?type=").json()
+    out = []
+    for kind, n in counts.items():
+        if not n:
+            continue
+        out.append(make_job(
+            source="paf", key=f"{kind}|{n}", title=f"Join PAF - {kind} Induction ({n} courses open)",
+            org="Pakistan Air Force", url="https://www.joinpaf.gov.pk/", category="armed", cities=["All Pakistan"],
+            applyUrl="https://www.joinpaf.gov.pk/", qualification="Intermediate",
+            description=f"Pakistan Air Force has {n} {kind.lower()} induction course(s) open for registration. Sign up on joinpaf.gov.pk to see eligibility, age limits and closing dates for each course.",
+        ))
+    return out
+
+
+NTS_JOB = re.compile(r"recruit|induction|post|vacanc|hiring|appointment|trainee|staff|officer|teacher|educator|engineer|assistant|clerk|jobs?\b|employ", re.I)
+
+
+def scrape_nts(_known: dict) -> list[dict]:
+    s = soup("https://www.nts.org.pk/new/projectsnew.php")
+    out, seen = [], set()
+    for a in s.find_all("a", href=re.compile(r"portal\.nts\.org\.pk/Alldetail|Test&Products/Announced", re.I)):
+        title = clean(a.get_text(" "))
+        url = a["href"].strip()
+        if len(title) < 10 or url in seen or not NTS_JOB.search(title) or re.search(r"admission|scholar|toeic|\bnat\b|\bgat\b", title, re.I):
+            continue
+        seen.add(url)
+        out.append(make_job(
+            source="nts", key=url, title=title, org="National Testing Service (NTS)", url=url, applyUrl=url,
+            description="Recruitment test conducted through NTS. Open the official NTS page for posts, eligibility, test date and online application.",
+        ))
+    return out
+
+
 SOURCES = {
     "njp": scrape_njp,
     "ppsc": scrape_ppsc,
@@ -390,7 +477,63 @@ SOURCES = {
     "kppsc": scrape_kppsc,
     "army": scrape_army,
     "navy": scrape_navy,
+    "spsc": scrape_spsc,
+    "bpsc": scrape_bpsc,
+    "paf": scrape_paf,
+    "nts": scrape_nts,
 }
+
+
+# --------------------------------------------------------------------------- updates (results / roll no / schedules)
+
+UPDATE_KINDS = [
+    ("rollno", r"roll\s*no|admission certificate|call letter|slip"),
+    ("result", r"result|merit|answer key|recommend|selected|shortlist|final list"),
+    ("interview", r"interview"),
+    ("schedule", r"schedule|programme|program|date sheet|test date|exam"),
+]
+UPDATE_PAGES = [
+    ("ppsc", "https://www.ppsc.gop.pk/default.aspx"),
+    ("fpsc", "https://www.fpsc.gov.pk/"),
+    ("kppsc", "https://www.kppsc.gov.pk/"),
+    ("spsc", "https://spsc.gov.pk/"),
+    ("bpsc", "https://www.bpsc.gob.pk/BPSC/pages?result"),
+    ("bpsc", "https://www.bpsc.gob.pk/BPSC/pages?interview"),
+    ("nts", "https://www.nts.org.pk/new/Allresults.php"),
+]
+SKIP_UPDATE = re.compile(r"archive|guideline|procedure|rules|policy|how to|syllab|observance|important information|instruction|timings|^(written |final |interview )?results?$|^schedules?$|^interviews?$|^exams?$|^programs?$|datewise", re.I)
+
+
+def _specific(title: str) -> bool:
+    """Menu links like "Results" or "Admission Certificates" carry no news; real notices name a post, case or date."""
+    return bool(re.search(r"\d", title)) or len(title.split()) >= 7
+
+
+def scrape_updates(page_source: str, page: str) -> list[dict]:
+    s = soup(page)
+    best: dict[str, dict] = {}  # one entry per link, keeping its most descriptive title
+    for a in s.find_all("a", href=True):
+        href = a["href"].strip()
+        if not href or href.startswith("#") or href.lower().startswith("javascript"):
+            continue
+        text = clean(a.get_text(" "))
+        tr = a.find_parent("tr")
+        title = clean(tr.get_text(" ")) if tr and len(text) < 6 else text  # table rows with a bare "Download" link
+        url = urljoin(page, href)
+        if len(title) < 14 or len(title) > 220 or url.rstrip("/") == page.rstrip("/"):
+            continue
+        kind = next((k for k, rx in UPDATE_KINDS if re.search(rx, title, re.I)), None)
+        if not kind or SKIP_UPDATE.search(title) or not _specific(title):
+            continue
+        prev = best.get(url)
+        if prev and len(prev["title"]) >= len(title):
+            continue
+        d = re.search(r"(\d{1,2}[-/.]\d{1,2}[-/.]\d{4})", title)
+        ts = re.search(r"/(\d{10})\.\w+$", url)
+        when = parse_date(d.group(1)) if d else (datetime.fromtimestamp(int(ts.group(1)), PKT).date().isoformat() if ts else None)
+        best[url] = {"id": job_id("upd-" + page_source, url + "|" + title), "source": page_source, "kind": kind,
+                     "title": title, "url": url, "date": when}
+    return list(best.values())[:8]
 
 
 # --------------------------------------------------------------------------- main
@@ -442,6 +585,32 @@ def main() -> int:
     new = [j for j in live if j["id"] not in previous]
 
     meta["total"], meta["new"] = len(live), len(new)
+
+    # results / roll no slips / schedules
+    prev_upd = {}
+    if UPDATES_FILE.exists():
+        try:
+            prev_upd = {u["id"]: u for u in json.loads(UPDATES_FILE.read_text(encoding="utf-8"))["updates"]}
+        except (ValueError, KeyError):
+            pass
+    updates: dict[str, dict] = {}
+    upd_ok: dict[str, bool] = {}
+    for src, page in UPDATE_PAGES:
+        try:
+            items = scrape_updates(src, page)
+            upd_ok[src] = upd_ok.get(src, True)
+        except Exception:  # noqa: BLE001
+            items = [u for u in prev_upd.values() if u["source"] == src]  # keep last known when a site is down/blocked
+            upd_ok[src] = False
+        for u in items:
+            u["firstSeen"] = prev_upd.get(u["id"], {}).get("firstSeen") or now.isoformat(timespec="seconds")
+            updates.setdefault(u["id"], u)
+    cutoff = (now - timedelta(days=UPDATES_KEEP_DAYS)).isoformat()
+    upd_list = sorted((u for u in updates.values() if u["firstSeen"] >= cutoff),
+                      key=lambda u: (u.get("date") or u["firstSeen"][:10], u["firstSeen"]), reverse=True)
+    meta["updates"] = {"total": len(upd_list), "new": sum(1 for u in upd_list if u["id"] not in prev_upd), "ok": upd_ok}
+    print(f"updates {len(upd_list)} ({meta['updates']['new']} new)")
+    UPDATES_FILE.write_text(json.dumps({"updatedAt": meta["updatedAt"], "updates": upd_list}, ensure_ascii=False, indent=1), encoding="utf-8")
     JOBS_FILE.write_text(json.dumps({"updatedAt": meta["updatedAt"], "jobs": live}, ensure_ascii=False, indent=1), encoding="utf-8")
     NEW_FILE.write_text(json.dumps({"updatedAt": meta["updatedAt"], "jobs": new}, ensure_ascii=False, indent=1), encoding="utf-8")
     META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")

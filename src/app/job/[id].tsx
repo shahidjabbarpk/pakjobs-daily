@@ -16,17 +16,20 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookmarkButton, DeadlineBadge, EmptyState, Icon, type IconName, NewBadge, OrgAvatar, Tap, useUrgencyColor } from '@/components/ui';
 import { Comments, ReportSheet } from '@/components/community';
+import { ImageViewer } from '@/components/ImageViewer';
 import { maybeShowInterstitial, showRewarded } from '@/lib/ads';
 import { deadlineMs, isNew, prettyDate, toIntl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { cancelReminder, scheduleDeadlineReminder } from '@/lib/notify';
 import { useApp } from '@/lib/store';
 import { CATEGORY_META, font, useTheme } from '@/lib/theme';
+import { STORE_URL } from '@/lib/config';
 import type { Job } from '@/lib/types';
 
 const SOURCE_NAME: Record<string, string> = {
   njp: 'National Jobs Portal (njp.gov.pk)', ppsc: 'PPSC (ppsc.gop.pk)', fpsc: 'FPSC (fpsc.gov.pk)',
   kppsc: 'KPPSC (kppsc.gov.pk)', army: 'Join Pak Army (joinpakarmy.gov.pk)', navy: 'Join Pak Navy (joinpaknavy.gov.pk)',
+  spsc: 'SPSC (spsc.gov.pk)', bpsc: 'BPSC (bpsc.gob.pk)', paf: 'Join PAF (joinpaf.gov.pk)', nts: 'NTS (nts.org.pk)',
 };
 
 export default function JobDetail() {
@@ -67,6 +70,7 @@ function Detail({ job }: { job: Job }) {
   const openAdvert = (url?: string) => showRewarded(() => open(url));
   const isUser = job.source === 'user';
   const [reporting, setReporting] = useState(false);
+  const [viewer, setViewer] = useState(false);
   const call = () => job.phone && Linking.openURL(`tel:${job.phone.replace(/\s/g, '')}`);
   const whatsapp = () => job.whatsapp && Linking.openURL(`https://wa.me/${toIntl(job.whatsapp)}?text=${encodeURIComponent(`Assalam o Alaikum, I saw your job "${job.title}" on PakJobs Daily.`)}`);
   const isPdf = job.advertImage && /\.pdf($|\?)/i.test(job.advertImage);
@@ -78,13 +82,20 @@ function Detail({ job }: { job: Job }) {
   const onRemind = async () => {
     if (Platform.OS === 'web') return;
     if (hasReminder) { await cancelReminder(job.id); return; }
-    flash((await scheduleDeadlineReminder(job)) ? t('reminderSet') : t('reminderPast'));
+    flash((await scheduleDeadlineReminder(job)) ? t('remindSet3') : t('reminderPast'));
   };
 
-  const onShare = () =>
-    Share.share({
-      message: `📢 ${job.title}\n🏢 ${job.organization}\n${job.lastDate ? `⏳ ${t('lastDate')}: ${prettyDate(job.lastDate)}\n` : ''}🔗 ${job.applyUrl ?? job.url}\n\nPakJobs Daily app se share kiya gaya`,
-    });
+  const shareText = () =>
+    `📢 ${job.title}\n🏢 ${job.organization}\n${job.lastDate ? `⏳ ${t('lastDate')}: ${prettyDate(job.lastDate)}\n` : ''}🔗 ${job.applyUrl ?? job.url}\n\n📲 PakJobs Daily app: ${STORE_URL}`;
+  const shareTo = (app: 'whatsapp' | 'facebook' | 'telegram') => {
+    const text = encodeURIComponent(shareText());
+    const link = encodeURIComponent(job.applyUrl ?? job.url);
+    const url = app === 'whatsapp' ? `whatsapp://send?text=${text}`
+      : app === 'telegram' ? `https://t.me/share/url?url=${link}&text=${text}`
+      : `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    Linking.openURL(url).catch(() => (app === 'whatsapp' ? Linking.openURL(`https://wa.me/?text=${text}`) : onShare()));
+  };
+  const onShare = () => Share.share({ message: shareText() });
 
   const info: [IconName, string, string | undefined][] = [
     ['school-outline', t('qualification'), qual(job.qualification)],
@@ -147,7 +158,7 @@ function Detail({ job }: { job: Job }) {
           <Animated.View entering={FadeInUp.delay(220)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>{t('viewAdvert')}</Text>
             {isImage && (
-              <Tap onPress={() => openAdvert(job.advertImage)} haptic={false}>
+              <Tap onPress={() => showRewarded(() => setViewer(true))} haptic={false}>
                 <Image source={{ uri: encodeURI(decodeURI(job.advertImage!)) }} style={styles.advert} contentFit="cover" transition={300} />
                 <View style={styles.zoom}><Icon name="magnify-plus-outline" size={18} color="#fff" /></View>
               </Tap>
@@ -192,12 +203,24 @@ function Detail({ job }: { job: Job }) {
           </Animated.View>
         )}
 
+        <Animated.View entering={FadeInUp.delay(340)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+          <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>📤 {t('shareOn')}</Text>
+          <View style={{ flexDirection: 'row', gap: 10 }}>
+            <ShareBtn icon="whatsapp" color="#25D366" label="WhatsApp" onPress={() => shareTo('whatsapp')} />
+            <ShareBtn icon="facebook" color="#1877F2" label="Facebook" onPress={() => shareTo('facebook')} />
+            <ShareBtn icon="send" color="#229ED9" label="Telegram" onPress={() => shareTo('telegram')} />
+            <ShareBtn icon="dots-horizontal" color={c.sub} label="More" onPress={onShare} />
+          </View>
+        </Animated.View>
+
         <Comments jobId={job.id} onToast={flash} />
 
         <View style={styles.sourceRow}>
           <Icon name={isUser ? 'account-group' : 'shield-check'} size={14} color={c.ok} />
           <Text style={[styles.sourceText, { color: c.faint }]}>{t('source')}: {isUser ? t('privateJobs') : SOURCE_NAME[job.source] ?? job.source}</Text>
         </View>
+        {isImage && <ImageViewer uri={encodeURI(decodeURI(job.advertImage!))} visible={viewer} onClose={() => setViewer(false)}
+          onOpenOriginal={() => { setViewer(false); open(job.advertImage); }} />}
         <ReportSheet visible={reporting} kind="job" jobId={job.id} onClose={(done) => { setReporting(false); if (done) flash(t('reportDone')); }} />
       </ScrollView>
 
@@ -231,6 +254,17 @@ function Detail({ job }: { job: Job }) {
         )}
       </Animated.View>
     </View>
+  );
+}
+
+function ShareBtn({ icon, color, label, onPress }: { icon: IconName; color: string; label: string; onPress: () => void }) {
+  return (
+    <Tap onPress={onPress} style={{ flex: 1, alignItems: 'center', gap: 6 }}>
+      <View style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: color + '1F', alignItems: 'center', justifyContent: 'center' }}>
+        <Icon name={icon} size={24} color={color} />
+      </View>
+      <Text style={{ fontFamily: font.medium, fontSize: 11, color }}>{label}</Text>
+    </Tap>
   );
 }
 

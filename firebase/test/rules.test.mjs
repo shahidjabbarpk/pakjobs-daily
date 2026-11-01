@@ -43,6 +43,8 @@ console.log('posts');
 let pid;
 await t('owner can create a pending post', async () => { pid = (await assertSucceeds(addDoc(collection(alice, 'posts'), post('alice')))).id; });
 await t('cannot self-approve on create', () => assertFails(addDoc(collection(alice, 'posts'), post('alice', { status: 'approved' }))));
+await t('admin can publish directly', () => assertSucceeds(addDoc(collection(boss, 'posts'), post('boss', { status: 'approved' }))));
+await t('admin cannot pre-feature on create', () => assertFails(addDoc(collection(boss, 'posts'), post('boss', { status: 'approved', featured: true }))));
 await t('cannot self-feature on create', () => assertFails(addDoc(collection(alice, 'posts'), post('alice', { featured: true }))));
 await t('cannot post as someone else', () => assertFails(addDoc(collection(alice, 'posts'), post('bob'))));
 await t('signed-out users cannot post', () => assertFails(addDoc(collection(anon, 'posts'), post('x'))));

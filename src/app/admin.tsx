@@ -58,7 +58,10 @@ export default function Admin() {
         <Tap onPress={() => router.back()} style={[styles.back, { backgroundColor: c.card }]}>
           <Icon name="arrow-left" size={22} color={c.text} />
         </Tap>
-        <Text style={[styles.h1, tf('bold'), { color: c.text }]}>🛡️ {t('admin')}</Text>
+        <Text style={[styles.h1, tf('bold'), { color: c.text, flex: 1 }]}>🛡️ {t('admin')}</Text>
+        <Tap onPress={() => router.push('/post-job')} style={[styles.back, { backgroundColor: c.primary }]}>
+          <Icon name="plus" size={22} color="#fff" />
+        </Tap>
       </View>
       <View style={styles.tabs}>
         <Chip label={`${t('pending')} (${counts.pending})`} active={tab === 'pending'} onPress={() => setTab('pending')} />
@@ -121,6 +124,7 @@ function PostCard({ job, i, actions }: { job: Job; i: number; actions: [IconName
         {!!job.whatsapp && <Action icon="whatsapp" label="WhatsApp" color="#25D366" onPress={() => Linking.openURL(`https://wa.me/${toIntl(job.whatsapp!)}`)} />}
       </View>
       <View style={styles.actions}>
+        <Action icon="pencil" label={t('editPost')} color={c.primary} onPress={() => router.push({ pathname: '/post-job', params: { edit: job.id } })} />
         {actions.map(([icon, label, color, fn]) => <Action key={label} icon={icon} label={label} color={color} onPress={fn} />)}
       </View>
     </Animated.View>

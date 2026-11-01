@@ -69,3 +69,30 @@ npx firebase-tools deploy --only firestore
 ```bash
 cd firebase/test && npx firebase-tools --config ../../firebase.json --project demo-pakjobs emulators:exec --only firestore "node rules.test.mjs"
 ```
+
+## v1.0 additions
+- **More sources:** SPSC (Sindh), BPSC (Balochistan), PAF (open-course count from its public API) and NTS recruitment tests, plus a new **IT** category.
+- **Results & Roll No:** `data/updates.json` collects roll-no slips, results, interviews and exam schedules from PPSC, FPSC, KPPSC, SPSC, BPSC and NTS. It has its own screen and its own notifications.
+- **Preparation:** 125 original MCQs in 6 subjects (instant feedback, explanations, best score) and links to official past papers and syllabi.
+- **CV Maker:** fills in a CV, saves it as a draft on the device, and exports it as a PDF to share.
+- **Job detail:** in-app pinch-zoom advert viewer, share buttons for WhatsApp, Facebook and Telegram, and reminders 3 days and 1 day before the deadline.
+- **Ads:** a native ad every 3 items, interstitials at most once every 2 minutes, and a rewarded video before adverts, past papers and roll-no links.
+- **Admin:** publish jobs directly and edit any post.
+- **Privacy policy:** `docs/privacy.html`, served by GitHub Pages at https://shahidjabbarpk.github.io/pakjobs-daily/privacy.html
+
+## Firebase (shahidjabbarpk@gmail.com only)
+The project is `pakjobs-daily-sj`. Set it up once as follows:
+1. Open https://console.firebase.google.com, go to **Add project**, choose the existing Google Cloud project **pakjobs-daily-sj**, and accept the terms.
+2. Run:
+   ```bash
+   node scripts/setup-firebase.mjs
+   ```
+   This creates the web app, writes `FIREBASE_CONFIG`, creates the Firestore database and deploys the rules.
+3. In the console, go to Authentication → Get started → enable **Anonymous**.
+4. Rebuild with `npm run apk` and `npm run aab`.
+
+Until this is done, `FIREBASE_CONFIG` is `null` and the community features show "being set up".
+
+## Signing
+- The upload keystore is `credentials/upload-keystore.jks` and its passwords are in `credentials/keystore.properties`. Both are gitignored.
+- A backup copy is in `E:\Projects\_backups\pakjobs-daily-keystore`. **Keep another copy in Google Drive.** If you lose it, you cannot publish updates.

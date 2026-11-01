@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, SlideInDown } from 'react-native-reanimated';
 import { FEATURED } from '@/lib/config';
-import { addComment, currentUid, deleteComment, listenComments, loadProfile, report, saveProfile } from '@/lib/community';
+import { addComment, communityReady, currentUid, deleteComment, listenComments, loadProfile, report, saveProfile } from '@/lib/community';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
@@ -201,7 +201,7 @@ export function Comments({ jobId, onToast }: { jobId: string; onToast: (msg: str
     <View style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
       <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>💬 {t('comments')} {list?.length ? `(${list.length})` : ''}</Text>
       {list === null && !failed && <ActivityIndicator color={c.primary} style={{ marginVertical: 12 }} />}
-      {failed && <Text style={[tf(), { color: c.faint, fontSize: 12.5, marginVertical: 8 }]}>{t('errorGeneric')}</Text>}
+      {failed && <Text style={[tf(), { color: c.faint, fontSize: 12.5, marginVertical: 8 }]}>{communityReady() ? t('errorGeneric') : t('communityOff')}</Text>}
       {list?.length === 0 && <Text style={[tf(), { color: c.faint, fontSize: 12.5, marginVertical: 8 }]}>{t('noComments')}</Text>}
       {list?.map((cm, i) => (
         <Animated.View key={cm.id} entering={i > list.length - 3 ? FadeInDown : undefined} style={[styles.comment, { borderColor: c.border }]}>
@@ -227,7 +227,7 @@ export function Comments({ jobId, onToast }: { jobId: string; onToast: (msg: str
         </Animated.View>
       ))}
 
-      {needProfile && !profile ? (
+      {!communityReady() ? null : needProfile && !profile ? (
         <Animated.View entering={FadeIn} style={{ marginTop: 10 }}>
           <ProfileForm onDone={() => setNeedProfile(false)} />
         </Animated.View>

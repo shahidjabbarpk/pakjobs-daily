@@ -3,9 +3,10 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import seed from '../data/seed.json';
 import { Storage } from './kv';
 import type { Lang } from './i18n';
-import type { Category, Feed, Job, Profile } from './types';
+import type { Category, Feed, Job, Profile, Update } from './types';
+import type { CvData } from './cv';
 
-export const ALL_CATEGORIES: Category[] = ['govt', 'psc', 'armed', 'banking', 'police', 'education', 'health', 'private'];
+export const ALL_CATEGORIES: Category[] = ['govt', 'psc', 'armed', 'banking', 'police', 'education', 'health', 'it', 'private'];
 
 interface AppState {
   jobs: Job[];
@@ -19,6 +20,11 @@ interface AppState {
   notify: boolean;
   alertCategories: Category[];
   alertCity: string | null;
+  updates: Update[];          // results / roll no slips / schedules
+  seenUpdateIds: string[];
+  notifyUpdates: boolean;
+  cv: CvData | null;
+  quizBest: Record<string, number>; // subject -> best score %
   homeCity: string | null;    // user's district, picked on first launch
   profile: Profile | null;    // cached copy of the Firestore profile (name + WhatsApp)
   admin: boolean;
@@ -48,6 +54,11 @@ export const useApp = create<AppState>()(
       notify: true,
       alertCategories: [...ALL_CATEGORIES],
       alertCity: null,
+      updates: [],
+      seenUpdateIds: [],
+      notifyUpdates: true,
+      cv: null,
+      quizBest: {},
       homeCity: null,
       profile: null,
       admin: false,

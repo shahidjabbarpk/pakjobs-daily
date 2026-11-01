@@ -9,14 +9,17 @@
     "userInterfaceStyle": "automatic",
     "backgroundColor": "#F3F6F4",
     "primaryColor": "#0B7A43",
-    "description": "Daily Govt & Private job alerts for Pakistan: NJP, PPSC, FPSC, KPPSC, Pak Army, Navy. Instant notifications, deadline countdown, Urdu & English.",
+    "description": "Pakistan govt & private job alerts: NJP, PPSC, SPSC, KPPSC, BPSC, FPSC, NTS, Pak Army, Navy, PAF. Results & roll no slips, MCQ practice, CV maker, Urdu & English.",
     "ios": {
       "bundleIdentifier": "com.pakjobs.daily.mza",
       "buildNumber": "1",
       "supportsTablet": false,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "UIBackgroundModes": ["fetch", "processing"]
+        "UIBackgroundModes": [
+          "fetch",
+          "processing"
+        ]
       }
     },
     "android": {
@@ -82,7 +85,8 @@
           }
         }
       ],
-      "./plugins/withReleaseSigning"
+      "./plugins/withReleaseSigning",
+      "expo-sharing"
     ],
     "experiments": {
       "typedRoutes": false
