@@ -10,8 +10,9 @@ import { font, useTheme } from '@/lib/theme';
 
 type BottomTabBarProps = Parameters<NonNullable<ComponentProps<typeof Tabs>['tabBar']>>[0];
 
-const TABS: { name: string; icon: IconName; active: IconName; label: 'home' | 'search' | 'saved' | 'settings' }[] = [
+const TABS: { name: string; icon: IconName; active: IconName; label: 'home' | 'privateTab' | 'search' | 'saved' | 'settings' }[] = [
   { name: 'index', icon: 'home-variant-outline', active: 'home-variant', label: 'home' },
+  { name: 'private', icon: 'briefcase-outline', active: 'briefcase', label: 'privateTab' },
   { name: 'search', icon: 'magnify', active: 'text-search', label: 'search' },
   { name: 'saved', icon: 'bookmark-outline', active: 'bookmark', label: 'saved' },
   { name: 'settings', icon: 'cog-outline', active: 'cog', label: 'settings' },
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   wrap: { borderTopWidth: StyleSheet.hairlineWidth, paddingTop: 8, paddingHorizontal: 10 },
   row: { flexDirection: 'row' },
   pillSlot: { position: 'absolute', top: 0, bottom: 0, alignItems: 'center' },
-  pill: { width: 64, height: 32, borderRadius: 16 },
+  pill: { width: 56, height: 32, borderRadius: 16 },
   tab: { flex: 1, alignItems: 'center', gap: 2, paddingTop: 4 },
   label: { fontSize: 11 },
   count: { position: 'absolute', top: -4, right: -10, minWidth: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center', borderWidth: 2, paddingHorizontal: 3 },

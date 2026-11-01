@@ -3,7 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import seed from '../data/seed.json';
 import { Storage } from './kv';
 import type { Lang } from './i18n';
-import type { Category, Feed, Job } from './types';
+import type { Category, Feed, Job, Profile } from './types';
 
 export const ALL_CATEGORIES: Category[] = ['govt', 'psc', 'armed', 'banking', 'police', 'education', 'health', 'private'];
 
@@ -19,6 +19,10 @@ interface AppState {
   notify: boolean;
   alertCategories: Category[];
   alertCity: string | null;
+  homeCity: string | null;    // user's district, picked on first launch
+  profile: Profile | null;    // cached copy of the Firestore profile (name + WhatsApp)
+  admin: boolean;
+  batteryHintShown: boolean;
   onboarded: boolean;
   lastInterstitial: number;
 
@@ -44,6 +48,10 @@ export const useApp = create<AppState>()(
       notify: true,
       alertCategories: [...ALL_CATEGORIES],
       alertCity: null,
+      homeCity: null,
+      profile: null,
+      admin: false,
+      batteryHintShown: false,
       onboarded: false,
       lastInterstitial: 0,
 

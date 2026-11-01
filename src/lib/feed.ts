@@ -1,4 +1,5 @@
 import { FEED_URL } from './config';
+import { fetchApprovedPosts } from './community';
 import { detectOnDevice, mergePhoneSources } from './detect';
 import { useApp } from './store';
 import type { Feed, Job } from './types';
@@ -29,10 +30,13 @@ let inflight: Promise<RefreshResult> | null = null;
 export function refreshJobs(): Promise<RefreshResult> {
   inflight ??= (async () => {
     const { jobs, ingest } = useApp.getState();
+    // private jobs posted in the app (Firestore); keep the cached ones if Firestore is unreachable
+    const postsP = fetchApprovedPosts().catch(() => jobs.filter((j) => j.source === 'user'));
+    const official = (list: Job[]) => list.filter((j) => j.source !== 'user');
     try {
       const feed = await fetchFeed();
       // PPSC / Army / Navy block the foreign servers that build the feed - the phone checks them itself
-      feed.jobs = (await mergePhoneSources(feed.jobs, jobs)).jobs;
+      feed.jobs = (await mergePhoneSources(feed.jobs, official(jobs))).jobs;
       // keep NJP jobs the device found itself (offline fallback) that the feed doesn't know yet
       const ids = new Set(feed.jobs.map((j) => j.id));
       const urls = new Set(feed.jobs.map((j) => j.url + j.title));
@@ -43,10 +47,10 @@ export function refreshJobs(): Promise<RefreshResult> {
       const devUrls = new Set(jobs.filter((j) => j.id.startsWith('dev-')).map((j) => j.url + j.title));
       const adopted = feed.jobs.filter((j) => devUrls.has(j.url + j.title)).map((j) => j.id);
       if (adopted.length) useApp.getState().set({ seenIds: [...adopted, ...useApp.getState().seenIds] });
-      return { fresh: ingest({ ...feed, jobs: [...extras, ...feed.jobs] }), via: 'feed' as const };
+      return { fresh: ingest({ ...feed, jobs: [...(await postsP), ...extras, ...feed.jobs] }), via: 'feed' as const };
     } catch {
-      const merged = await detectOnDevice(jobs);
-      return { fresh: ingest({ updatedAt: new Date().toISOString(), jobs: merged }), via: 'device' as const };
+      const merged = await detectOnDevice(official(jobs));
+      return { fresh: ingest({ updatedAt: new Date().toISOString(), jobs: [...(await postsP), ...merged] }), via: 'device' as const };
     }
   })().finally(() => {
     inflight = null;

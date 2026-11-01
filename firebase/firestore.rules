@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// PakJobs Daily. Users are anonymous Firebase accounts; admins are uids listed in /admins.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function me() { return request.auth.uid; }
+    function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(me())); }
+    function notBanned() { return !exists(/databases/$(database)/documents/banned/$(me())); }
+    function str(v, lo, hi) { return v is string && v.size() >= lo && v.size() <= hi; }
+    function data() { return request.resource.data; }
+
+    match /admins/{uid} {
+      allow read: if signedIn() && me() == uid;
+      allow write: if false; // granted from the console / scripts only
+    }
+
+    match /banned/{uid} {
+      allow read: if signedIn() && (me() == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    match /profiles/{uid} {
+      allow read: if signedIn() && (me() == uid || isAdmin());
+      allow write: if signedIn() && me() == uid
+        && str(data().name, 2, 60) && str(data().whatsapp, 0, 20);
+    }
+
+    // Private job posts: created as "pending", only an admin can approve or feature them.
+    match /posts/{id} {
+      allow read: if resource.data.status == 'approved'
+        || (signedIn() && (resource.data.ownerUid == me() || isAdmin()));
+
+      allow create: if signedIn() && notBanned()
+        && data().ownerUid == me()
+        && data().status == 'pending'
+        && data().featured == false
+        && data().featureRequested is bool
+        && str(data().title, 3, 120)
+        && str(data().company, 2, 120)
+        && str(data().city, 2, 60)
+        && str(data().description, 10, 3000)
+        && str(data().phone, 0, 20) && str(data().whatsapp, 0, 20)
+        && data().createdAt == request.time
+        && data().expiresAt <= request.time + duration.value(31, 'd');
+
+      // owners may only ask for "featured"; everything else is the admin's
+      allow update: if isAdmin()
+        || (signedIn() && resource.data.ownerUid == me()
+            && data().diff(resource.data).affectedKeys().hasOnly(['featureRequested'])
+            && data().featureRequested == true);
+
+      allow delete: if isAdmin() || (signedIn() && resource.data.ownerUid == me());
+    }
+
+    // Comments on any job (government or private), keyed by the app's job id.
+    match /threads/{jobId}/comments/{cid} {
+      allow read: if true;
+      allow create: if signedIn() && notBanned()
+        && data().uid == me()
+        && str(data().name, 1, 60)
+        && str(data().text, 1, 500)
+        && data().createdAt == request.time;
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == me());
+    }
+
+    match /reports/{id} {
+      allow create: if signedIn() && data().uid == me() && str(data().reason, 1, 200)
+        && data().kind in ['job', 'comment'];
+      allow read, delete: if isAdmin();
+    }
+  }
+}

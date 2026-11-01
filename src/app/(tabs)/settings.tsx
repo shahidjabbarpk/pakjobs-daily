@@ -1,9 +1,15 @@
+import * as Clipboard from 'expo-clipboard';
+import { router } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useState } from 'react';
 import { ActivityIndicator, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CityPicker } from '@/components/CityPicker';
+import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap } from '@/components/ui';
+import { openBatterySettings } from '@/lib/battery';
+import { currentUid, ensureUser } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { useI18n } from '@/lib/i18n';
 import { notifyNewJobs, setupNotifications } from '@/lib/notify';
@@ -35,6 +41,18 @@ export default function Settings() {
   const s = useApp();
   const [checking, setChecking] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [editCity, setEditCity] = useState(false);
+  const [editProfile, setEditProfile] = useState(false);
+  const [uid, setUid] = useState<string | null>(currentUid());
+  const [copied, setCopied] = useState(false);
+  const copyId = async () => {
+    const id = uid ?? (await ensureUser().catch(() => null));
+    if (!id) return;
+    setUid(id);
+    await Clipboard.setStringAsync(id);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
   const checkNow = async () => {
     setChecking(true);
@@ -73,6 +91,50 @@ export default function Settings() {
       </Card>
 
       <Card>
+        <Label icon="map-marker-radius" text={t('pickCity')} />
+        <Tap onPress={() => setEditCity(!editCity)} style={[styles.row, { backgroundColor: c.cardAlt }]}>
+          <Icon name="map-marker" size={18} color={c.primary} />
+          <Text style={[styles.rowText, { color: c.text }]}>{s.homeCity ?? t('allPakistan')}</Text>
+          <Icon name={editCity ? 'chevron-up' : 'chevron-down'} size={20} color={c.faint} />
+        </Tap>
+        {editCity && (
+          <Animated.View entering={FadeIn} style={{ marginTop: 12 }}>
+            <CityPicker value={s.homeCity} onChange={(city) => { s.set({ homeCity: city, alertCity: city }); setEditCity(false); }} />
+          </Animated.View>
+        )}
+      </Card>
+
+      <Card>
+        <Label icon="account-circle-outline" text={t('profileTitle')} />
+        {s.profile && !editProfile ? (
+          <Tap onPress={() => setEditProfile(true)} style={[styles.row, { backgroundColor: c.cardAlt }]}>
+            <Icon name="account" size={18} color={c.primary} />
+            <Text style={[styles.rowText, { color: c.text }]}>{s.profile.name}{s.profile.whatsapp ? ` • ${s.profile.whatsapp}` : ''}</Text>
+            <Icon name="pencil-outline" size={18} color={c.faint} />
+          </Tap>
+        ) : (
+          <View style={{ marginHorizontal: -16, marginTop: -14 }}><ProfileForm onDone={() => setEditProfile(false)} /></View>
+        )}
+        <Tap onPress={() => router.push('/my-posts')} style={[styles.row, { backgroundColor: c.cardAlt, marginTop: 10 }]}>
+          <Icon name="briefcase-account-outline" size={18} color={c.primary} />
+          <Text style={[styles.rowText, tf(), { color: c.text }]}>{t('myPosts')}</Text>
+          <Icon name="chevron-right" size={20} color={c.faint} />
+        </Tap>
+        <Tap onPress={() => router.push('/post-job')} style={[styles.row, { backgroundColor: c.cardAlt, marginTop: 10 }]}>
+          <Icon name="briefcase-plus-outline" size={18} color={c.primary} />
+          <Text style={[styles.rowText, tf(), { color: c.text }]}>{t('postJob')}</Text>
+          <Icon name="chevron-right" size={20} color={c.faint} />
+        </Tap>
+        {s.admin && (
+          <Tap onPress={() => router.push('/admin')} style={[styles.row, { backgroundColor: c.gold + '26', marginTop: 10 }]}>
+            <Icon name="shield-crown-outline" size={18} color={c.gold} />
+            <Text style={[styles.rowText, tf('bold'), { color: c.text }]}>{t('admin')}</Text>
+            <Icon name="chevron-right" size={20} color={c.faint} />
+          </Tap>
+        )}
+      </Card>
+
+      <Card>
         <View style={styles.between}>
           <View style={{ flex: 1 }}>
             <Label icon="bell-ring-outline" text={t('notifications')} />
@@ -106,6 +168,17 @@ export default function Settings() {
           </Animated.View>
         )}
       </Card>
+
+      {Platform.OS === 'android' && (
+        <Card>
+          <Label icon="battery-heart-variant" text={t('batteryTitle')} />
+          <Text style={[styles.hint, tf(), { color: c.sub, marginTop: -4, marginBottom: 10 }]}>{t('batteryBody')}</Text>
+          <Tap onPress={() => openBatterySettings()} style={[styles.checkBtn, { backgroundColor: c.warn }]}>
+            <Icon name="cog-outline" size={18} color="#fff" />
+            <Text style={[styles.checkText, tf('bold')]}>{t('batteryOpen')}</Text>
+          </Tap>
+        </Card>
+      )}
 
       <Card>
         <Label icon="theme-light-dark" text={t('theme')} />
@@ -146,6 +219,11 @@ export default function Settings() {
       <Card>
         <Label icon="information-outline" text={t('disclaimerTitle')} />
         <Text style={[styles.disclaimer, tf(), { color: c.sub }]}>{t('disclaimer')}</Text>
+        <Tap onPress={copyId} haptic={false} style={{ marginTop: 12 }}>
+          <Text style={[styles.version, { color: c.faint, marginTop: 0 }]} numberOfLines={1}>
+            {t('yourId')}: {uid ?? '—'} {copied ? `✓ ${t('copied')}` : '⧉'}
+          </Text>
+        </Tap>
         <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.0</Text>
       </Card>
     </ScrollView>
@@ -169,6 +247,8 @@ function Label({ icon, text }: { icon: IconName; text: string }) {
 }
 
 const styles = StyleSheet.create({
+  row: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, height: 48, borderRadius: 12 },
+  rowText: { flex: 1, fontFamily: font.medium, fontSize: 14 },
   h1: { fontSize: 26, paddingHorizontal: 16, marginBottom: 12 },
   card: { marginHorizontal: 16, marginBottom: 12, borderRadius: 20, padding: 16, borderWidth: 1 },
   label: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 },

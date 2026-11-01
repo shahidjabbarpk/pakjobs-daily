@@ -23,8 +23,14 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
       <Tap
         haptic={false}
         onPress={() => router.push(`/job/${job.id}`)}
-        style={[styles.card, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}
+        style={[styles.card, { backgroundColor: c.card, borderColor: job.featured ? c.gold : c.border, shadowColor: c.shadow },
+          job.featured && styles.featuredCard]}
       >
+        {job.featured && (
+          <View style={[styles.ribbon, { backgroundColor: c.gold }]}>
+            <Text style={styles.ribbonText}>⭐ {t('featured')}</Text>
+          </View>
+        )}
         <View style={styles.top}>
           <OrgAvatar job={job} />
           <View style={{ flex: 1 }}>
@@ -40,6 +46,7 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
         <View style={styles.tags}>
           <Tag icon="school-outline" label={qual(job.qualification)} />
           {!!place && <Tag icon="map-marker-outline" label={place} />}
+          {!!job.salary && <Tag icon="cash" label={job.salary} tint={c.ok} />}
           {!!job.grade && <Tag icon="star-four-points-outline" label={job.grade} />}
           {!!job.vacancies && <Tag icon="account-multiple-outline" label={`${job.vacancies}`} />}
         </View>
@@ -74,6 +81,9 @@ const styles = StyleSheet.create({
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 12 },
   bottom: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 12 },
   date: { fontFamily: font.medium, fontSize: 11 },
+  featuredCard: { borderWidth: 1.5 },
+  ribbon: { position: 'absolute', top: 0, right: 44, paddingHorizontal: 8, paddingVertical: 2, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
+  ribbonText: { fontFamily: font.bold, fontSize: 9.5, color: '#1A1300' },
   track: { height: 4, borderRadius: 2, marginTop: 10, overflow: 'hidden' },
   fill: { height: 4, borderRadius: 2 },
 });

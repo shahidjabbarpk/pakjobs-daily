@@ -10,6 +10,8 @@ import mobileAds, {
   NativeAsset,
   NativeAssetType,
   NativeMediaView,
+  RewardedAd,
+  RewardedAdEventType,
 } from 'react-native-google-mobile-ads';
 import { Image } from 'expo-image';
 import { Platform } from 'react-native';
@@ -25,13 +27,14 @@ const AD_UNITS = {
   banner: useTest ? TestIds.ADAPTIVE_BANNER : prod.banner,
   native: useTest ? TestIds.NATIVE : prod.native,
   interstitial: useTest ? TestIds.INTERSTITIAL : prod.interstitial,
+  rewarded: useTest ? TestIds.REWARDED : prod.rewarded,
 };
 
 let started = false;
 export function startAds() {
   if (started) return;
   started = true;
-  mobileAds().initialize().then(loadInterstitial).catch(() => {});
+  mobileAds().initialize().then(() => { loadInterstitial(); loadRewarded(); }).catch(() => {});
 }
 
 // ---------------------------------------------------------------- interstitial
@@ -59,6 +62,47 @@ export function maybeShowInterstitial() {
   set({ lastInterstitial: Date.now() });
   interstitialReady = false;
   interstitial.show().catch(() => loadInterstitial());
+}
+
+// ---------------------------------------------------------------- rewarded
+
+const REWARDED_GAP_MS = 2 * 60 * 1000;
+let rewarded: RewardedAd | null = null;
+let rewardedReady = false;
+let lastRewarded = 0;
+let afterRewarded: (() => void) | null = null;
+
+function loadRewarded() {
+  rewarded = RewardedAd.createForAdRequest(AD_UNITS.rewarded);
+  rewardedReady = false;
+  rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => { rewardedReady = true; });
+  rewarded.addAdEventListener(AdEventType.CLOSED, () => {
+    // the content opens whether or not the video was watched to the end
+    afterRewarded?.();
+    afterRewarded = null;
+    loadRewarded();
+  });
+  rewarded.addAdEventListener(AdEventType.ERROR, () => {
+    rewardedReady = false;
+    setTimeout(loadRewarded, 60_000);
+  });
+  rewarded.load();
+}
+
+/** Shows a rewarded video before opening an advert/PDF; opens straight away if none is ready. */
+export function showRewarded(then: () => void) {
+  if (!rewarded || !rewardedReady || Date.now() - lastRewarded < REWARDED_GAP_MS) {
+    then();
+    return;
+  }
+  lastRewarded = Date.now();
+  rewardedReady = false;
+  afterRewarded = then;
+  rewarded.show().catch(() => {
+    afterRewarded = null;
+    then();
+    loadRewarded();
+  });
 }
 
 // ---------------------------------------------------------------- banner

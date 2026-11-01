@@ -1,6 +1,7 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import { deadlineMs } from './format';
+import { jobInArea } from './places';
 import { translate } from './i18n';
 import { useApp } from './store';
 import type { Job } from './types';
@@ -39,9 +40,7 @@ export async function setupNotifications(): Promise<boolean> {
 export function matchesAlerts(job: Job): boolean {
   const { alertCategories, alertCity } = useApp.getState();
   if (!alertCategories.includes(job.category)) return false;
-  if (alertCity && job.cities.length && !job.cities.includes('All Pakistan')
-    && !job.cities.some((c) => c.toLowerCase() === alertCity.toLowerCase())) return false;
-  return true;
+  return jobInArea(job, alertCity);
 }
 
 export async function notifyNewJobs(jobs: Job[]): Promise<void> {

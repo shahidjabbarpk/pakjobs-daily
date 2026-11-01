@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useState } from 'react';
-import { Platform, ScrollView, Share, StyleSheet, Text, View } from 'react-native';
+import { Linking, Platform, ScrollView, Share, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   FadeIn,
   FadeInDown,
@@ -15,8 +15,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookmarkButton, DeadlineBadge, EmptyState, Icon, type IconName, NewBadge, OrgAvatar, Tap, useUrgencyColor } from '@/components/ui';
-import { maybeShowInterstitial } from '@/lib/ads';
-import { deadlineMs, isNew, prettyDate, windowProgress } from '@/lib/format';
+import { Comments, ReportSheet } from '@/components/community';
+import { maybeShowInterstitial, showRewarded } from '@/lib/ads';
+import { deadlineMs, isNew, prettyDate, toIntl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { cancelReminder, scheduleDeadlineReminder } from '@/lib/notify';
 import { useApp } from '@/lib/store';
@@ -63,6 +64,11 @@ function Detail({ job }: { job: Job }) {
   const [note, setNote] = useState<string | null>(null);
   const meta = CATEGORY_META[job.category];
   const open = (url?: string) => url && WebBrowser.openBrowserAsync(encodeURI(decodeURI(url)), { toolbarColor: c.heroA });
+  const openAdvert = (url?: string) => showRewarded(() => open(url));
+  const isUser = job.source === 'user';
+  const [reporting, setReporting] = useState(false);
+  const call = () => job.phone && Linking.openURL(`tel:${job.phone.replace(/\s/g, '')}`);
+  const whatsapp = () => job.whatsapp && Linking.openURL(`https://wa.me/${toIntl(job.whatsapp)}?text=${encodeURIComponent(`Assalam o Alaikum, I saw your job "${job.title}" on PakJobs Daily.`)}`);
   const isPdf = job.advertImage && /\.pdf($|\?)/i.test(job.advertImage);
   const isImage = job.advertImage && /\.(jpe?g|png|webp)($|\?)/i.test(job.advertImage);
   const place = job.cities.includes('All Pakistan') ? t('allPakistan') : job.cities.join(', ');
@@ -88,6 +94,7 @@ function Detail({ job }: { job: Job }) {
     ['calendar-account-outline', t('age'), job.ageLimit],
     ['card-account-details-outline', t('domicile'), job.domicile],
     ['map-marker-outline', t('location'), place || undefined],
+    ['cash-multiple', t('salary'), job.salary],
     ['cash', t('fee'), job.fee],
     ['pound', t('advertNo'), job.advertNo],
     ['calendar-start', t('posted'), job.postedDate ? prettyDate(job.postedDate) : undefined],
@@ -104,6 +111,7 @@ function Detail({ job }: { job: Job }) {
               <Icon name="arrow-left" size={22} color="#fff" />
             </Tap>
             <View style={{ flexDirection: 'row', gap: 10 }}>
+              {isUser && <Tap onPress={() => setReporting(true)} style={styles.navBtn}><Icon name="flag-outline" size={20} color="#fff" /></Tap>}
               <Tap onPress={onShare} style={styles.navBtn}><Icon name="share-variant-outline" size={20} color="#fff" /></Tap>
               <View style={styles.navBtn}><BookmarkButton active={saved} onPress={() => toggleSave(job)} light /></View>
             </View>
@@ -139,13 +147,13 @@ function Detail({ job }: { job: Job }) {
           <Animated.View entering={FadeInUp.delay(220)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>{t('viewAdvert')}</Text>
             {isImage && (
-              <Tap onPress={() => open(job.advertImage)} haptic={false}>
+              <Tap onPress={() => openAdvert(job.advertImage)} haptic={false}>
                 <Image source={{ uri: encodeURI(decodeURI(job.advertImage!)) }} style={styles.advert} contentFit="cover" transition={300} />
                 <View style={styles.zoom}><Icon name="magnify-plus-outline" size={18} color="#fff" /></View>
               </Tap>
             )}
             <View style={{ gap: 8, marginTop: isImage ? 12 : 0 }}>
-              {isPdf && <LinkRow icon="file-pdf-box" label={`${t('viewAdvert')} (PDF)`} onPress={() => open(job.advertImage)} />}
+              {isPdf && <LinkRow icon="file-pdf-box" label={`${t('viewAdvert')} (PDF)`} onPress={() => openAdvert(job.advertImage)} />}
               {job.criteriaUrl && <LinkRow icon="clipboard-check-outline" label={t('criteria')} onPress={() => open(job.criteriaUrl)} />}
             </View>
           </Animated.View>
@@ -170,10 +178,27 @@ function Detail({ job }: { job: Job }) {
           </Animated.View>
         )}
 
+        {isUser && (
+          <Animated.View entering={FadeInUp.delay(320)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+            <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>📞 {t('postedBy')}: {job.ownerName}</Text>
+            <View style={{ flexDirection: 'row', gap: 10 }}>
+              {!!job.phone && <ContactBtn icon="phone" label={t('call')} color={c.primary} onPress={call} />}
+              {!!job.whatsapp && <ContactBtn icon="whatsapp" label={t('whatsapp')} color="#25D366" onPress={whatsapp} />}
+            </View>
+            <View style={[styles.warn, { backgroundColor: c.danger + '12' }]}>
+              <Icon name="shield-alert-outline" size={16} color={c.danger} />
+              <Text style={[tf(), { color: c.danger, fontSize: 12, flex: 1 }]}>{t('scamWarning')}</Text>
+            </View>
+          </Animated.View>
+        )}
+
+        <Comments jobId={job.id} onToast={flash} />
+
         <View style={styles.sourceRow}>
-          <Icon name="shield-check" size={14} color={c.ok} />
-          <Text style={[styles.sourceText, { color: c.faint }]}>{t('source')}: {SOURCE_NAME[job.source] ?? job.source}</Text>
+          <Icon name={isUser ? 'account-group' : 'shield-check'} size={14} color={c.ok} />
+          <Text style={[styles.sourceText, { color: c.faint }]}>{t('source')}: {isUser ? t('privateJobs') : SOURCE_NAME[job.source] ?? job.source}</Text>
         </View>
+        <ReportSheet visible={reporting} kind="job" jobId={job.id} onClose={(done) => { setReporting(false); if (done) flash(t('reportDone')); }} />
       </ScrollView>
 
       {note && (
@@ -189,14 +214,33 @@ function Detail({ job }: { job: Job }) {
             <Icon name={hasReminder ? 'bell-check' : 'bell-plus-outline'} size={22} color={hasReminder ? c.gold : c.text} />
           </Tap>
         )}
-        <Tap onPress={() => open(job.applyUrl ?? job.url)} style={{ flex: 1 }}>
-          <LinearGradient colors={[c.primaryDark, c.primary]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.apply}>
-            <Text style={[styles.applyText, tf('bold')]}>{t('applyNow')}</Text>
-            <Icon name="arrow-right" size={20} color="#fff" />
-          </LinearGradient>
-        </Tap>
+        {isUser ? (
+          <Tap onPress={() => (job.whatsapp ? whatsapp() : call())} style={{ flex: 1 }}>
+            <LinearGradient colors={job.whatsapp ? ['#128C7E', '#25D366'] : [c.primaryDark, c.primary]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.apply}>
+              <Icon name={job.whatsapp ? 'whatsapp' : 'phone'} size={22} color="#fff" />
+              <Text style={[styles.applyText, tf('bold')]}>{t('applyNow')}</Text>
+            </LinearGradient>
+          </Tap>
+        ) : (
+          <Tap onPress={() => open(job.applyUrl ?? job.url)} style={{ flex: 1 }}>
+            <LinearGradient colors={[c.primaryDark, c.primary]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.apply}>
+              <Text style={[styles.applyText, tf('bold')]}>{t('applyNow')}</Text>
+              <Icon name="arrow-right" size={20} color="#fff" />
+            </LinearGradient>
+          </Tap>
+        )}
       </Animated.View>
     </View>
+  );
+}
+
+function ContactBtn({ icon, label, color, onPress }: { icon: IconName; label: string; color: string; onPress: () => void }) {
+  const { tf } = useI18n();
+  return (
+    <Tap onPress={onPress} style={[styles.contact, { backgroundColor: color + '1A', borderColor: color + '55' }]}>
+      <Icon name={icon} size={22} color={color} />
+      <Text style={[tf('bold'), { color, fontSize: 14 }]}>{label}</Text>
+    </Tap>
   );
 }
 
@@ -299,5 +343,7 @@ const styles = StyleSheet.create({
   iconBtn: { width: 54, height: 54, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
   apply: { height: 54, borderRadius: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
   applyText: { color: '#fff', fontSize: 16 },
+  contact: { flex: 1, flexDirection: 'row', gap: 8, height: 50, borderRadius: 14, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
+  warn: { flexDirection: 'row', gap: 8, alignItems: 'center', padding: 10, borderRadius: 12, marginTop: 12 },
   toast: { position: 'absolute', alignSelf: 'center', paddingHorizontal: 18, paddingVertical: 10, borderRadius: 20 },
 });

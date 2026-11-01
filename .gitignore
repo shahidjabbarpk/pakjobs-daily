@@ -8,3 +8,5 @@ credentials/
 *.jks
 *.log
 release/
+firebase/test/node_modules/
+*-debug.log

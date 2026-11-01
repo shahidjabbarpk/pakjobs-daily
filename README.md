@@ -47,3 +47,25 @@ Release signing: put `credentials/keystore.properties` (storeFile, storePassword
 
 ## Adding a source
 Write `scrape_<name>(known) -> list[dict]` in `scraper/scrape.py` using `make_job(...)`, then add it to `SOURCES`. If one source fails, the others still run, and the failing source keeps its previous jobs.
+
+## Community features (Firebase project `pakjobs-daily-pk`)
+- **Private jobs:** employers post jobs from the app (`post-job`). Each post starts as *pending* and an admin approves it. Posts expire after 30 days. Call and WhatsApp buttons replace "Apply" on these jobs.
+- **Featured listing:** the employer requests it, pays outside the app (see `FEATURED` in `src/lib/config.ts` for price, account and admin WhatsApp), and the admin switches "featured" on. Featured jobs show at the top with a ⭐ ribbon.
+- **Comments + reports** on every job, plus a scam warning. The admin panel (`/admin`) handles pending posts, featured requests, reports and bans.
+- **Identity:** an anonymous Firebase account plus a profile (name and WhatsApp). There is no OTP yet, because SMS needs a billing account.
+- **District:** chosen during onboarding. It drives the "Jobs in <city>" strip and area-aware alerts (district + province + All Pakistan).
+- **Monetisation extras:** a rewarded video before opening an official advert or PDF (at most once every 2 min; it never blocks if no ad is ready).
+
+**One-time console step:** go to Authentication → Get started → enable **Anonymous**.
+
+**Make someone admin:** copy "Your user ID" from Settings, then create an empty document `admins/<uid>` in Firestore.
+
+**Deploy rules:**
+```bash
+npx firebase-tools deploy --only firestore
+```
+
+**Test rules** (needs Java 21+ on PATH):
+```bash
+cd firebase/test && npx firebase-tools --config ../../firebase.json --project demo-pakjobs emulators:exec --only firestore "node rules.test.mjs"
+```

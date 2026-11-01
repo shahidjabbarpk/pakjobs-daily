@@ -1,0 +1,46 @@
+import type { Job } from './types';
+
+export type Province = 'Punjab' | 'Sindh' | 'KPK' | 'Balochistan' | 'ICT' | 'AJK' | 'GB';
+
+/** Districts / major cities users can pick, with their province. */
+export const DISTRICTS: Record<string, Province> = {
+  Islamabad: 'ICT',
+  Lahore: 'Punjab', Rawalpindi: 'Punjab', Faisalabad: 'Punjab', Multan: 'Punjab', Gujranwala: 'Punjab',
+  Sialkot: 'Punjab', Bahawalpur: 'Punjab', Sargodha: 'Punjab', Sahiwal: 'Punjab', Sheikhupura: 'Punjab',
+  Jhang: 'Punjab', 'Rahim Yar Khan': 'Punjab', Gujrat: 'Punjab', Kasur: 'Punjab', Okara: 'Punjab',
+  'Dera Ghazi Khan': 'Punjab', Muzaffargarh: 'Punjab', Jhelum: 'Punjab', Chakwal: 'Punjab', Attock: 'Punjab',
+  Mianwali: 'Punjab', Bahawalnagar: 'Punjab', Vehari: 'Punjab', Khanewal: 'Punjab', 'Toba Tek Singh': 'Punjab',
+  Karachi: 'Sindh', Hyderabad: 'Sindh', Sukkur: 'Sindh', Larkana: 'Sindh', Nawabshah: 'Sindh',
+  Mirpurkhas: 'Sindh', Thatta: 'Sindh', Jacobabad: 'Sindh', Khairpur: 'Sindh', Dadu: 'Sindh',
+  Peshawar: 'KPK', Mardan: 'KPK', Abbottabad: 'KPK', Swat: 'KPK', Kohat: 'KPK', Bannu: 'KPK',
+  'Dera Ismail Khan': 'KPK', Mansehra: 'KPK', Charsadda: 'KPK', Nowshera: 'KPK', Swabi: 'KPK', Chitral: 'KPK',
+  Quetta: 'Balochistan', Gwadar: 'Balochistan', Turbat: 'Balochistan', Khuzdar: 'Balochistan',
+  Sibi: 'Balochistan', Zhob: 'Balochistan', Loralai: 'Balochistan', Chaman: 'Balochistan',
+  Muzaffarabad: 'AJK', Mirpur: 'AJK', Kotli: 'AJK', Rawalakot: 'AJK',
+  Gilgit: 'GB', Skardu: 'GB', Hunza: 'GB',
+};
+
+export const DISTRICT_NAMES = Object.keys(DISTRICTS).sort((a, b) => a.localeCompare(b));
+
+export const PROVINCE_NAMES: Record<Province, string> = {
+  Punjab: 'Punjab', Sindh: 'Sindh', KPK: 'Khyber Pakhtunkhwa', Balochistan: 'Balochistan',
+  ICT: 'Islamabad Capital', AJK: 'Azad Kashmir', GB: 'Gilgit-Baltistan',
+};
+
+/**
+ * Is this job open to someone living in `place` (a district or province)?
+ * Jobs tagged with the district, its province, or "All Pakistan" match; untagged jobs match everyone.
+ */
+export function jobInArea(job: Job, place: string | null): boolean {
+  if (!place) return true;
+  if (!job.cities.length || job.cities.includes('All Pakistan')) return true;
+  const prov = DISTRICTS[place];
+  const want = new Set([place.toLowerCase(), prov?.toLowerCase(), prov === 'ICT' ? 'islamabad' : undefined].filter(Boolean) as string[]);
+  return job.cities.some((c) => want.has(c.toLowerCase()));
+}
+
+/** Matches the user's own district only (for the "Jobs in your city" strip). */
+export function jobInCity(job: Job, place: string | null): boolean {
+  if (!place) return false;
+  return job.cities.some((c) => c.toLowerCase() === place.toLowerCase());
+}

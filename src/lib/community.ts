@@ -1,0 +1,236 @@
+/**
+ * Firestore-backed community features: private job posts, comments, reports, admin moderation.
+ * Every user gets an anonymous Firebase account on first use; identity shown to others is the
+ * profile (name + WhatsApp). All access control lives in firebase/firestore.rules.
+ */
+import { signInAnonymously } from '@firebase/auth';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+  Timestamp,
+  updateDoc,
+  where,
+  type DocumentData,
+} from 'firebase/firestore';
+import { POST_LIFETIME_DAYS } from './config';
+import { auth, db } from './firebase';
+import type { Category, Comment, Job, PostStatus, Profile, Report } from './types';
+
+export const POST_PREFIX = 'u-';
+
+let signingIn: Promise<string> | null = null;
+
+/** Signed-in uid; concurrent callers share one sign-in so only one anonymous account is ever made. */
+export function ensureUser(): Promise<string> {
+  if (auth.currentUser) return Promise.resolve(auth.currentUser.uid);
+  signingIn ??= (async () => {
+    // wait for the persisted session to load before deciding to create a new anonymous account
+    await auth.authStateReady();
+    const restored = auth.currentUser as { uid: string } | null;
+    if (restored) return restored.uid;
+    return (await signInAnonymously(auth)).user.uid;
+  })().finally(() => {
+    signingIn = null;
+  });
+  return signingIn;
+}
+
+export const currentUid = () => auth.currentUser?.uid ?? null;
+
+// ------------------------------------------------------------------ profile / roles
+
+export async function loadProfile(): Promise<Profile | null> {
+  const uid = await ensureUser();
+  const snap = await getDoc(doc(db, 'profiles', uid));
+  return snap.exists() ? (snap.data() as Profile) : null;
+}
+
+export async function saveProfile(p: Profile): Promise<void> {
+  const uid = await ensureUser();
+  await setDoc(doc(db, 'profiles', uid), { name: p.name.trim(), whatsapp: p.whatsapp.trim(), city: p.city ?? null, updatedAt: serverTimestamp() });
+}
+
+export async function isAdmin(): Promise<boolean> {
+  const uid = await ensureUser();
+  try {
+    return (await getDoc(doc(db, 'admins', uid))).exists();
+  } catch {
+    return false;
+  }
+}
+
+// ------------------------------------------------------------------ posts
+
+export interface PostInput {
+  title: string;
+  company: string;
+  category: Category;
+  city: string;
+  salary: string;
+  qualification: string | null;
+  jobType: string;
+  vacancies: number | null;
+  lastDate: string | null; // YYYY-MM-DD
+  description: string;
+  phone: string;
+  whatsapp: string;
+}
+
+const iso = (v: unknown) => (v instanceof Timestamp ? v.toDate().toISOString() : new Date().toISOString());
+const ymd = (v: unknown) => (v instanceof Timestamp ? v.toDate().toISOString().slice(0, 10) : undefined);
+
+export function postToJob(id: string, d: DocumentData): Job {
+  return {
+    id: POST_PREFIX + id,
+    source: 'user',
+    title: d.title,
+    organization: d.company,
+    category: d.category ?? 'private',
+    cities: d.city ? [d.city] : [],
+    qualification: d.qualification ?? null,
+    url: `pakjobs://job/${POST_PREFIX}${id}`,
+    description: d.description,
+    jobType: d.jobType || undefined,
+    vacancies: d.vacancies ?? undefined,
+    salary: d.salary || undefined,
+    phone: d.phone || undefined,
+    whatsapp: d.whatsapp || undefined,
+    postedDate: ymd(d.createdAt),
+    lastDate: d.lastDate || ymd(d.expiresAt),
+    ownerUid: d.ownerUid,
+    ownerName: d.ownerName,
+    featured: !!d.featured,
+    featureRequested: !!d.featureRequested,
+    status: d.status,
+    firstSeen: iso(d.createdAt),
+  };
+}
+
+const docId = (jobId: string) => jobId.slice(POST_PREFIX.length);
+
+export async function createPost(input: PostInput, ownerName: string, requestFeature: boolean): Promise<string> {
+  const uid = await ensureUser();
+  const expires = new Date(Date.now() + POST_LIFETIME_DAYS * 86_400_000);
+  const ref = await addDoc(collection(db, 'posts'), {
+    ...input,
+    title: input.title.trim(),
+    company: input.company.trim(),
+    description: input.description.trim(),
+    ownerUid: uid,
+    ownerName,
+    status: 'pending' satisfies PostStatus,
+    featured: false,
+    featureRequested: requestFeature,
+    createdAt: serverTimestamp(),
+    expiresAt: Timestamp.fromDate(expires),
+  });
+  return POST_PREFIX + ref.id;
+}
+
+/** Approved, unexpired posts - newest first, featured on top. */
+export async function fetchApprovedPosts(): Promise<Job[]> {
+  await ensureUser();
+  const snap = await getDocs(query(collection(db, 'posts'), where('status', '==', 'approved'), orderBy('createdAt', 'desc'), limit(150)));
+  const now = Date.now();
+  return snap.docs
+    .filter((d) => ((d.data().expiresAt as Timestamp | undefined)?.toMillis() ?? Infinity) > now)
+    .map((d) => postToJob(d.id, d.data()))
+    .sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
+}
+
+export async function fetchMyPosts(): Promise<Job[]> {
+  const uid = await ensureUser();
+  const snap = await getDocs(query(collection(db, 'posts'), where('ownerUid', '==', uid)));
+  return snap.docs.map((d) => postToJob(d.id, d.data())).sort((a, b) => b.firstSeen.localeCompare(a.firstSeen));
+}
+
+export async function deletePost(jobId: string) {
+  await deleteDoc(doc(db, 'posts', docId(jobId)));
+}
+
+export async function requestFeature(jobId: string) {
+  await updateDoc(doc(db, 'posts', docId(jobId)), { featureRequested: true });
+}
+
+// ------------------------------------------------------------------ comments
+
+export function listenComments(jobId: string, cb: (c: Comment[]) => void, onError?: () => void): () => void {
+  const q = query(collection(db, 'threads', jobId, 'comments'), orderBy('createdAt', 'asc'), limit(200));
+  let unsub = () => {};
+  let cancelled = false;
+  ensureUser()
+    .then(() => {
+      if (cancelled) return;
+      unsub = onSnapshot(
+        q,
+        (snap) => cb(snap.docs.map((d) => ({
+          id: d.id,
+          uid: d.data().uid,
+          name: d.data().name,
+          text: d.data().text,
+          createdAt: (d.data().createdAt as Timestamp | null)?.toMillis() ?? Date.now(),
+        }))),
+        () => onError?.(),
+      );
+    })
+    .catch(() => onError?.());
+  return () => {
+    cancelled = true;
+    unsub();
+  };
+}
+
+export async function addComment(jobId: string, name: string, text: string) {
+  const uid = await ensureUser();
+  await addDoc(collection(db, 'threads', jobId, 'comments'), { uid, name, text: text.trim(), createdAt: serverTimestamp() });
+}
+
+export async function deleteComment(jobId: string, commentId: string) {
+  await deleteDoc(doc(db, 'threads', jobId, 'comments', commentId));
+}
+
+// ------------------------------------------------------------------ reports
+
+export async function report(kind: 'job' | 'comment', jobId: string, reason: string, commentId?: string) {
+  const uid = await ensureUser();
+  await addDoc(collection(db, 'reports'), { kind, jobId, commentId: commentId ?? null, reason, uid, createdAt: serverTimestamp() });
+}
+
+// ------------------------------------------------------------------ admin
+
+export async function fetchPending(): Promise<Job[]> {
+  const snap = await getDocs(query(collection(db, 'posts'), where('status', '==', 'pending'), orderBy('createdAt', 'asc'), limit(100)));
+  return snap.docs.map((d) => postToJob(d.id, d.data()));
+}
+
+export async function fetchFeatureRequests(): Promise<Job[]> {
+  const snap = await getDocs(query(collection(db, 'posts'), where('featureRequested', '==', true), limit(100)));
+  return snap.docs.map((d) => postToJob(d.id, d.data()));
+}
+
+export async function fetchReports(): Promise<Report[]> {
+  const snap = await getDocs(query(collection(db, 'reports'), orderBy('createdAt', 'desc'), limit(100)));
+  return snap.docs.map((d) => ({ id: d.id, ...(d.data() as any), createdAt: (d.data().createdAt as Timestamp | null)?.toMillis() ?? 0 }));
+}
+
+export async function moderatePost(jobId: string, patch: { status?: PostStatus; featured?: boolean; featureRequested?: boolean }) {
+  await updateDoc(doc(db, 'posts', docId(jobId)), patch);
+}
+
+export async function dismissReport(id: string) {
+  await deleteDoc(doc(db, 'reports', id));
+}
+
+export async function banUser(uid: string) {
+  await setDoc(doc(db, 'banned', uid), { at: serverTimestamp() });
+}

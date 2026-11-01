@@ -21,6 +21,7 @@ import { NATIVE_AD_EVERY } from '@/lib/config';
 import { refreshJobs } from '@/lib/feed';
 import { isNew, sortJobs, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
+import { jobInCity } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
 import { CATEGORY_META, font, useTheme } from '@/lib/theme';
 import type { Job } from '@/lib/types';
@@ -39,6 +40,7 @@ export default function Home() {
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();
   const jobs = useApp((s) => s.jobs);
+  const homeCity = useApp((s) => s.homeCity);
   const [refreshing, setRefreshing] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const scrollY = useSharedValue(0);
@@ -49,6 +51,8 @@ export default function Home() {
     () => sortJobs(live.filter((j) => ['today', 'urgent', 'soon'].includes(urgency(j))), 'deadline').slice(0, 10),
     [live],
   );
+  const featured = useMemo(() => live.filter((j) => j.featured).slice(0, 10), [live]);
+  const cityJobs = useMemo(() => sortJobs(live.filter((j) => jobInCity(j, homeCity)), 'newest').slice(0, 12), [live, homeCity]);
   const newCount = useMemo(() => live.filter((j) => isNew(j)).length, [live]);
   const counts = useMemo(() => {
     const m: Record<string, number> = {};
@@ -177,6 +181,21 @@ export default function Home() {
         ))}
       </ScrollView>
 
+      {featured.length > 0 && (
+        <>
+          <SectionTitle title={`⭐ ${t('featuredJobs')}`} action={t('seeAll')} onAction={() => router.push('/private')} />
+          <JobStrip jobs={featured} featured />
+        </>
+      )}
+
+      {cityJobs.length > 0 && (
+        <>
+          <SectionTitle title={`📍 ${t('yourCity')} ${homeCity}`} action={t('seeAll')}
+            onAction={() => router.push({ pathname: '/search', params: { city: homeCity! } })} />
+          <JobStrip jobs={cityJobs} />
+        </>
+      )}
+
       {closing.length > 0 && (
         <>
           <SectionTitle title={`⏳ ${t('closingSoon')}`} action={t('seeAll')}
@@ -276,3 +295,25 @@ const styles = StyleSheet.create({
   toast: { position: 'absolute', alignSelf: 'center', paddingHorizontal: 18, paddingVertical: 10, borderRadius: 22, elevation: 6 },
   toastText: { fontSize: 13 },
 });
+
+/** Horizontal snap carousel of compact job cards. */
+function JobStrip({ jobs, featured }: { jobs: Job[]; featured?: boolean }) {
+  const c = useTheme();
+  return (
+    <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList} decelerationRate="fast" snapToInterval={262}>
+      {jobs.map((job, i) => (
+        <Animated.View key={job.id} entering={FadeInRight.delay(i * 60).springify()}>
+          <Tap style={[styles.closeCard, { backgroundColor: c.card, borderColor: featured ? c.gold : c.border, shadowColor: c.shadow }]}
+            onPress={() => router.push(`/job/${job.id}`)}>
+            <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+              <OrgAvatar job={job} size={38} />
+              <Text style={[styles.closeOrg, { color: c.sub }]} numberOfLines={2}>{job.organization}</Text>
+            </View>
+            <Text style={[styles.closeTitle, { color: c.text }]} numberOfLines={2}>{job.title}</Text>
+            {job.salary ? <Text style={{ color: c.ok, fontFamily: font.semi, fontSize: 12.5 }} numberOfLines={1}>💰 {job.salary}</Text> : <DeadlineBadge job={job} />}
+          </Tap>
+        </Animated.View>
+      ))}
+    </ScrollView>
+  );
+}

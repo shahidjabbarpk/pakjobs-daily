@@ -75,3 +75,9 @@ export function sortJobs(jobs: Job[], by: 'newest' | 'deadline'): Job[] {
   }
   return copy;
 }
+
+/** 0300-1234567 -> 923001234567 (for wa.me links). */
+export function toIntl(n: string): string {
+  const d = n.replace(/\D/g, '');
+  return d.startsWith('0') ? `92${d.slice(1)}` : d;
+}
