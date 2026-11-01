@@ -33,4 +33,6 @@ jobs:
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           NEW=$(python -c "import json;print(json.load(open('data/meta.json'))['new'])")
           git commit -m "jobs: $NEW new ($(date -u +%FT%TZ))"
+          # code pushes can land meanwhile; our freshly scraped data wins on data/ conflicts
+          git pull --rebase -X theirs origin main
           git push
