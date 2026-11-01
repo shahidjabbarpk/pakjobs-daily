@@ -1,0 +1,31 @@
+{
+ "updatedAt": "2026-11-02T01:11:22+05:00",
+ "sources": {
+  "njp": {
+   "count": 90,
+   "ok": true
+  },
+  "ppsc": {
+   "count": 0,
+   "ok": true
+  },
+  "fpsc": {
+   "count": 0,
+   "ok": true
+  },
+  "kppsc": {
+   "count": 0,
+   "ok": true
+  },
+  "army": {
+   "count": 2,
+   "ok": true
+  },
+  "navy": {
+   "count": 3,
+   "ok": true
+  }
+ },
+ "total": 94,
+ "new": 94
+}
