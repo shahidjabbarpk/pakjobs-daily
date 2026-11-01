@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-02T03:51:49+05:00",
+ "updatedAt": "2026-11-02T04:10:24+05:00",
  "sources": {
   "njp": {
    "count": 90,
@@ -7,7 +7,8 @@
   },
   "ppsc": {
    "count": 0,
-   "ok": true
+   "ok": false,
+   "error": "HTTPSConnectionPool(host='www.ppsc.gop.pk', port=443): Max retries exceeded with url: /Jobs.aspx (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ppsc.gop.pk', port=443) at 0x7f94d4230320>, '"
   },
   "fpsc": {
    "count": 0,
@@ -19,11 +20,13 @@
   },
   "army": {
    "count": 2,
-   "ok": true
+   "ok": false,
+   "error": "HTTPSConnectionPool(host='joinpakarmy.gov.pk', port=443): Max retries exceeded with url: /api/course_list/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='joinpakarmy.gov.pk', port=443) at 0x7f9"
   },
   "navy": {
    "count": 3,
-   "ok": true
+   "ok": false,
+   "error": "403 Client Error: Forbidden for url: https://www.joinpaknavy.gov.pk/"
   },
   "spsc": {
    "count": 1,
@@ -35,7 +38,8 @@
   },
   "paf": {
    "count": 1,
-   "ok": true
+   "ok": false,
+   "error": "HTTPSConnectionPool(host='www.joinpaf.gov.pk', port=443): Max retries exceeded with url: /api/count-courses?type= (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.joinpaf.gov.pk', port=443) a"
   },
   "nts": {
    "count": 6,
@@ -45,10 +49,10 @@
  "total": 105,
  "new": 0,
  "updates": {
-  "total": 65,
-  "new": 65,
+  "total": 44,
+  "new": 0,
   "ok": {
-   "ppsc": true,
+   "ppsc": false,
    "fpsc": true,
    "kppsc": true,
    "spsc": true,

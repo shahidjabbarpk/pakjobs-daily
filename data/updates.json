@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-02T03:51:49+05:00",
+ "updatedAt": "2026-11-02T04:10:24+05:00",
  "updates": [
   {
    "id": "7299bebcccee607d",
@@ -209,69 +209,6 @@
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
-   "id": "bd84716836472a54",
-   "source": "nts",
-   "kind": "result",
-   "title": "Sindh High Court (Recruitment Test) (Answer Keys) Only for the Post of (Junior Translator, Assistant Accountant, Caretaker, Library Associate, Telephone Operator)",
-   "url": "https://nts.org.pk/Test&Products/Lists/SHC_23_08_2026_Keys/posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "d2c0bd0173b2dcf1",
-   "source": "nts",
-   "kind": "schedule",
-   "title": "RAVI URBAN DEVELOPMENT AUTHORITY (RUDA) YOUNG LEADERSHIP PROGRAM (YLP)",
-   "url": "https://nts.org.pk/Test&Products/Results/09_26/RUDA_17_09_2026_result/Search.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "3ce27626cb893c2d",
-   "source": "nts",
-   "kind": "schedule",
-   "title": "Shaheed Zulfikar Ali Bhutto Institute of Science and Technology SZABIST(Special Test for MS Programs))",
-   "url": "https://portal.nts.org.pk/login",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "d25e0235f45b2f37",
-   "source": "nts",
-   "kind": "result",
-   "title": "University of Balochistan (Admission Test for BS (CS/ IT/ AI)) (Answer Keys)",
-   "url": "https://nts.org.pk/Test&Products/Lists/BUITEMS_13Sep26_Keys/Posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "7bcc8afe4d5d9764",
-   "source": "nts",
-   "kind": "result",
-   "title": "District & Session Judge Badin (Recruitment Test) (Answer Keys)",
-   "url": "https://nts.org.pk/Test&Products/Lists/DSC_Badin_06Sep26_Keys/Posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "9edbbedf73fbd099",
-   "source": "nts",
-   "kind": "result",
-   "title": "TOEIC PUBLIC TEST AUGUST 2026 RESULT",
-   "url": "https://nts.org.pk/Test&Products/Results/09_26/ETS_TOEIC_17Aug26_Result/search.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "d8b382358a728176",
-   "source": "nts",
-   "kind": "result",
-   "title": "Balochistan University of Information Technology, Engineering And Management Sciences-BUITEMS (ADMISSIONS FALL- 2026) (Answer Keys)",
-   "url": "https://nts.org.pk/Test&Products/Lists/BUITEMS_30Aug26_Keys/Posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
    "id": "7567ab7fa59337e3",
    "source": "ppsc",
    "kind": "schedule",
@@ -425,75 +362,12 @@
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
-   "id": "554b59afaab589d9",
-   "source": "bpsc",
-   "kind": "rollno",
-   "title": "Press Release Dated 01-10-2026 Name Nusrat Shaheen D/O Abdul Wahab Roll No 11277 Have been declared to qualified for appointment to the post of Head Nurse.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1790849564.jpeg",
-   "date": "2026-10-01",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "cc0d1842b5c28133",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Press Release Dated 29-09-2026 Final result of various posts of different department.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1790683304.jpeg",
-   "date": "2026-09-29",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "eaaaf3d505af039c",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Final result for the post of Principal Midwifery School Female B-18. in the Health Department Dated 29-09-2026.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1790682817.jpeg",
-   "date": "2026-09-29",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "a85522a34d2771e5",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Press Release - Result of Head Nurse (B-17) in the Health Department (17-09-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1789641555.pdf",
-   "date": "2026-09-17",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "d61bf51a4c74a55c",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Press Release - Result of various posts (14-09-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1789380496.pdf",
-   "date": "2026-09-14",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "da6dc1cb52aa6d0d",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Press Release - Result of Assistant Engineer / Sub Divisional Officer (B-17) (11-09-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1789123982.pdf",
-   "date": "2026-09-11",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
    "id": "e1b53887aa7ec7d8",
    "source": "bpsc",
    "kind": "interview",
    "title": "Press Release - Interview Schedule against various posts (11-09-2026)",
    "url": "https://www.bpsc.gob.pk/uploads/Interview/1789132406.pdf",
    "date": "2026-09-11",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "b30b2f781b4bb77b",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Press Release - Result of Medical Officer (B-17) and Lady Medical Officer (B-17) (PART-II Page from 16 to 30)",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1788944284.pdf",
-   "date": "2026-09-09",
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
@@ -521,69 +395,6 @@
    "title": "Press Release - Interview Schedule for various posts (13-07-2026)",
    "url": "https://www.bpsc.gob.pk/uploads/Interview/1783937101.pdf",
    "date": "2026-07-13",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "17c10967c5b1a53d",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule for the posts of Tutor Nurse (B-17) Male-Female and Head Nurse (B-17) (10-07-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1783686452.pdf",
-   "date": "2026-07-10",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "e5921e972a2a3167",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule of Tehsildar (B-16) in Board of Revenue (09-07-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1783584216.pdf",
-   "date": "2026-07-09",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "fe7480f9ce8f513a",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule (02-07-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1782987336.pdf",
-   "date": "2026-07-02",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "f45cf40e0a588508",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule against various posts (29-06-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1782726144.pdf",
-   "date": "2026-06-29",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "143a2927240660d8",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule of Naib Tehsildar (B-14) in the Board of Revenue Department (18-05-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1779093071.pdf",
-   "date": "2026-05-18",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "2b83c76f25cd13e6",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule (20-04-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1776686043.pdf",
-   "date": "2026-04-20",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "9d47c6a332edbbad",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule (30-03-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1774859393.pdf",
-   "date": "2026-03-30",
    "firstSeen": "2026-11-02T03:51:49+05:00"
   }
  ]
