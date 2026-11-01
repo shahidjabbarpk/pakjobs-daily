@@ -5,7 +5,7 @@ import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CityPicker } from '@/components/CityPicker';
 import { FeaturedPayInfo, Field, ProfileForm, useProfile } from '@/components/community';
-import { Chip, Icon, Tap } from '@/components/ui';
+import { Chip, Icon, Tap, useStatusBar } from '@/components/ui';
 import { communityReady, createPost, updatePost } from '@/lib/community';
 import { FEATURED } from '@/lib/config';
 import { useI18n } from '@/lib/i18n';
@@ -16,6 +16,7 @@ import type { Category } from '@/lib/types';
 const QUALS = ['Middle', 'Matric', 'Intermediate', 'DAE', 'Bachelor', 'Masters'];
 
 export default function PostJob() {
+  useStatusBar('plain');
   const c = useTheme();
   const { t, tf, qual } = useI18n();
   const insets = useSafeAreaInsets();

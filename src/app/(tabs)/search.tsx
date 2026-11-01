@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { Chip, EmptyState, Icon, Tap } from '@/components/ui';
+import { Chip, EmptyState, Icon, Tap, useStatusBar } from '@/components/ui';
 import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { sortJobs, urgency } from '@/lib/format';
@@ -21,6 +21,7 @@ const RANK = Object.fromEntries(QUALS.map((q, i) => [q, i]));
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
 
 export default function Search() {
+  useStatusBar('plain');
   const c = useTheme();
   const { t, tf, qual, isUr } = useI18n();
   const insets = useSafeAreaInsets();

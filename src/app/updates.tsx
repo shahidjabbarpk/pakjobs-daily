@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Chip, EmptyState, Icon, type IconName, NewBadge, Tap } from '@/components/ui';
+import { Chip, EmptyState, Icon, type IconName, NewBadge, Tap, useStatusBar } from '@/components/ui';
 import { NativeAdCard, showRewarded } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { prettyDate } from '@/lib/format';
@@ -25,6 +25,7 @@ const SOURCES = ['ppsc', 'fpsc', 'kppsc', 'spsc', 'bpsc', 'nts'];
 type Row = { type: 'u'; u: Update; i: number } | { type: 'ad'; key: string };
 
 export default function Updates() {
+  useStatusBar('plain');
   const c = useTheme();
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();

@@ -2,7 +2,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { type ReactNode, useEffect } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { setStatusBarStyle } from 'expo-status-bar';
+import { type ReactNode, useCallback, useEffect } from 'react';
 import { Pressable, type PressableProps, type StyleProp, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated, {
   Easing,
@@ -216,3 +218,13 @@ const styles = StyleSheet.create({
   emptyTitle: { fontSize: 17, textAlign: 'center' },
   emptyHint: { fontSize: 13, textAlign: 'center', lineHeight: 20 },
 });
+
+/** Status-bar icon colour for the focused screen: 'hero' screens have a dark gradient header. */
+export function useStatusBar(kind: 'hero' | 'plain') {
+  const c = useTheme();
+  useFocusEffect(
+    useCallback(() => {
+      setStatusBarStyle(kind === 'hero' || c.dark ? 'light' : 'dark');
+    }, [kind, c.dark]),
+  );
+}

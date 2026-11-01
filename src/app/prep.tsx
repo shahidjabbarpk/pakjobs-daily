@@ -4,7 +4,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Icon, type IconName, SectionTitle, Tap } from '@/components/ui';
+import { Icon, type IconName, SectionTitle, Tap, useStatusBar } from '@/components/ui';
 import { PAST_PAPERS, SUBJECTS } from '@/data/mcqs';
 import { BottomBanner, showRewarded } from '@/lib/ads';
 import { useI18n } from '@/lib/i18n';
@@ -12,6 +12,7 @@ import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 
 export default function Prep() {
+  useStatusBar('hero');
   const c = useTheme();
   const { t, tf, isUr } = useI18n();
   const insets = useSafeAreaInsets();

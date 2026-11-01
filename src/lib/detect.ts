@@ -249,8 +249,26 @@ export async function detectNavy(): Promise<Job[]> {
   return out;
 }
 
+/** PAF only exposes how many courses are open (details need a login). Title/key match the server scraper. */
+export async function detectPaf(): Promise<Job[]> {
+  const counts: Record<string, number> = await (await get('https://www.joinpaf.gov.pk/api/count-courses?type=')).json();
+  return Object.entries(counts).filter(([, n]) => n > 0).map(([kind, n]) => ({
+    id: hash(`paf|${kind}|${n}`),
+    source: 'paf' as const,
+    title: `Join PAF - ${kind} Induction (${n} courses open)`,
+    organization: 'Pakistan Air Force',
+    category: 'armed' as const,
+    cities: ['All Pakistan'],
+    qualification: 'Intermediate',
+    url: 'https://www.joinpaf.gov.pk/',
+    applyUrl: 'https://www.joinpaf.gov.pk/',
+    description: `Pakistan Air Force has ${n} ${kind.toLowerCase()} induction course(s) open for registration. Sign up on joinpaf.gov.pk to see eligibility, age limits and closing dates for each course.`,
+    firstSeen: new Date().toISOString(),
+  }));
+}
+
 // These sites block foreign servers (GitHub, AWS), so the phone in Pakistan checks them itself.
-const PHONE_SOURCES = { army: detectArmy, ppsc: detectPpsc, navy: detectNavy } as const;
+const PHONE_SOURCES = { army: detectArmy, ppsc: detectPpsc, navy: detectNavy, paf: detectPaf } as const;
 
 const reuseKey = (j: Job) => `${j.source}|${j.title}|${j.advertNo ?? ''}`;
 

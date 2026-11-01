@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeInRight, useAnimatedStyle, useSharedValue, withSpring, withTiming, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { haptic, Icon, Tap } from '@/components/ui';
+import { haptic, Icon, Tap, useStatusBar } from '@/components/ui';
 import { type Mcq, SUBJECTS } from '@/data/mcqs';
 import { maybeShowInterstitial } from '@/lib/ads';
 import { useI18n } from '@/lib/i18n';
@@ -23,6 +23,7 @@ function shuffle<T>(a: T[]): T[] {
 }
 
 export default function Quiz() {
+  useStatusBar('hero');
   const { subject } = useLocalSearchParams<{ subject: string }>();
   const sub = SUBJECTS.find((s) => s.key === subject) ?? SUBJECTS[0]!;
   const c = useTheme();

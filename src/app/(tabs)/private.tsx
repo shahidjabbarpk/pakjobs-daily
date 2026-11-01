@@ -5,7 +5,7 @@ import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { Chip, EmptyState, Icon, Tap } from '@/components/ui';
+import { Chip, EmptyState, Icon, Tap, useStatusBar } from '@/components/ui';
 import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { communityReady } from '@/lib/community';
@@ -20,6 +20,7 @@ import type { Job } from '@/lib/types';
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
 
 export default function PrivateJobs() {
+  useStatusBar('hero');
   const c = useTheme();
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();

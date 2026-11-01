@@ -14,7 +14,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BookmarkButton, DeadlineBadge, EmptyState, Icon, type IconName, NewBadge, OrgAvatar, Tap, useUrgencyColor } from '@/components/ui';
+import { BookmarkButton, DeadlineBadge, EmptyState, Icon, type IconName, NewBadge, OrgAvatar, Tap, useUrgencyColor, useStatusBar } from '@/components/ui';
 import { Comments, ReportSheet } from '@/components/community';
 import { ImageViewer } from '@/components/ImageViewer';
 import { maybeShowInterstitial, showRewarded } from '@/lib/ads';
@@ -33,6 +33,7 @@ const SOURCE_NAME: Record<string, string> = {
 };
 
 export default function JobDetail() {
+  useStatusBar('hero');
   const { id } = useLocalSearchParams<{ id: string }>();
   const job = useApp((s) => s.jobs.find((j) => j.id === id) ?? s.saved[id!]);
   const c = useTheme();

@@ -5,7 +5,7 @@ import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, FadeInRight, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CityPicker } from '@/components/CityPicker';
-import { Icon, Tap } from '@/components/ui';
+import { Icon, Tap, useStatusBar } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
 import { useI18n } from '@/lib/i18n';
 import { setupNotifications } from '@/lib/notify';
@@ -13,6 +13,7 @@ import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 
 export default function Onboarding() {
+  useStatusBar('hero');
   const c = useTheme();
   const { t, tf, lang } = useI18n();
   const insets = useSafeAreaInsets();

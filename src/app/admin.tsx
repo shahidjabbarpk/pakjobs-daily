@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Chip, EmptyState, Icon, type IconName, Tap } from '@/components/ui';
+import { Chip, EmptyState, Icon, type IconName, Tap, useStatusBar } from '@/components/ui';
 import {
   banUser, deleteComment, deletePost, dismissReport, fetchFeatureRequests, fetchPending, fetchReports, moderatePost,
 } from '@/lib/community';
@@ -16,6 +16,7 @@ import type { Job, Report } from '@/lib/types';
 type Tab = 'pending' | 'featured' | 'reports';
 
 export default function Admin() {
+  useStatusBar('plain');
   const c = useTheme();
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();

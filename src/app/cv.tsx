@@ -5,7 +5,7 @@ import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleShe
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Field } from '@/components/community';
-import { Icon, Tap } from '@/components/ui';
+import { Icon, Tap, useStatusBar } from '@/components/ui';
 import { maybeShowInterstitial } from '@/lib/ads';
 import { type CvData, type CvRow, EMPTY_CV, exportCv } from '@/lib/cv';
 import { useI18n } from '@/lib/i18n';
@@ -13,6 +13,7 @@ import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 
 export default function CvBuilder() {
+  useStatusBar('hero');
   const c = useTheme();
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();

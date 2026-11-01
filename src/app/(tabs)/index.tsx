@@ -15,7 +15,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { DeadlineBadge, Icon, type IconName, OrgAvatar, SectionTitle, Tap } from '@/components/ui';
+import { DeadlineBadge, Icon, type IconName, OrgAvatar, SectionTitle, Tap, useStatusBar } from '@/components/ui';
 import { BottomBanner, NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { refreshJobs } from '@/lib/feed';
@@ -36,6 +36,7 @@ function greetingKey(): 'greetMorning' | 'greetAfternoon' | 'greetEvening' {
 }
 
 export default function Home() {
+  useStatusBar('hero');
   const c = useTheme();
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();

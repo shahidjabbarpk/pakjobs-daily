@@ -4,7 +4,7 @@ import { ActivityIndicator, Alert, FlatList, Platform, StyleSheet, Text, View } 
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FeaturedPayInfo } from '@/components/community';
-import { EmptyState, Icon, Tap } from '@/components/ui';
+import { EmptyState, Icon, Tap, useStatusBar } from '@/components/ui';
 import { deletePost, fetchMyPosts, requestFeature } from '@/lib/community';
 import { prettyDate } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
@@ -12,6 +12,7 @@ import { font, useTheme } from '@/lib/theme';
 import type { Job } from '@/lib/types';
 
 export default function MyPosts() {
+  useStatusBar('plain');
   const c = useTheme();
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();

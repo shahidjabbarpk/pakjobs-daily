@@ -2,13 +2,14 @@ import { useMemo } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { EmptyState } from '@/components/ui';
+import { EmptyState, useStatusBar } from '@/components/ui';
 import { sortJobs } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { useTheme } from '@/lib/theme';
 
 export default function Saved() {
+  useStatusBar('plain');
   const c = useTheme();
   const { t, tf, isUr } = useI18n();
   const insets = useSafeAreaInsets();

@@ -7,7 +7,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CityPicker } from '@/components/CityPicker';
 import { ProfileForm } from '@/components/community';
-import { Chip, Icon, type IconName, Tap } from '@/components/ui';
+import { Chip, Icon, type IconName, Tap, useStatusBar } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
 import { PRIVACY_URL } from '@/lib/config';
 import { currentUid, ensureUser } from '@/lib/community';
@@ -40,6 +40,7 @@ function ago(iso: string | null, t: (k: any) => string) {
 }
 
 export default function Settings() {
+  useStatusBar('plain');
   const c = useTheme();
   const { t, tf, isUr } = useI18n();
   const insets = useSafeAreaInsets();
