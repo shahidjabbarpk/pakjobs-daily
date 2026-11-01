@@ -11,11 +11,11 @@ Set-Location $repo
 $log = Join-Path $repo 'feed-bot.log'
 
 function Log($msg) { "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  $msg" | Out-File -Append -Encoding utf8 $log }
-function Git { & git @args 2>&1 | Out-Null; if ($LASTEXITCODE -ne 0) { throw "git $args failed" } }
+function Invoke-Git { & git @args 2>&1 | Out-Null; if ($LASTEXITCODE -ne 0) { throw "git $args failed" } }
 
 function Sync-And-Scrape {
-    Git fetch -q origin
-    Git reset -q --hard origin/main
+    Invoke-Git fetch -q origin
+    Invoke-Git reset -q --hard origin/main
     $env:PYTHONIOENCODING = 'utf-8'
     $out = & python scraper/scrape.py 2>&1 | Out-String
     if ($LASTEXITCODE -ne 0) { throw "scraper failed: $out" }
@@ -29,7 +29,7 @@ try {
         & git diff --cached --quiet
         if ($LASTEXITCODE -eq 0) { Log 'no changes'; break }
         $new = (Get-Content data/meta.json -Raw | ConvertFrom-Json).new
-        Git commit -q -m "jobs: $new new (local PK run $(Get-Date -Format s))"
+        Invoke-Git commit -q -m "jobs: $new new (local PK run $(Get-Date -Format s))"
         $env:GIT_TERMINAL_PROMPT = '0'
         & git push -q origin HEAD:main 2>&1 | Out-Null
         if ($LASTEXITCODE -eq 0) { Log "pushed ($new new)"; break }
