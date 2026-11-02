@@ -1,6 +1,24 @@
 {
- "updatedAt": "2026-11-02T11:18:04+05:00",
+ "updatedAt": "2026-11-02T13:31:09+05:00",
  "updates": [
+  {
+   "id": "37dde747d4f29c76",
+   "source": "kppsc",
+   "kind": "schedule",
+   "title": "Computer Based Test (CBT) 18th Schedule, November 2026 [Revised] New",
+   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/Computer_Based_Test_18th_Schedule_November_2026_Revised.pdf",
+   "date": null,
+   "firstSeen": "2026-11-02T13:31:09+05:00"
+  },
+  {
+   "id": "58c6f0474e06e3a7",
+   "source": "bpsc",
+   "kind": "result",
+   "title": "Final Result for the Posts of Associate Professor (B-19) (Men's Section) in the Colleges, Higher and Technical Education Department.",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1793608978.jpeg",
+   "date": "2026-11-02",
+   "firstSeen": "2026-11-02T13:31:09+05:00"
+  },
   {
    "id": "7299bebcccee607d",
    "source": "ppsc",
@@ -340,15 +358,6 @@
    "kind": "result",
    "title": "Press release Dated 01-10-2026 Final result of Assistant Director Mechanical and Electrical Engineer.",
    "url": "https://www.bpsc.gob.pk/uploads/Result/1790854905.jpeg",
-   "date": "2026-10-01",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "d3c1491d9861cfae",
-   "source": "bpsc",
-   "kind": "rollno",
-   "title": "Press Release Dated 01-10-2026 Assistant Professor History B-18 Named Amna Abbas D/o Muhammad Abbas Roll No 7301 is declared to have qualified for appointment.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1790849956.jpeg",
    "date": "2026-10-01",
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
