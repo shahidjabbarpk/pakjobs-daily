@@ -54,16 +54,16 @@ export function cvHtml(d: CvData): string {
   return `<!doctype html><html><head><meta charset="utf-8"><style>
   @page { margin: 28px; }
   body { font-family: Helvetica, Arial, sans-serif; color: #1b2a22; font-size: 12.5px; }
-  .head { background: linear-gradient(135deg,#01411C,#0B7A43); color: #fff; padding: 22px 26px; border-radius: 14px; }
+  .head { background: linear-gradient(135deg,#003300,#006400); color: #fff; padding: 22px 26px; border-radius: 14px; }
   .head h1 { margin: 0; font-size: 26px; letter-spacing: .5px; }
   .head p { margin: 6px 0 0; opacity: .9; }
-  h2 { color: #0B7A43; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #0B7A43; padding-bottom: 4px; margin: 22px 0 10px; }
+  h2 { color: #006400; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #006400; padding-bottom: 4px; margin: 22px 0 10px; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
   .grid div b { display: inline-block; min-width: 105px; color: #5d6e65; font-weight: 600; }
   table { width: 100%; border-collapse: collapse; }
-  th { background: #eef4f0; text-align: left; padding: 7px 8px; font-size: 11.5px; color: #0B7A43; }
+  th { background: #f1f3f5; text-align: left; padding: 7px 8px; font-size: 11.5px; color: #006400; }
   td { padding: 7px 8px; border-bottom: 1px solid #e1e9e4; }
-  .chip { display: inline-block; background: #ddf3e6; color: #01411C; padding: 4px 10px; border-radius: 12px; margin: 0 6px 6px 0; font-size: 11.5px; }
+  .chip { display: inline-block; background: #e4f3e4; color: #003300; padding: 4px 10px; border-radius: 12px; margin: 0 6px 6px 0; font-size: 11.5px; }
   .foot { margin-top: 30px; color: #93a39a; font-size: 10px; text-align: center; }
   </style></head><body>
   <div class="head"><h1>${esc(d.name || 'Your Name')}</h1><p>${esc([d.phone, d.email].filter(Boolean).join('  •  '))}</p></div>

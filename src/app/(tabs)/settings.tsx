@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
 import { CityPicker } from '@/components/CityPicker';
 import { ProfileForm } from '@/components/community';
-import { Chip, Icon, type IconName, Tap, useStatusBar } from '@/components/ui';
+import { Chip, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
 import { PRIVACY_URL } from '@/lib/config';
 import { currentUid, ensureUser, signOutUser } from '@/lib/community';
@@ -45,6 +45,7 @@ export default function Settings() {
   const c = useTheme();
   const { t, tf, isUr } = useI18n();
   const insets = useSafeAreaInsets();
+  const tabSpace = useTabBarSpace();
   const s = useApp();
   const [checking, setChecking] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -86,9 +87,9 @@ export default function Settings() {
     s.set({ alertCategories: s.alertCategories.includes(k) ? s.alertCategories.filter((x) => x !== k) : [...s.alertCategories, k] });
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: c.bg }} contentContainerStyle={{ paddingTop: insets.top + 12, paddingBottom: 40 }}
+    <ScrollView style={{ flex: 1, backgroundColor: c.bg }} contentContainerStyle={{ paddingTop: insets.top + 12, paddingBottom: tabSpace }}
       showsVerticalScrollIndicator={false}>
-      <Text style={[styles.h1, tf('bold'), { color: c.text }, isUr && { textAlign: 'right' }]}>{t('settings')}</Text>
+      <Text style={[styles.h1, tf('bold'), { color: c.text }, isUr && { textAlign: 'right' }]}>{t('profileTab')}</Text>
 
       <Card>
         <Label icon="translate" text={t('language')} />

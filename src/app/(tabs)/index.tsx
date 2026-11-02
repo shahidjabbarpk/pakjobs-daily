@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Extrapolation,
   FadeIn,
@@ -15,7 +15,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { DeadlineBadge, Icon, type IconName, OrgAvatar, SectionTitle, Tap, useStatusBar } from '@/components/ui';
+import {
+  BrandSpinner, brandRefreshControl, DeadlineBadge, Icon, type IconName, JobCardSkeleton, OrgAvatar, SectionTitle, Tap, useStatusBar,
+  useTabBarSpace,
+} from '@/components/ui';
 import { BottomBanner, NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { refreshJobs } from '@/lib/feed';
@@ -28,6 +31,19 @@ import type { Job } from '@/lib/types';
 
 const CITY_CHIPS = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Rawalpindi', 'Multan', 'Punjab', 'Sindh', 'KPK', 'Balochistan'];
 
+// Quick filters under the search pill: each opens Search pre-filtered.
+const QUICK: { key: string; label?: string; icon: IconName; params: Record<string, string> }[] = [
+  { key: 'all', icon: 'view-grid-outline', params: {} },
+  { key: 'ppsc', label: 'PPSC', icon: 'bank-outline', params: { source: 'ppsc' } },
+  { key: 'fpsc', label: 'FPSC', icon: 'bank-outline', params: { source: 'fpsc' } },
+  { key: 'army', label: 'Pak Army', icon: 'shield-star-outline', params: { source: 'army' } },
+  { key: 'navy', label: 'Navy', icon: 'anchor', params: { source: 'navy' } },
+  { key: 'banking', icon: 'cash-multiple', params: { cat: 'banking' } },
+  { key: 'education', icon: 'school-outline', params: { cat: 'education' } },
+  { key: 'it', icon: 'laptop', params: { cat: 'it' } },
+  { key: 'remote', icon: 'home-city-outline', params: { q: 'remote' } },
+];
+
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
 
 function greetingKey(): 'greetMorning' | 'greetAfternoon' | 'greetEvening' {
@@ -38,9 +54,13 @@ function greetingKey(): 'greetMorning' | 'greetAfternoon' | 'greetEvening' {
 export default function Home() {
   useStatusBar('hero');
   const c = useTheme();
-  const { t, tf } = useI18n();
+  const { t, tf, isUr } = useI18n();
   const insets = useSafeAreaInsets();
+  const tabSpace = useTabBarSpace();
   const jobs = useApp((s) => s.jobs);
+  const syncing = useApp((s) => s.syncing);
+  const lang = useApp((s) => s.lang);
+  const setApp = useApp((s) => s.set);
   const homeCity = useApp((s) => s.homeCity);
   const updates = useApp((s) => s.updates);
   const [refreshing, setRefreshing] = useState(false);
@@ -104,35 +124,67 @@ export default function Home() {
   const header = (
     <View>
       <LinearGradient colors={[c.heroA, c.heroB, c.heroC]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
-        style={[styles.hero, { paddingTop: insets.top + 14 }]}>
+        style={[styles.hero, { paddingTop: insets.top + 12 }]}>
+        {/* decorative crescent & star */}
+        <Icon name="star-crescent" size={170} color="rgba(255,255,255,0.06)" style={styles.deco} />
         <Animated.View style={heroParallax}>
-          <View style={styles.heroTop}>
-            <View style={{ flex: 1 }}>
-              <Text style={[styles.greet, tf()]}>{t(greetingKey())} 👋</Text>
-              <Text style={[styles.brand, tf('bold')]}>{t('appName')}</Text>
-              <Text style={[styles.tagline, tf()]}>{t('tagline')}</Text>
+          <View style={styles.heroBar}>
+            <View style={styles.logo}>
+              <Icon name="briefcase-variant" size={20} color={c.heroB} />
+              <View style={[styles.logoDot, { backgroundColor: c.gold }]} />
+            </View>
+            <Text style={[styles.brandSmall, tf('bold')]} numberOfLines={1}>{t('appName')}</Text>
+            {/* EN | Urdu */}
+            <View style={styles.langToggle}>
+              {(['en', 'ur'] as const).map((l) => (
+                <Tap key={l} onPress={() => lang !== l && setApp({ lang: l })}
+                  style={[styles.langBtn, lang === l && { backgroundColor: '#fff' }]}>
+                  <Text style={[styles.langText, l === 'ur' ? { fontFamily: font.urdu, fontSize: 11 } : null,
+                    { color: lang === l ? c.heroB : '#fff' }]}>{l === 'en' ? 'EN' : 'اردو'}</Text>
+                </Tap>
+              ))}
             </View>
             <Tap style={styles.bell} onPress={() => router.push({ pathname: '/search', params: { sort: 'newest' } })}>
-              <Icon name="bell-ring-outline" size={22} color="#fff" />
+              <Icon name="bell-outline" size={21} color="#fff" />
               {newCount > 0 && (
-                <Animated.View entering={ZoomIn.delay(400)} style={[styles.bellDot, { backgroundColor: c.gold }]}>
+                <Animated.View entering={ZoomIn.delay(400)} style={[styles.bellDot, { backgroundColor: c.danger, borderColor: c.heroB }]}>
                   <Text style={styles.bellDotText}>{newCount > 99 ? '99+' : newCount}</Text>
                 </Animated.View>
               )}
             </Tap>
           </View>
+          <Text style={[styles.greet, tf(), isUr && { textAlign: 'right' }]}>{t(greetingKey())} 👋</Text>
+          <Text style={[styles.brand, tf('bold'), isUr && { textAlign: 'right' }]}>{t('tagline')}</Text>
         </Animated.View>
+      </LinearGradient>
 
-        <Tap haptic={false} onPress={() => router.push('/search')} style={styles.searchBar}>
-          <Icon name="magnify" size={20} color="#5D6E65" />
-          <Text style={[styles.searchText, tf()]} numberOfLines={1}>{t('searchPlaceholder')}</Text>
+      {/* floating search pill over the hero's edge */}
+      <Animated.View entering={FadeIn.delay(120)} style={styles.searchWrap}>
+        <Tap haptic={false} scaleTo={0.98} onPress={() => router.push('/search')}
+          style={[styles.searchBar, { backgroundColor: c.card, shadowColor: c.shadow, borderColor: c.border }]}>
+          <Icon name="magnify" size={21} color={c.primary} />
+          <Text style={[styles.searchText, tf(), { color: c.faint }]} numberOfLines={1}>{t('searchPlaceholder')}</Text>
           <View style={[styles.filterBtn, { backgroundColor: c.primary }]}>
-            <Icon name="tune-variant" size={16} color="#fff" />
+            <Icon name="tune-variant" size={17} color="#fff" />
           </View>
         </Tap>
-        {/* decorative crescent & star */}
-        <Icon name="star-crescent" size={160} color="rgba(255,255,255,0.06)" style={styles.deco} />
-      </LinearGradient>
+      </Animated.View>
+
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.quick}>
+        {QUICK.map((f, i) => (
+          <Animated.View key={f.key} entering={FadeInRight.delay(160 + i * 35).springify().damping(16)}>
+            <Tap onPress={() => router.push({ pathname: '/search', params: f.params })}
+              style={[styles.quickChip, i === 0
+                ? { backgroundColor: c.primary, borderColor: c.primary }
+                : { backgroundColor: c.card, borderColor: c.border }]}>
+              <Icon name={f.icon} size={15} color={i === 0 ? '#fff' : c.primary} />
+              <Text style={[styles.quickText, tf(i === 0 ? 'bold' : 'regular'), { color: i === 0 ? '#fff' : c.text }]}>
+                {f.label ?? (f.key === 'all' ? t('all') : f.key === 'remote' ? t('remote') : t(`cat.${f.key}` as any))}
+              </Text>
+            </Tap>
+          </Animated.View>
+        ))}
+      </ScrollView>
 
       <View style={styles.stats}>
         {([
@@ -269,16 +321,14 @@ export default function Home() {
         keyExtractor={(r) => (r.type === 'job' ? r.job.id : r.key)}
         renderItem={({ item }) => (item.type === 'job' ? <JobCard job={item.job} index={item.i} /> : <NativeAdCard />)}
         ListHeaderComponent={header}
-        ListFooterComponent={<View style={{ height: 24 }} />}
+        ListEmptyComponent={syncing ? <View>{[0, 1, 2, 3].map((k) => <JobCardSkeleton key={k} />)}</View> : null}
+        ListFooterComponent={<View style={{ height: tabSpace + 64 }} />}
         onScroll={onScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         initialNumToRender={8}
         windowSize={9}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fff" colors={[c.primary]}
-            progressViewOffset={insets.top} />
-        }
+        refreshControl={brandRefreshControl(refreshing, onRefresh)}
       />
 
       {/* compact header that slides in once the hero scrolls away */}
@@ -293,25 +343,42 @@ export default function Home() {
           <Text style={[styles.toastText, tf(), { color: c.bg }]}>{toast}</Text>
         </Animated.View>
       )}
-      <BottomBanner />
+      <BrandSpinner visible={refreshing} top={insets.top + 64} />
+      {/* the ad banner sits just above the floating tab bar */}
+      <View pointerEvents="box-none" style={[styles.banner, { bottom: tabSpace - 8 }]}>
+        <BottomBanner />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  hero: { paddingHorizontal: 18, paddingBottom: 56, borderBottomLeftRadius: 30, borderBottomRightRadius: 30, overflow: 'hidden' },
-  heroTop: { flexDirection: 'row', alignItems: 'flex-start' },
-  greet: { color: 'rgba(255,255,255,0.8)', fontSize: 13 },
-  brand: { color: '#fff', fontSize: 26, marginTop: 2 },
-  tagline: { color: 'rgba(255,255,255,0.75)', fontSize: 12.5, marginTop: 1 },
-  bell: { width: 44, height: 44, borderRadius: 22, backgroundColor: 'rgba(255,255,255,0.15)', alignItems: 'center', justifyContent: 'center' },
-  bellDot: { position: 'absolute', top: -2, right: -4, minWidth: 20, height: 20, borderRadius: 10, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
-  bellDotText: { color: '#1A1300', fontFamily: font.bold, fontSize: 10 },
-  searchBar: { marginTop: 18, height: 52, borderRadius: 16, backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', paddingLeft: 14, paddingRight: 6, gap: 10 },
-  searchText: { flex: 1, color: '#93A39A', fontSize: 13.5 },
-  filterBtn: { width: 40, height: 40, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
-  deco: { position: 'absolute', right: -30, top: -10, transform: [{ rotate: '-15deg' }] },
-  stats: { flexDirection: 'row', gap: 10, paddingHorizontal: 16, marginTop: -38 },
+  hero: { paddingHorizontal: 18, paddingBottom: 46, borderBottomLeftRadius: 28, borderBottomRightRadius: 28, overflow: 'hidden' },
+  heroBar: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  logo: { width: 38, height: 38, borderRadius: 12, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' },
+  logoDot: { position: 'absolute', top: 6, right: 6, width: 8, height: 8, borderRadius: 4 },
+  brandSmall: { color: '#fff', fontSize: 17, flex: 1 },
+  langToggle: { flexDirection: 'row', backgroundColor: 'rgba(255,255,255,0.16)', borderRadius: 16, padding: 3 },
+  langBtn: { paddingHorizontal: 9, height: 26, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
+  langText: { fontFamily: font.bold, fontSize: 11.5 },
+  greet: { color: 'rgba(255,255,255,0.8)', fontSize: 13, marginTop: 18 },
+  brand: { color: '#fff', fontSize: 21, lineHeight: 29, marginTop: 2 },
+  bell: { width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.16)', alignItems: 'center', justifyContent: 'center' },
+  bellDot: { position: 'absolute', top: -3, right: -4, minWidth: 20, height: 20, borderRadius: 10, borderWidth: 2, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 3 },
+  bellDotText: { color: '#fff', fontFamily: font.bold, fontSize: 9.5 },
+  searchWrap: { paddingHorizontal: 16, marginTop: -28 },
+  searchBar: {
+    height: 56, borderRadius: 28, borderWidth: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 18, paddingRight: 7, gap: 10,
+    shadowOpacity: 0.14, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 8,
+  },
+  searchText: { flex: 1, fontSize: 13.5 },
+  filterBtn: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center' },
+  deco: { position: 'absolute', right: -34, top: 10, transform: [{ rotate: '-15deg' }] },
+  quick: { paddingHorizontal: 16, gap: 8, paddingTop: 14, paddingBottom: 2 },
+  quickChip: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, height: 36, borderRadius: 18, borderWidth: 1 },
+  quickText: { fontSize: 12.5 },
+  banner: { position: 'absolute', left: 0, right: 0 },
+  stats: { flexDirection: 'row', gap: 10, paddingHorizontal: 16, marginTop: 14 },
   stat: { borderRadius: 18, padding: 12, borderWidth: 1, shadowOpacity: 0.1, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 4 },
   statIcon: { width: 32, height: 32, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
   statNum: { fontFamily: font.bold, fontSize: 22, marginTop: 6 },

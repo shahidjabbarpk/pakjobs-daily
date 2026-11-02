@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { EmptyState, useStatusBar } from '@/components/ui';
+import { EmptyState, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { sortJobs } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
@@ -13,6 +13,7 @@ export default function Saved() {
   const c = useTheme();
   const { t, tf, isUr } = useI18n();
   const insets = useSafeAreaInsets();
+  const tabSpace = useTabBarSpace();
   const saved = useApp((s) => s.saved);
   const list = useMemo(() => sortJobs(Object.values(saved), 'deadline'), [saved]);
 
@@ -28,8 +29,8 @@ export default function Saved() {
           {list.length > 0 && <Text style={[tf(), { color: c.sub, fontSize: 13 }]}>{list.length} • {t('deadline')}</Text>}
         </View>
       }
-      ListEmptyComponent={<EmptyState icon="bookmark-multiple-outline" title={t('savedEmpty')} hint={t('savedEmptyHint')} />}
-      ListFooterComponent={<View style={{ height: 24 }} />}
+      ListEmptyComponent={<EmptyState icon="heart-multiple-outline" title={t('savedEmpty')} hint={t('savedEmptyHint')} />}
+      ListFooterComponent={<View style={{ height: tabSpace }} />}
       showsVerticalScrollIndicator={false}
     />
   );

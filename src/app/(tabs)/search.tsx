@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { Chip, EmptyState, Icon, Tap, useStatusBar } from '@/components/ui';
+import { Chip, EmptyState, Icon, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { sortJobs, urgency } from '@/lib/format';
@@ -25,7 +25,8 @@ export default function Search() {
   const c = useTheme();
   const { t, tf, qual, isUr } = useI18n();
   const insets = useSafeAreaInsets();
-  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string }>();
+  const tabSpace = useTabBarSpace();
+  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string; q?: string }>();
   const jobs = useApp((s) => s.jobs);
 
   const [q, setQ] = useState('');
@@ -42,7 +43,8 @@ export default function Search() {
     if (params.city) setCity(params.city);
     if (params.sort === 'deadline' || params.sort === 'newest') setSort(params.sort);
     if (params.source) setSource(params.source);
-  }, [params.cat, params.city, params.sort, params.source]);
+    if (params.q) setQ(params.q);
+  }, [params.cat, params.city, params.sort, params.source, params.q]);
 
   const results = useMemo(() => {
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
@@ -143,7 +145,7 @@ export default function Search() {
       itemLayoutAnimation={LinearTransition.springify().damping(18)}
       ListHeaderComponent={filters}
       ListEmptyComponent={<EmptyState icon="file-search-outline" title={t('noResults')} hint={t('noResultsHint')} />}
-      ListFooterComponent={<View style={{ height: 24 }} />}
+      ListFooterComponent={<View style={{ height: tabSpace }} />}
       keyboardShouldPersistTaps="handled"
       keyboardDismissMode="on-drag"
       initialNumToRender={8}

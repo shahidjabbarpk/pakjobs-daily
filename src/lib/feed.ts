@@ -30,6 +30,7 @@ let inflight: Promise<RefreshResult> | null = null;
 export function refreshJobs(): Promise<RefreshResult> {
   inflight ??= (async () => {
     const { jobs, ingest } = useApp.getState();
+    useApp.getState().set({ syncing: true });
     // private jobs posted in the app (Firestore); keep the cached ones if Firestore is unreachable
     const postsP = fetchApprovedPosts().catch(() => jobs.filter((j) => j.source === 'user'));
     const official = (list: Job[]) => list.filter((j) => j.source !== 'user');
@@ -54,6 +55,7 @@ export function refreshJobs(): Promise<RefreshResult> {
     }
   })().finally(() => {
     inflight = null;
+    useApp.getState().set({ syncing: false });
   });
   return inflight;
 }

@@ -1,11 +1,13 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { Chip, EmptyState, Icon, Tap, useStatusBar } from '@/components/ui';
+import {
+  BrandSpinner, brandRefreshControl, Chip, EmptyState, Icon, JobCardSkeleton, Tap, useStatusBar, useTabBarSpace,
+} from '@/components/ui';
 import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { communityReady } from '@/lib/community';
@@ -28,6 +30,8 @@ export default function PrivateJobs() {
   const homeCity = useApp((s) => s.homeCity);
   const [area, setArea] = useState<string | null>(homeCity);
   const [refreshing, setRefreshing] = useState(false);
+  const syncing = useApp((s) => s.syncing);
+  const tabSpace = useTabBarSpace();
 
   const list = useMemo(() => jobs
     .filter((j) => j.source === 'user' && urgency(j) !== 'closed' && jobInArea(j, area))
@@ -54,10 +58,10 @@ export default function PrivateJobs() {
         data={rows}
         keyExtractor={(r) => (r.type === 'job' ? r.job.id : r.key)}
         renderItem={({ item }) => (item.type === 'job' ? <JobCard job={item.job} index={item.i} /> : <NativeAdCard />)}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[c.primary]} />}
+        refreshControl={brandRefreshControl(refreshing, onRefresh)}
         ListHeaderComponent={
           <View>
-            <LinearGradient colors={['#0E7490', '#0891B2', '#22D3EE']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+            <LinearGradient colors={[c.heroA, c.heroB, c.heroC]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
               style={[styles.hero, { paddingTop: insets.top + 14 }]}>
               <View style={styles.heroRow}>
                 <View style={{ flex: 1 }}>
@@ -70,8 +74,8 @@ export default function PrivateJobs() {
               </View>
               <Animated.View entering={ZoomIn.delay(150).springify()}>
                 <Tap onPress={() => router.push('/post-job')} style={styles.postBtn}>
-                  <Icon name="briefcase-plus" size={22} color="#0E7490" />
-                  <Text style={[styles.postText, tf('bold')]}>{t('postJob')}</Text>
+                  <Icon name="briefcase-plus" size={22} color={c.heroB} />
+                  <Text style={[styles.postText, tf('bold'), { color: c.heroB }]}>{t('postJob')}</Text>
                   <Text style={styles.free}>FREE</Text>
                 </Tap>
               </Animated.View>
@@ -87,10 +91,13 @@ export default function PrivateJobs() {
             </Animated.View>
           </View>
         }
-        ListEmptyComponent={<EmptyState icon="briefcase-search-outline" title={t('nothingHere')} hint={communityReady() ? t('postJob') : t('communityOff')} />}
-        ListFooterComponent={<View style={{ height: 24 }} />}
+        ListEmptyComponent={syncing
+          ? <View>{[0, 1, 2].map((k) => <JobCardSkeleton key={k} />)}</View>
+          : <EmptyState icon="briefcase-search-outline" title={t('nothingHere')} hint={communityReady() ? t('postJob') : t('communityOff')} />}
+        ListFooterComponent={<View style={{ height: tabSpace }} />}
         showsVerticalScrollIndicator={false}
       />
+      <BrandSpinner visible={refreshing} top={insets.top + 12} />
     </View>
   );
 }
@@ -101,9 +108,9 @@ const styles = StyleSheet.create({
   h1: { color: '#fff', fontSize: 24 },
   sub: { color: 'rgba(255,255,255,0.85)', fontSize: 13 },
   heroBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: 'rgba(255,255,255,0.18)', alignItems: 'center', justifyContent: 'center' },
-  postBtn: { marginTop: 16, height: 54, borderRadius: 16, backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10 },
+  postBtn: { marginTop: 16, height: 54, borderRadius: 27, backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10 },
   postText: { color: '#0E7490', fontSize: 16 },
-  free: { fontFamily: font.bold, fontSize: 10, color: '#fff', backgroundColor: '#16A34A', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, overflow: 'hidden' },
+  free: { fontFamily: font.bold, fontSize: 10, color: '#fff', backgroundColor: '#00C853', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, overflow: 'hidden' },
   deco: { position: 'absolute', right: -30, top: 0 },
   filters: { flexDirection: 'row', gap: 8, paddingHorizontal: 16, marginTop: 14 },
   warn: { flexDirection: 'row', gap: 8, alignItems: 'center', marginHorizontal: 16, marginVertical: 12, padding: 10, borderRadius: 12 },

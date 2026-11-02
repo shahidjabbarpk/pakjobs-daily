@@ -31,6 +31,8 @@ interface AppState {
   batteryHintShown: boolean;
   onboarded: boolean;
   lastInterstitial: number;
+  syncing: boolean;           // a job refresh is in flight (not persisted) - drives skeleton loaders
+  alertsSeenAt: number;       // last time the Alerts tab was opened; newer updates show a badge
 
   /** Merge a fresh feed in; returns the jobs never seen before on this device. */
   ingest: (feed: Feed) => Job[];
@@ -65,6 +67,8 @@ export const useApp = create<AppState>()(
       batteryHintShown: false,
       onboarded: false,
       lastInterstitial: 0,
+      syncing: false,
+      alertsSeenAt: Date.now(),
 
       ingest: (feed) => {
         const seen = new Set(get().seenIds);
@@ -97,7 +101,7 @@ export const useApp = create<AppState>()(
       name: 'pakjobs-app',
       version: 1,
       storage: createJSONStorage(() => Storage),
-      partialize: ({ ingest, toggleSave, set, ...rest }) => rest,
+      partialize: ({ ingest, toggleSave, set, syncing, ...rest }) => rest,
     },
   ),
 );

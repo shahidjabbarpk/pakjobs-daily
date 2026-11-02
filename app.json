@@ -7,8 +7,8 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "backgroundColor": "#F3F6F4",
-    "primaryColor": "#0B7A43",
+    "backgroundColor": "#F8F9FA",
+    "primaryColor": "#006400",
     "description": "Pakistan govt & private job alerts: NJP, PPSC, SPSC, KPPSC, BPSC, FPSC, NTS, Pak Army, Navy, PAF. Results & roll no slips, MCQ practice, CV maker, Urdu & English.",
     "ios": {
       "bundleIdentifier": "com.pakjobs.daily.mza",
@@ -27,7 +27,7 @@
       "versionCode": 1,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "backgroundColor": "#0B7A43",
+        "backgroundColor": "#006400",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
@@ -51,7 +51,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#0B7A43",
+          "backgroundColor": "#006400",
           "image": "./assets/splash-icon.png",
           "imageWidth": 180
         }
@@ -60,7 +60,7 @@
         "expo-notifications",
         {
           "icon": "./assets/notification-icon.png",
-          "color": "#0B7A43",
+          "color": "#006400",
           "defaultChannel": "new-jobs"
         }
       ],

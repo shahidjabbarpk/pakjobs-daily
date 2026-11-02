@@ -23,7 +23,7 @@ export async function setupNotifications(): Promise<boolean> {
       name: 'New job alerts',
       importance: Notifications.AndroidImportance.HIGH,
       vibrationPattern: [0, 220, 120, 220],
-      lightColor: '#0B7A43',
+      lightColor: '#006400',
     });
     await Notifications.setNotificationChannelAsync('reminders', {
       name: 'Deadline reminders',

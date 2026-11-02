@@ -7,7 +7,7 @@ import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 import type { Job } from '@/lib/types';
-import { BookmarkButton, DeadlineBadge, NewBadge, OrgAvatar, Tag, Tap, useUrgencyColor } from './ui';
+import { BookmarkButton, CategoryPill, DeadlineBadge, NewBadge, OrgAvatar, Tag, Tap, useUrgencyColor } from './ui';
 
 function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
   const c = useTheme();
@@ -22,9 +22,10 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
     <Animated.View entering={index < 12 ? FadeInDown.delay(index * 45).springify().damping(16) : undefined}>
       <Tap
         haptic={false}
+        scaleTo={0.97}
         onPress={() => router.push(`/job/${job.id}`)}
         style={[styles.card, { backgroundColor: c.card, borderColor: job.featured ? c.gold : c.border, shadowColor: c.shadow },
-          job.featured && styles.featuredCard]}
+          c.dark && styles.cardDark, job.featured && styles.featuredCard]}
       >
         {job.featured && (
           <View style={[styles.ribbon, { backgroundColor: c.gold }]}>
@@ -33,11 +34,12 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
         )}
         <View style={styles.top}>
           <OrgAvatar job={job} />
-          <View style={{ flex: 1 }}>
-            <View style={styles.titleRow}>
+          <View style={{ flex: 1, gap: 2 }}>
+            <View style={styles.pills}>
+              <CategoryPill category={job.category} />
               {isNew(job) && <NewBadge />}
-              <Text style={[styles.title, { color: c.text }]} numberOfLines={2}>{job.title}</Text>
             </View>
+            <Text style={[styles.title, { color: c.text }]} numberOfLines={2}>{job.title}</Text>
             <Text style={[styles.org, { color: c.sub }]} numberOfLines={1}>{job.organization}</Text>
           </View>
           <BookmarkButton active={saved} onPress={() => toggleSave(job)} />
@@ -51,6 +53,7 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
           {!!job.vacancies && <Tag icon="account-multiple-outline" label={`${job.vacancies}`} />}
         </View>
 
+        <View style={[styles.divider, { backgroundColor: c.border }]} />
         <View style={styles.bottom}>
           <DeadlineBadge job={job} />
           <Text style={[styles.date, { color: c.faint }]}>
@@ -71,18 +74,20 @@ export const JobCard = memo(JobCardBase);
 
 const styles = StyleSheet.create({
   card: {
-    marginHorizontal: 16, marginBottom: 12, borderRadius: 20, padding: 14, borderWidth: 1,
-    shadowOpacity: 0.07, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 2,
+    marginHorizontal: 16, marginBottom: 12, borderRadius: 16, padding: 14, borderWidth: 1,
+    shadowOpacity: 0.08, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 3,
   },
+  cardDark: { shadowOpacity: 0.4, elevation: 4 },
   top: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
-  titleRow: { flexDirection: 'row', alignItems: 'center', gap: 6, flexWrap: 'wrap' },
-  title: { fontFamily: font.semi, fontSize: 15, lineHeight: 21, flexShrink: 1 },
-  org: { fontFamily: font.regular, fontSize: 12.5, marginTop: 2 },
+  pills: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 3 },
+  title: { fontFamily: font.semi, fontSize: 15, lineHeight: 21 },
+  org: { fontFamily: font.regular, fontSize: 12.5 },
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 12 },
-  bottom: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 12 },
-  date: { fontFamily: font.medium, fontSize: 11 },
+  divider: { height: StyleSheet.hairlineWidth, marginTop: 12 },
+  bottom: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10, gap: 8 },
+  date: { fontFamily: font.medium, fontSize: 11, flexShrink: 1, textAlign: 'right' },
   featuredCard: { borderWidth: 1.5 },
-  ribbon: { position: 'absolute', top: 0, right: 44, paddingHorizontal: 8, paddingVertical: 2, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
+  ribbon: { position: 'absolute', top: 0, right: 52, paddingHorizontal: 8, paddingVertical: 2, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
   ribbonText: { fontFamily: font.bold, fontSize: 9.5, color: '#1A1300' },
   track: { height: 4, borderRadius: 2, marginTop: 10, overflow: 'hidden' },
   fill: { height: 4, borderRadius: 2 },

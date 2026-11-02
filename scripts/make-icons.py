@@ -3,7 +3,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 
 OUT = Path(__file__).resolve().parent.parent / "assets"
-G1, G2, GOLD = (1, 65, 28), (23, 164, 92), (242, 183, 5)
+G1, G2, GOLD = (0, 51, 0), (0, 168, 68), (242, 183, 5)  # #003300 -> #00A844 brand gradient
 
 
 def gradient(size):

@@ -6,7 +6,7 @@ export interface Subject { key: string; title: string; titleUr: string; icon: st
 
 export const SUBJECTS: Subject[] = [
   {
-    key: 'pak', title: 'Pakistan Studies', titleUr: 'مطالعہ پاکستان', icon: 'flag-variant', colors: ['#01411C', '#2FBF71'],
+    key: 'pak', title: 'Pakistan Studies', titleUr: 'مطالعہ پاکستان', icon: 'flag-variant', colors: ['#003300', '#00C853'],
     mcqs: [
       { q: 'Pakistan came into being on:', o: ['14 August 1947', '23 March 1940', '15 August 1947', '23 March 1956'], a: 0 },
       { q: 'The Lahore Resolution was passed in:', o: ['1930', '1940', '1946', '1947'], a: 1, e: 'Passed on 23 March 1940 at Minto Park (now Iqbal Park), Lahore.' },
