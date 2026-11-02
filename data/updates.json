@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-02T15:18:53+05:00",
+ "updatedAt": "2026-11-02T17:04:22+05:00",
  "updates": [
+  {
+   "id": "d585ca6e591e589a",
+   "source": "nts",
+   "kind": "result",
+   "title": "TOEIC PUBLIC TEST OCTOBER 2026 RESULT",
+   "url": "https://nts.org.pk/Test&Products/Results/11_26/ETS_TOEIC_14Oct26_Result/search.php",
+   "date": null,
+   "firstSeen": "2026-11-02T17:04:22+05:00"
+  },
   {
    "id": "37dde747d4f29c76",
    "source": "kppsc",
@@ -205,15 +214,6 @@
    "kind": "result",
    "title": "Balochistan University of Information Technology, Engineering & Management Sciences BUITEMS, Quetta Employment Test Zhob Campus (Answer Key)",
    "url": "https://nts.org.pk/Test&Products/Lists/BUITEMS_27Sep26_Keys/posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "875ce274facc137a",
-   "source": "nts",
-   "kind": "result",
-   "title": "TOEIC PUBLIC TEST SEPTEMBER 2026 RESULT",
-   "url": "https://nts.org.pk/Test&Products/Results/10_26/ETS_TOEIC_16Sep26_Result/Search.php",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
