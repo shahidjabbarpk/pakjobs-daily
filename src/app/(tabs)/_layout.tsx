@@ -1,7 +1,7 @@
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
 import { type ComponentProps, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon, type IconName, TAB_BAR_H as BAR_H, Tap } from '@/components/ui';
@@ -41,8 +41,9 @@ function TabBar({ state, navigation }: BottomTabBarProps) {
   return (
     <View pointerEvents="box-none" style={[styles.float, { bottom: Math.max(insets.bottom, 12) }]}>
       <View style={[styles.bar, { borderColor: c.glassBorder, shadowColor: c.shadow }]}>
-        <BlurView intensity={60} tint={c.dark ? 'dark' : 'light'} style={StyleSheet.absoluteFill} />
-        <View style={[StyleSheet.absoluteFill, { backgroundColor: c.tabBar }]} />
+        {/* Android's BlurView doesn't actually blur, so content would show through: use a solid bar there */}
+        {Platform.OS === 'ios' && <BlurView intensity={60} tint={c.dark ? 'dark' : 'light'} style={StyleSheet.absoluteFill} />}
+        <View style={[StyleSheet.absoluteFill, { backgroundColor: Platform.OS === 'ios' ? c.tabBar : c.card }]} />
         <View style={styles.row} onLayout={(e) => setW(e.nativeEvent.layout.width)}>
           {w > 0 && idx >= 0 && (
             <Animated.View style={[styles.pillSlot, { width: tabW }, pill]}>
