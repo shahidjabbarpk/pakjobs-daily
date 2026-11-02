@@ -27,7 +27,14 @@ export const PROD_AD_UNITS = {
 // null = community features (private jobs, comments) show "being set up".
 export const FIREBASE_CONFIG: {
   apiKey: string; authDomain: string; projectId: string; storageBucket: string; messagingSenderId: string; appId: string;
-} | null = null;
+} | null = {
+  apiKey: 'AIzaSyDgReqSEL_iUg4gbza4hToZ6Ju9OQbF9xo',
+  authDomain: 'pakjobs-daily-sj.firebaseapp.com',
+  projectId: 'pakjobs-daily-sj',
+  storageBucket: 'pakjobs-daily-sj.firebasestorage.app',
+  messagingSenderId: '349850513796',
+  appId: '1:349850513796:web:50e8ab7215c29f5632add1'
+};
 
 /** Private job posts stay visible this long. */
 export const POST_LIFETIME_DAYS = 30;
