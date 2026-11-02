@@ -1,9 +1,22 @@
 /**
  * Firestore-backed community features: private job posts, comments, reports, admin moderation.
- * Every user gets an anonymous Firebase account on first use; identity shown to others is the
+ * Every user gets an anonymous Firebase account on first use; posting and commenting need a real
+ * login (Google or email/password), linked onto that account. Identity shown to others is the
  * profile (name + WhatsApp). All access control lives in firebase/firestore.rules.
  */
-import { signInAnonymously } from '@firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  linkWithCredential,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInAnonymously,
+  signInWithCredential,
+  signInWithEmailAndPassword,
+  signOut,
+  type AuthCredential,
+  type User,
+} from '@firebase/auth';
 import {
   addDoc,
   collection,
@@ -24,6 +37,7 @@ import {
 } from 'firebase/firestore';
 import { FIREBASE_CONFIG, POST_LIFETIME_DAYS } from './config';
 import { fb } from './firebase';
+import { googleCredential, googleSignOut } from './google';
 import type { Category, Comment, Job, PostStatus, Profile, Report } from './types';
 
 export const POST_PREFIX = 'u-';
@@ -61,6 +75,68 @@ export const currentUid = () => {
 
 /** True when Firebase is configured for this build. */
 export const communityReady = () => !!FIREBASE_CONFIG;
+
+// ------------------------------------------------------------------ accounts (Google / email)
+
+export interface AuthUser { uid: string; guest: boolean; email: string | null; name: string | null }
+
+const toAuthUser = (u: User | null): AuthUser | null =>
+  u && { uid: u.uid, guest: u.isAnonymous, email: u.email, name: u.displayName };
+
+/** Calls back with the signed-in user (null while signed out); returns the unsubscribe. */
+export function watchAuth(cb: (u: AuthUser | null) => void): () => void {
+  try {
+    return onAuthStateChanged(fb().auth, (u) => cb(toAuthUser(u)));
+  } catch {
+    cb(null);
+    return () => {};
+  }
+}
+
+/** A guest's posts stay theirs: link the new login onto the anonymous account when possible. */
+async function linkOrSignIn(cred: AuthCredential) {
+  const { auth } = fb();
+  const cur = auth.currentUser;
+  if (cur?.isAnonymous) {
+    try {
+      await linkWithCredential(cur, cred);
+      return;
+    } catch (e: any) {
+      // that Google account already has a PakJobs account: just sign into it
+      if (e?.code !== 'auth/credential-already-in-use') throw e;
+    }
+  }
+  await signInWithCredential(auth, cred);
+}
+
+export async function signUpEmail(email: string, password: string) {
+  await ensureUser().catch(() => {});
+  const cur = fb().auth.currentUser;
+  if (cur?.isAnonymous) await linkWithCredential(cur, EmailAuthProvider.credential(email.trim(), password));
+  else await createUserWithEmailAndPassword(fb().auth, email.trim(), password);
+}
+
+export async function signInEmail(email: string, password: string) {
+  await signInWithEmailAndPassword(fb().auth, email.trim(), password);
+}
+
+/** False when the user closed the Google account picker. */
+export async function signInGoogle(): Promise<boolean> {
+  await ensureUser().catch(() => {});
+  const cred = await googleCredential();
+  if (!cred) return false;
+  await linkOrSignIn(cred);
+  return true;
+}
+
+export const resetPassword = (email: string) => sendPasswordResetEmail(fb().auth, email.trim());
+
+/** Back to a fresh guest session. */
+export async function signOutUser() {
+  await signOut(fb().auth);
+  await googleSignOut();
+  await ensureUser().catch(() => {});
+}
 
 // ------------------------------------------------------------------ profile / roles
 

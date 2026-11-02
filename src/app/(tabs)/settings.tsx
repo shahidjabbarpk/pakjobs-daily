@@ -5,12 +5,13 @@ import { useState } from 'react';
 import { ActivityIndicator, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
 import { CityPicker } from '@/components/CityPicker';
 import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap, useStatusBar } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
 import { PRIVACY_URL } from '@/lib/config';
-import { currentUid, ensureUser } from '@/lib/community';
+import { currentUid, ensureUser, signOutUser } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { useI18n } from '@/lib/i18n';
 import { notifyNewJobs, setupNotifications } from '@/lib/notify';
@@ -51,6 +52,13 @@ export default function Settings() {
   const [editProfile, setEditProfile] = useState(false);
   const [uid, setUid] = useState<string | null>(currentUid());
   const [copied, setCopied] = useState(false);
+  const user = useAuthUser();
+  const [login, setLogin] = useState(false);
+  const logout = async () => {
+    await signOutUser().catch(() => {});
+    s.set({ profile: null, admin: false });
+    setUid(currentUid());
+  };
   const copyId = async () => {
     const id = uid ?? (await ensureUser().catch(() => null));
     if (!id) return;
@@ -107,6 +115,29 @@ export default function Settings() {
           <Animated.View entering={FadeIn} style={{ marginTop: 12 }}>
             <CityPicker value={s.homeCity} onChange={(city) => { s.set({ homeCity: city, alertCity: city }); setEditCity(false); }} />
           </Animated.View>
+        )}
+      </Card>
+
+      <Card>
+        <Label icon="shield-account-outline" text={t('account')} />
+        {isLoggedIn(user) ? (
+          <View style={[styles.row, { backgroundColor: c.cardAlt }]}>
+            <Icon name={user!.email?.endsWith('@gmail.com') ? 'google' : 'email-outline'} size={18} color={c.primary} />
+            <Text style={[styles.rowText, { color: c.text }]} numberOfLines={1}>{user!.email ?? user!.name}</Text>
+            <Tap onPress={logout} style={[styles.logout, { borderColor: c.danger + '55' }]}>
+              <Text style={[tf('bold'), { color: c.danger, fontSize: 12.5 }]}>{t('logout')}</Text>
+            </Tap>
+          </View>
+        ) : login ? (
+          <View style={{ marginHorizontal: -16, marginTop: -14 }}><AuthCard onDone={() => { setLogin(false); setUid(currentUid()); }} /></View>
+        ) : (
+          <>
+            <Text style={[tf(), { color: c.sub, fontSize: 12.5, marginBottom: 10 }]}>{t('guestMode')}</Text>
+            <Tap onPress={() => setLogin(true)} style={[styles.row, { backgroundColor: c.primary, justifyContent: 'center' }]}>
+              <Icon name="login" size={18} color="#fff" />
+              <Text style={[tf('bold'), { color: '#fff', fontSize: 14 }]}>{t('authLogin')} / {t('authSignup')}</Text>
+            </Tap>
+          </>
         )}
       </Card>
 
@@ -270,6 +301,7 @@ function Label({ icon, text }: { icon: IconName; text: string }) {
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, height: 48, borderRadius: 12 },
   rowText: { flex: 1, fontFamily: font.medium, fontSize: 14 },
+  logout: { paddingHorizontal: 12, height: 32, borderRadius: 10, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
   h1: { fontSize: 26, paddingHorizontal: 16, marginBottom: 12 },
   card: { marginHorizontal: 16, marginBottom: 12, borderRadius: 20, padding: 16, borderWidth: 1 },
   label: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 },

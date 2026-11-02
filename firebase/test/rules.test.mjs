@@ -9,9 +9,12 @@ const env = await initializeTestEnvironment({
   firestore: { rules: readFileSync(new URL('../firestore.rules', import.meta.url), 'utf8') },
 });
 
-const alice = env.authenticatedContext('alice').firestore();
-const bob = env.authenticatedContext('bob').firestore();
-const boss = env.authenticatedContext('boss').firestore();
+// logged-in users (Google / email); 'guest' is an anonymous Firebase account
+const user = (uid, provider = 'password') => env.authenticatedContext(uid, { firebase: { sign_in_provider: provider } }).firestore();
+const alice = user('alice');
+const bob = user('bob');
+const boss = user('boss');
+const guest = user('guest', 'anonymous');
 const anon = env.unauthenticatedContext().firestore();
 
 const post = (owner, extra = {}) => ({
@@ -48,7 +51,8 @@ await t('admin cannot pre-feature on create', () => assertFails(addDoc(collectio
 await t('cannot self-feature on create', () => assertFails(addDoc(collection(alice, 'posts'), post('alice', { featured: true }))));
 await t('cannot post as someone else', () => assertFails(addDoc(collection(alice, 'posts'), post('bob'))));
 await t('signed-out users cannot post', () => assertFails(addDoc(collection(anon, 'posts'), post('x'))));
-await t('banned user cannot post', () => assertFails(addDoc(collection(env.authenticatedContext('mallory').firestore(), 'posts'), post('mallory'))));
+await t('guest (not logged in) cannot post', () => assertFails(addDoc(collection(guest, 'posts'), post('guest'))));
+await t('banned user cannot post', () => assertFails(addDoc(collection(user('mallory'), 'posts'), post('mallory'))));
 await t('expiry longer than 31 days rejected', () => assertFails(addDoc(collection(alice, 'posts'),
   post('alice', { expiresAt: Timestamp.fromDate(new Date(Date.now() + 90 * 86400000)) }))));
 await t('pending post hidden from others', () => assertFails(getDoc(doc(bob, 'posts', pid))));
@@ -72,7 +76,8 @@ let cid;
 await t('signed-in user can comment', async () => { cid = (await assertSucceeds(addDoc(collection(bob, 'threads/njp-1/comments'), cm('bob')))).id; });
 await t('cannot comment as someone else', () => assertFails(addDoc(collection(bob, 'threads/njp-1/comments'), cm('alice'))));
 await t('empty / too long comment rejected', () => assertFails(addDoc(collection(bob, 'threads/njp-1/comments'), cm('bob', 'x'.repeat(501)))));
-await t('banned user cannot comment', () => assertFails(addDoc(collection(env.authenticatedContext('mallory').firestore(), 'threads/njp-1/comments'), cm('mallory'))));
+await t('guest (not logged in) cannot comment', () => assertFails(addDoc(collection(guest, 'threads/njp-1/comments'), cm('guest'))));
+await t('banned user cannot comment', () => assertFails(addDoc(collection(user('mallory'), 'threads/njp-1/comments'), cm('mallory'))));
 await t('everyone can read comments', () => assertSucceeds(getDocs(collection(anon, 'threads/njp-1/comments'))));
 await t('cannot delete others comment', () => assertFails(deleteDoc(doc(alice, 'threads/njp-1/comments', cid))));
 await t('admin can delete any comment', () => assertSucceeds(deleteDoc(doc(boss, 'threads/njp-1/comments', cid))));

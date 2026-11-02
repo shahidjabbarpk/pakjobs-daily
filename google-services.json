@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "349850513796",
+    "project_id": "pakjobs-daily-sj",
+    "storage_bucket": "pakjobs-daily-sj.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349850513796:android:8a473a6aee96aa1532add1",
+        "android_client_info": {
+          "package_name": "com.pakjobs.daily.mza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349850513796-tbuaot6rgrim8u7h6sj7v696ukhco9n6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pakjobs.daily.mza",
+            "certificate_hash": "a881873002ed77e3b80fa11d86bddc323f9bc55e"
+          }
+        },
+        {
+          "client_id": "349850513796-f32iv00qk35t8q0mv8dtnjjb83frl6fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn_R9eoRq-9Q-M5AxnaL-qyrtXj5qsWDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349850513796-f32iv00qk35t8q0mv8dtnjjb83frl6fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

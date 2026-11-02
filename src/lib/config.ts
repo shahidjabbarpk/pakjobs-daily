@@ -36,6 +36,10 @@ export const FIREBASE_CONFIG: {
   appId: '1:349850513796:web:50e8ab7215c29f5632add1'
 };
 
+// OAuth "web client" of the same project (type 3 in google-services.json); Google login asks
+// for an idToken issued to this client so Firebase Auth accepts it.
+export const GOOGLE_WEB_CLIENT_ID = '349850513796-f32iv00qk35t8q0mv8dtnjjb83frl6fv.apps.googleusercontent.com';
+
 /** Private job posts stay visible this long. */
 export const POST_LIFETIME_DAYS = 30;
 

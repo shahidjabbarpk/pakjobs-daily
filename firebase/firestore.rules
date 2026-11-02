@@ -1,10 +1,12 @@
 rules_version = '2';
 
-// PakJobs Daily. Users are anonymous Firebase accounts; admins are uids listed in /admins.
+// PakJobs Daily. Everyone starts as an anonymous (guest) Firebase account; posting and commenting
+// need a Google or email/password login. Admins are uids listed in /admins.
 service cloud.firestore {
   match /databases/{database}/documents {
 
     function signedIn() { return request.auth != null; }
+    function realUser() { return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous'; }
     function me() { return request.auth.uid; }
     function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(me())); }
     function notBanned() { return !exists(/databases/$(database)/documents/banned/$(me())); }
@@ -32,7 +34,7 @@ service cloud.firestore {
       allow read: if resource.data.status == 'approved'
         || (signedIn() && (resource.data.ownerUid == me() || isAdmin()));
 
-      allow create: if signedIn() && notBanned()
+      allow create: if realUser() && notBanned()
         && data().ownerUid == me()
         // admins may publish directly; everyone else starts as pending
         && (data().status == 'pending' || (isAdmin() && data().status == 'approved'))
@@ -58,7 +60,7 @@ service cloud.firestore {
     // Comments on any job (government or private), keyed by the app's job id.
     match /threads/{jobId}/comments/{cid} {
       allow read: if true;
-      allow create: if signedIn() && notBanned()
+      allow create: if realUser() && notBanned()
         && data().uid == me()
         && str(data().name, 1, 60)
         && str(data().text, 1, 500)

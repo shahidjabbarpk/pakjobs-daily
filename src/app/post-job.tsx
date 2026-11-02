@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
 import { CityPicker } from '@/components/CityPicker';
 import { FeaturedPayInfo, Field, ProfileForm, useProfile } from '@/components/community';
 import { Chip, Icon, Tap, useStatusBar } from '@/components/ui';
@@ -21,6 +22,7 @@ export default function PostJob() {
   const { t, tf, qual } = useI18n();
   const insets = useSafeAreaInsets();
   const [profile] = useProfile();
+  const user = useAuthUser();
   const homeCity = useApp((s) => s.homeCity);
   const admin = useApp((s) => s.admin);
   const { edit } = useLocalSearchParams<{ edit?: string }>();
@@ -106,6 +108,10 @@ export default function PostJob() {
         {header}
         {!communityReady() ? (
           <Text style={[tf(), { color: c.sub, textAlign: 'center', padding: 30, fontSize: 14 }]}>{t('communityOff')}</Text>
+        ) : user === undefined ? (
+          <ActivityIndicator color={c.primary} style={{ marginTop: 40 }} />
+        ) : !isLoggedIn(user) ? (
+          <AuthCard />
         ) : !profile ? (
           <ProfileForm />
         ) : (

@@ -25,6 +25,7 @@
     "android": {
       "package": "com.pakjobs.daily.mza",
       "versionCode": 1,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#0B7A43",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -86,7 +87,8 @@
         }
       ],
       "./plugins/withReleaseSigning",
-      "expo-sharing"
+      "expo-sharing",
+      "@react-native-google-signin/google-signin"
     ],
     "experiments": {
       "typedRoutes": false

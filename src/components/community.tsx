@@ -7,6 +7,7 @@ import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 import type { Comment, Profile } from '@/lib/types';
+import { AuthCard, isLoggedIn, useAuthUser } from './AuthCard';
 import { Icon, Tap } from './ui';
 
 /** Cached profile; fetched from Firestore once if this device has none yet. */
@@ -179,6 +180,8 @@ export function Comments({ jobId, onToast }: { jobId: string; onToast: (msg: str
   const [busy, setBusy] = useState(false);
   const [needProfile, setNeedProfile] = useState(false);
   const [reporting, setReporting] = useState<string | null>(null);
+  const user = useAuthUser();
+  const [wantLogin, setWantLogin] = useState(false);
 
   useEffect(() => listenComments(jobId, setList, () => setFailed(true)), [jobId]);
 
@@ -227,7 +230,16 @@ export function Comments({ jobId, onToast }: { jobId: string; onToast: (msg: str
         </Animated.View>
       ))}
 
-      {!communityReady() ? null : needProfile && !profile ? (
+      {!communityReady() || user === undefined ? null : !isLoggedIn(user) ? (
+        wantLogin ? (
+          <AuthCard style={{ marginHorizontal: 0, borderWidth: 0, padding: 4 }} onDone={() => setWantLogin(false)} />
+        ) : (
+          <Tap onPress={() => setWantLogin(true)} style={[styles.loginBtn, { backgroundColor: c.primarySoft }]}>
+            <Icon name="login" size={18} color={c.primary} />
+            <Text style={[tf('bold'), { color: c.primary, fontSize: 14 }]}>{t('loginToComment')}</Text>
+          </Tap>
+        )
+      ) : needProfile && !profile ? (
         <Animated.View entering={FadeIn} style={{ marginTop: 10 }}>
           <ProfileForm onDone={() => setNeedProfile(false)} />
         </Animated.View>
@@ -277,5 +289,6 @@ const styles = StyleSheet.create({
   cText: { fontFamily: font.regular, fontSize: 13, lineHeight: 19, marginTop: 1 },
   composer: { flexDirection: 'row', alignItems: 'flex-end', gap: 8, borderRadius: 16, padding: 6, marginTop: 12 },
   composerInput: { flex: 1, fontFamily: font.regular, fontSize: 13.5, paddingHorizontal: 10, paddingVertical: 8, maxHeight: 110 },
+  loginBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, height: 46, borderRadius: 14, marginTop: 12 },
   sendBtn: { width: 40, height: 40, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
 });
