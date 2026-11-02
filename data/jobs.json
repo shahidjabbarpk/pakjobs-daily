@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-02T23:10:27+05:00",
+ "updatedAt": "2026-11-03T00:09:20+05:00",
  "jobs": [
   {
    "id": "e1b50264a20d437e",
@@ -1665,6 +1665,50 @@
    "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
+   "id": "888bf74c000a9172",
+   "source": "njp",
+   "title": "Assistant",
+   "organization": "National Highways & Motorway Police (NHMP)",
+   "category": "police",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/9934",
+   "description": "Quota of Post:\nOpen Merit = 01\nQualification & Criteria:\nB.A/ B.Sc\nAge Limit: 18-25 years",
+   "grade": "BPS-15",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9934",
+   "firstSeen": "2026-11-03T00:09:20+05:00"
+  },
+  {
+   "id": "0725c0be7686ee5d",
+   "source": "njp",
+   "title": "Stenotypist",
+   "organization": "National Highways & Motorway Police (NHMP)",
+   "category": "police",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/9936",
+   "description": "Quota of Posts:\nOpen Merit = 02\nWomen = 01\nTotal = 03\nQualification & Criteria:\nIntermediate\nMinimum speed of 80/40 w.p.m in shorthand/ typing respectively.\nMust be computer literate.\nAge Limit: 18-25 years",
+   "grade": "BPS-14",
+   "jobType": "Regular",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9936",
+   "firstSeen": "2026-11-03T00:09:20+05:00"
+  },
+  {
    "id": "88a2edccb10b010b",
    "source": "njp",
    "title": "Naib Qasid",
@@ -2656,44 +2700,6 @@
    "lastDate": "2026-11-04",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-EXIM-Bank-of-Pakistan-1657610809230329.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9844",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "b897cf61ba6a5701",
-   "source": "njp",
-   "title": "ASSISTANT PRIVATE SECRETARY (APS) — EQUIVALENT TO PPS-6",
-   "organization": "Ministry of Planning, Development & Special Initiatives",
-   "category": "govt",
-   "cities": [],
-   "qualification": null,
-   "url": "https://www.njp.gov.pk/jobs/9840",
-   "description": "To attend telephone and to keep record of calls.\nTo arrange engagements and maintain an engagement diary.\nTaking dictation, rendering transcripts and doing other typing work.\nTo prepare papers for meetings and interviews.\nTo see those matters requiring the Officers attention are brought to his notice in good time and in complete and proper form.\nTo keep proper record of movement of files and other Classified documents.\nTo receive and conduct visitors.",
-   "grade": "PPS-6",
-   "jobType": "Contract",
-   "vacancies": 1,
-   "ageLimit": "Max: 50 years",
-   "postedDate": "2026-10-19",
-   "lastDate": "2026-11-02",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9840",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "a7ad0df566fa7d2e",
-   "source": "njp",
-   "title": "ACCOUNTANT — EQUIVALENT TO PPS-6",
-   "organization": "Ministry of Planning, Development & Special Initiatives",
-   "category": "govt",
-   "cities": [],
-   "qualification": null,
-   "url": "https://www.njp.gov.pk/jobs/9842",
-   "description": "Preparation of NIS\nMaintenance of cash books, handling of cash receipts/payments and bills under the project.\nReconciliation of accounts with AGPR\nAny other responsibility assigned by PD",
-   "grade": "PPS-6",
-   "jobType": "Contract",
-   "vacancies": 1,
-   "ageLimit": "Max: 45 years",
-   "postedDate": "2026-10-19",
-   "lastDate": "2026-11-02",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9842",
    "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {

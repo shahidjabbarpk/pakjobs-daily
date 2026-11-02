@@ -1,4 +1,49 @@
 {
- "updatedAt": "2026-11-02T23:10:27+05:00",
- "jobs": []
+ "updatedAt": "2026-11-03T00:09:20+05:00",
+ "jobs": [
+  {
+   "id": "888bf74c000a9172",
+   "source": "njp",
+   "title": "Assistant",
+   "organization": "National Highways & Motorway Police (NHMP)",
+   "category": "police",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/9934",
+   "description": "Quota of Post:\nOpen Merit = 01\nQualification & Criteria:\nB.A/ B.Sc\nAge Limit: 18-25 years",
+   "grade": "BPS-15",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9934",
+   "firstSeen": "2026-11-03T00:09:20+05:00"
+  },
+  {
+   "id": "0725c0be7686ee5d",
+   "source": "njp",
+   "title": "Stenotypist",
+   "organization": "National Highways & Motorway Police (NHMP)",
+   "category": "police",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/9936",
+   "description": "Quota of Posts:\nOpen Merit = 02\nWomen = 01\nTotal = 03\nQualification & Criteria:\nIntermediate\nMinimum speed of 80/40 w.p.m in shorthand/ typing respectively.\nMust be computer literate.\nAge Limit: 18-25 years",
+   "grade": "BPS-14",
+   "jobType": "Regular",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9936",
+   "firstSeen": "2026-11-03T00:09:20+05:00"
+  }
+ ]
 }
