@@ -35,7 +35,7 @@ const CITY_CHIPS = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Raw
 // user finds Results / Roll No / Prep etc. without hunting through tabs.
 type Service = { key: string; icon: IconName; color: string; href: string; params?: Record<string, string> };
 const SERVICES: Service[] = [
-  { key: 'cat.govt', icon: 'bank', color: '#34A853', href: '/search' },
+  { key: 'cat.govt', icon: 'bank', color: '#34A853', href: '/search', params: { govt: '1' } },
   { key: 'privateJobs', icon: 'briefcase', color: '#4285F4', href: '/private' },
   { key: 'kind.result', icon: 'trophy', color: '#FBBC05', href: '/updates', params: { kind: 'result' } },
   { key: 'kind.rollno', icon: 'card-account-details', color: '#EA4335', href: '/updates', params: { kind: 'rollno' } },
@@ -46,6 +46,10 @@ const SERVICES: Service[] = [
 ];
 
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
+
+/** Opens Search with exactly these filters (`n` tells Search it's a new visit, see search.tsx). */
+const openSearch = (params: Record<string, string> = {}) =>
+  router.push({ pathname: '/search', params: { ...params, n: String(Date.now()) } });
 
 function greetingKey(): 'greetMorning' | 'greetAfternoon' | 'greetEvening' {
   const h = new Date(Date.now() + 5 * 3600_000).getUTCHours();
@@ -145,7 +149,7 @@ export default function Home() {
                 </Tap>
               ))}
             </View>
-            <Tap style={styles.bell} onPress={() => router.push({ pathname: '/search', params: { sort: 'newest' } })}>
+            <Tap style={styles.bell} onPress={() => openSearch({ sort: 'newest' })}>
               <Icon name="bell-outline" size={21} color="#fff" />
               {newCount > 0 && (
                 <Animated.View entering={ZoomIn.delay(400)} style={[styles.bellDot, { backgroundColor: c.danger, borderColor: c.heroB }]}>
@@ -161,7 +165,7 @@ export default function Home() {
 
       {/* floating search pill over the hero's edge */}
       <Animated.View entering={FadeIn.delay(120)} style={styles.searchWrap}>
-        <Tap haptic={false} scaleTo={0.98} onPress={() => router.push('/search')}
+        <Tap haptic={false} scaleTo={0.98} onPress={() => openSearch()}
           style={[styles.searchBar, { backgroundColor: c.card, shadowColor: c.shadow, borderColor: c.border }]}>
           <Icon name="magnify" size={21} color={c.primary} />
           <Text style={[styles.searchText, tf(), { color: c.faint }]} numberOfLines={1}>{t('searchPlaceholder')}</Text>
@@ -181,7 +185,7 @@ export default function Home() {
             : sv.params?.sort === 'deadline' ? closing.length : 0;
           return (
             <Animated.View key={sv.key} entering={ZoomIn.delay(120 + i * 45).springify().damping(15)} style={styles.serviceCell}>
-              <Tap onPress={() => router.push({ pathname: sv.href as any, params: sv.params ?? {} })}
+              <Tap onPress={() => (sv.href === '/search' ? openSearch(sv.params) : router.push({ pathname: sv.href as any, params: sv.params ?? {} }))}
                 style={[styles.service, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}>
                 <View style={[styles.serviceIcon, { backgroundColor: sv.color + '1F' }]}>
                   <Icon name={sv.icon} size={26} color={sv.color} />
@@ -200,7 +204,7 @@ export default function Home() {
           const meta = CATEGORY_META[cat];
           return (
             <Animated.View key={cat} entering={ZoomIn.delay(120 + i * 40).springify().damping(14)} style={styles.cell}>
-              <Tap style={styles.cellInner} onPress={() => router.push({ pathname: '/search', params: { cat } })}>
+              <Tap style={styles.cellInner} onPress={() => openSearch({ cat })}>
                 <LinearGradient colors={meta.colors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.catIcon}>
                   <Icon name={meta.icon as IconName} size={24} color="#fff" />
                   {!!counts[cat] && (
@@ -221,7 +225,7 @@ export default function Home() {
         {SOURCE_CHIPS.filter(([k]) => k !== 'user' && k !== 'njp').map(([k, label], i) => (
           <Animated.View key={k} entering={FadeInRight.delay(i * 40)}>
             <Tap style={[styles.cityChip, { backgroundColor: c.card, borderColor: c.border }]}
-              onPress={() => router.push({ pathname: '/search', params: { source: k } })}>
+              onPress={() => openSearch({ source: k })}>
               <Icon name="bank-outline" size={16} color={c.primary} />
               <Text style={[styles.cityText, { color: c.text }]}>{label}</Text>
               {!!sourceCounts[k] && <Text style={[styles.srcCount, { color: c.primary, backgroundColor: c.primarySoft }]}>{sourceCounts[k]}</Text>}
@@ -235,7 +239,7 @@ export default function Home() {
         {CITY_CHIPS.map((city, i) => (
           <Animated.View key={city} entering={FadeInRight.delay(i * 40)}>
             <Tap style={[styles.cityChip, { backgroundColor: c.card, borderColor: c.border }]}
-              onPress={() => router.push({ pathname: '/search', params: { city } })}>
+              onPress={() => openSearch({ city })}>
               <Icon name="map-marker-radius" size={16} color={c.primary} />
               <Text style={[styles.cityText, { color: c.text }]}>{city}</Text>
             </Tap>
@@ -253,7 +257,7 @@ export default function Home() {
       {cityJobs.length > 0 && (
         <>
           <SectionTitle title={`📍 ${t('yourCity')} ${homeCity}`} action={t('seeAll')}
-            onAction={() => router.push({ pathname: '/search', params: { city: homeCity! } })} />
+            onAction={() => openSearch({ city: homeCity! })} />
           <JobStrip jobs={cityJobs} />
         </>
       )}
@@ -261,7 +265,7 @@ export default function Home() {
       {closing.length > 0 && (
         <>
           <SectionTitle title={`⏳ ${t('closingSoon')}`} action={t('seeAll')}
-            onAction={() => router.push({ pathname: '/search', params: { sort: 'deadline' } })} />
+            onAction={() => openSearch({ sort: 'deadline' })} />
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList} decelerationRate="fast" snapToInterval={262}>
             {closing.map((job, i) => (
               <Animated.View key={job.id} entering={FadeInRight.delay(i * 60).springify()}>
@@ -280,7 +284,7 @@ export default function Home() {
         </>
       )}
 
-      <SectionTitle title={`🆕 ${t('latestJobs')}`} action={t('seeAll')} onAction={() => router.push('/search')} />
+      <SectionTitle title={`🆕 ${t('latestJobs')}`} action={t('seeAll')} onAction={() => openSearch()} />
     </View>
   );
 

@@ -9,7 +9,7 @@ import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { sortJobs, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
-import { SOURCE_CHIPS } from '@/lib/places';
+import { jobMatchesPlace, SOURCE_CHIPS } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 import type { Category, Job } from '@/lib/types';
@@ -26,7 +26,7 @@ export default function Search() {
   const { t, tf, qual, isUr } = useI18n();
   const insets = useSafeAreaInsets();
   const tabSpace = useTabBarSpace();
-  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string; q?: string }>();
+  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string; q?: string; govt?: string; n?: string }>();
   const jobs = useApp((s) => s.jobs);
 
   const [q, setQ] = useState('');
@@ -36,33 +36,40 @@ export default function Search() {
   const [source, setSource] = useState<string | null>(null);
   const [sort, setSort] = useState<'newest' | 'deadline'>('newest');
   const [showClosed, setShowClosed] = useState(false);
+  const [govtOnly, setGovtOnly] = useState(false);
 
-  // deep links from Home (category tiles, city chips, stat cards)
+  // deep links from Home (services, category tiles, city chips). Search is a tab that stays mounted,
+  // so each visit replaces the previous visit's filters instead of piling onto them; `n` makes a
+  // repeat tap on the same tile count as a new visit.
   useEffect(() => {
-    if (params.cat) setCat(params.cat as Category);
-    if (params.city) setCity(params.city);
-    if (params.sort === 'deadline' || params.sort === 'newest') setSort(params.sort);
-    if (params.source) setSource(params.source);
-    if (params.q) setQ(params.q);
-  }, [params.cat, params.city, params.sort, params.source, params.q]);
+    if (!params.n) return;
+    setCat((params.cat as Category) || null);
+    setCity(params.city || null);
+    setSort(params.sort === 'deadline' ? 'deadline' : 'newest');
+    setSource(params.source || null);
+    setQ(params.q || '');
+    setGovtOnly(params.govt === '1');
+    setQualF(null);
+  }, [params.n, params.cat, params.city, params.sort, params.source, params.q, params.govt]);
 
   const results = useMemo(() => {
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
     const list = jobs.filter((j) => {
       if (!showClosed && urgency(j) === 'closed') return false;
+      if (govtOnly && (j.source === 'user' || j.category === 'private')) return false;
       if (cat && j.category !== cat) return false;
       if (source && j.source !== source) return false;
       // "Matric" shows jobs whose minimum requirement is Matric or lower
       if (qualF && j.qualification && j.qualification !== 'Any' && (RANK[j.qualification] ?? 0) > RANK[qualF]!) return false;
-      if (city && !j.cities.includes('All Pakistan') && !j.cities.some((x) => x.toLowerCase() === city.toLowerCase())) return false;
+      if (city && !jobMatchesPlace(j, city)) return false;
       if (words.length) {
-        const hay = `${j.title} ${j.organization} ${j.cities.join(' ')} ${j.grade ?? ''} ${j.source}`.toLowerCase();
+        const hay = `${j.title} ${j.organization} ${j.cities.join(' ')} ${j.grade ?? ''} ${j.source} ${j.qualification ?? ''} ${j.jobType ?? ''} ${j.advertNo ?? ''}`.toLowerCase();
         if (!words.every((w) => hay.includes(w))) return false;
       }
       return true;
     });
     return sortJobs(list, sort);
-  }, [jobs, q, cat, qualF, city, source, sort, showClosed]);
+  }, [jobs, q, cat, qualF, city, source, sort, showClosed, govtOnly]);
 
   const rows = useMemo<Row[]>(() => {
     const out: Row[] = [];
@@ -73,8 +80,8 @@ export default function Search() {
     return out;
   }, [results]);
 
-  const active = [cat, qualF, city, source, q].filter(Boolean).length;
-  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); setSource(null); };
+  const active = [cat, qualF, city, source, q, govtOnly].filter(Boolean).length;
+  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); setSource(null); setGovtOnly(false); };
 
   const filters = (
     <View>
@@ -96,7 +103,8 @@ export default function Search() {
       </View>
 
       <FilterRow label={t('category')}>
-        <Chip label={t('all')} active={!cat} onPress={() => setCat(null)} />
+        <Chip label={t('all')} active={!cat && !govtOnly} onPress={() => { setCat(null); setGovtOnly(false); }} />
+        <Chip icon="bank-outline" label={t('allGovt')} active={govtOnly} onPress={() => setGovtOnly(!govtOnly)} />
         {ALL_CATEGORIES.map((k) => <Chip key={k} label={t(`cat.${k}`)} active={cat === k} onPress={() => setCat(cat === k ? null : k)} />)}
       </FilterRow>
       <FilterRow label={t('commissions')}>

@@ -84,6 +84,9 @@ function loadRewarded() {
   });
   rewarded.addAdEventListener(AdEventType.ERROR, () => {
     rewardedReady = false;
+    // an ad that fails mid-show must not swallow the advert/result the user tapped
+    afterRewarded?.();
+    afterRewarded = null;
     setTimeout(loadRewarded, 60_000);
   });
   rewarded.load();

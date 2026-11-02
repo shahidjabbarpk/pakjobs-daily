@@ -48,3 +48,27 @@ export function jobInCity(job: Job, place: string | null): boolean {
 /** Source filter chips: [job.source, label]. */
 export const SOURCE_CHIPS: [string, string][] = [['ppsc', 'PPSC'], ['spsc', 'SPSC'], ['kppsc', 'KPPSC'], ['bpsc', 'BPSC'], ['fpsc', 'FPSC'],
   ['nts', 'NTS'], ['army', 'Army'], ['navy', 'Navy'], ['paf', 'PAF'], ['njp', 'NJP'], ['user', 'Private']];
+
+const PROVINCE_ALIASES: Record<string, Province> = {
+  punjab: 'Punjab', sindh: 'Sindh', kpk: 'KPK', 'khyber pakhtunkhwa': 'KPK', balochistan: 'Balochistan',
+  ict: 'ICT', ajk: 'AJK', 'azad kashmir': 'AJK', gb: 'GB', 'gilgit-baltistan': 'GB',
+};
+
+/**
+ * Search filter: a district also shows its province-wide and All-Pakistan jobs;
+ * a province also shows jobs posted in any of its districts. Untagged jobs don't match.
+ */
+export function jobMatchesPlace(job: Job, place: string): boolean {
+  const tags = job.cities.map((c) => c.toLowerCase());
+  if (!tags.length) return false;
+  if (tags.includes('all pakistan')) return true;
+  const p = place.toLowerCase();
+  if (tags.includes(p)) return true;
+  const prov = PROVINCE_ALIASES[p];
+  if (prov) {
+    return tags.some((t) => PROVINCE_ALIASES[t] === prov
+      || Object.entries(DISTRICTS).some(([d, pr]) => pr === prov && d.toLowerCase() === t));
+  }
+  const own = DISTRICTS[place];
+  return !!own && tags.some((t) => PROVINCE_ALIASES[t] === own || (own === 'ICT' && t === 'islamabad'));
+}

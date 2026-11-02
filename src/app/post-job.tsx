@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,6 +8,7 @@ import { CityPicker } from '@/components/CityPicker';
 import { FeaturedPayInfo, Field, ProfileForm, useProfile } from '@/components/community';
 import { Chip, Icon, Tap, useStatusBar } from '@/components/ui';
 import { communityReady, createPost, updatePost } from '@/lib/community';
+import { refreshJobs } from '@/lib/feed';
 import { FEATURED } from '@/lib/config';
 import { useI18n } from '@/lib/i18n';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
@@ -44,12 +45,27 @@ export default function PostJob() {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [doneId, setDoneId] = useState<string | null>(null);
+  // the profile loads after the first render: prefill WhatsApp once it arrives
+  useEffect(() => {
+    if (profile?.whatsapp) setWhatsapp((w) => w || profile.whatsapp);
+  }, [profile?.whatsapp]);
 
   const submit = async () => {
-    const dateOk = !lastDate || /^\d{4}-\d{2}-\d{2}$/.test(lastDate);
-    if (title.trim().length < 3 || company.trim().length < 2 || !city || description.trim().length < 10 || !dateOk
+    if (title.trim().length < 3 || company.trim().length < 2 || !city || description.trim().length < 10
       || (!phone.trim() && !whatsapp.trim())) {
       setErr(t('required'));
+      return;
+    }
+    // a past or impossible date would hide the post the moment it's approved
+    const today = new Date(Date.now() + 5 * 3600_000).toISOString().slice(0, 10);
+    const ms = /^\d{4}-\d{2}-\d{2}$/.test(lastDate) ? Date.parse(`${lastDate}T00:00:00Z`) : NaN;
+    const real = !Number.isNaN(ms) && new Date(ms).toISOString().slice(0, 10) === lastDate; // rejects 2026-02-30
+    if (lastDate && (!real || lastDate < today)) {
+      setErr(t('badDate'));
+      return;
+    }
+    if ([phone, whatsapp].some((n) => n.trim() && n.replace(/\D/g, '').length < 10)) {
+      setErr(t('badPhone'));
       return;
     }
     setBusy(true);
@@ -62,6 +78,7 @@ export default function PostJob() {
       };
       if (editing && admin) {
         await updatePost(editing.id, input);
+        refreshJobs().catch(() => {});
         router.back();
         return;
       }

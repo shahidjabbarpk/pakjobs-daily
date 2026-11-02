@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { isNew, prettyDate, windowProgress } from '@/lib/format';
+import { isNew, prettyDate, safeUrl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
@@ -18,7 +18,7 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
   const barColor = useUrgencyColor(job);
   const progress = windowProgress(job);
   // the official newspaper / website advert, when the source publishes one
-  const advert = job.advertImage && /\.(jpe?g|png|webp)($|\?)/i.test(job.advertImage) ? encodeURI(decodeURI(job.advertImage)) : null;
+  const advert = job.advertImage && /\.(jpe?g|png|webp)($|\?)/i.test(job.advertImage) ? safeUrl(job.advertImage) : null;
   const advertPdf = !!job.advertImage && !advert;
   const place = job.cities.includes('All Pakistan') ? t('allPakistan') : job.cities.slice(0, 2).join(', ');
 

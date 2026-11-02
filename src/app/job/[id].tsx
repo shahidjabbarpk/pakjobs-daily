@@ -18,7 +18,7 @@ import { BookmarkButton, DeadlineBadge, EmptyState, Icon, type IconName, NewBadg
 import { Comments, ReportSheet } from '@/components/community';
 import { ImageViewer } from '@/components/ImageViewer';
 import { maybeShowInterstitial, showRewarded } from '@/lib/ads';
-import { deadlineMs, isNew, prettyDate, toIntl, windowProgress } from '@/lib/format';
+import { deadlineMs, isNew, prettyDate, safeUrl, toIntl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { cancelReminder, scheduleDeadlineReminder } from '@/lib/notify';
 import { useApp } from '@/lib/store';
@@ -67,7 +67,7 @@ function Detail({ job }: { job: Job }) {
   const toggleSave = useApp((s) => s.toggleSave);
   const [note, setNote] = useState<string | null>(null);
   const meta = CATEGORY_META[job.category];
-  const open = (url?: string) => url && WebBrowser.openBrowserAsync(encodeURI(decodeURI(url)), { toolbarColor: c.heroA });
+  const open = (url?: string) => url && WebBrowser.openBrowserAsync(safeUrl(url), { toolbarColor: c.heroA });
   const openAdvert = (url?: string) => showRewarded(() => open(url));
   const isUser = job.source === 'user';
   const [reporting, setReporting] = useState(false);
@@ -160,7 +160,7 @@ function Detail({ job }: { job: Job }) {
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>{t('viewAdvert')}</Text>
             {isImage && (
               <Tap onPress={() => showRewarded(() => setViewer(true))} haptic={false}>
-                <Image source={{ uri: encodeURI(decodeURI(job.advertImage!)) }} style={styles.advert} contentFit="cover" transition={300} />
+                <Image source={{ uri: safeUrl(job.advertImage!) }} style={styles.advert} contentFit="cover" transition={300} />
                 <View style={styles.zoom}><Icon name="magnify-plus-outline" size={18} color="#fff" /></View>
               </Tap>
             )}
@@ -220,7 +220,7 @@ function Detail({ job }: { job: Job }) {
           <Icon name={isUser ? 'account-group' : 'shield-check'} size={14} color={c.ok} />
           <Text style={[styles.sourceText, { color: c.faint }]}>{t('source')}: {isUser ? t('privateJobs') : SOURCE_NAME[job.source] ?? job.source}</Text>
         </View>
-        {isImage && <ImageViewer uri={encodeURI(decodeURI(job.advertImage!))} visible={viewer} onClose={() => setViewer(false)}
+        {isImage && <ImageViewer uri={safeUrl(job.advertImage!)} visible={viewer} onClose={() => setViewer(false)}
           onOpenOriginal={() => { setViewer(false); open(job.advertImage); }} />}
         <ReportSheet visible={reporting} kind="job" jobId={job.id} onClose={(done) => { setReporting(false); if (done) flash(t('reportDone')); }} />
       </ScrollView>

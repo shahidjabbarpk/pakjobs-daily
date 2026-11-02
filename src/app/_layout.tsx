@@ -25,6 +25,8 @@ function useNotificationTaps() {
     if (Platform.OS === 'web') return;
     const openJob = (r: Notifications.NotificationResponse | null) => {
       const data = r?.notification.request.content.data;
+      // handled once: otherwise the same tap re-opens the job whenever the app restarts its JS
+      if (r) Notifications.clearLastNotificationResponse();
       if (typeof data?.jobId === 'string') router.push(`/job/${data.jobId}`);
       else if (typeof data?.screen === 'string') router.push(data.screen as any);
     };

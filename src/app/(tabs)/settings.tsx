@@ -37,7 +37,8 @@ function ago(iso: string | null, t: (k: any) => string) {
   const m = Math.round((Date.now() - Date.parse(iso)) / 60000);
   if (m < 1) return t('justNow');
   if (m < 60) return `${m} ${t('minAgo')}`;
-  return `${Math.round(m / 60)} ${t('hrAgo')}`;
+  if (m < 48 * 60) return `${Math.round(m / 60)} ${t('hrAgo')}`;
+  return `${Math.round(m / 1440)} ${t('dayAgo')}`;
 }
 
 export default function Settings() {

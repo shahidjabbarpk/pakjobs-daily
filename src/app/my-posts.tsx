@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FeaturedPayInfo } from '@/components/community';
 import { EmptyState, Icon, Tap, useStatusBar } from '@/components/ui';
 import { deletePost, fetchMyPosts, requestFeature } from '@/lib/community';
+import { refreshJobs } from '@/lib/feed';
 import { prettyDate } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { font, useTheme } from '@/lib/theme';
@@ -26,7 +27,8 @@ export default function MyPosts() {
   useFocusEffect(load);
 
   const confirmDelete = (job: Job) => {
-    const run = () => deletePost(job.id).then(load).catch(() => setErr(true));
+    // refresh the shared job list too, or the deleted post lingers on Private Jobs
+    const run = () => deletePost(job.id).then(() => { load(); refreshJobs().catch(() => {}); }).catch(() => setErr(true));
     if (Platform.OS === 'web') { run(); return; }
     Alert.alert(t('confirmDelete'), job.title, [
       { text: t('cancel'), style: 'cancel' },

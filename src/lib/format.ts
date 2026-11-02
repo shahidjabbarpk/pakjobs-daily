@@ -81,3 +81,12 @@ export function toIntl(n: string): string {
   const d = n.replace(/\D/g, '');
   return d.startsWith('0') ? `92${d.slice(1)}` : d;
 }
+
+/** Normalises a scraped URL for opening/loading; decodeURI throws on stray '%', so fall back to the raw string. */
+export function safeUrl(url: string): string {
+  try {
+    return encodeURI(decodeURI(url));
+  } catch {
+    return url.replace(/ /g, '%20');
+  }
+}

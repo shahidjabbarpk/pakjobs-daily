@@ -1,7 +1,7 @@
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@/components/ui';
 import { NativeAdCard, showRewarded } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
-import { prettyDate } from '@/lib/format';
+import { prettyDate, safeUrl } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
@@ -38,6 +38,7 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
   const [kind, setKind] = useState<UpdateKind | null>(params.kind ?? null);
   useEffect(() => { if (params.kind) setKind(params.kind); }, [params.kind]);
   const [src, setSrc] = useState<string | null>(null);
+  const [q, setQ] = useState('');
   const [refreshing, setRefreshing] = useState(false);
   const tabSpace = useTabBarSpace();
   // opening the Alerts tab marks everything as read
@@ -45,7 +46,11 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
     if (tab) useApp.getState().set({ alertsSeenAt: Date.now() });
   }, [tab]));
 
-  const list = useMemo(() => updates.filter((u) => (!kind || u.kind === kind) && (!src || u.source === src)), [updates, kind, src]);
+  const list = useMemo(() => {
+    const words = q.toLowerCase().split(/\s+/).filter(Boolean);
+    return updates.filter((u) => (!kind || u.kind === kind) && (!src || u.source === src)
+      && words.every((w) => `${u.title} ${u.source}`.toLowerCase().includes(w)));
+  }, [updates, kind, src, q]);
   const rows = useMemo<Row[]>(() => {
     const out: Row[] = [];
     list.forEach((u, i) => {
@@ -62,7 +67,7 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
   }, []);
 
   // roll-no slips and results open behind a rewarded video (skipped if none is ready)
-  const open = (u: Update) => showRewarded(() => WebBrowser.openBrowserAsync(encodeURI(decodeURI(u.url))));
+  const open = (u: Update) => showRewarded(() => WebBrowser.openBrowserAsync(safeUrl(u.url)));
 
   return (
     <View style={{ flex: 1, backgroundColor: c.bg }}>
@@ -70,6 +75,8 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
       style={{ flex: 1, backgroundColor: c.bg }}
       data={rows}
       keyExtractor={(r) => (r.type === 'u' ? r.u.id : r.key)}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
       refreshControl={brandRefreshControl(refreshing, onRefresh)}
       ListHeaderComponent={
         <View style={{ paddingTop: insets.top + 8 }}>
@@ -83,6 +90,12 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
               <Text style={[styles.h1, tf('bold'), { color: c.text }]}>{t('updates')}</Text>
               <Text style={[tf(), { color: c.sub, fontSize: 12 }]}>{t('updatesSub')}</Text>
             </View>
+          </View>
+          <View style={[styles.input, { backgroundColor: c.card, borderColor: c.border }]}>
+            <Icon name="magnify" size={20} color={c.faint} />
+            <TextInput value={q} onChangeText={setQ} placeholder={t('searchUpdates')} placeholderTextColor={c.faint}
+              style={[styles.inputText, { color: c.text }]} returnKeyType="search" autoCorrect={false} />
+            {!!q && <Tap onPress={() => setQ('')}><Icon name="close-circle" size={18} color={c.faint} /></Tap>}
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
             <Chip label={t('all')} active={!kind} onPress={() => setKind(null)} />
@@ -133,6 +146,8 @@ const styles = StyleSheet.create({
   back: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center' },
   h1: { fontSize: 22 },
   chips: { paddingHorizontal: 16, gap: 8 },
+  input: { flexDirection: 'row', alignItems: 'center', gap: 10, height: 48, borderRadius: 16, paddingHorizontal: 14, borderWidth: 1, marginHorizontal: 16, marginBottom: 12 },
+  inputText: { flex: 1, fontFamily: font.regular, fontSize: 14 },
   card: { flexDirection: 'row', gap: 12, alignItems: 'center', marginHorizontal: 16, marginBottom: 10, padding: 14, borderRadius: 18, borderWidth: 1 },
   icon: { width: 46, height: 46, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   row: { flexDirection: 'row', alignItems: 'center', gap: 6 },

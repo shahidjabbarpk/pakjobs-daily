@@ -3,6 +3,7 @@
  * richest sources (National Jobs Portal + Pak Army API). Used when the hosted
  * feed is unreachable, so the app keeps discovering jobs with no server at all.
  */
+import { Platform } from 'react-native';
 import type { Category, Job } from './types';
 
 const UA = 'Mozilla/5.0 (Linux; Android 14) PakJobsDaily/1.0';
@@ -278,12 +279,19 @@ const reuseKey = (j: Job) => `${j.source}|${j.title}|${j.advertNo ?? ''}`;
  */
 export async function mergePhoneSources(base: Job[], known: Job[]): Promise<{ jobs: Job[]; ok: number }> {
   const names = Object.keys(PHONE_SOURCES) as (keyof typeof PHONE_SOURCES)[];
-  const results = await Promise.allSettled(names.map((n) => PHONE_SOURCES[n]()));
+  // browsers can't read these sites (CORS), so on web only the cached copies are kept
+  const results = await Promise.allSettled(names.map((n) => (Platform.OS === 'web' ? Promise.reject(new Error('web')) : PHONE_SOURCES[n]())));
   const prev = new Map([...known, ...base].map((j) => [reuseKey(j), j]));
   let jobs = base;
   let ok = 0;
   results.forEach((r, i) => {
-    if (r.status !== 'fulfilled') return;
+    if (r.status !== 'fulfilled') {
+      // site down / offline: keep what we last found there instead of dropping it until the next
+      // success (which would also bring the jobs back with a fresh "NEW" badge)
+      const ids = new Set(jobs.map((j) => j.id));
+      jobs = [...known.filter((j) => j.source === names[i] && !ids.has(j.id)), ...jobs];
+      return;
+    }
     ok++;
     for (const j of r.value) {
       const p = prev.get(reuseKey(j));
