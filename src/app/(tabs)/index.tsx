@@ -31,17 +31,18 @@ import type { Job } from '@/lib/types';
 
 const CITY_CHIPS = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Rawalpindi', 'Multan', 'Punjab', 'Sindh', 'KPK', 'Balochistan'];
 
-// Quick filters under the search pill: each opens Search pre-filtered.
-const QUICK: { key: string; label?: string; icon: IconName; params: Record<string, string> }[] = [
-  { key: 'all', icon: 'view-grid-outline', params: {} },
-  { key: 'ppsc', label: 'PPSC', icon: 'bank-outline', params: { source: 'ppsc' } },
-  { key: 'fpsc', label: 'FPSC', icon: 'bank-outline', params: { source: 'fpsc' } },
-  { key: 'army', label: 'Pak Army', icon: 'shield-star-outline', params: { source: 'army' } },
-  { key: 'navy', label: 'Navy', icon: 'anchor', params: { source: 'navy' } },
-  { key: 'banking', icon: 'cash-multiple', params: { cat: 'banking' } },
-  { key: 'education', icon: 'school-outline', params: { cat: 'education' } },
-  { key: 'it', icon: 'laptop', params: { cat: 'it' } },
-  { key: 'remote', icon: 'home-city-outline', params: { q: 'remote' } },
+// The Services grid: every main feature one tap from Home, so a first-time
+// user finds Results / Roll No / Prep etc. without hunting through tabs.
+type Service = { key: string; icon: IconName; color: string; href: string; params?: Record<string, string> };
+const SERVICES: Service[] = [
+  { key: 'cat.govt', icon: 'bank', color: '#34A853', href: '/search' },
+  { key: 'privateJobs', icon: 'briefcase', color: '#4285F4', href: '/private' },
+  { key: 'kind.result', icon: 'trophy', color: '#FBBC05', href: '/updates', params: { kind: 'result' } },
+  { key: 'kind.rollno', icon: 'card-account-details', color: '#EA4335', href: '/updates', params: { kind: 'rollno' } },
+  { key: 'testPrep', icon: 'school', color: '#7C3AED', href: '/prep' },
+  { key: 'cvBuilder', icon: 'file-account', color: '#0E7490', href: '/cv' },
+  { key: 'lastDateSoon', icon: 'timer-sand', color: '#F97316', href: '/search', params: { sort: 'deadline' } },
+  { key: 'postJob', icon: 'briefcase-plus', color: '#B45309', href: '/post-job' },
 ];
 
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
@@ -153,7 +154,7 @@ export default function Home() {
               )}
             </Tap>
           </View>
-          <Text style={[styles.greet, tf(), isUr && { textAlign: 'right' }]}>{t(greetingKey())} 👋</Text>
+          <Text style={[styles.greet, tf(), isUr && { textAlign: 'right' }]}>{t(greetingKey())} 👋  •  {live.length} {t('liveJobs').toLowerCase()}, {newCount} {t('newToday').toLowerCase()}</Text>
           <Text style={[styles.brand, tf('bold'), isUr && { textAlign: 'right' }]}>{t('tagline')}</Text>
         </Animated.View>
       </LinearGradient>
@@ -170,58 +171,27 @@ export default function Home() {
         </Tap>
       </Animated.View>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.quick}>
-        {QUICK.map((f, i) => (
-          <Animated.View key={f.key} entering={FadeInRight.delay(160 + i * 35).springify().damping(16)}>
-            <Tap onPress={() => router.push({ pathname: '/search', params: f.params })}
-              style={[styles.quickChip, i === 0
-                ? { backgroundColor: c.primary, borderColor: c.primary }
-                : { backgroundColor: c.card, borderColor: c.border }]}>
-              <Icon name={f.icon} size={15} color={i === 0 ? '#fff' : c.primary} />
-              <Text style={[styles.quickText, tf(i === 0 ? 'bold' : 'regular'), { color: i === 0 ? '#fff' : c.text }]}>
-                {f.label ?? (f.key === 'all' ? t('all') : f.key === 'remote' ? t('remote') : t(`cat.${f.key}` as any))}
-              </Text>
-            </Tap>
-          </Animated.View>
-        ))}
-      </ScrollView>
-
-      <View style={styles.stats}>
-        {([
-          ['briefcase-search-outline', live.length, t('liveJobs'), c.primary, undefined],
-          ['fire', newCount, t('newToday'), '#EF4444', 'newest'],
-          ['timer-sand', closing.length, t('closingSoon'), c.warn, 'deadline'],
-        ] as [IconName, number, string, string, string | undefined][]).map(([icon, n, label, col, sort], i) => (
-          <Animated.View key={label} entering={FadeIn.delay(150 + i * 90)} style={{ flex: 1 }}>
-            <Tap style={[styles.stat, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}
-              onPress={() => router.push({ pathname: '/search', params: sort ? { sort } : {} })}>
-              <View style={[styles.statIcon, { backgroundColor: col + '1A' }]}>
-                <Icon name={icon} size={18} color={col} />
-              </View>
-              <Text style={[styles.statNum, { color: c.text }]}>{n}</Text>
-              <Text style={[styles.statLabel, tf(), { color: c.sub }]} numberOfLines={1}>{label}</Text>
-            </Tap>
-          </Animated.View>
-        ))}
+      <View style={styles.servicesHead}>
+        <Text style={[styles.servicesTitle, tf('bold'), { color: c.text }]}>{t('services')}</Text>
+        <Text style={[styles.servicesHint, tf(), { color: c.sub }]}>{t('servicesHint')}</Text>
       </View>
-
-      <View style={styles.tools}>
-        {([
-          ['clipboard-text-clock-outline', t('updates'), '#0E7490', '/updates', updates.filter((u) => Date.now() - Date.parse(u.firstSeen) < 2 * 86_400_000).length],
-          ['school-outline', t('preparation'), '#7C3AED', '/prep', 0],
-          ['file-account-outline', t('cvBuilder'), '#1E3A8A', '/cv', 0],
-          ['briefcase-plus-outline', t('postJob'), '#B45309', '/post-job', 0],
-        ] as [IconName, string, string, string, number][]).map(([icon, label, col, href, badge], i) => (
-          <Animated.View key={href} entering={FadeIn.delay(200 + i * 70)} style={{ flex: 1 }}>
-            <Tap onPress={() => router.push(href as any)} style={[styles.tool, { backgroundColor: c.card, borderColor: c.border }]}>
-              <View style={[styles.toolIcon, { backgroundColor: col + '1A' }]}>
-                <Icon name={icon} size={22} color={col} />
-                {badge > 0 && <View style={[styles.toolBadge, { backgroundColor: c.danger }]}><Text style={styles.toolBadgeText}>{badge > 9 ? '9+' : badge}</Text></View>}
-              </View>
-              <Text style={[styles.toolText, tf(), { color: c.text }]} numberOfLines={2}>{label}</Text>
-            </Tap>
-          </Animated.View>
-        ))}
+      <View style={styles.services}>
+        {SERVICES.map((sv, i) => {
+          const badge = sv.params?.kind ? updates.filter((u) => u.kind === sv.params!.kind && Date.now() - Date.parse(u.firstSeen) < 2 * 86_400_000).length
+            : sv.params?.sort === 'deadline' ? closing.length : 0;
+          return (
+            <Animated.View key={sv.key} entering={ZoomIn.delay(120 + i * 45).springify().damping(15)} style={styles.serviceCell}>
+              <Tap onPress={() => router.push({ pathname: sv.href as any, params: sv.params ?? {} })}
+                style={[styles.service, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}>
+                <View style={[styles.serviceIcon, { backgroundColor: sv.color + '1F' }]}>
+                  <Icon name={sv.icon} size={26} color={sv.color} />
+                  {badge > 0 && <View style={[styles.toolBadge, { backgroundColor: c.danger }]}><Text style={styles.toolBadgeText}>{badge > 9 ? '9+' : badge}</Text></View>}
+                </View>
+                <Text style={[styles.serviceText, tf('bold'), { color: c.text }]} numberOfLines={2}>{t(sv.key as any)}</Text>
+              </Tap>
+            </Animated.View>
+          );
+        })}
       </View>
 
       <SectionTitle title={t('categories')} />
@@ -374,15 +344,18 @@ const styles = StyleSheet.create({
   searchText: { flex: 1, fontSize: 13.5 },
   filterBtn: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center' },
   deco: { position: 'absolute', right: -34, top: 10, transform: [{ rotate: '-15deg' }] },
-  quick: { paddingHorizontal: 16, gap: 8, paddingTop: 14, paddingBottom: 2 },
-  quickChip: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, height: 36, borderRadius: 18, borderWidth: 1 },
-  quickText: { fontSize: 12.5 },
+  servicesHead: { paddingHorizontal: 18, marginTop: 18 },
+  servicesTitle: { fontSize: 18 },
+  servicesHint: { fontSize: 12, marginTop: 1 },
+  services: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 12, marginTop: 8 },
+  serviceCell: { width: '25%', padding: 4 },
+  service: {
+    alignItems: 'center', gap: 7, paddingVertical: 12, paddingHorizontal: 2, borderRadius: 18, borderWidth: 1, minHeight: 104,
+    shadowOpacity: 0.06, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 2,
+  },
+  serviceIcon: { width: 50, height: 50, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
+  serviceText: { fontSize: 11.5, lineHeight: 15, textAlign: 'center' },
   banner: { position: 'absolute', left: 0, right: 0 },
-  stats: { flexDirection: 'row', gap: 10, paddingHorizontal: 16, marginTop: 14 },
-  stat: { borderRadius: 18, padding: 12, borderWidth: 1, shadowOpacity: 0.1, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 4 },
-  statIcon: { width: 32, height: 32, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
-  statNum: { fontFamily: font.bold, fontSize: 22, marginTop: 6 },
-  statLabel: { fontSize: 11.5 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 10 },
   cell: { width: '33.33%', padding: 4 },
   cellInner: { alignItems: 'center', gap: 6, paddingVertical: 6 },
@@ -391,12 +364,8 @@ const styles = StyleSheet.create({
   catCountText: { fontFamily: font.bold, fontSize: 10.5 },
   catLabel: { fontSize: 11.5, textAlign: 'center' },
   hList: { paddingHorizontal: 16, gap: 10 },
-  tools: { flexDirection: 'row', gap: 8, paddingHorizontal: 16, marginTop: 14 },
-  tool: { alignItems: 'center', gap: 6, paddingVertical: 12, paddingHorizontal: 4, borderRadius: 16, borderWidth: 1, minHeight: 92 },
-  toolIcon: { width: 42, height: 42, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   toolBadge: { position: 'absolute', top: -4, right: -6, minWidth: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
   toolBadgeText: { color: '#fff', fontFamily: font.bold, fontSize: 9.5 },
-  toolText: { fontSize: 11, textAlign: 'center' },
   srcCount: { fontFamily: font.bold, fontSize: 11, paddingHorizontal: 7, paddingVertical: 1, borderRadius: 8, overflow: 'hidden' },
   cityChip: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, height: 40, borderRadius: 20, borderWidth: 1 },
   cityText: { fontFamily: font.medium, fontSize: 13 },

@@ -1,6 +1,6 @@
-import { router, useFocusEffect } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -33,7 +33,10 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
   const { t, tf } = useI18n();
   const insets = useSafeAreaInsets();
   const updates = useApp((s) => s.updates);
-  const [kind, setKind] = useState<UpdateKind | null>(null);
+  // home's Services grid opens this pre-filtered (?kind=result / rollno)
+  const params = useLocalSearchParams<{ kind?: UpdateKind }>();
+  const [kind, setKind] = useState<UpdateKind | null>(params.kind ?? null);
+  useEffect(() => { if (params.kind) setKind(params.kind); }, [params.kind]);
   const [src, setSrc] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const tabSpace = useTabBarSpace();

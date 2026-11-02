@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -7,7 +8,7 @@ import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 import type { Job } from '@/lib/types';
-import { BookmarkButton, CategoryPill, DeadlineBadge, NewBadge, OrgAvatar, Tag, Tap, useUrgencyColor } from './ui';
+import { BookmarkButton, CategoryPill, DeadlineBadge, Icon, NewBadge, OrgAvatar, Tag, Tap, useUrgencyColor } from './ui';
 
 function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
   const c = useTheme();
@@ -16,6 +17,9 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
   const toggleSave = useApp((s) => s.toggleSave);
   const barColor = useUrgencyColor(job);
   const progress = windowProgress(job);
+  // the official newspaper / website advert, when the source publishes one
+  const advert = job.advertImage && /\.(jpe?g|png|webp)($|\?)/i.test(job.advertImage) ? encodeURI(decodeURI(job.advertImage)) : null;
+  const advertPdf = !!job.advertImage && !advert;
   const place = job.cities.includes('All Pakistan') ? t('allPakistan') : job.cities.slice(0, 2).join(', ');
 
   return (
@@ -51,7 +55,18 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
           {!!job.salary && <Tag icon="cash" label={job.salary} tint={c.ok} />}
           {!!job.grade && <Tag icon="star-four-points-outline" label={job.grade} />}
           {!!job.vacancies && <Tag icon="account-multiple-outline" label={`${job.vacancies}`} />}
+          {advertPdf && <Tag icon="newspaper-variant-outline" label={t('viewAdvert')} tint={c.primary} />}
         </View>
+
+        {advert && (
+          <View style={[styles.advert, { backgroundColor: c.cardAlt }]}>
+            <Image source={{ uri: advert }} style={StyleSheet.absoluteFill} contentFit="cover" contentPosition="top" transition={250} />
+            <View style={styles.advertTag}>
+              <Icon name="newspaper-variant-outline" size={13} color="#fff" />
+              <Text style={styles.advertTagText}>{t('viewAdvert')}</Text>
+            </View>
+          </View>
+        )}
 
         <View style={[styles.divider, { backgroundColor: c.border }]} />
         <View style={styles.bottom}>
@@ -89,6 +104,9 @@ const styles = StyleSheet.create({
   featuredCard: { borderWidth: 1.5 },
   ribbon: { position: 'absolute', top: 0, right: 52, paddingHorizontal: 8, paddingVertical: 2, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
   ribbonText: { fontFamily: font.bold, fontSize: 9.5, color: '#1A1300' },
+  advert: { height: 140, borderRadius: 12, marginTop: 12, overflow: 'hidden' },
+  advertTag: { position: 'absolute', left: 8, bottom: 8, flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: 'rgba(0,0,0,0.6)', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 10 },
+  advertTagText: { color: '#fff', fontFamily: font.semi, fontSize: 11 },
   track: { height: 4, borderRadius: 2, marginTop: 10, overflow: 'hidden' },
   fill: { height: 4, borderRadius: 2 },
 });

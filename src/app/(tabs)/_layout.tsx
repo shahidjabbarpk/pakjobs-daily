@@ -15,7 +15,7 @@ const TABS: { name: string; icon: IconName; active: IconName; label: 'home' | 'p
   { name: 'index', icon: 'home-variant-outline', active: 'home-variant', label: 'home' },
   { name: 'private', icon: 'briefcase-outline', active: 'briefcase', label: 'privateTab' },
   { name: 'saved', icon: 'heart-outline', active: 'heart', label: 'saved' },
-  { name: 'alerts', icon: 'bell-outline', active: 'bell', label: 'alertsTab' },
+  { name: 'alerts', icon: 'clipboard-text-outline', active: 'clipboard-text', label: 'alertsTab' },
   { name: 'settings', icon: 'account-circle-outline', active: 'account-circle', label: 'profileTab' },
 ];
 // reachable from Home's search pill and filter chips, but not a tab of its own
