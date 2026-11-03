@@ -7,7 +7,6 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
 import { CityPicker } from '@/components/CityPicker';
-import { Dropdown } from '@/components/Dropdown';
 import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
@@ -16,7 +15,6 @@ import { currentUid, ensureUser, signOutUser } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { useI18n } from '@/lib/i18n';
 import { notifyNewJobs, setupNotifications } from '@/lib/notify';
-import { DISTRICT_NAMES } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 
@@ -32,7 +30,6 @@ const SOURCES: [string, string, IconName][] = [
   ['Join Pak Navy', 'https://www.joinpaknavy.gov.pk/', 'anchor'],
   ['Join PAF', 'https://www.joinpaf.gov.pk/', 'airplane'],
 ];
-const ALERT_CITIES = [...new Set(['Punjab', 'Sindh', 'KPK', 'Balochistan', 'Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', ...DISTRICT_NAMES])];
 
 function ago(iso: string | null, t: (k: any) => string) {
   if (!iso) return '—';
@@ -52,7 +49,6 @@ export default function Settings() {
   const s = useApp();
   const [checking, setChecking] = useState(false);
   const [result, setResult] = useState<string | null>(null);
-  const [editCity, setEditCity] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
   const [uid, setUid] = useState<string | null>(currentUid());
   const [copied, setCopied] = useState(false);
@@ -110,16 +106,7 @@ export default function Settings() {
 
       <Card>
         <Label icon="map-marker-radius" text={t('pickCity')} />
-        <Tap onPress={() => setEditCity(!editCity)} style={[styles.row, { backgroundColor: c.cardAlt }]}>
-          <Icon name="map-marker" size={18} color={c.primary} />
-          <Text style={[styles.rowText, { color: c.text }]}>{s.homeCity ?? t('allPakistan')}</Text>
-          <Icon name={editCity ? 'chevron-up' : 'chevron-down'} size={20} color={c.faint} />
-        </Tap>
-        {editCity && (
-          <Animated.View entering={FadeIn} style={{ marginTop: 12 }}>
-            <CityPicker value={s.homeCity} onChange={(city) => { s.set({ homeCity: city, alertCity: city }); setEditCity(false); }} />
-          </Animated.View>
-        )}
+        <CityPicker value={s.homeCity} onChange={(city) => s.set({ homeCity: city, alertCity: city })} />
       </Card>
 
       <Card>
@@ -200,11 +187,7 @@ export default function Settings() {
               ))}
             </View>
             <Text style={[styles.sub, tf('bold'), { color: c.sub }]}>{t('city')}</Text>
-            {/* any district (the home city picked in onboarding is often not one of the big ones) */}
-            <View style={styles.wrap}>
-              <Dropdown label={t('allPakistan')} icon="map-marker-outline" value={s.alertCity} searchable
-                options={ALERT_CITIES.map((k) => ({ value: k, label: k }))} onChange={(v) => s.set({ alertCity: v })} />
-            </View>
+            <CityPicker value={s.alertCity} onChange={(v) => s.set({ alertCity: v })} />
           </Animated.View>
         )}
       </Card>

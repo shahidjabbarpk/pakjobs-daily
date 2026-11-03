@@ -6,7 +6,7 @@ import Animated, { FadeInDown, ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon, type IconName, SectionTitle, Tap, useStatusBar } from '@/components/ui';
 import { PAST_PAPERS, SUBJECTS } from '@/data/mcqs';
-import { BottomBanner, showRewarded } from '@/lib/ads';
+import { BottomBanner, withAd } from '@/lib/ads';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
@@ -49,7 +49,7 @@ export default function Prep() {
         <SectionTitle title={`📄 ${t('pastPapers')}`} />
         {PAST_PAPERS.map((p, i) => (
           <Animated.View key={p.url} entering={FadeInDown.delay(200 + i * 40)}>
-            <Tap onPress={() => showRewarded(() => WebBrowser.openBrowserAsync(p.url))}
+            <Tap onPress={() => withAd(() => WebBrowser.openBrowserAsync(p.url))}
               style={[styles.paper, { backgroundColor: c.card, borderColor: c.border }]}>
               <View style={[styles.paperIcon, { backgroundColor: c.primarySoft }]}>
                 <Icon name="file-document-outline" size={20} color={c.primary} />

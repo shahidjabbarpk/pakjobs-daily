@@ -10,13 +10,11 @@ import mobileAds, {
   NativeAsset,
   NativeAssetType,
   NativeMediaView,
-  RewardedAd,
-  RewardedAdEventType,
 } from 'react-native-google-mobile-ads';
 import { Image } from 'expo-image';
 import { Platform } from 'react-native';
 import { TestIds } from 'react-native-google-mobile-ads';
-import { INTERSTITIAL_GAP_MS, PROD_AD_UNITS } from './config';
+import { FULLSCREEN_GAP_MS, PROD_AD_UNITS } from './config';
 import { useI18n } from './i18n';
 import { useApp } from './store';
 import { font, useTheme } from './theme';
@@ -27,85 +25,73 @@ const AD_UNITS = {
   banner: useTest ? TestIds.ADAPTIVE_BANNER : prod.banner,
   native: useTest ? TestIds.NATIVE : prod.native,
   interstitial: useTest ? TestIds.INTERSTITIAL : prod.interstitial,
-  rewarded: useTest ? TestIds.REWARDED : prod.rewarded,
 };
 
 let started = false;
 export function startAds() {
   if (started) return;
   started = true;
-  mobileAds().initialize().then(() => { loadInterstitial(); loadRewarded(); }).catch(() => {});
+  mobileAds().initialize().then(() => loadInterstitial()).catch(() => {});
 }
 
-// ---------------------------------------------------------------- interstitial
+// ---------------------------------------------------------------- full-screen
+// One full-screen ad at most every FULLSCREEN_GAP_MS across the whole app (job open, advert,
+// result, quiz...), none in the first minute and a half, so a user never sees two back to back.
+// The interstitial unit is display-only in AdMob (no 30-60 s videos).
 
+const LAUNCH_GRACE_MS = 90 * 1000;
+const launchedAt = Date.now();
 let interstitial: InterstitialAd | null = null;
 let interstitialReady = false;
+let afterAd: (() => void) | null = null;
 
 function loadInterstitial() {
   interstitial = InterstitialAd.createForAdRequest(AD_UNITS.interstitial);
   interstitialReady = false;
   interstitial.addAdEventListener(AdEventType.LOADED, () => { interstitialReady = true; });
-  interstitial.addAdEventListener(AdEventType.CLOSED, () => loadInterstitial());
+  interstitial.addAdEventListener(AdEventType.CLOSED, () => {
+    // whatever the user tapped opens once the ad is closed
+    afterAd?.();
+    afterAd = null;
+    loadInterstitial();
+  });
   interstitial.addAdEventListener(AdEventType.ERROR, () => {
     interstitialReady = false;
+    // an ad that fails mid-show must not swallow the advert/result the user tapped
+    afterAd?.();
+    afterAd = null;
     setTimeout(loadInterstitial, 60_000);
   });
   interstitial.load();
 }
 
-/** Called when a job detail opens. Shows at most one interstitial every 3 minutes. */
-export function maybeShowInterstitial() {
-  const { lastInterstitial, set } = useApp.getState();
-  if (!interstitial || !interstitialReady) return;
-  if (Date.now() - lastInterstitial < INTERSTITIAL_GAP_MS) return;
-  set({ lastInterstitial: Date.now() });
+function canShowFullScreen(): boolean {
+  const now = Date.now();
+  return !!interstitial && interstitialReady && now - launchedAt > LAUNCH_GRACE_MS
+    && now - useApp.getState().lastInterstitial > FULLSCREEN_GAP_MS;
+}
+
+function showFullScreen(then?: () => void): boolean {
+  if (!canShowFullScreen()) return false;
+  useApp.getState().set({ lastInterstitial: Date.now() });
   interstitialReady = false;
-  interstitial.show().catch(() => loadInterstitial());
+  afterAd = then ?? null;
+  interstitial!.show().catch(() => {
+    afterAd = null;
+    then?.();
+    loadInterstitial();
+  });
+  return true;
 }
 
-// ---------------------------------------------------------------- rewarded
-
-const REWARDED_GAP_MS = 2 * 60 * 1000;
-let rewarded: RewardedAd | null = null;
-let rewardedReady = false;
-let lastRewarded = 0;
-let afterRewarded: (() => void) | null = null;
-
-function loadRewarded() {
-  rewarded = RewardedAd.createForAdRequest(AD_UNITS.rewarded);
-  rewardedReady = false;
-  rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => { rewardedReady = true; });
-  rewarded.addAdEventListener(AdEventType.CLOSED, () => {
-    // the content opens whether or not the video was watched to the end
-    afterRewarded?.();
-    afterRewarded = null;
-    loadRewarded();
-  });
-  rewarded.addAdEventListener(AdEventType.ERROR, () => {
-    rewardedReady = false;
-    // an ad that fails mid-show must not swallow the advert/result the user tapped
-    afterRewarded?.();
-    afterRewarded = null;
-    setTimeout(loadRewarded, 60_000);
-  });
-  rewarded.load();
+/** Called when a job detail / quiz result / CV opens; skipped while the shared cooldown runs. */
+export function maybeShowInterstitial() {
+  showFullScreen();
 }
 
-/** Shows a rewarded video before opening an advert/PDF; opens straight away if none is ready. */
-export function showRewarded(then: () => void) {
-  if (!rewarded || !rewardedReady || Date.now() - lastRewarded < REWARDED_GAP_MS) {
-    then();
-    return;
-  }
-  lastRewarded = Date.now();
-  rewardedReady = false;
-  afterRewarded = then;
-  rewarded.show().catch(() => {
-    afterRewarded = null;
-    then();
-    loadRewarded();
-  });
+/** Opens an advert/result after an ad when one is due; otherwise opens it straight away. */
+export function withAd(then: () => void) {
+  if (!showFullScreen(then)) then();
 }
 
 // ---------------------------------------------------------------- banner

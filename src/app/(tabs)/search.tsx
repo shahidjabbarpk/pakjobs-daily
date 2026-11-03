@@ -4,23 +4,21 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
+import { CityPicker } from '@/components/CityPicker';
 import { Dropdown } from '@/components/Dropdown';
 import { Chip, EmptyState, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
-import { sortJobs, urgency } from '@/lib/format';
+import { isEngineeringJob, sortJobs, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
-import { DISTRICT_NAMES, jobMatchesPlace, SOURCE_CHIPS } from '@/lib/places';
+import { jobMatchesPlace, SOURCE_CHIPS } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
 import { CATEGORY_META, font, useTheme } from '@/lib/theme';
 import type { Category, Job } from '@/lib/types';
 
 const QUALS = ['Middle', 'Matric', 'Intermediate', 'DAE', 'Bachelor', 'Masters', 'MPhil', 'PhD'];
-const CITIES = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Rawalpindi', 'Multan', 'Faisalabad', 'Hyderabad',
-  'Gwadar', 'Turbat', 'Punjab', 'Sindh', 'KPK', 'Balochistan', 'AJK', 'GB'];
-// provinces first, then the big cities, then every other district (searchable in the sheet)
-const CITY_OPTIONS = [...new Set([...CITIES, ...DISTRICT_NAMES])];
 const GOVT_ALL = '__govt';
+const ENG = '__eng';
 const RANK = Object.fromEntries(QUALS.map((q, i) => [q, i]));
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
 
@@ -30,7 +28,7 @@ export default function Search() {
   const { t, tf, qual, isUr } = useI18n();
   const insets = useSafeAreaInsets();
   const tabSpace = useTabBarSpace();
-  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string; q?: string; govt?: string; n?: string }>();
+  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string; q?: string; govt?: string; eng?: string; n?: string }>();
   const jobs = useApp((s) => s.jobs);
 
   const [q, setQ] = useState('');
@@ -41,6 +39,7 @@ export default function Search() {
   const [sort, setSort] = useState<'newest' | 'deadline'>('newest');
   const [showClosed, setShowClosed] = useState(false);
   const [govtOnly, setGovtOnly] = useState(false);
+  const [engOnly, setEngOnly] = useState(false);
 
   // deep links from Home (services, category tiles, city chips). Search is a tab that stays mounted,
   // so each visit replaces the previous visit's filters instead of piling onto them; `n` makes a
@@ -53,14 +52,16 @@ export default function Search() {
     setSource(params.source || null);
     setQ(params.q || '');
     setGovtOnly(params.govt === '1');
+    setEngOnly(params.eng === '1');
     setQualF(null);
-  }, [params.n, params.cat, params.city, params.sort, params.source, params.q, params.govt]);
+  }, [params.n, params.cat, params.city, params.sort, params.source, params.q, params.govt, params.eng]);
 
   const results = useMemo(() => {
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
     const list = jobs.filter((j) => {
       if (!showClosed && urgency(j) === 'closed') return false;
       if (govtOnly && (j.source === 'user' || j.category === 'private')) return false;
+      if (engOnly && !isEngineeringJob(j)) return false;
       if (cat && j.category !== cat) return false;
       if (source && j.source !== source) return false;
       // "Matric" shows jobs whose minimum requirement is Matric or lower
@@ -73,7 +74,7 @@ export default function Search() {
       return true;
     });
     return sortJobs(list, sort);
-  }, [jobs, q, cat, qualF, city, source, sort, showClosed, govtOnly]);
+  }, [jobs, q, cat, qualF, city, source, sort, showClosed, govtOnly, engOnly]);
 
   const rows = useMemo<Row[]>(() => {
     const out: Row[] = [];
@@ -84,8 +85,8 @@ export default function Search() {
     return out;
   }, [results]);
 
-  const active = [cat, qualF, city, source, q, govtOnly].filter(Boolean).length;
-  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); setSource(null); setGovtOnly(false); };
+  const active = [cat, qualF, city, source, q, govtOnly, engOnly].filter(Boolean).length;
+  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); setSource(null); setGovtOnly(false); setEngOnly(false); };
 
   const filters = (
     <View>
@@ -108,16 +109,15 @@ export default function Search() {
 
       {/* one line of dropdowns instead of four rows of chips */}
       <View style={styles.dropdowns}>
-        <Dropdown label={t('category')} icon="shape-outline" value={govtOnly ? GOVT_ALL : cat}
-          options={[{ value: GOVT_ALL, label: t('allGovt'), icon: 'bank-outline' },
+        <Dropdown label={t('category')} icon="shape-outline" value={engOnly ? ENG : govtOnly ? GOVT_ALL : cat}
+          options={[{ value: GOVT_ALL, label: t('allGovt'), icon: 'bank-outline' }, { value: ENG, label: t('engineers'), icon: 'hard-hat' },
             ...ALL_CATEGORIES.map((k) => ({ value: k, label: t(`cat.${k}`), icon: CATEGORY_META[k].icon as IconName }))]}
-          onChange={(v) => { setGovtOnly(v === GOVT_ALL); setCat(v && v !== GOVT_ALL ? (v as Category) : null); }} />
+          onChange={(v) => { setGovtOnly(v === GOVT_ALL); setEngOnly(v === ENG); setCat(v && v !== GOVT_ALL && v !== ENG ? (v as Category) : null); }} />
         <Dropdown label={t('commissionShort')} icon="bank-outline" value={source}
           options={SOURCE_CHIPS.map(([k, label]) => ({ value: k, label }))} onChange={setSource} />
         <Dropdown label={t('qualification')} icon="school-outline" value={qualF}
           options={QUALS.map((k) => ({ value: k, label: qual(k) }))} onChange={setQualF} />
-        <Dropdown label={t('city')} icon="map-marker-outline" value={city} searchable
-          options={CITY_OPTIONS.map((k) => ({ value: k, label: k }))} onChange={setCity} />
+        <CityPicker inline value={city} onChange={setCity} />
       </View>
 
       <View style={styles.summary}>

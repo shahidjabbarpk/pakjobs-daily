@@ -17,7 +17,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookmarkButton, DeadlineBadge, EmptyState, Icon, type IconName, NewBadge, OrgAvatar, Tap, useUrgencyColor, useStatusBar } from '@/components/ui';
 import { Comments, ReportSheet } from '@/components/community';
 import { ImageViewer } from '@/components/ImageViewer';
-import { maybeShowInterstitial, showRewarded } from '@/lib/ads';
+import { maybeShowInterstitial, withAd } from '@/lib/ads';
 import { deadlineMs, isNew, prettyDate, safeUrl, toIntl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { cancelReminder, scheduleDeadlineReminder } from '@/lib/notify';
@@ -68,7 +68,7 @@ function Detail({ job }: { job: Job }) {
   const [note, setNote] = useState<string | null>(null);
   const meta = CATEGORY_META[job.category];
   const open = (url?: string) => url && WebBrowser.openBrowserAsync(safeUrl(url), { toolbarColor: c.heroA });
-  const openAdvert = (url?: string) => showRewarded(() => open(url));
+  const openAdvert = (url?: string) => withAd(() => open(url));
   const isUser = job.source === 'user';
   const [reporting, setReporting] = useState(false);
   const [viewer, setViewer] = useState(false);
@@ -159,7 +159,7 @@ function Detail({ job }: { job: Job }) {
           <Animated.View entering={FadeInUp.delay(220)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>{t('viewAdvert')}</Text>
             {isImage && (
-              <Tap onPress={() => showRewarded(() => setViewer(true))} haptic={false}>
+              <Tap onPress={() => withAd(() => setViewer(true))} haptic={false}>
                 <Image source={{ uri: safeUrl(job.advertImage!) }} style={styles.advert} contentFit="cover" transition={300} />
                 <View style={styles.zoom}><Icon name="magnify-plus-outline" size={18} color="#fff" /></View>
               </Tap>

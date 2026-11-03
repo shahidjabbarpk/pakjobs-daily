@@ -90,3 +90,11 @@ export function safeUrl(url: string): string {
     return url.replace(/ /g, '%20');
   }
 }
+
+// Title/qualification only: descriptions mention "engineering" departments for peons and drivers too.
+const ENGINEERING = /engineer|engineering|\bB\.?\s?E\b|\bDAE\b|\bSDO\b|technician|draftsman|surveyor|electrician|mechanic|\bcivil\b|electrical|mechanical|electronics|software|developer|programmer|network admin/i;
+
+/** Jobs for engineers, sub-engineers (DAE) and technicians - the Engineers service on Home. */
+export function isEngineeringJob(job: Job): boolean {
+  return ENGINEERING.test(`${job.title} | ${job.qualification ?? ''}`);
+}

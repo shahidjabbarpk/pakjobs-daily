@@ -22,7 +22,7 @@ import {
 import { BottomBanner, NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { refreshJobs } from '@/lib/feed';
-import { isNew, sortJobs, urgency } from '@/lib/format';
+import { isEngineeringJob, isNew, sortJobs, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { jobInCity, SOURCE_CHIPS } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
@@ -91,6 +91,8 @@ export default function Home() {
     for (const j of live) m[j.category] = (m[j.category] ?? 0) + 1;
     return m;
   }, [live]);
+
+  const engCount = useMemo(() => live.filter(isEngineeringJob).length, [live]);
 
   const rows = useMemo<Row[]>(() => {
     const out: Row[] = [];
@@ -200,20 +202,23 @@ export default function Home() {
 
       <SectionTitle title={t('categories')} />
       <View style={styles.grid}>
-        {ALL_CATEGORIES.map((cat, i) => {
-          const meta = CATEGORY_META[cat];
+        {/* Private Jobs sits in the Services grid above; its slot here is Engineers (not a feed category) */}
+        {[...ALL_CATEGORIES.filter((k) => k !== 'private').map((cat) => ({ key: cat, label: t(`cat.${cat}`), ...CATEGORY_META[cat], count: counts[cat], params: { cat } as Record<string, string> })),
+          { key: 'engineers', label: t('engineers'), icon: 'hard-hat', colors: ['#F59E0B', '#C2410C'] as const, count: engCount, params: { eng: '1' } }]
+          .map((meta, i) => {
+          const cat = meta.key;
           return (
             <Animated.View key={cat} entering={ZoomIn.delay(120 + i * 40).springify().damping(14)} style={styles.cell}>
-              <Tap style={styles.cellInner} onPress={() => openSearch({ cat })}>
+              <Tap style={styles.cellInner} onPress={() => openSearch(meta.params)}>
                 <LinearGradient colors={meta.colors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.catIcon}>
                   <Icon name={meta.icon as IconName} size={24} color="#fff" />
-                  {!!counts[cat] && (
+                  {!!meta.count && (
                     <View style={[styles.catCount, { backgroundColor: c.card }]}>
-                      <Text style={[styles.catCountText, { color: meta.colors[0] }]}>{counts[cat]}</Text>
+                      <Text style={[styles.catCountText, { color: meta.colors[0] }]}>{meta.count}</Text>
                     </View>
                   )}
                 </LinearGradient>
-                <Text style={[styles.catLabel, tf(), { color: c.text }]} numberOfLines={2}>{t(`cat.${cat}`)}</Text>
+                <Text style={[styles.catLabel, tf(), { color: c.text }]} numberOfLines={2}>{meta.label}</Text>
               </Tap>
             </Animated.View>
           );

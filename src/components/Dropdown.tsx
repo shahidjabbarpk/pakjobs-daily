@@ -35,10 +35,14 @@ export function Dropdown({ label, icon, value, options, onChange, searchable }: 
     return s ? all.filter((o) => o.value && o.label.toLowerCase().includes(s)) : all;
   }, [options, q, t]);
 
-  const pick = (v: string) => {
-    onChange(v || null);
+  // the search text is cleared however the sheet closes, so it opens fresh next time
+  const close = () => {
     setOpen(false);
     setQ('');
+  };
+  const pick = (v: string) => {
+    onChange(v || null);
+    close();
   };
 
   return (
@@ -52,16 +56,16 @@ export function Dropdown({ label, icon, value, options, onChange, searchable }: 
         <Icon name="chevron-down" size={16} color={active ? '#fff' : c.faint} />
       </Tap>
 
-      <Modal visible={open} transparent animationType="none" statusBarTranslucent onRequestClose={() => setOpen(false)}>
+      <Modal visible={open} transparent animationType="none" statusBarTranslucent onRequestClose={close}>
         <Animated.View entering={FadeIn.duration(150)} style={styles.backdrop}>
-          <Pressable style={StyleSheet.absoluteFill} onPress={() => setOpen(false)} />
+          <Pressable style={StyleSheet.absoluteFill} onPress={close} />
           <Animated.View entering={SlideInDown.springify().damping(18)}
             style={[styles.sheet, { backgroundColor: c.bg, paddingBottom: insets.bottom + 12 }]}>
             <View style={[styles.grip, { backgroundColor: c.border }]} />
             <View style={styles.head}>
               <Icon name={icon} size={20} color={c.primary} />
               <Text style={[styles.title, tf('bold'), { color: c.text }]}>{label}</Text>
-              <Tap onPress={() => setOpen(false)} style={[styles.close, { backgroundColor: c.cardAlt }]}>
+              <Tap onPress={close} style={[styles.close, { backgroundColor: c.cardAlt }]}>
                 <Icon name="close" size={18} color={c.text} />
               </Tap>
             </View>

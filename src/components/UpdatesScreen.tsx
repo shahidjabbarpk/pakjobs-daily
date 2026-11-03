@@ -8,7 +8,7 @@ import { Dropdown } from './Dropdown';
 import {
   BrandSpinner, brandRefreshControl, EmptyState, Icon, type IconName, NewBadge, Tap, useStatusBar, useTabBarSpace,
 } from '@/components/ui';
-import { NativeAdCard, showRewarded } from '@/lib/ads';
+import { NativeAdCard, withAd } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { prettyDate, safeUrl } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
@@ -68,7 +68,7 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
   }, []);
 
   // roll-no slips and results open behind a rewarded video (skipped if none is ready)
-  const open = (u: Update) => showRewarded(() => WebBrowser.openBrowserAsync(safeUrl(u.url)));
+  const open = (u: Update) => withAd(() => WebBrowser.openBrowserAsync(safeUrl(u.url)));
 
   return (
     <View style={{ flex: 1, backgroundColor: c.bg }}>

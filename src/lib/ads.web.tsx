@@ -1,7 +1,7 @@
 // Web preview: AdMob is native-only, so ads render as nothing.
 export function startAds() {}
 export function maybeShowInterstitial() {}
-export function showRewarded(then: () => void) {
+export function withAd(then: () => void) {
   then();
 }
 export function BottomBanner() {

@@ -40,8 +40,9 @@ export function jobInArea(job: Job, place: string | null): boolean {
 
 /** Matches the user's own district only (for the "Jobs in your city" strip). */
 export function jobInCity(job: Job, place: string | null): boolean {
-  if (!place) return false;
-  return job.cities.some((c) => c.toLowerCase() === place.toLowerCase());
+  if (!place || job.cities.includes('All Pakistan')) return false;
+  // a whole province (picked with no district) covers its districts too
+  return jobMatchesPlace(job, place);
 }
 
 /** Source filter chips: [job.source, label]. */
