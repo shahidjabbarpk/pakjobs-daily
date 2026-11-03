@@ -16,9 +16,15 @@ export const BACKGROUND_INTERVAL_MIN = 30; // Android/iOS treat this as a minimu
 export const INTERSTITIAL_GAP_MS = 2 * 60 * 1000;
 export const NATIVE_AD_EVERY = 3;
 
-// Replace with your real AdMob unit IDs before publishing; empty = Google test ads.
+// AdMob app "PakJobs Daily" (ca-app-pub-2214888899948620~1749464777, shahidjabbarpk@gmail.com).
+// Debug builds always use Google's test ads; empty = test ads too.
 export const PROD_AD_UNITS = {
-  android: { banner: '', native: '', interstitial: '', rewarded: '' },
+  android: {
+    banner: 'ca-app-pub-2214888899948620/5497138097',
+    native: 'ca-app-pub-2214888899948620/2291943142',
+    interstitial: 'ca-app-pub-2214888899948620/4184056427',
+    rewarded: 'ca-app-pub-2214888899948620/5109678177',
+  },
   ios: { banner: '', native: '', interstitial: '', rewarded: '' },
 };
 
