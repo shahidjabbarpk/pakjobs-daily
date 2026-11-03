@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-03T14:02:56+05:00",
+ "updatedAt": "2026-11-03T15:06:02+05:00",
  "updates": [
+  {
+   "id": "19a73f605f57e009",
+   "source": "spsc",
+   "kind": "schedule",
+   "title": "Sindh Public Service Commission Introduces Electronic Attendance System to Curb Impersonation in Examinations.",
+   "url": "https://spsc.gov.pk/recent-announcements/Nov2026/PR_E-Attendance.pdf",
+   "date": null,
+   "firstSeen": "2026-11-03T15:06:02+05:00"
+  },
   {
    "id": "043f5b80e0ea69fb",
    "source": "bpsc",
@@ -151,15 +160,6 @@
    "kind": "rollno",
    "title": "The Sindh Public Service Commission hereby informs all candidates appearing in the upcoming Departmental Examinations, commencing from 5th October, 2026, that their Admission Slips are now available online.",
    "url": "https://spsc.gov.pk/recent-announcements/Oct2026/PR_Admissionslip_Departmental.jpg",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "e443a83d070686aa",
-   "source": "spsc",
-   "kind": "schedule",
-   "title": "Withdrawl of Posts and Cancellation of Descriptive Examination of Various Posts under Land Administration & Revenue Management Information System (LARMIS) Board of Revenue.",
-   "url": "https://spsc.gov.pk/recent-announcements/Sep2026/withdrawl_LARMIS_posts.pdf",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
