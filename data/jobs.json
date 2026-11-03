@@ -1,6 +1,29 @@
 {
- "updatedAt": "2026-11-03T11:04:43+05:00",
+ "updatedAt": "2026-11-03T12:26:55+05:00",
  "jobs": [
+  {
+   "id": "48bf86d50cd21218",
+   "source": "njp",
+   "title": "Upper Division Clerk (BPS-13)",
+   "organization": "Directorate General of Customs Valuation Karachi",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10471",
+   "description": "Upper Division Clerk (BS-13)\nQualification / Experience:\n(i) Intermediate.\n(ii) Successful completion of a 03 weeks Basic IT Training Course (including MS Office) conducted by the NITB shall be mandatory before expiry of the probation period; otherwise, the services of the appointee(s) shall be terminated without any notice.\nAge Limit (including 5 years general relaxation): Minimum 18 years; Maximum 25+5=30 years.",
+   "grade": "BPS-13",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-03",
+   "lastDate": "2026-11-15",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10471",
+   "firstSeen": "2026-11-03T12:26:55+05:00"
+  },
   {
    "id": "e1b50264a20d437e",
    "source": "njp",
