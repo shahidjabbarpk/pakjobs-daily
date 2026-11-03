@@ -33,10 +33,9 @@ export const PROVINCE_NAMES: Record<Province, string> = {
  */
 export function jobInArea(job: Job, place: string | null): boolean {
   if (!place) return true;
-  if (!job.cities.length || job.cities.includes('All Pakistan')) return true;
-  const prov = DISTRICTS[place];
-  const want = new Set([place.toLowerCase(), prov?.toLowerCase(), prov === 'ICT' ? 'islamabad' : undefined].filter(Boolean) as string[]);
-  return job.cities.some((c) => want.has(c.toLowerCase()));
+  if (!job.cities.length) return true;
+  // same rules as the search filter, so a "Punjab" alert also covers jobs tagged Lahore
+  return jobMatchesPlace(job, place);
 }
 
 /** Matches the user's own district only (for the "Jobs in your city" strip). */

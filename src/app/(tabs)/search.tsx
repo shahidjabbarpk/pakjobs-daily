@@ -1,22 +1,26 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
-import { Chip, EmptyState, Icon, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
+import { Dropdown } from '@/components/Dropdown';
+import { Chip, EmptyState, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { sortJobs, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
-import { jobMatchesPlace, SOURCE_CHIPS } from '@/lib/places';
+import { DISTRICT_NAMES, jobMatchesPlace, SOURCE_CHIPS } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
-import { font, useTheme } from '@/lib/theme';
+import { CATEGORY_META, font, useTheme } from '@/lib/theme';
 import type { Category, Job } from '@/lib/types';
 
 const QUALS = ['Middle', 'Matric', 'Intermediate', 'DAE', 'Bachelor', 'Masters', 'MPhil', 'PhD'];
 const CITIES = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Rawalpindi', 'Multan', 'Faisalabad', 'Hyderabad',
   'Gwadar', 'Turbat', 'Punjab', 'Sindh', 'KPK', 'Balochistan', 'AJK', 'GB'];
+// provinces first, then the big cities, then every other district (searchable in the sheet)
+const CITY_OPTIONS = [...new Set([...CITIES, ...DISTRICT_NAMES])];
+const GOVT_ALL = '__govt';
 const RANK = Object.fromEntries(QUALS.map((q, i) => [q, i]));
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
 
@@ -102,23 +106,19 @@ export default function Search() {
         </View>
       </View>
 
-      <FilterRow label={t('category')}>
-        <Chip label={t('all')} active={!cat && !govtOnly} onPress={() => { setCat(null); setGovtOnly(false); }} />
-        <Chip icon="bank-outline" label={t('allGovt')} active={govtOnly} onPress={() => setGovtOnly(!govtOnly)} />
-        {ALL_CATEGORIES.map((k) => <Chip key={k} label={t(`cat.${k}`)} active={cat === k} onPress={() => setCat(cat === k ? null : k)} />)}
-      </FilterRow>
-      <FilterRow label={t('commissions')}>
-        <Chip label={t('all')} active={!source} onPress={() => setSource(null)} />
-        {SOURCE_CHIPS.map(([k, label]) => <Chip key={k} label={label} active={source === k} onPress={() => setSource(source === k ? null : k)} />)}
-      </FilterRow>
-      <FilterRow label={t('qualification')}>
-        <Chip label={t('all')} active={!qualF} onPress={() => setQualF(null)} />
-        {QUALS.map((k) => <Chip key={k} icon="school-outline" label={qual(k)} active={qualF === k} onPress={() => setQualF(qualF === k ? null : k)} />)}
-      </FilterRow>
-      <FilterRow label={t('city')}>
-        <Chip label={t('all')} active={!city} onPress={() => setCity(null)} />
-        {CITIES.map((k) => <Chip key={k} icon="map-marker-outline" label={k} active={city === k} onPress={() => setCity(city === k ? null : k)} />)}
-      </FilterRow>
+      {/* one line of dropdowns instead of four rows of chips */}
+      <View style={styles.dropdowns}>
+        <Dropdown label={t('category')} icon="shape-outline" value={govtOnly ? GOVT_ALL : cat}
+          options={[{ value: GOVT_ALL, label: t('allGovt'), icon: 'bank-outline' },
+            ...ALL_CATEGORIES.map((k) => ({ value: k, label: t(`cat.${k}`), icon: CATEGORY_META[k].icon as IconName }))]}
+          onChange={(v) => { setGovtOnly(v === GOVT_ALL); setCat(v && v !== GOVT_ALL ? (v as Category) : null); }} />
+        <Dropdown label={t('commissionShort')} icon="bank-outline" value={source}
+          options={SOURCE_CHIPS.map(([k, label]) => ({ value: k, label }))} onChange={setSource} />
+        <Dropdown label={t('qualification')} icon="school-outline" value={qualF}
+          options={QUALS.map((k) => ({ value: k, label: qual(k) }))} onChange={setQualF} />
+        <Dropdown label={t('city')} icon="map-marker-outline" value={city} searchable
+          options={CITY_OPTIONS.map((k) => ({ value: k, label: k }))} onChange={setCity} />
+      </View>
 
       <View style={styles.summary}>
         <Animated.Text key={results.length} entering={FadeIn} style={[styles.count, { color: c.text }]}>
@@ -162,24 +162,12 @@ export default function Search() {
   );
 }
 
-function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
-  const c = useTheme();
-  const { tf } = useI18n();
-  return (
-    <View style={{ marginTop: 12 }}>
-      <Text style={[styles.rowLabel, tf('bold'), { color: c.sub }]}>{label}</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>{children}</ScrollView>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   head: { paddingHorizontal: 16, paddingBottom: 4 },
   h1: { fontSize: 26, marginBottom: 12 },
   input: { flexDirection: 'row', alignItems: 'center', gap: 10, height: 50, borderRadius: 16, paddingHorizontal: 14, borderWidth: 1 },
   inputText: { flex: 1, fontFamily: font.regular, fontSize: 14 },
-  rowLabel: { fontSize: 12, marginLeft: 16, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.6 },
-  chips: { paddingHorizontal: 16, gap: 8 },
+  dropdowns: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, paddingHorizontal: 16, marginTop: 12 },
   summary: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16, marginTop: 16, marginBottom: 10 },
   count: { fontFamily: font.bold, fontSize: 20 },
   toggle: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 4 },

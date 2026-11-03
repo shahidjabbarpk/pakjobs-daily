@@ -7,6 +7,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
 import { CityPicker } from '@/components/CityPicker';
+import { Dropdown } from '@/components/Dropdown';
 import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
@@ -15,6 +16,7 @@ import { currentUid, ensureUser, signOutUser } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { useI18n } from '@/lib/i18n';
 import { notifyNewJobs, setupNotifications } from '@/lib/notify';
+import { DISTRICT_NAMES } from '@/lib/places';
 import { ALL_CATEGORIES, useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 
@@ -30,7 +32,7 @@ const SOURCES: [string, string, IconName][] = [
   ['Join Pak Navy', 'https://www.joinpaknavy.gov.pk/', 'anchor'],
   ['Join PAF', 'https://www.joinpaf.gov.pk/', 'airplane'],
 ];
-const ALERT_CITIES = ['Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Punjab', 'Sindh', 'KPK', 'Balochistan'];
+const ALERT_CITIES = [...new Set(['Punjab', 'Sindh', 'KPK', 'Balochistan', 'Islamabad', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', ...DISTRICT_NAMES])];
 
 function ago(iso: string | null, t: (k: any) => string) {
   if (!iso) return '—';
@@ -198,11 +200,10 @@ export default function Settings() {
               ))}
             </View>
             <Text style={[styles.sub, tf('bold'), { color: c.sub }]}>{t('city')}</Text>
+            {/* any district (the home city picked in onboarding is often not one of the big ones) */}
             <View style={styles.wrap}>
-              <Chip label={t('allPakistan')} active={!s.alertCity} onPress={() => s.set({ alertCity: null })} />
-              {ALERT_CITIES.map((k) => (
-                <Chip key={k} label={k} active={s.alertCity === k} onPress={() => s.set({ alertCity: s.alertCity === k ? null : k })} />
-              ))}
+              <Dropdown label={t('allPakistan')} icon="map-marker-outline" value={s.alertCity} searchable
+                options={ALERT_CITIES.map((k) => ({ value: k, label: k }))} onChange={(v) => s.set({ alertCity: v })} />
             </View>
           </Animated.View>
         )}

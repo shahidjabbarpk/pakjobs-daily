@@ -1,11 +1,12 @@
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Dropdown } from './Dropdown';
 import {
-  BrandSpinner, brandRefreshControl, Chip, EmptyState, Icon, type IconName, NewBadge, Tap, useStatusBar, useTabBarSpace,
+  BrandSpinner, brandRefreshControl, EmptyState, Icon, type IconName, NewBadge, Tap, useStatusBar, useTabBarSpace,
 } from '@/components/ui';
 import { NativeAdCard, showRewarded } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
@@ -97,16 +98,13 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
               style={[styles.inputText, { color: c.text }]} returnKeyType="search" autoCorrect={false} />
             {!!q && <Tap onPress={() => setQ('')}><Icon name="close-circle" size={18} color={c.faint} /></Tap>}
           </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-            <Chip label={t('all')} active={!kind} onPress={() => setKind(null)} />
-            {(Object.keys(KIND_META) as UpdateKind[]).map((k) => (
-              <Chip key={k} icon={KIND_META[k].icon} label={t(`kind.${k}` as any)} active={kind === k} onPress={() => setKind(kind === k ? null : k)} />
-            ))}
-          </ScrollView>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={[styles.chips, { marginTop: 8, marginBottom: 12 }]}>
-            <Chip label={t('all')} active={!src} onPress={() => setSrc(null)} />
-            {SOURCES.map((s) => <Chip key={s} label={s.toUpperCase()} active={src === s} onPress={() => setSrc(src === s ? null : s)} />)}
-          </ScrollView>
+          <View style={styles.dropdowns}>
+            <Dropdown label={t('noticeType')} icon="file-document-multiple-outline" value={kind}
+              options={(Object.keys(KIND_META) as UpdateKind[]).map((k) => ({ value: k, label: t(`kind.${k}` as any), icon: KIND_META[k].icon }))}
+              onChange={(v) => setKind(v as UpdateKind | null)} />
+            <Dropdown label={t('commissionShort')} icon="bank-outline" value={src}
+              options={SOURCES.map((k) => ({ value: k, label: k.toUpperCase() }))} onChange={setSrc} />
+          </View>
         </View>
       }
       renderItem={({ item }) => {
@@ -122,7 +120,9 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
               </View>
               <View style={{ flex: 1 }}>
                 <View style={styles.row}>
-                  <Text style={[styles.src, { color: meta.color }]}>{u.source.toUpperCase()} • {t(`kind.${u.kind}` as any)}</Text>
+                  {/* who published it is what people scan for: big solid badge */}
+                  <Text style={[styles.srcBadge, { backgroundColor: meta.color }]}>{u.source.toUpperCase()}</Text>
+                  <Text style={[styles.src, { color: meta.color }]}>{t(`kind.${u.kind}` as any)}</Text>
                   {fresh && <NewBadge />}
                 </View>
                 <Text style={[styles.title, { color: c.text }]} numberOfLines={3}>{u.title}</Text>
@@ -145,13 +145,14 @@ const styles = StyleSheet.create({
   head: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 16, paddingBottom: 12 },
   back: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center' },
   h1: { fontSize: 22 },
-  chips: { paddingHorizontal: 16, gap: 8 },
+  dropdowns: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, paddingHorizontal: 16, marginBottom: 12 },
   input: { flexDirection: 'row', alignItems: 'center', gap: 10, height: 48, borderRadius: 16, paddingHorizontal: 14, borderWidth: 1, marginHorizontal: 16, marginBottom: 12 },
   inputText: { flex: 1, fontFamily: font.regular, fontSize: 14 },
   card: { flexDirection: 'row', gap: 12, alignItems: 'center', marginHorizontal: 16, marginBottom: 10, padding: 14, borderRadius: 18, borderWidth: 1 },
   icon: { width: 46, height: 46, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   row: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  src: { fontFamily: font.bold, fontSize: 10.5, letterSpacing: 0.4 },
-  title: { fontFamily: font.medium, fontSize: 13.5, lineHeight: 19, marginTop: 3 },
+  srcBadge: { fontFamily: font.bold, fontSize: 13, color: '#fff', letterSpacing: 0.6, paddingHorizontal: 9, paddingVertical: 2, borderRadius: 8, overflow: 'hidden' },
+  src: { fontFamily: font.bold, fontSize: 11.5, letterSpacing: 0.3 },
+  title: { fontFamily: font.semi, fontSize: 14, lineHeight: 20, marginTop: 6 },
   date: { fontFamily: font.regular, fontSize: 11, marginTop: 4 },
 });
