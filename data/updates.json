@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-03T16:05:55+05:00",
+ "updatedAt": "2026-11-03T16:58:23+05:00",
  "updates": [
+  {
+   "id": "8f624c0b54fca2d0",
+   "source": "bpsc",
+   "kind": "result",
+   "title": "Press Release Dated 03-11-2026 Final result for the post of Professor B-20.",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1793706976.jpeg",
+   "date": "2026-11-03",
+   "firstSeen": "2026-11-03T16:58:23+05:00"
+  },
   {
    "id": "19a73f605f57e009",
    "source": "spsc",
@@ -323,15 +332,6 @@
    "title": "Pres release dated 09-10-2026 final result of various posts.",
    "url": "https://www.bpsc.gob.pk/uploads/Result/1791532627.jpeg",
    "date": "2026-10-09",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "4b283ea294d020b0",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Press release Dated 06-10-2026. The continuation of press release no PSC -2026 / E-Result/ 2251-59 Dated 09-09-2026.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1791354090.pdf",
-   "date": "2026-10-06",
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
