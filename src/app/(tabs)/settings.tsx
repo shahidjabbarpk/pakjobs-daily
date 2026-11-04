@@ -254,7 +254,7 @@ export default function Settings() {
             {t('yourId')}: {uid ?? '—'} {copied ? `✓ ${t('copied')}` : '⧉'}
           </Text>
         </Tap>
-        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.2</Text>
+        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.3</Text>
       </Card>
     </ScrollView>
   );
