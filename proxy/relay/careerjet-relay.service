@@ -1,0 +1,17 @@
+[Unit]
+Description=PakJobs Daily Careerjet relay
+After=network-online.target
+
+[Service]
+User=nobody
+ExecStart=/usr/bin/node /opt/careerjet-relay/relay.mjs
+Environment=PORT=4100
+Restart=always
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+MemoryMax=128M
+
+[Install]
+WantedBy=multi-user.target

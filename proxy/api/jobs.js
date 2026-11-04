@@ -1,7 +1,9 @@
 // Careerjet job-search proxy for the PakJobs Daily app (Vercel serverless function).
 // Keeps the Careerjet API key out of the APK and forwards the real user's IP and user agent,
 // which Careerjet requires on every call (the user whose action triggered it). Nothing is stored.
-const API = 'https://search.api.careerjet.net/v4/query';
+// Careerjet only accepts calls from declared fixed IPs, so they go out through a relay on our
+// AWS server (18.139.102.249, see relay/). It forwards the request unchanged.
+const API = 'https://cj.18.139.102.249.sslip.io/v4/query';
 // the public PakJobs Daily website (this same Vercel project) registered with Careerjet
 const REFERER = 'https://pakjobs-daily.vercel.app/';
 
