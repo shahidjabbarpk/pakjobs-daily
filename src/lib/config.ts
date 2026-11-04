@@ -7,8 +7,8 @@ export const FEED_URL =
   process.env.EXPO_PUBLIC_FEED_URL ??
   'https://raw.githubusercontent.com/shahidjabbarpk/pakjobs-daily/main/data/jobs.json';
 
-/** Careerjet proxy (proxy/ folder, deployed on Vercel). Empty = the web-jobs section stays hidden. */
-export const WEB_JOBS_URL = process.env.EXPO_PUBLIC_WEB_JOBS_URL ?? '';
+/** Careerjet proxy (proxy/ folder, Vercel project pakjobs-daily-proxy). While it has no API key it answers "OFF" and the section stays hidden. */
+export const WEB_JOBS_URL = process.env.EXPO_PUBLIC_WEB_JOBS_URL ?? 'https://pakjobs-daily-proxy.vercel.app/api/jobs';
 
 export const STORE_URL = 'https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza';
 export const PRIVACY_URL = 'https://shahidjabbarpk.github.io/pakjobs-daily/privacy.html';
