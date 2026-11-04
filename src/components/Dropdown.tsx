@@ -59,7 +59,7 @@ export function Dropdown({ label, icon, value, options, onChange, searchable }: 
       <Modal visible={open} transparent animationType="none" statusBarTranslucent onRequestClose={close}>
         <Animated.View entering={FadeIn.duration(150)} style={styles.backdrop}>
           <Pressable style={StyleSheet.absoluteFill} onPress={close} />
-          <Animated.View entering={SlideInDown.springify().damping(18)}
+          <Animated.View entering={SlideInDown.duration(220)}
             style={[styles.sheet, { backgroundColor: c.bg, paddingBottom: insets.bottom + 12 }]}>
             <View style={[styles.grip, { backgroundColor: c.border }]} />
             <View style={styles.head}>

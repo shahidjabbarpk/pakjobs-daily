@@ -13,8 +13,8 @@ export const PRIVACY_URL = 'https://shahidjabbarpk.github.io/pakjobs-daily/priva
 export const BACKGROUND_TASK = 'pakjobs-detect-new-jobs';
 export const BACKGROUND_INTERVAL_MIN = 30; // Android/iOS treat this as a minimum, not exact
 
-/** Minimum time between any two full-screen ads (job open, advert, result, quiz, CV). */
-export const FULLSCREEN_GAP_MS = 5 * 60 * 1000;
+/** Safety floor between any two full-screen ads; the normal rhythm is per open (see lib/ads.tsx). */
+export const FULLSCREEN_GAP_MS = 60 * 1000;
 export const NATIVE_AD_EVERY = 3;
 
 // AdMob app "PakJobs Daily" (ca-app-pub-2214888899948620~1749464777, shahidjabbarpk@gmail.com).

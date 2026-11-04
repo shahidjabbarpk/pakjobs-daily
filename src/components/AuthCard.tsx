@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Platform, StyleSheet, Text, TextInput, View, type ViewStyle } from 'react-native';
-import Animated, { FadeIn, FadeInDown, LinearTransition } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { isAdmin, loadProfile, resetPassword, saveProfile, signInEmail, signInGoogle, signUpEmail, watchAuth, type AuthUser } from '@/lib/community';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
@@ -100,7 +100,7 @@ export function AuthCard({ onDone, title, style }: { onDone?: () => void; title?
 
   const input = [styles.input, { backgroundColor: c.cardAlt, color: c.text, borderColor: c.border }];
   return (
-    <Animated.View entering={FadeInDown.springify().damping(18)} layout={LinearTransition}
+    <Animated.View
       style={[styles.card, { backgroundColor: c.card, borderColor: c.border }, style]}>
       <View style={[styles.badge, { backgroundColor: c.primarySoft }]}>
         <Icon name="account-lock-outline" size={26} color={c.primary} />
@@ -145,8 +145,8 @@ export function AuthCard({ onDone, title, style }: { onDone?: () => void; title?
         </Tap>
       </View>
 
-      {err && <Animated.Text entering={FadeIn} style={[styles.msg, { color: c.danger }]}>{err}</Animated.Text>}
-      {note && <Animated.Text entering={FadeIn} style={[styles.msg, { color: c.primary }]}>{note}</Animated.Text>}
+      {err && <Animated.Text style={[styles.msg, { color: c.danger }]}>{err}</Animated.Text>}
+      {note && <Animated.Text style={[styles.msg, { color: c.primary }]}>{note}</Animated.Text>}
 
       <Tap onPress={submit} disabled={!!busy} style={[styles.btn, { backgroundColor: c.primary }]}>
         {busy === 'email' ? <ActivityIndicator color="#fff" /> : (

@@ -1,7 +1,7 @@
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { ActivityIndicator, Alert, FlatList, Platform, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FeaturedPayInfo } from '@/components/community';
 import { EmptyState, Icon, Tap, useStatusBar } from '@/components/ui';
@@ -64,7 +64,7 @@ export default function MyPosts() {
       renderItem={({ item, index }) => {
         const st = statusMeta(item);
         return (
-          <Animated.View entering={FadeInDown.delay(index * 50)} style={[styles.card, { backgroundColor: c.card, borderColor: item.featured ? c.gold : c.border }]}>
+          <Animated.View style={[styles.card, { backgroundColor: c.card, borderColor: item.featured ? c.gold : c.border }]}>
             <View style={styles.row}>
               <View style={[styles.status, { backgroundColor: st.color + '1F' }]}>
                 <Icon name={st.icon} size={14} color={st.color} />

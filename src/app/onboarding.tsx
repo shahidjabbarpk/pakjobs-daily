@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeInRight, ZoomIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CityPicker } from '@/components/CityPicker';
 import { Icon, Tap, useStatusBar } from '@/components/ui';
@@ -38,12 +38,12 @@ export default function Onboarding() {
     <View style={{ flex: 1, backgroundColor: c.bg }}>
       <LinearGradient colors={[c.heroA, c.heroB, c.heroC]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
         style={[styles.hero, { paddingTop: insets.top + 20 }]}>
-        <Animated.View entering={ZoomIn.springify().damping(12)} style={styles.logo}>
+        <Animated.View style={styles.logo}>
           <Icon name="briefcase-variant" size={38} color={c.heroA} />
           <View style={[styles.logoDot, { backgroundColor: c.gold }]} />
         </Animated.View>
-        <Animated.Text entering={FadeInDown.delay(150)} style={[styles.title, tf('bold')]}>{t('onboardTitle')}</Animated.Text>
-        <Animated.Text entering={FadeInDown.delay(250)} style={[styles.sub, tf()]}>{t('onboardSub')}</Animated.Text>
+        <Animated.Text style={[styles.title, tf('bold')]}>{t('onboardTitle')}</Animated.Text>
+        <Animated.Text style={[styles.sub, tf()]}>{t('onboardSub')}</Animated.Text>
         <View style={styles.dots}>
           {[0, 1].map((i) => <View key={i} style={[styles.dot, { opacity: step === i ? 1 : 0.4, width: step === i ? 22 : 8 }]} />)}
         </View>
@@ -51,7 +51,7 @@ export default function Onboarding() {
 
       {step === 0 ? (
         <ScrollView contentContainerStyle={{ padding: 18, paddingBottom: 120 }} keyboardShouldPersistTaps="handled">
-          <Animated.View entering={FadeIn.delay(300)}>
+          <Animated.View>
             <Text style={[styles.label, tf('bold'), { color: c.text }]}>{t('language')}</Text>
             <View style={styles.langRow}>
               {(['en', 'ur'] as const).map((l) => (
@@ -67,7 +67,7 @@ export default function Onboarding() {
           </Animated.View>
         </ScrollView>
       ) : (
-        <Animated.View entering={FadeInRight.springify()} style={{ padding: 22, gap: 16 }}>
+        <Animated.View style={{ padding: 22, gap: 16 }}>
           <View style={[styles.battery, { backgroundColor: c.warn + '1A' }]}>
             <Icon name="battery-heart-variant" size={44} color={c.warn} />
           </View>

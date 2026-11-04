@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "349850513796-6906mkov0mpchv5ta3ttffhqf232foch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pakjobs.daily.mza",
+            "certificate_hash": "fa8e340c2c71af27a75c5db8f09ec2451187ea22"
+          }
+        },
+        {
           "client_id": "349850513796-tbuaot6rgrim8u7h6sj7v696ukhco9n6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

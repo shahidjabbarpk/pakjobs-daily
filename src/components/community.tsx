@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, SlideInDown } from 'react-native-reanimated';
+import Animated, { SlideInDown } from 'react-native-reanimated';
 import { FEATURED } from '@/lib/config';
 import { addComment, communityReady, currentUid, deleteComment, listenComments, loadProfile, report, saveProfile } from '@/lib/community';
 import { useI18n } from '@/lib/i18n';
@@ -24,9 +24,10 @@ export function useProfile(): [Profile | null, (p: Profile) => Promise<void>] {
   return [profile, save];
 }
 
-export function Field({ label, value, onChange, placeholder, multiline, keyboard, required, maxLength }: {
+export function Field({ label, value, onChange, placeholder, multiline, keyboard, required, maxLength, error }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; multiline?: boolean;
-  keyboard?: 'default' | 'phone-pad' | 'numeric'; required?: boolean; maxLength?: number;
+  keyboard?: 'default' | 'phone-pad' | 'numeric' | 'email-address'; required?: boolean; maxLength?: number;
+  error?: string | null; // shown under the box, which turns red
 }) {
   const c = useTheme();
   const { tf } = useI18n();
@@ -40,9 +41,11 @@ export function Field({ label, value, onChange, placeholder, multiline, keyboard
         placeholderTextColor={c.faint}
         multiline={multiline}
         keyboardType={keyboard}
+        autoCapitalize={keyboard === 'email-address' ? 'none' : undefined}
         maxLength={maxLength}
-        style={[styles.input, multiline && styles.multi, { backgroundColor: c.card, borderColor: c.border, color: c.text }]}
+        style={[styles.input, multiline && styles.multi, { backgroundColor: c.card, borderColor: error ? c.danger : c.border, color: c.text }]}
       />
+      {!!error && <Text style={[tf(), { color: c.danger, fontSize: 12, marginTop: 4 }]}>{error}</Text>}
     </View>
   );
 }
@@ -140,7 +143,7 @@ export function ReportSheet({ visible, onClose, kind, jobId, commentId }: {
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={() => onClose(false)}>
       <Pressable style={styles.backdrop} onPress={() => onClose(false)}>
-        <Animated.View entering={SlideInDown.springify().damping(18)} style={[styles.sheet, { backgroundColor: c.card }]}>
+        <Animated.View entering={SlideInDown.duration(220)} style={[styles.sheet, { backgroundColor: c.card }]}>
           <Pressable>
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text, marginBottom: 12 }]}>{t('reportTitle')}</Text>
             {reasons.map((r) => (
@@ -207,7 +210,7 @@ export function Comments({ jobId, onToast }: { jobId: string; onToast: (msg: str
       {failed && <Text style={[tf(), { color: c.faint, fontSize: 12.5, marginVertical: 8 }]}>{communityReady() ? t('errorGeneric') : t('communityOff')}</Text>}
       {list?.length === 0 && <Text style={[tf(), { color: c.faint, fontSize: 12.5, marginVertical: 8 }]}>{t('noComments')}</Text>}
       {list?.map((cm, i) => (
-        <Animated.View key={cm.id} entering={i > list.length - 3 ? FadeInDown : undefined} style={[styles.comment, { borderColor: c.border }]}>
+        <Animated.View key={cm.id} style={[styles.comment, { borderColor: c.border }]}>
           <View style={[styles.avatar, { backgroundColor: c.primarySoft }]}>
             <Text style={{ color: c.primary, fontFamily: font.bold }}>{cm.name.slice(0, 1).toUpperCase()}</Text>
           </View>
@@ -240,7 +243,7 @@ export function Comments({ jobId, onToast }: { jobId: string; onToast: (msg: str
           </Tap>
         )
       ) : needProfile && !profile ? (
-        <Animated.View entering={FadeIn} style={{ marginTop: 10 }}>
+        <Animated.View style={{ marginTop: 10 }}>
           <ProfileForm onDone={() => setNeedProfile(false)} />
         </Animated.View>
       ) : (

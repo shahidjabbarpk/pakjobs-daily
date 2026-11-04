@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, { FadeIn, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/lib/i18n';
 import { font } from '@/lib/theme';
@@ -66,7 +66,7 @@ export function ImageViewer({ uri, visible, onClose, onOpenOriginal }: {
             <Text style={styles.btnText}>{t('openOriginal')}</Text>
           </Tap>
         </View>
-        <Animated.Text entering={FadeIn.delay(400)} style={[styles.hint, { bottom: insets.bottom + 20 }]}>{t('zoomHint')}</Animated.Text>
+        <Animated.Text style={[styles.hint, { bottom: insets.bottom + 20 }]}>{t('zoomHint')}</Animated.Text>
       </GestureHandlerRootView>
     </Modal>
   );

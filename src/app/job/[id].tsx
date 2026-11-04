@@ -4,20 +4,13 @@ import { router, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useState } from 'react';
 import { Linking, Platform, ScrollView, Share, StyleSheet, Text, View } from 'react-native';
-import Animated, {
-  FadeIn,
-  FadeInDown,
-  FadeInUp,
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookmarkButton, DeadlineBadge, EmptyState, Icon, type IconName, NewBadge, OrgAvatar, Tap, useUrgencyColor, useStatusBar } from '@/components/ui';
 import { Comments, ReportSheet } from '@/components/community';
 import { ImageViewer } from '@/components/ImageViewer';
-import { maybeShowInterstitial, withAd } from '@/lib/ads';
+import { examForJob } from '@/data/exams';
+import { adOnOpen } from '@/lib/ads';
 import { deadlineMs, isNew, prettyDate, safeUrl, toIntl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { cancelReminder, scheduleDeadlineReminder } from '@/lib/notify';
@@ -41,7 +34,7 @@ export default function JobDetail() {
 
   useEffect(() => {
     // small delay so the screen transition finishes before an ad covers it
-    const timer = setTimeout(maybeShowInterstitial, 450);
+    const timer = setTimeout(() => adOnOpen('job'), 450);
     return () => clearTimeout(timer);
   }, []);
 
@@ -68,7 +61,8 @@ function Detail({ job }: { job: Job }) {
   const [note, setNote] = useState<string | null>(null);
   const meta = CATEGORY_META[job.category];
   const open = (url?: string) => url && WebBrowser.openBrowserAsync(safeUrl(url), { toolbarColor: c.heroA });
-  const openAdvert = (url?: string) => withAd(() => open(url));
+  // the job open already had its ad; the advert, Apply and criteria open straight away
+  const openAdvert = (url?: string) => open(url);
   const isUser = job.source === 'user';
   const [reporting, setReporting] = useState(false);
   const [viewer, setViewer] = useState(false);
@@ -128,7 +122,7 @@ function Detail({ job }: { job: Job }) {
               <View style={styles.navBtn}><BookmarkButton active={saved} onPress={() => toggleSave(job)} light /></View>
             </View>
           </View>
-          <Animated.View entering={FadeInDown.springify().damping(15)} style={styles.heroBody}>
+          <Animated.View style={styles.heroBody}>
             <View style={styles.avatarRing}><OrgAvatar job={job} size={64} /></View>
             <View style={styles.heroTags}>
               {isNew(job) && <NewBadge />}
@@ -142,7 +136,7 @@ function Detail({ job }: { job: Job }) {
 
         {job.lastDate && <Countdown job={job} />}
 
-        <Animated.View entering={FadeInUp.delay(150)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+        <Animated.View style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
           <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>{t('eligibility')} & {t('details')}</Text>
           <View style={styles.grid}>
             {info.filter(([, , v]) => !!v).map(([icon, label, value]) => (
@@ -156,10 +150,10 @@ function Detail({ job }: { job: Job }) {
         </Animated.View>
 
         {(isImage || isPdf || job.criteriaUrl) && (
-          <Animated.View entering={FadeInUp.delay(220)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+          <Animated.View style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>{t('viewAdvert')}</Text>
             {isImage && (
-              <Tap onPress={() => withAd(() => setViewer(true))} haptic={false}>
+              <Tap onPress={() => setViewer(true)} haptic={false}>
                 <Image source={{ uri: safeUrl(job.advertImage!) }} style={styles.advert} contentFit="cover" transition={300} />
                 <View style={styles.zoom}><Icon name="magnify-plus-outline" size={18} color="#fff" /></View>
               </Tap>
@@ -172,7 +166,7 @@ function Detail({ job }: { job: Job }) {
         )}
 
         {!!job.description && (
-          <Animated.View entering={FadeInUp.delay(280)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+          <Animated.View style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>{t('description')}</Text>
             {job.description.split('\n').filter(Boolean).map((line, i) => {
               const [k, ...rest] = line.split(':');
@@ -191,7 +185,7 @@ function Detail({ job }: { job: Job }) {
         )}
 
         {isUser && (
-          <Animated.View entering={FadeInUp.delay(320)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+          <Animated.View style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
             <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>📞 {t('postedBy')}: {job.ownerName}</Text>
             <View style={{ flexDirection: 'row', gap: 10 }}>
               {!!job.phone && <ContactBtn icon="phone" label={t('call')} color={c.primary} onPress={call} />}
@@ -204,7 +198,20 @@ function Detail({ job }: { job: Job }) {
           </Animated.View>
         )}
 
-        <Animated.View entering={FadeInUp.delay(340)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+        {!isUser && (
+          // the written test for this post: matching mock test, past papers and the exam-day guide
+          <View style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+            <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>🎯 {t('prepareTest')}</Text>
+            <Text style={[tf(), { color: c.sub, fontSize: 12.5, marginTop: -4, marginBottom: 10 }]}>{t('prepareTestHint')} ({examForJob(job).name})</Text>
+            <View style={{ gap: 8 }}>
+              <LinkRow icon="play-circle-outline" label={`${examForJob(job).name} ${t('mockTest')}`} onPress={() => router.push(`/exam/${examForJob(job).key}`)} />
+              <LinkRow icon="file-document-multiple-outline" label={t('pastPapers')} onPress={() => router.push('/past-papers')} />
+              <LinkRow icon="calendar-clock" label={t('testSchedule')} onPress={() => router.push({ pathname: '/updates', params: { kind: 'schedule' } })} />
+            </View>
+          </View>
+        )}
+
+        <Animated.View style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
           <Text style={[styles.cardTitle, tf('bold'), { color: c.text }]}>📤 {t('shareOn')}</Text>
           <View style={{ flexDirection: 'row', gap: 10 }}>
             <ShareBtn icon="whatsapp" color="#25D366" label="WhatsApp" onPress={() => shareTo('whatsapp')} />
@@ -226,12 +233,12 @@ function Detail({ job }: { job: Job }) {
       </ScrollView>
 
       {note && (
-        <Animated.View entering={FadeIn} style={[styles.toast, { bottom: 100 + insets.bottom, backgroundColor: c.text }]}>
+        <Animated.View style={[styles.toast, { bottom: 100 + insets.bottom, backgroundColor: c.text }]}>
           <Text style={[tf(), { color: c.bg, fontSize: 13 }]}>{note}</Text>
         </Animated.View>
       )}
 
-      <Animated.View entering={FadeInUp.delay(300).springify()}
+      <Animated.View
         style={[styles.bar, { paddingBottom: insets.bottom + 12, backgroundColor: c.card, borderTopColor: c.border }]}>
         {job.lastDate && Platform.OS !== 'web' && (
           <Tap onPress={onRemind} style={[styles.iconBtn, { backgroundColor: hasReminder ? c.gold + '33' : c.cardAlt }]}>
@@ -314,7 +321,7 @@ function Countdown({ job }: { job: Job }) {
   const bar = useAnimatedStyle(() => ({ width: `${Math.max(3, progress.value * 100)}%` }));
 
   return (
-    <Animated.View entering={FadeInUp.delay(80)} style={[styles.card, styles.countCard, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}>
+    <Animated.View style={[styles.card, styles.countCard, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}>
       <View style={styles.countHead}>
         <Text style={[styles.cardTitle, tf('bold'), { color: c.text, marginBottom: 0 }]}>⏳ {t('timeLeft')}</Text>
         <DeadlineBadge job={job} />

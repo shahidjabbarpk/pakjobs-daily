@@ -94,6 +94,8 @@ export default function RootLayout() {
         <Stack.Screen name="prep" />
         <Stack.Screen name="quiz/[subject]" options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="cv" />
+        <Stack.Screen name="exam/[key]" />
+        <Stack.Screen name="past-papers" />
       </Stack>
     </GestureHandlerRootView>
   );

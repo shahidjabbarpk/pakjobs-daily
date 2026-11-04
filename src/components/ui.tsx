@@ -6,17 +6,7 @@ import { useFocusEffect } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { type ReactNode, useCallback, useEffect, useState } from 'react';
 import { Pressable, type PressableProps, RefreshControl, type StyleProp, StyleSheet, Text, View, type ViewStyle } from 'react-native';
-import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withSequence,
-  withSpring,
-  withTiming,
-  ZoomIn,
-  ZoomOut,
-} from 'react-native-reanimated';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { daysLeft, initials, urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
@@ -36,7 +26,7 @@ export function haptic(kind: 'select' | 'light' | 'medium' = 'select') {
   }
 }
 
-/** Pressable with a springy scale-down + light haptic. */
+/** Pressable with a short, subtle press-down + light haptic (no spring, so nothing bounces). */
 export function Tap({ style, children, haptic: withHaptic = true, scaleTo = 0.96, onPress, ...rest }:
   Omit<PressableProps, 'style'> & { style?: StyleProp<ViewStyle>; children?: ReactNode; haptic?: boolean; scaleTo?: number }) {
   const s = useSharedValue(1);
@@ -44,8 +34,8 @@ export function Tap({ style, children, haptic: withHaptic = true, scaleTo = 0.96
   return (
     <APressable
       {...rest}
-      onPressIn={() => { s.value = withSpring(scaleTo, { damping: 15, stiffness: 400 }); }}
-      onPressOut={() => { s.value = withSpring(1, { damping: 12, stiffness: 300 }); }}
+      onPressIn={() => { s.value = withTiming(scaleTo, { duration: 80 }); }}
+      onPressOut={() => { s.value = withTiming(1, { duration: 120 }); }}
       onPress={(e) => {
         if (withHaptic) haptic();
         onPress?.(e);
@@ -199,16 +189,11 @@ export function SectionTitle({ title, action, onAction }: { title: string; actio
 export function EmptyState({ icon, title, hint }: { icon: IconName; title: string; hint: string }) {
   const c = useTheme();
   const { tf } = useI18n();
-  const float = useSharedValue(0);
-  useEffect(() => {
-    float.value = withRepeat(withTiming(1, { duration: 1600, easing: Easing.inOut(Easing.sin) }), -1, true);
-  }, [float]);
-  const st = useAnimatedStyle(() => ({ transform: [{ translateY: -8 * float.value }] }));
   return (
     <View style={styles.empty}>
-      <Animated.View style={[styles.emptyIcon, { backgroundColor: c.primarySoft }, st]}>
+      <View style={[styles.emptyIcon, { backgroundColor: c.primarySoft }]}>
         <Icon name={icon} size={44} color={c.primary} />
-      </Animated.View>
+      </View>
       <Text style={[styles.emptyTitle, tf('bold'), { color: c.text }]}>{title}</Text>
       <Text style={[styles.emptyHint, tf(), { color: c.sub }]}>{hint}</Text>
     </View>
@@ -234,9 +219,9 @@ export function BookmarkButton({ active, onPress, size = 22, light }: { active: 
       onPress={() => {
         haptic(active ? 'light' : 'medium');
         if (active) {
-          s.value = withSequence(withTiming(0.8, { duration: 90 }), withSpring(1));
+          s.value = withSequence(withTiming(0.85, { duration: 80 }), withTiming(1, { duration: 120 }));
         } else {
-          s.value = withSequence(withTiming(0.7, { duration: 80 }), withSpring(1.4, { damping: 5, stiffness: 420 }), withSpring(1, { damping: 9 }));
+          s.value = withSequence(withTiming(1.15, { duration: 100 }), withTiming(1, { duration: 140 }));
           ring.value = 0;
           ring.value = withTiming(1, { duration: 480, easing: Easing.out(Easing.quad) }, () => { ring.value = 0; });
         }
@@ -313,7 +298,7 @@ export function BrandSpinner({ visible, top }: { visible: boolean; top: number }
   const spin = useAnimatedStyle(() => ({ transform: [{ rotate: `${r.value}deg` }] }));
   if (!visible) return null;
   return (
-    <Animated.View entering={ZoomIn.springify().damping(12)} exiting={ZoomOut.duration(180)} pointerEvents="none"
+    <Animated.View pointerEvents="none"
       style={[styles.spinner, { top, backgroundColor: c.card, shadowColor: c.shadow }]}>
       <Animated.View style={spin}>
         <Icon name="star-crescent" size={24} color={c.primary} />

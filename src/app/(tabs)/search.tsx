@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
 import { CityPicker } from '@/components/CityPicker';
@@ -28,7 +28,7 @@ export default function Search() {
   const { t, tf, qual, isUr } = useI18n();
   const insets = useSafeAreaInsets();
   const tabSpace = useTabBarSpace();
-  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string; q?: string; govt?: string; eng?: string; n?: string }>();
+  const params = useLocalSearchParams<{ cat?: string; city?: string; sort?: string; source?: string; q?: string; govt?: string; eng?: string; soon?: string; n?: string }>();
   const jobs = useApp((s) => s.jobs);
 
   const [q, setQ] = useState('');
@@ -40,6 +40,8 @@ export default function Search() {
   const [showClosed, setShowClosed] = useState(false);
   const [govtOnly, setGovtOnly] = useState(false);
   const [engOnly, setEngOnly] = useState(false);
+  const [soonOnly, setSoonOnly] = useState(false); // Last Date Soon: closing within 7 days
+  const listRef = useRef<FlatList<Row>>(null);
 
   // deep links from Home (services, category tiles, city chips). Search is a tab that stays mounted,
   // so each visit replaces the previous visit's filters instead of piling onto them; `n` makes a
@@ -53,8 +55,11 @@ export default function Search() {
     setQ(params.q || '');
     setGovtOnly(params.govt === '1');
     setEngOnly(params.eng === '1');
+    setSoonOnly(params.soon === '1');
     setQualF(null);
-  }, [params.n, params.cat, params.city, params.sort, params.source, params.q, params.govt, params.eng]);
+    // each visit starts at the top instead of wherever the last visit was scrolled to
+    listRef.current?.scrollToOffset({ offset: 0, animated: false });
+  }, [params.n, params.cat, params.city, params.sort, params.source, params.q, params.govt, params.eng, params.soon]);
 
   const results = useMemo(() => {
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
@@ -62,6 +67,7 @@ export default function Search() {
       if (!showClosed && urgency(j) === 'closed') return false;
       if (govtOnly && (j.source === 'user' || j.category === 'private')) return false;
       if (engOnly && !isEngineeringJob(j)) return false;
+      if (soonOnly && !['today', 'urgent', 'soon'].includes(urgency(j))) return false;
       if (cat && j.category !== cat) return false;
       if (source && j.source !== source) return false;
       // "Matric" shows jobs whose minimum requirement is Matric or lower
@@ -74,7 +80,7 @@ export default function Search() {
       return true;
     });
     return sortJobs(list, sort);
-  }, [jobs, q, cat, qualF, city, source, sort, showClosed, govtOnly, engOnly]);
+  }, [jobs, q, cat, qualF, city, source, sort, showClosed, govtOnly, engOnly, soonOnly]);
 
   const rows = useMemo<Row[]>(() => {
     const out: Row[] = [];
@@ -85,8 +91,8 @@ export default function Search() {
     return out;
   }, [results]);
 
-  const active = [cat, qualF, city, source, q, govtOnly, engOnly].filter(Boolean).length;
-  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); setSource(null); setGovtOnly(false); setEngOnly(false); };
+  const active = [cat, qualF, city, source, q, govtOnly, engOnly, soonOnly].filter(Boolean).length;
+  const clear = () => { setQ(''); setCat(null); setQualF(null); setCity(null); setSource(null); setGovtOnly(false); setEngOnly(false); setSoonOnly(false); };
 
   const filters = (
     <View>
@@ -118,10 +124,11 @@ export default function Search() {
         <Dropdown label={t('qualification')} icon="school-outline" value={qualF}
           options={QUALS.map((k) => ({ value: k, label: qual(k) }))} onChange={setQualF} />
         <CityPicker inline value={city} onChange={setCity} />
+        <Chip icon="timer-sand" label={t('within7Days')} active={soonOnly} onPress={() => setSoonOnly(!soonOnly)} />
       </View>
 
       <View style={styles.summary}>
-        <Animated.Text key={results.length} entering={FadeIn} style={[styles.count, { color: c.text }]}>
+        <Animated.Text key={results.length} style={[styles.count, { color: c.text }]}>
           {results.length} <Text style={[tf(), { color: c.sub, fontSize: 13 }]}>{t('results')}</Text>
         </Animated.Text>
         <View style={{ flexDirection: 'row', gap: 6 }}>
@@ -145,12 +152,12 @@ export default function Search() {
   );
 
   return (
-    <Animated.FlatList
+    <FlatList
+      ref={listRef}
       style={{ flex: 1, backgroundColor: c.bg }}
       data={rows}
       keyExtractor={(r) => (r.type === 'job' ? r.job.id : r.key)}
       renderItem={({ item }) => (item.type === 'job' ? <JobCard job={item.job} index={item.i} /> : <NativeAdCard />)}
-      itemLayoutAnimation={LinearTransition.springify().damping(18)}
       ListHeaderComponent={filters}
       ListEmptyComponent={<EmptyState icon="file-search-outline" title={t('noResults')} hint={t('noResultsHint')} />}
       ListFooterComponent={<View style={{ height: tabSpace }} />}

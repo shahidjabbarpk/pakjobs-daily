@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { isNew, prettyDate, safeUrl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
@@ -23,7 +23,7 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
   const place = job.cities.includes('All Pakistan') ? t('allPakistan') : job.cities.slice(0, 2).join(', ');
 
   return (
-    <Animated.View entering={index < 12 ? FadeInDown.delay(index * 45).springify().damping(16) : undefined}>
+    <Animated.View>
       <Tap
         haptic={false}
         scaleTo={0.97}

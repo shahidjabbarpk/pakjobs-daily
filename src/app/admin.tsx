@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Chip, EmptyState, Icon, type IconName, Tap, useStatusBar } from '@/components/ui';
 import {
@@ -90,7 +90,7 @@ export default function Admin() {
       ))}
 
       {tab === 'reports' && reports?.map((r, i) => (
-        <Animated.View key={r.id} entering={FadeInDown.delay(i * 40)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
+        <Animated.View key={r.id} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
           <Text style={[styles.title, { color: c.text }]}>{r.kind === 'comment' ? '💬 Comment' : '📄 Job'} • {t(r.reason as any)}</Text>
           <Text style={[styles.meta, { color: c.faint }]}>{r.jobId}{r.commentId ? ` / ${r.commentId}` : ''}</Text>
           <View style={styles.actions}>
@@ -115,7 +115,7 @@ function PostCard({ job, i, actions }: { job: Job; i: number; actions: [IconName
   const c = useTheme();
   const { t } = useI18n();
   return (
-    <Animated.View entering={FadeInDown.delay(i * 40)} style={[styles.card, { backgroundColor: c.card, borderColor: job.featured ? c.gold : c.border }]}>
+    <Animated.View style={[styles.card, { backgroundColor: c.card, borderColor: job.featured ? c.gold : c.border }]}>
       <Text style={[styles.title, { color: c.text }]}>{job.title}</Text>
       <Text style={[styles.meta, { color: c.sub }]}>{job.organization} • {job.cities[0]} • {job.salary ?? '—'}</Text>
       <Text style={[styles.meta, { color: c.faint }]}>{t('postedBy')}: {job.ownerName} • {prettyDate(job.postedDate)} • {job.status}</Text>

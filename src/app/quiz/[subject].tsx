@@ -2,11 +2,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeInRight, useAnimatedStyle, useSharedValue, withSpring, withTiming, ZoomIn } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { haptic, Icon, Tap, useStatusBar } from '@/components/ui';
+import { buildMock, examByKey, shuffleOptions } from '@/data/exams';
 import { type Mcq, SUBJECTS } from '@/data/mcqs';
-import { maybeShowInterstitial } from '@/lib/ads';
+import { maybeShowInterstitial, withAd } from '@/lib/ads';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
@@ -25,12 +26,21 @@ function shuffle<T>(a: T[]): T[] {
 export default function Quiz() {
   useStatusBar('hero');
   const { subject } = useLocalSearchParams<{ subject: string }>();
-  const sub = SUBJECTS.find((s) => s.key === subject) ?? SUBJECTS[0]!;
+  // "mock-ppsc" etc. = a timed mock test in that body's subject mix; anything else = subject practice
+  const exam = subject?.startsWith('mock-') ? examByKey(subject.slice(5)) : undefined;
+  // memoised: a new object every render would reshuffle the paper on each tap
+  const sub = useMemo(() => (exam
+    ? { key: subject!, title: `${exam.name} Mock Test`, titleUr: `${exam.name} ماک ٹیسٹ`, colors: exam.colors, mcqs: [] as Mcq[] }
+    : SUBJECTS.find((s) => s.key === subject) ?? SUBJECTS[0]!), [exam, subject]);
   const c = useTheme();
   const { t, tf, isUr } = useI18n();
   const insets = useSafeAreaInsets();
   const [round, setRound] = useState(0);
-  const questions = useMemo<Mcq[]>(() => shuffle(sub.mcqs).slice(0, PER_TEST), [sub, round]);
+  // every session gets new questions in a new order, with the options shuffled too
+  const questions = useMemo<Mcq[]>(
+    () => (exam ? buildMock(exam) : shuffle(sub.mcqs).slice(0, PER_TEST).map(shuffleOptions)),
+    [exam, sub, round],
+  );
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<(number | null)[]>([]);
   const [done, setDone] = useState(false);
@@ -47,29 +57,44 @@ export default function Quiz() {
   }, [idx, choice, questions.length, progress]);
   const bar = useAnimatedStyle(() => ({ width: `${progress.value * 100}%` }));
 
+  // a mock test is like the real paper: no answer is revealed until the end and answers can be changed
   const pick = (i: number) => {
-    if (choice != null) return;
-    haptic(i === q.a ? 'light' : 'medium');
+    if (!exam && choice != null) return;
+    haptic(exam || i === q.a ? 'light' : 'medium');
     const next = [...picked];
     next[idx] = i;
     setPicked(next);
   };
 
-  const next = () => {
-    if (idx + 1 < questions.length) { setIdx(idx + 1); return; }
+  const finish = () => {
     setDone(true);
     const { quizBest, set } = useApp.getState();
     if ((quizBest[sub.key] ?? -1) < pct) set({ quizBest: { ...quizBest, [sub.key]: pct } });
-    setTimeout(maybeShowInterstitial, 600);
+    // the result is on screen first, then one ad
+    setTimeout(maybeShowInterstitial, 1500);
+  };
+  const next = () => {
+    if (idx + 1 < questions.length) { setIdx(idx + 1); return; }
+    finish();
   };
 
-  const restart = () => {
+  // mock tests run against the clock and submit themselves when time is up
+  const [left, setLeft] = useState(exam ? exam.minutes * 60 : 0);
+  useEffect(() => {
+    if (!exam || done) return;
+    if (left <= 0) { finish(); return; }
+    const t = setTimeout(() => setLeft((l) => l - 1), 1000);
+    return () => clearTimeout(t);
+  }, [exam, done, left]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const restart = () => withAd(() => {
     setRound((r) => r + 1);
     setIdx(0);
     setPicked([]);
     setDone(false);
     setReview(false);
-  };
+    if (exam) setLeft(exam.minutes * 60);
+  });
 
   const title = isUr ? sub.titleUr : sub.title;
   const header = (
@@ -77,6 +102,7 @@ export default function Quiz() {
       <View style={styles.heroRow}>
         <Tap onPress={() => router.back()} style={styles.back}><Icon name="close" size={22} color="#fff" /></Tap>
         <Text style={[styles.heroTitle, isUr ? { fontFamily: font.urduBold } : null]} numberOfLines={1}>{title}</Text>
+        {!done && exam && <Text style={[styles.counter, left < 60 && { color: '#FFD54F' }]}>⏱ {Math.floor(left / 60)}:{String(left % 60).padStart(2, '0')}</Text>}
         {!done && <Text style={styles.counter}>{idx + 1}/{questions.length}</Text>}
       </View>
       {!done && (
@@ -91,7 +117,7 @@ export default function Quiz() {
       <View style={{ flex: 1, backgroundColor: c.bg }}>
         {header}
         <ScrollView contentContainerStyle={{ padding: 18, paddingBottom: 40 }}>
-          <Animated.View entering={ZoomIn.springify().damping(12)} style={[styles.result, { backgroundColor: c.card, borderColor: c.border }]}>
+          <Animated.View style={[styles.result, { backgroundColor: c.card, borderColor: c.border }]}>
             <Text style={[tf(), { color: c.sub, fontSize: 14 }]}>{t('yourScore')}</Text>
             <View style={[styles.ring, { borderColor: color }]}>
               <Text style={[styles.pct, { color }]}>{pct}%</Text>
@@ -112,7 +138,7 @@ export default function Quiz() {
           {review && questions.map((qq, i) => {
             const ok = picked[i] === qq.a;
             return (
-              <Animated.View key={i} entering={FadeIn.delay(i * 30)} style={[styles.reviewCard, { backgroundColor: c.card, borderColor: ok ? c.ok : c.danger }]}>
+              <Animated.View key={i} style={[styles.reviewCard, { backgroundColor: c.card, borderColor: ok ? c.ok : c.danger }]}>
                 <Text style={[styles.reviewQ, { color: c.text }]}>{i + 1}. {qq.q}</Text>
                 {!ok && picked[i] != null && <Text style={[styles.reviewA, { color: c.danger }]}>✗ {qq.o[picked[i]!]}</Text>}
                 <Text style={[styles.reviewA, { color: c.ok }]}>✓ {qq.o[qq.a]}</Text>
@@ -129,26 +155,31 @@ export default function Quiz() {
     <View style={{ flex: 1, backgroundColor: c.bg }}>
       {header}
       <ScrollView contentContainerStyle={{ padding: 18, paddingBottom: 120 }}>
-        <Animated.View key={`${round}-${idx}`} entering={FadeInRight.springify().damping(16)}>
+        <Animated.View key={`${round}-${idx}`}>
           <Text style={[styles.question, { color: c.text }]}>{q.q}</Text>
           {q.o.map((opt, i) => {
-            const isRight = choice != null && i === q.a;
-            const isWrong = choice === i && i !== q.a;
+            const isRight = !exam && choice != null && i === q.a;
+            const isWrong = !exam && choice === i && i !== q.a;
             return (
               <Option key={i} label={String.fromCharCode(65 + i)} text={opt} onPress={() => pick(i)}
-                state={isRight ? 'right' : isWrong ? 'wrong' : choice != null ? 'dim' : 'idle'} />
+                state={exam ? (choice === i ? 'selected' : 'idle') : isRight ? 'right' : isWrong ? 'wrong' : choice != null ? 'dim' : 'idle'} />
             );
           })}
-          {choice != null && !!q.e && (
-            <Animated.View entering={FadeIn} style={[styles.explBox, { backgroundColor: c.primarySoft }]}>
+          {!exam && choice != null && !!q.e && (
+            <Animated.View style={[styles.explBox, { backgroundColor: c.primarySoft }]}>
               <Icon name="lightbulb-on-outline" size={18} color={c.primary} />
               <Text style={[styles.expl, { color: c.text, flex: 1, marginTop: 0 }]}>{q.e}</Text>
             </Animated.View>
           )}
         </Animated.View>
       </ScrollView>
-      {choice != null && (
-        <Animated.View entering={FadeIn} style={[styles.footer, { paddingBottom: insets.bottom + 14, backgroundColor: c.card, borderTopColor: c.border }]}>
+      {(choice != null || exam) && (
+        <Animated.View style={[styles.footer, { paddingBottom: insets.bottom + 14, backgroundColor: c.card, borderTopColor: c.border, gap: 10 }]}>
+          {exam && idx > 0 && (
+            <Tap onPress={() => setIdx(idx - 1)} style={[styles.btn, { backgroundColor: c.cardAlt }]}>
+              <Icon name="arrow-left" size={20} color={c.text} />
+            </Tap>
+          )}
           <Tap onPress={next} style={[styles.btn, { backgroundColor: sub.colors[0], flex: 1 }]}>
             <Text style={[styles.btnText, tf('bold')]}>{idx + 1 < questions.length ? t('next') : t('finish')}</Text>
             <Icon name="arrow-right" size={20} color="#fff" />
@@ -159,25 +190,20 @@ export default function Quiz() {
   );
 }
 
-function Option({ label, text, state, onPress }: { label: string; text: string; state: 'idle' | 'right' | 'wrong' | 'dim'; onPress: () => void }) {
+function Option({ label, text, state, onPress }: { label: string; text: string; state: 'idle' | 'right' | 'wrong' | 'dim' | 'selected'; onPress: () => void }) {
   const c = useTheme();
-  const s = useSharedValue(1);
-  useEffect(() => {
-    if (state === 'right' || state === 'wrong') s.value = withSpring(1.03, { damping: 8 }, () => { s.value = withSpring(1); });
-  }, [state, s]);
-  const anim = useAnimatedStyle(() => ({ transform: [{ scale: s.value }] }));
-  const col = state === 'right' ? c.ok : state === 'wrong' ? c.danger : c.border;
+  const col = state === 'right' ? c.ok : state === 'wrong' ? c.danger : state === 'selected' ? c.primary : c.border;
   return (
-    <Animated.View style={anim}>
+    <View>
       <Tap onPress={onPress} haptic={false}
-        style={[styles.option, { backgroundColor: state === 'right' ? c.ok + '1A' : state === 'wrong' ? c.danger + '1A' : c.card, borderColor: col, opacity: state === 'dim' ? 0.55 : 1 }]}>
+        style={[styles.option, { backgroundColor: state === 'right' ? c.ok + '1A' : state === 'wrong' ? c.danger + '1A' : state === 'selected' ? c.primarySoft : c.card, borderColor: col, opacity: state === 'dim' ? 0.55 : 1 }]}>
         <View style={[styles.letter, { backgroundColor: state === 'idle' || state === 'dim' ? c.cardAlt : col }]}>
           {state === 'right' ? <Icon name="check" size={18} color="#fff" /> : state === 'wrong' ? <Icon name="close" size={18} color="#fff" />
-            : <Text style={{ color: c.text, fontFamily: font.bold }}>{label}</Text>}
+            : <Text style={{ color: state === 'selected' ? '#fff' : c.text, fontFamily: font.bold }}>{label}</Text>}
         </View>
         <Text style={[styles.optText, { color: c.text }]}>{text}</Text>
       </Tap>
-    </Animated.View>
+    </View>
   );
 }
 

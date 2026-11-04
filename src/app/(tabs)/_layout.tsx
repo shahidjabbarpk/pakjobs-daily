@@ -2,7 +2,7 @@ import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
 import { type ComponentProps, useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring, ZoomIn } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon, type IconName, TAB_BAR_H as BAR_H, Tap } from '@/components/ui';
 import { useI18n } from '@/lib/i18n';
@@ -34,7 +34,7 @@ function TabBar({ state, navigation }: BottomTabBarProps) {
   const idx = TABS.findIndex((tab) => tab.name === current);
 
   useEffect(() => {
-    if (idx >= 0) x.value = withSpring(idx * tabW, { damping: 18, stiffness: 180 });
+    if (idx >= 0) x.value = withTiming(idx * tabW, { duration: 200 });
   }, [idx, tabW, x]);
   const pill = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }] }));
 
@@ -58,7 +58,7 @@ function TabBar({ state, navigation }: BottomTabBarProps) {
                 <View>
                   <Icon name={focused ? tab.active : tab.icon} size={23} color={focused ? c.primary : c.faint} />
                   {badge > 0 && (
-                    <Animated.View entering={ZoomIn.springify()} style={[styles.count, { backgroundColor: c.danger, borderColor: c.card }]}>
+                    <Animated.View style={[styles.count, { backgroundColor: c.danger, borderColor: c.card }]}>
                       <Text style={styles.countText}>{badge > 99 ? '99' : badge}</Text>
                     </Animated.View>
                   )}

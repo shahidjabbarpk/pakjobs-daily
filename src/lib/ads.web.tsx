@@ -10,3 +10,6 @@ export function BottomBanner() {
 export function NativeAdCard() {
   return null;
 }
+export function adOnOpen(_kind: string, then?: () => void) {
+  then?.();
+}

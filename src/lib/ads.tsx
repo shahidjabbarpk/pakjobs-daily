@@ -35,11 +35,14 @@ export function startAds() {
 }
 
 // ---------------------------------------------------------------- full-screen
-// One full-screen ad at most every FULLSCREEN_GAP_MS across the whole app (job open, advert,
-// result, quiz...), none in the first minute and a half, so a user never sees two back to back.
-// The interstitial unit is display-only in AdMob (no 30-60 s videos).
+// Ads follow what the user does, not a clock:
+//  - jobs, results/roll-no slips and past papers: an ad on the 1st open, the 2nd is free, ad on the 3rd...
+//    (each kind counts separately; Apply / advert inside an opened job never shows another one)
+//  - MCQ practice and mock tests: one ad before the session starts and one after the result.
+// Two safety nets keep it from feeling spammy: never in the first 30 s after launch and never two
+// within FULLSCREEN_GAP_MS. The interstitial unit is display-only in AdMob (closable after ~5 s, no long videos).
 
-const LAUNCH_GRACE_MS = 90 * 1000;
+const LAUNCH_GRACE_MS = 30 * 1000;
 const launchedAt = Date.now();
 let interstitial: InterstitialAd | null = null;
 let interstitialReady = false;
@@ -84,14 +87,27 @@ function showFullScreen(then?: () => void): boolean {
   return true;
 }
 
-/** Called when a job detail / quiz result / CV opens; skipped while the shared cooldown runs. */
+/** An ad right now if the safety nets allow it (quiz/mock result, CV made). */
 export function maybeShowInterstitial() {
   showFullScreen();
 }
 
-/** Opens an advert/result after an ad when one is due; otherwise opens it straight away. */
+/** Runs `then` after an ad if one may show now, otherwise straight away (before a quiz / mock test). */
 export function withAd(then: () => void) {
   if (!showFullScreen(then)) then();
+}
+
+// opens since the last ad, per kind; starts "due" so the first open shows one
+const freeOpens: Record<'job' | 'update' | 'paper', number> = { job: 1, update: 1, paper: 1 };
+
+/** Every other open of a kind gets an ad: 1st ad, 2nd free, 3rd ad. An ad that can't show stays due. */
+export function adOnOpen(kind: keyof typeof freeOpens, then?: () => void) {
+  if (freeOpens[kind] >= 1 && showFullScreen(then)) {
+    freeOpens[kind] = 0;
+    return;
+  }
+  freeOpens[kind] += 1;
+  then?.();
 }
 
 // ---------------------------------------------------------------- banner

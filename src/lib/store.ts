@@ -16,7 +16,7 @@ interface AppState {
   saved: Record<string, Job>;
   reminders: Record<string, string>; // jobId -> scheduled notification id
   lang: Lang;
-  theme: 'system' | 'light' | 'dark';
+  theme: 'system' | 'light' | 'dark'; // 'system' is legacy and now means light
   notify: boolean;
   alertCategories: Category[];
   alertCity: string | null;
@@ -52,7 +52,7 @@ export const useApp = create<AppState>()(
       saved: {},
       reminders: {},
       lang: 'en',
-      theme: 'system',
+      theme: 'light',
       notify: true,
       alertCategories: [...ALL_CATEGORIES],
       alertCity: null,

@@ -2,13 +2,13 @@ import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Dropdown } from './Dropdown';
 import {
   BrandSpinner, brandRefreshControl, EmptyState, Icon, type IconName, NewBadge, Tap, useStatusBar, useTabBarSpace,
 } from '@/components/ui';
-import { NativeAdCard, withAd } from '@/lib/ads';
+import { adOnOpen, NativeAdCard } from '@/lib/ads';
 import { NATIVE_AD_EVERY } from '@/lib/config';
 import { prettyDate, safeUrl } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
@@ -67,8 +67,8 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
     setRefreshing(false);
   }, []);
 
-  // roll-no slips and results open behind a rewarded video (skipped if none is ready)
-  const open = (u: Update) => withAd(() => WebBrowser.openBrowserAsync(safeUrl(u.url)));
+  // results / roll-no slips: ad on the 1st open, 2nd free, ad on the 3rd...
+  const open = (u: Update) => adOnOpen('update', () => WebBrowser.openBrowserAsync(safeUrl(u.url)));
 
   return (
     <View style={{ flex: 1, backgroundColor: c.bg }}>
@@ -113,7 +113,7 @@ export function UpdatesScreen({ tab }: { tab?: boolean }) {
         const meta = KIND_META[u.kind];
         const fresh = Date.now() - Date.parse(u.firstSeen) < 2 * 86_400_000;
         return (
-          <Animated.View entering={i < 10 ? FadeInDown.delay(i * 40) : undefined}>
+          <Animated.View>
             <Tap onPress={() => open(u)} style={[styles.card, { backgroundColor: c.card, borderColor: c.border }]}>
               <View style={[styles.icon, { backgroundColor: meta.color + '1F' }]}>
                 <Icon name={meta.icon} size={22} color={meta.color} />

@@ -1,5 +1,6 @@
 // Original practice questions written for PakJobs Daily (stable, well-established facts only).
 // a = index of the correct option.
+import { EXTRA_MCQS } from './mcqs-extra';
 
 export interface Mcq { q: string; o: [string, string, string, string]; a: 0 | 1 | 2 | 3; e?: string }
 export interface Subject { key: string; title: string; titleUr: string; icon: string; colors: [string, string]; mcqs: Mcq[] }
@@ -161,6 +162,9 @@ export const SUBJECTS: Subject[] = [
     ],
   },
 ];
+
+// the extra bank lives in its own file to keep this one readable
+for (const sub of SUBJECTS) sub.mcqs.push(...(EXTRA_MCQS[sub.key] ?? []));
 
 /** Official past-paper / syllabus pages (opened in the browser). */
 export const PAST_PAPERS: { title: string; source: string; url: string }[] = [

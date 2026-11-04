@@ -1,4 +1,3 @@
-import { useColorScheme } from 'react-native';
 import { useApp } from './store';
 import type { Category } from './types';
 
@@ -61,10 +60,8 @@ const dark: typeof light = {
 export type Theme = typeof light;
 
 export function useTheme(): Theme {
-  const sys = useColorScheme();
-  const pref = useApp((s) => s.theme);
-  const isDark = pref === 'system' ? sys === 'dark' : pref === 'dark';
-  return isDark ? dark : light;
+  // light unless the user switched Dark mode on in Profile (the phone's own theme is ignored)
+  return useApp((s) => s.theme) === 'dark' ? dark : light;
 }
 
 export const CATEGORY_META: Record<Category, { icon: string; colors: [string, string] }> = {

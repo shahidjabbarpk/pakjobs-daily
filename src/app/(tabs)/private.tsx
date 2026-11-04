@@ -1,8 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
 import {
@@ -15,6 +15,7 @@ import { refreshJobs } from '@/lib/feed';
 import { urgency } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
 import { jobInArea } from '@/lib/places';
+import { INDUSTRIES, jobIndustry } from '@/lib/industries';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 import type { Job } from '@/lib/types';
@@ -29,13 +30,16 @@ export default function PrivateJobs() {
   const jobs = useApp((s) => s.jobs);
   const homeCity = useApp((s) => s.homeCity);
   const [area, setArea] = useState<string | null>(homeCity);
+  const [industry, setIndustry] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const syncing = useApp((s) => s.syncing);
   const tabSpace = useTabBarSpace();
 
   const list = useMemo(() => jobs
-    .filter((j) => j.source === 'user' && urgency(j) !== 'closed' && jobInArea(j, area))
-    .sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || b.firstSeen.localeCompare(a.firstSeen)), [jobs, area]);
+    // employers' own posts plus private-company ads found on the official portals
+    .filter((j) => (j.source === 'user' || j.category === 'private') && urgency(j) !== 'closed' && jobInArea(j, area)
+      && (!industry || jobIndustry(j) === industry))
+    .sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || b.firstSeen.localeCompare(a.firstSeen)), [jobs, area, industry]);
 
   const rows = useMemo<Row[]>(() => {
     const out: Row[] = [];
@@ -72,7 +76,7 @@ export default function PrivateJobs() {
                   <Icon name="account-box-outline" size={22} color="#fff" />
                 </Tap>
               </View>
-              <Animated.View entering={ZoomIn.delay(150).springify()}>
+              <Animated.View>
                 <Tap onPress={() => router.push('/post-job')} style={styles.postBtn}>
                   <Icon name="briefcase-plus" size={22} color={c.heroB} />
                   <Text style={[styles.postText, tf('bold'), { color: c.heroB }]}>{t('postJob')}</Text>
@@ -85,7 +89,14 @@ export default function PrivateJobs() {
               <Chip icon="earth" label={t('allPakistan')} active={!area} onPress={() => setArea(null)} />
               {homeCity && <Chip icon="map-marker" label={homeCity} active={area === homeCity} onPress={() => setArea(homeCity)} />}
             </View>
-            <Animated.View entering={FadeIn} style={[styles.warn, { backgroundColor: c.danger + '12' }]}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.industries}>
+              <Chip icon="view-grid-outline" label={t('all')} active={!industry} onPress={() => setIndustry(null)} />
+              {INDUSTRIES.map((i) => (
+                <Chip key={i.key} icon={i.icon} label={t(`ind.${i.key}` as any)} active={industry === i.key}
+                  onPress={() => setIndustry(industry === i.key ? null : i.key)} />
+              ))}
+            </ScrollView>
+            <Animated.View style={[styles.warn, { backgroundColor: c.danger + '12' }]}>
               <Icon name="shield-alert-outline" size={16} color={c.danger} />
               <Text style={[tf(), { color: c.danger, fontSize: 12, flex: 1 }]}>{t('scamWarning')}</Text>
             </Animated.View>
@@ -113,5 +124,6 @@ const styles = StyleSheet.create({
   free: { fontFamily: font.bold, fontSize: 10, color: '#fff', backgroundColor: '#00C853', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, overflow: 'hidden' },
   deco: { position: 'absolute', right: -30, top: 0 },
   filters: { flexDirection: 'row', gap: 8, paddingHorizontal: 16, marginTop: 14 },
+  industries: { gap: 8, paddingHorizontal: 16, marginTop: 10 },
   warn: { flexDirection: 'row', gap: 8, alignItems: 'center', marginHorizontal: 16, marginVertical: 12, padding: 10, borderRadius: 12 },
 });

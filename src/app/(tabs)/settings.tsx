@@ -3,10 +3,11 @@ import { router } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useState } from 'react';
 import { ActivityIndicator, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
 import { CityPicker } from '@/components/CityPicker';
+import { Dropdown } from '@/components/Dropdown';
 import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
@@ -179,7 +180,7 @@ export default function Settings() {
           />
         </View>
         {s.notify && (
-          <Animated.View entering={FadeIn}>
+          <Animated.View>
             <Text style={[styles.sub, tf('bold'), { color: c.sub }]}>{t('alertFor')}</Text>
             <View style={styles.wrap}>
               {ALL_CATEGORIES.map((k) => (
@@ -214,15 +215,10 @@ export default function Settings() {
       </Card>
 
       <Card>
-        <Label icon="theme-light-dark" text={t('theme')} />
-        <View style={styles.segment}>
-          {(['system', 'light', 'dark'] as const).map((m) => (
-            <Tap key={m} onPress={() => s.set({ theme: m })} style={[styles.segBtn, { backgroundColor: s.theme === m ? c.primary : c.cardAlt }]}>
-              <Text style={[styles.segText, tf(), { color: s.theme === m ? '#fff' : c.text }]}>
-                {t(m === 'system' ? 'themeSystem' : m === 'light' ? 'themeLight' : 'themeDark')}
-              </Text>
-            </Tap>
-          ))}
+        <View style={styles.between}>
+          <View style={{ flex: 1 }}><Label icon="weather-night" text={t('darkMode')} /></View>
+          <Switch value={s.theme === 'dark'} onValueChange={(v) => s.set({ theme: v ? 'dark' : 'light' })}
+            trackColor={{ true: c.primary, false: c.border }} thumbColor="#fff" />
         </View>
       </Card>
 
@@ -231,7 +227,7 @@ export default function Settings() {
           {checking ? <ActivityIndicator color="#fff" /> : <Icon name="radar" size={20} color="#fff" />}
           <Text style={[styles.checkText, tf('bold')]}>{checking ? t('checking') : t('checkNow')}</Text>
         </Tap>
-        {result && <Animated.Text entering={FadeIn} style={[styles.result, tf(), { color: c.primary }]}>{result}</Animated.Text>}
+        {result && <Animated.Text style={[styles.result, tf(), { color: c.primary }]}>{result}</Animated.Text>}
         <Text style={[styles.hint, tf(), { color: c.sub, textAlign: 'center', marginTop: 8 }]}>
           {t('lastChecked')}: {ago(s.lastChecked ?? s.updatedAt, t)}
         </Text>
@@ -239,14 +235,10 @@ export default function Settings() {
 
       <Card>
         <Label icon="shield-check-outline" text={t('sources')} />
-        {SOURCES.map(([name, url, icon]) => (
-          <Tap key={url} onPress={() => WebBrowser.openBrowserAsync(url)} style={[styles.source, { borderColor: c.border }]}>
-            <Icon name={icon} size={18} color={c.primary} />
-            <Text style={[styles.sourceName, { color: c.text }]}>{name}</Text>
-            <Text style={[styles.sourceUrl, { color: c.faint }]} numberOfLines={1}>{url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '')}</Text>
-            <Icon name="open-in-new" size={14} color={c.faint} />
-          </Tap>
-        ))}
+        {/* one dropdown instead of ten rows; picking a source opens its website */}
+        <Dropdown label={t('sources')} icon="web" value={null}
+          options={SOURCES.map(([name, url, icon]) => ({ value: url, label: name, icon }))}
+          onChange={(url) => { if (url) WebBrowser.openBrowserAsync(url); }} />
       </Card>
 
       <Card>
@@ -262,7 +254,7 @@ export default function Settings() {
             {t('yourId')}: {uid ?? '—'} {copied ? `✓ ${t('copied')}` : '⧉'}
           </Text>
         </Tap>
-        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.0</Text>
+        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.1</Text>
       </Card>
     </ScrollView>
   );
@@ -303,9 +295,6 @@ const styles = StyleSheet.create({
   checkBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, height: 52, borderRadius: 16 },
   checkText: { color: '#fff', fontSize: 14.5 },
   result: { textAlign: 'center', marginTop: 10, fontSize: 14 },
-  source: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 11, borderTopWidth: StyleSheet.hairlineWidth },
-  sourceName: { fontFamily: font.medium, fontSize: 13.5 },
-  sourceUrl: { flex: 1, fontFamily: font.regular, fontSize: 11.5, textAlign: 'right' },
   disclaimer: { fontSize: 12.5, lineHeight: 20 },
   version: { fontFamily: font.regular, fontSize: 11, marginTop: 12, textAlign: 'center' },
 });

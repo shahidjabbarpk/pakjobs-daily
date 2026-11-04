@@ -1,10 +1,12 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
-import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
 import { CityPicker } from '@/components/CityPicker';
+import { Dropdown } from '@/components/Dropdown';
+import { INDUSTRIES } from '@/lib/industries';
 import { FeaturedPayInfo, Field, ProfileForm, useProfile } from '@/components/community';
 import { Chip, Icon, Tap, useStatusBar } from '@/components/ui';
 import { communityReady, createPost, updatePost } from '@/lib/community';
@@ -36,6 +38,7 @@ export default function PostJob() {
   const [salary, setSalary] = useState(editing?.salary ?? '');
   const [qualification, setQualification] = useState<string | null>(editing?.qualification ?? null);
   const [jobType, setJobType] = useState(editing?.jobType ?? '');
+  const [industry, setIndustry] = useState<string | null>(editing?.industry ?? null);
   const [vacancies, setVacancies] = useState(editing?.vacancies ? String(editing.vacancies) : '');
   const [lastDate, setLastDate] = useState(editing?.lastDate ?? '');
   const [description, setDescription] = useState(editing?.description ?? '');
@@ -72,7 +75,7 @@ export default function PostJob() {
     setErr(null);
     try {
       const input = {
-        title, company, category, city, salary: salary.trim(), qualification, jobType: jobType.trim(),
+        title, company, category, city, salary: salary.trim(), qualification, jobType: jobType.trim(), industry: industry ?? 'other',
         vacancies: Number(vacancies) || null, lastDate: lastDate || null, description,
         phone: phone.trim(), whatsapp: whatsapp.trim(),
       };
@@ -103,7 +106,7 @@ export default function PostJob() {
     return (
       <View style={{ flex: 1, backgroundColor: c.bg }}>
         {header}
-        <Animated.View entering={ZoomIn.springify()} style={styles.done}>
+        <Animated.View style={styles.done}>
           <View style={[styles.doneIcon, { backgroundColor: c.primarySoft }]}>
             <Icon name="check-decagram" size={56} color={c.primary} />
           </View>
@@ -132,7 +135,7 @@ export default function PostJob() {
         ) : !profile ? (
           <ProfileForm />
         ) : (
-          <Animated.View entering={FadeIn} style={{ paddingHorizontal: 16 }}>
+          <Animated.View style={{ paddingHorizontal: 16 }}>
             <View style={[styles.warn, { backgroundColor: c.danger + '14' }]}>
               <Icon name="shield-alert-outline" size={18} color={c.danger} />
               <Text style={[tf(), { color: c.danger, fontSize: 12.5, flex: 1 }]}>{t('scamWarning')}</Text>
@@ -152,6 +155,12 @@ export default function PostJob() {
               {ALL_CATEGORIES.filter((k) => k !== 'psc' && k !== 'armed').map((k) => (
                 <Chip key={k} label={t(`cat.${k}`)} active={category === k} onPress={() => setCategory(k)} />
               ))}
+            </View>
+
+            <Text style={[styles.label, tf('bold'), { color: c.sub, marginTop: 14 }]}>{t('industry')}</Text>
+            <View style={styles.wrap}>
+              <Dropdown label={t('industry')} icon="domain" value={industry}
+                options={INDUSTRIES.map((i) => ({ value: i.key, label: t(`ind.${i.key}` as any), icon: i.icon }))} onChange={setIndustry} />
             </View>
 
             <Text style={[styles.label, tf('bold'), { color: c.sub, marginTop: 14 }]}>{t('city')} *</Text>
@@ -180,7 +189,7 @@ export default function PostJob() {
               </View>
               <Switch value={feature} onValueChange={setFeature} trackColor={{ true: c.gold, false: c.border }} thumbColor="#fff" />
             </View>
-            {feature && <Animated.View entering={FadeIn}><FeaturedPayInfo /></Animated.View>}
+            {feature && <Animated.View><FeaturedPayInfo /></Animated.View>}
 
             {err && <Text style={[styles.err, tf(), { color: c.danger }]}>{err}</Text>}
             <Tap onPress={submit} disabled={busy} style={[styles.submit, { backgroundColor: c.primary }]}>

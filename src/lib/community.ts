@@ -170,6 +170,7 @@ export interface PostInput {
   salary: string;
   qualification: string | null;
   jobType: string;
+  industry: string;
   vacancies: number | null;
   lastDate: string | null; // YYYY-MM-DD
   description: string;
@@ -192,6 +193,7 @@ export function postToJob(id: string, d: DocumentData): Job {
     url: `pakjobs://job/${POST_PREFIX}${id}`,
     description: d.description,
     jobType: d.jobType || undefined,
+    industry: d.industry || undefined,
     vacancies: d.vacancies ?? undefined,
     salary: d.salary || undefined,
     phone: d.phone || undefined,

@@ -31,6 +31,7 @@ export interface Job {
   firstSeen: string;     // ISO timestamp the detector first saw it
   // private (user-posted) jobs only
   salary?: string;
+  industry?: string;     // private jobs: see lib/industries.ts
   phone?: string;
   whatsapp?: string;
   ownerUid?: string;

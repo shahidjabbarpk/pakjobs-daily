@@ -2,17 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, {
-  Extrapolation,
-  FadeIn,
-  FadeInRight,
-  FadeOutUp,
-  interpolate,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  useSharedValue,
-  ZoomIn,
-} from 'react-native-reanimated';
+import Animated, { Extrapolation, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
 import {
@@ -41,8 +31,8 @@ const SERVICES: Service[] = [
   { key: 'kind.rollno', icon: 'card-account-details', color: '#EA4335', href: '/updates', params: { kind: 'rollno' } },
   { key: 'testPrep', icon: 'school', color: '#7C3AED', href: '/prep' },
   { key: 'cvBuilder', icon: 'file-account', color: '#0E7490', href: '/cv' },
-  { key: 'lastDateSoon', icon: 'timer-sand', color: '#F97316', href: '/search', params: { sort: 'deadline' } },
-  { key: 'postJob', icon: 'briefcase-plus', color: '#B45309', href: '/post-job' },
+  { key: 'lastDateSoon', icon: 'timer-sand', color: '#F97316', href: '/search', params: { sort: 'deadline', soon: '1' } },
+  { key: 'pastPapers', icon: 'file-document-multiple', color: '#B45309', href: '/past-papers' },
 ];
 
 type Row = { type: 'job'; job: Job; i: number } | { type: 'ad'; key: string };
@@ -154,7 +144,7 @@ export default function Home() {
             <Tap style={styles.bell} onPress={() => openSearch({ sort: 'newest' })}>
               <Icon name="bell-outline" size={21} color="#fff" />
               {newCount > 0 && (
-                <Animated.View entering={ZoomIn.delay(400)} style={[styles.bellDot, { backgroundColor: c.danger, borderColor: c.heroB }]}>
+                <Animated.View style={[styles.bellDot, { backgroundColor: c.danger, borderColor: c.heroB }]}>
                   <Text style={styles.bellDotText}>{newCount > 99 ? '99+' : newCount}</Text>
                 </Animated.View>
               )}
@@ -166,7 +156,7 @@ export default function Home() {
       </LinearGradient>
 
       {/* floating search pill over the hero's edge */}
-      <Animated.View entering={FadeIn.delay(120)} style={styles.searchWrap}>
+      <Animated.View style={styles.searchWrap}>
         <Tap haptic={false} scaleTo={0.98} onPress={() => openSearch()}
           style={[styles.searchBar, { backgroundColor: c.card, shadowColor: c.shadow, borderColor: c.border }]}>
           <Icon name="magnify" size={21} color={c.primary} />
@@ -186,7 +176,7 @@ export default function Home() {
           const badge = sv.params?.kind ? updates.filter((u) => u.kind === sv.params!.kind && Date.now() - Date.parse(u.firstSeen) < 2 * 86_400_000).length
             : sv.params?.sort === 'deadline' ? closing.length : 0;
           return (
-            <Animated.View key={sv.key} entering={ZoomIn.delay(120 + i * 45).springify().damping(15)} style={styles.serviceCell}>
+            <Animated.View key={sv.key} style={styles.serviceCell}>
               <Tap onPress={() => (sv.href === '/search' ? openSearch(sv.params) : router.push({ pathname: sv.href as any, params: sv.params ?? {} }))}
                 style={[styles.service, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}>
                 <View style={[styles.serviceIcon, { backgroundColor: sv.color + '1F' }]}>
@@ -208,7 +198,7 @@ export default function Home() {
           .map((meta, i) => {
           const cat = meta.key;
           return (
-            <Animated.View key={cat} entering={ZoomIn.delay(120 + i * 40).springify().damping(14)} style={styles.cell}>
+            <Animated.View key={cat} style={styles.cell}>
               <Tap style={styles.cellInner} onPress={() => openSearch(meta.params)}>
                 <LinearGradient colors={meta.colors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.catIcon}>
                   <Icon name={meta.icon as IconName} size={24} color="#fff" />
@@ -228,7 +218,7 @@ export default function Home() {
       <SectionTitle title={`🏛️ ${t('commissions')}`} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList}>
         {SOURCE_CHIPS.filter(([k]) => k !== 'user' && k !== 'njp').map(([k, label], i) => (
-          <Animated.View key={k} entering={FadeInRight.delay(i * 40)}>
+          <Animated.View key={k}>
             <Tap style={[styles.cityChip, { backgroundColor: c.card, borderColor: c.border }]}
               onPress={() => openSearch({ source: k })}>
               <Icon name="bank-outline" size={16} color={c.primary} />
@@ -242,7 +232,7 @@ export default function Home() {
       <SectionTitle title={t('byCity')} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList}>
         {CITY_CHIPS.map((city, i) => (
-          <Animated.View key={city} entering={FadeInRight.delay(i * 40)}>
+          <Animated.View key={city}>
             <Tap style={[styles.cityChip, { backgroundColor: c.card, borderColor: c.border }]}
               onPress={() => openSearch({ city })}>
               <Icon name="map-marker-radius" size={16} color={c.primary} />
@@ -270,10 +260,10 @@ export default function Home() {
       {closing.length > 0 && (
         <>
           <SectionTitle title={`⏳ ${t('closingSoon')}`} action={t('seeAll')}
-            onAction={() => openSearch({ sort: 'deadline' })} />
+            onAction={() => openSearch({ sort: 'deadline', soon: '1' })} />
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList} decelerationRate="fast" snapToInterval={262}>
             {closing.map((job, i) => (
-              <Animated.View key={job.id} entering={FadeInRight.delay(i * 60).springify()}>
+              <Animated.View key={job.id}>
                 <Tap style={[styles.closeCard, { backgroundColor: c.card, borderColor: c.border, shadowColor: c.shadow }]}
                   onPress={() => router.push(`/job/${job.id}`)}>
                   <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
@@ -318,7 +308,7 @@ export default function Home() {
       </Animated.View>
 
       {toast && (
-        <Animated.View entering={FadeIn.springify()} exiting={FadeOutUp} style={[styles.toast, { top: insets.top + 60, backgroundColor: c.text }]}>
+        <Animated.View style={[styles.toast, { top: insets.top + 60, backgroundColor: c.text }]}>
           <Text style={[styles.toastText, tf(), { color: c.bg }]}>{toast}</Text>
         </Animated.View>
       )}
@@ -394,7 +384,7 @@ function JobStrip({ jobs, featured }: { jobs: Job[]; featured?: boolean }) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hList} decelerationRate="fast" snapToInterval={262}>
       {jobs.map((job, i) => (
-        <Animated.View key={job.id} entering={FadeInRight.delay(i * 60).springify()}>
+        <Animated.View key={job.id}>
           <Tap style={[styles.closeCard, { backgroundColor: c.card, borderColor: featured ? c.gold : c.border, shadowColor: c.shadow }]}
             onPress={() => router.push(`/job/${job.id}`)}>
             <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
