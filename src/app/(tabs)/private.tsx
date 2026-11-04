@@ -5,6 +5,7 @@ import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { JobCard } from '@/components/JobCard';
+import { WebJobs } from '@/components/WebJobs';
 import {
   BrandSpinner, brandRefreshControl, Chip, EmptyState, Icon, JobCardSkeleton, Tap, useStatusBar, useTabBarSpace,
 } from '@/components/ui';
@@ -105,7 +106,7 @@ export default function PrivateJobs() {
         ListEmptyComponent={syncing
           ? <View>{[0, 1, 2].map((k) => <JobCardSkeleton key={k} />)}</View>
           : <EmptyState icon="briefcase-search-outline" title={t('nothingHere')} hint={communityReady() ? t('postJob') : t('communityOff')} />}
-        ListFooterComponent={<View style={{ height: tabSpace }} />}
+        ListFooterComponent={<View><WebJobs industry={industry} area={area} /><View style={{ height: tabSpace }} /></View>}
         showsVerticalScrollIndicator={false}
       />
       <BrandSpinner visible={refreshing} top={insets.top + 12} />

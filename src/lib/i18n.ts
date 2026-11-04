@@ -325,6 +325,9 @@ const en = {
   loading: 'Loading…',
   paperFailed: 'This paper could not be shown here. You can download the PDF instead.',
   downloadPdf: 'Download PDF',
+  webJobs: 'More private jobs from the web',
+  jobsByCareerjet: 'Jobs by Careerjet',
+  loadMore: 'Load more',
 };
 
 type Key = keyof typeof en;
@@ -652,6 +655,9 @@ const ur: Record<Key, string> = {
   loading: 'لوڈ ہو رہا ہے…',
   paperFailed: 'یہ پرچہ یہاں نہیں کھل سکا۔ آپ PDF ڈاؤن لوڈ کر سکتے ہیں۔',
   downloadPdf: 'PDF ڈاؤن لوڈ کریں',
+  webJobs: 'ویب سے مزید پرائیویٹ نوکریاں',
+  jobsByCareerjet: 'نوکریاں بذریعہ Careerjet',
+  loadMore: 'مزید دیکھیں',
 };
 
 export const QUAL_UR: Record<string, string> = {
