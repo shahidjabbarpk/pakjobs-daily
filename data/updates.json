@@ -1,14 +1,23 @@
 {
- "updatedAt": "2026-11-04T15:18:17+05:00",
+ "updatedAt": "2026-11-04T17:00:23+05:00",
  "updates": [
   {
-   "id": "ed3c539689b8d40f",
+   "id": "64e8a6ee7e507429",
+   "source": "kppsc",
+   "kind": "result",
+   "title": "Interview Result: Civil Judge-Cum-Judicial Magistrate / Illaqa Qazi (BPS-18) advertised vide Advertisement No.03/2026 New",
+   "url": "https://www.kppsc.gov.pk/interview/interview_details/3465",
+   "date": null,
+   "firstSeen": "2026-11-04T17:00:23+05:00"
+  },
+  {
+   "id": "5ec153747c523efd",
    "source": "bpsc",
    "kind": "result",
-   "title": "Results of Various Lecturer Posts (Male and Female Sections) in Colleges under the Higher and Technical Education Department.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1793788635.pdf",
+   "title": "Result of the various Lecturer Posts (Men's and Female Section) in the Colleges, Higher & Technical Department",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1793789307.pdf",
    "date": "2026-11-04",
-   "firstSeen": "2026-11-04T15:18:17+05:00"
+   "firstSeen": "2026-11-04T17:00:23+05:00"
   },
   {
    "id": "8f624c0b54fca2d0",
@@ -133,15 +142,6 @@
    "kind": "result",
    "title": "Written Examination Result for the Post of Civil Judges-Cum-Judicial Magistrates/ Alaqa Qazi (Adv# 03/2026)",
    "url": "https://kppsc.gov.pk/public/assets/downloads/files/Written_Examination_result_CIVIL_JUDGES_CUM_JUDICIAL_MAGISTRATES_ALAQA_QAZI_03_2026_30092026.pdf",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "cbaa6c5506d4eb1b",
-   "source": "kppsc",
-   "kind": "result",
-   "title": "Result of Written Examination for the Posts of PMS Officer & AETO (Adv No. 02/2025 Sr. No. 1 & 2)",
-   "url": "https://kppsc.gov.pk/public/assets/downloads/files/PMS_Officers_AETO_Written_Exam_Result_02_2025_04092026.pdf",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
