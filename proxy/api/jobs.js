@@ -27,7 +27,9 @@ export default async function handler(req, res) {
     const r = await fetch(`${API}?${q}`, {
       headers: { Authorization: `Basic ${Buffer.from(`${key}:`).toString('base64')}`, Referer: REFERER },
     });
-    const body = await r.json().catch(() => ({ type: 'ERROR' }));
+    const text = await r.text();
+    let body;
+    try { body = JSON.parse(text); } catch { body = { type: 'ERROR', status: r.status, detail: text.slice(0, 300) }; }
     return res.status(r.ok ? 200 : 502).json(body);
   } catch {
     return res.status(502).json({ type: 'ERROR', jobs: [] });
