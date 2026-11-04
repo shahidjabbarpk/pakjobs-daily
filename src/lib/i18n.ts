@@ -313,9 +313,14 @@ const en = {
   syllabus: 'Syllabus',
   howToAttempt: 'How to attempt the test',
   testSchedule: 'Test schedule',
-  pastPapersSub: 'Official papers & syllabus, plus practice papers with answer keys you can save as PDF.',
+  pastPapersSub: 'official past papers from the commissions',
   prepareTest: 'Prepare for the test',
   prepareTestHint: 'Mock test in this paper pattern',
+  searchPapers: 'Search papers…',
+  practicePapers: 'Practice papers',
+  practicePaper: 'practice paper',
+  practicePapersHint: 'Fresh questions with answer key - save as PDF, print or share.',
+  officialPapers: 'Official past papers',
 };
 
 type Key = keyof typeof en;
@@ -631,9 +636,14 @@ const ur: Record<Key, string> = {
   syllabus: 'سلیبس',
   howToAttempt: 'ٹیسٹ کیسے دیں',
   testSchedule: 'ٹیسٹ شیڈول',
-  pastPapersSub: 'سرکاری پرچے اور سلیبس، اور جوابات کے ساتھ پریکٹس پرچے جو PDF میں محفوظ ہو سکتے ہیں۔',
+  pastPapersSub: 'کمیشنز کے سرکاری پرانے پرچے',
   prepareTest: 'ٹیسٹ کی تیاری',
   prepareTestHint: 'اسی پرچے کے انداز میں ماک ٹیسٹ',
+  searchPapers: 'پرچے تلاش کریں…',
+  practicePapers: 'پریکٹس پرچے',
+  practicePaper: 'پریکٹس پرچہ',
+  practicePapersHint: 'نئے سوالات اور جوابات کے ساتھ - PDF میں محفوظ، پرنٹ یا شیئر کریں۔',
+  officialPapers: 'سرکاری پرانے پرچے',
 };
 
 export const QUAL_UR: Record<string, string> = {

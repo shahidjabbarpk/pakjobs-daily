@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import seed from '../data/seed.json';
+import bundledPapers from '../../data/papers.json';
 import { Storage } from './kv';
 import type { Lang } from './i18n';
-import type { Category, Feed, Job, Profile, Update } from './types';
+import type { Category, Feed, Job, Paper, Profile, Update } from './types';
 import type { CvData } from './cv';
 
 export const ALL_CATEGORIES: Category[] = ['govt', 'psc', 'armed', 'banking', 'police', 'education', 'health', 'it', 'private'];
@@ -21,6 +22,7 @@ interface AppState {
   alertCategories: Category[];
   alertCity: string | null;
   updates: Update[];          // results / roll no slips / schedules
+  papers: Paper[];            // official past papers, refreshed with the updates
   seenUpdateIds: string[];
   notifyUpdates: boolean;
   cv: CvData | null;
@@ -57,6 +59,7 @@ export const useApp = create<AppState>()(
       alertCategories: [...ALL_CATEGORIES],
       alertCity: null,
       updates: [],
+      papers: bundledPapers.papers as Paper[],
       seenUpdateIds: [],
       notifyUpdates: true,
       cv: null,

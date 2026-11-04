@@ -67,6 +67,15 @@ export interface Report {
   createdAt: number;
 }
 
+/** An official past paper (PDF) a commission publishes on its own site; see scraper scrape_papers. */
+export interface Paper {
+  id: string;
+  source: Source;
+  title: string;
+  url: string;
+  year: number | null;
+}
+
 export type UpdateKind = 'rollno' | 'result' | 'interview' | 'schedule';
 
 /** Result / roll-no slip / exam schedule notice from a commission or NTS. */

@@ -4,12 +4,22 @@ import { FEED_URL } from './config';
 import { translate } from './i18n';
 import { CHANNEL } from './notify';
 import { useApp } from './store';
-import type { Update } from './types';
+import type { Paper, Update } from './types';
 
 const UPDATES_URL = FEED_URL.replace(/jobs\.json$/, 'updates.json');
+const PAPERS_URL = FEED_URL.replace(/jobs\.json$/, 'papers.json');
+
+/** Official past-paper list (changes rarely); the copy bundled in the app is used until this succeeds. */
+async function refreshPapers() {
+  const r = await fetch(`${PAPERS_URL}?t=${Math.floor(Date.now() / 3600000)}`);
+  if (!r.ok) return;
+  const { papers } = (await r.json()) as { papers: Paper[] };
+  if (papers?.length) useApp.getState().set({ papers });
+}
 
 /** Fetches results / roll-no / schedule notices; returns the ones this device hasn't seen. */
 export async function refreshUpdates(): Promise<Update[]> {
+  refreshPapers().catch(() => {});
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 15000);
   try {

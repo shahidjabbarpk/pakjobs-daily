@@ -1,7 +1,25 @@
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
+import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 import { buildMock, type Exam } from '@/data/exams';
+import { adOnOpen } from './ads';
+import type { Paper } from './types';
+
+/** Opens an official past paper inside the app (PDF viewer in the in-app browser); every other open has an ad. */
+export function openPaper(p: Paper) {
+  const viewer = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(p.url)}`;
+  adOnOpen('paper', () => WebBrowser.openBrowserAsync(viewer, { toolbarColor: '#0E7490' }));
+}
+
+// Repeated on every printed page (position: fixed repeats per page when printing):
+// a faint diagonal "PakJobs Daily" across the middle and a footer line.
+export const WATERMARK_CSS = `
+  .wm { position: fixed; top: 42%; left: -10%; width: 120%; text-align: center; transform: rotate(-30deg);
+        font-size: 72px; font-weight: 800; letter-spacing: 6px; color: rgba(0,100,0,0.07); z-index: 0; pointer-events: none; }
+  .wmfoot { position: fixed; bottom: 0; left: 0; right: 0; text-align: center; font-size: 10px; color: #6b8a76; }
+  .content { position: relative; z-index: 1; }`;
+export const WATERMARK_HTML = '<div class="wm">PakJobs Daily</div><div class="wmfoot">PakJobs Daily - Govt &amp; Private Job Alerts, Mock Tests &amp; Past Papers</div>';
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -21,15 +39,14 @@ export async function exportPracticePaper(exam: Exam): Promise<void> {
   .o { display: inline-block; width: 46%; margin: 2px 0; }
   .key { page-break-before: always; }
   .key span { display: inline-block; width: 18%; margin: 3px 0; }
-  .foot { margin-top: 20px; color: #93a39a; font-size: 10px; text-align: center; }
-  </style></head><body>
+  ${WATERMARK_CSS}
+  </style></head><body>${WATERMARK_HTML}<div class="content">
   <h1>${esc(exam.name)} Practice Paper</h1>
   <div class="meta">${qs.length} MCQs &nbsp;•&nbsp; ${exam.minutes} minutes &nbsp;•&nbsp; Practice paper, not an official past paper</div>
   ${qs.map((q, i) => `<div class="q"><b>${i + 1}. ${esc(q.q)}</b>${q.o.map((o, j) => `<span class="o">(${'ABCD'[j]}) ${esc(o)}</span>`).join('')}</div>`).join('')}
   <div class="key"><h1>Answer Key</h1><div class="meta">Check yourself after attempting the paper.</div>
   ${qs.map((q, i) => `<span>${i + 1}. ${'ABCD'[q.a]}</span>`).join('')}</div>
-  <div class="foot">Made with PakJobs Daily</div>
-  </body></html>`;
+  </div></body></html>`;
   if (Platform.OS === 'web') {
     await Print.printAsync({ html });
     return;

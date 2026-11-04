@@ -39,7 +39,6 @@ export const EXAMS: Exam[] = [
     key: 'kppsc', name: 'KPPSC', full: 'Khyber Pakhtunkhwa Public Service Commission', icon: 'file-certificate', colors: ['#B45309', '#F59E0B'],
     mix: { pak: 6, gk: 6, islamiat: 5, eng: 5, math: 4, computer: 4 }, minutes: 30, source: 'kppsc',
     links: [
-      { label: 'Competitive exam past papers', url: 'https://www.kppsc.gov.pk/past_papers' },
       { label: 'Syllabus', url: 'https://www.kppsc.gov.pk/syllabus' },
       { label: 'Official website', url: 'https://www.kppsc.gov.pk/' },
     ],
@@ -48,7 +47,6 @@ export const EXAMS: Exam[] = [
     key: 'spsc', name: 'SPSC', full: 'Sindh Public Service Commission', icon: 'file-document-multiple', colors: ['#0E7490', '#22D3EE'],
     mix: { pak: 6, gk: 6, islamiat: 5, eng: 5, math: 4, computer: 4 }, minutes: 30, source: 'spsc',
     links: [
-      { label: 'Past papers', url: 'https://spsc.gov.pk/Past_Papers.php' },
       { label: 'Scope & syllabus', url: 'https://spsc.gov.pk/Syllabus.php' },
       { label: 'Official website', url: 'https://spsc.gov.pk/' },
     ],

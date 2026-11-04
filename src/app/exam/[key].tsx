@@ -4,6 +4,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { useMemo, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PaperRow } from '@/components/PaperRow';
 import { Icon, type IconName, SectionTitle, Tap, useStatusBar } from '@/components/ui';
 import { ATTEMPT_STEPS, EXAMS, examByKey } from '@/data/exams';
 import { adOnOpen, BottomBanner, withAd } from '@/lib/ads';
@@ -23,6 +24,8 @@ export default function ExamScreen() {
   const insets = useSafeAreaInsets();
   const best = useApp((s) => s.quizBest[`mock-${exam.key}`]);
   const updates = useApp((s) => s.updates);
+  const allPapers = useApp((s) => s.papers);
+  const papers = useMemo(() => allPapers.filter((p) => p.source === exam.source), [allPapers, exam.source]);
   const [busy, setBusy] = useState(false);
   const total = Object.values(exam.mix).reduce((a, b) => a + b, 0);
 
@@ -81,7 +84,14 @@ export default function ExamScreen() {
           </>
         )}
 
-        <SectionTitle title={`📄 ${t('pastPapers')} & ${t('syllabus')}`} />
+        {papers.length > 0 && (
+          <>
+            <SectionTitle title={`📄 ${t('officialPapers')} (${papers.length})`} />
+            {papers.map((p) => <PaperRow key={p.id} paper={p} />)}
+          </>
+        )}
+
+        <SectionTitle title={`🔗 ${t('syllabus')} & ${t('sources')}`} />
         {exam.links.map((l) => (
           <Tap key={l.url} onPress={() => adOnOpen('paper', () => WebBrowser.openBrowserAsync(l.url))}
             style={[styles.row, { backgroundColor: c.card, borderColor: c.border }]}>

@@ -6,6 +6,7 @@ schema, de-duplicates against the previous run and writes:
     data/jobs.json   - all live jobs (newest first) that the app downloads
     data/new.json    - only the jobs first seen in this run (for push/notify)
     data/meta.json   - run timestamp + per-source counts/errors
+    data/papers.json - official past papers (PDFs the commissions publish themselves)
 
 Run:  python scraper/scrape.py            (from repo root)
 """
@@ -34,6 +35,8 @@ NEW_FILE = DATA / "new.json"
 UPDATES_FILE = DATA / "updates.json"
 UPDATES_KEEP_DAYS = 45
 META_FILE = DATA / "meta.json"
+PAPERS_FILE = DATA / "papers.json"
+PAPER_PAGES = [("kppsc", "https://www.kppsc.gov.pk/past_papers"), ("spsc", "https://spsc.gov.pk/Past_Papers.php")]
 
 KEEP_DAYS_AFTER_DEADLINE = 3      # keep expired jobs briefly so users see "closed"
 KEEP_DAYS_WITHOUT_DEADLINE = 45
@@ -536,6 +539,45 @@ def scrape_updates(page_source: str, page: str) -> list[dict]:
     return list(best.values())[:8]
 
 
+# --------------------------------------------------------------------------- past papers
+
+# SPSC lists bare years under a folder per exam ("CCE/CCE_2019.pdf" shows as "2019")
+PAPER_FOLDERS = {"CCE": "CCE (Combined Competitive Exam)", "Lecturers": "Lecturer", "Medical": "Medical Officer"}
+
+
+def paper_title(text: str, url: str) -> str:
+    text = re.sub(r"^[>\s]+", "", text).strip(" -")
+    parts = url.split("/")
+    folder, name = (parts[-2] if len(parts) > 1 else ""), parts[-1]
+    text = re.sub(r"\s+-(?=\d)", " ", text)  # "papers -2017" -> "papers 2017"
+    if folder in PAPER_FOLDERS:
+        text = re.sub(r"^MO\b", "", text).replace("-", " ").strip()
+        text = f"{PAPER_FOLDERS[folder]} {text}".strip()
+    if "sample" in text.lower() and "biology" in name.lower():
+        text += " (Biology)"
+    year = re.search(r"(?:19|20)\d{2}", text) or re.search(r"(?:19|20)\d{2}", name)
+    if year and year.group(0) not in text:
+        text += f" {year.group(0)}"
+    return clean(text)
+
+
+def scrape_papers(src: str, page: str) -> list[dict]:
+    """Past-paper PDFs a commission publishes on its own site (schedules/results on the same page are skipped)."""
+    out: dict[str, dict] = {}
+    for a in soup(page).find_all("a", href=True):
+        url = urljoin(page, a["href"].strip())
+        text = clean(a.get_text(" "))
+        if not url.lower().endswith(".pdf") or re.search(r"schedule|result|interview|act|rules", url + " " + text, re.I):
+            continue
+        if not re.search(r"past|previous|papers?|sample", url + " " + text, re.I):
+            continue
+        title = paper_title(text, url)
+        year = re.search(r"(?:19|20)\d{2}", title)
+        out.setdefault(url, {"id": job_id("paper-" + src, url), "source": src, "title": title, "url": url,
+                             "year": int(year.group(0)) if year else None})
+    return sorted(out.values(), key=lambda p: (p["year"] or 0, p["title"]), reverse=True)
+
+
 # --------------------------------------------------------------------------- main
 
 def load_previous() -> dict[str, dict]:
@@ -610,6 +652,22 @@ def main() -> int:
                       key=lambda u: (u.get("date") or u["firstSeen"][:10], u["firstSeen"]), reverse=True)
     meta["updates"] = {"total": len(upd_list), "new": sum(1 for u in upd_list if u["id"] not in prev_upd), "ok": upd_ok}
     print(f"updates {len(upd_list)} ({meta['updates']['new']} new)")
+    # past papers change rarely; a site that is down keeps its last known list
+    prev_papers = []
+    if PAPERS_FILE.exists():
+        try:
+            prev_papers = json.loads(PAPERS_FILE.read_text(encoding="utf-8"))["papers"]
+        except (ValueError, KeyError):
+            pass
+    papers: list[dict] = []
+    for src, page in PAPER_PAGES:
+        try:
+            items = scrape_papers(src, page)
+        except Exception:  # noqa: BLE001
+            items = []
+        papers += items or [p for p in prev_papers if p["source"] == src]
+    print(f"papers {len(papers)}")
+    PAPERS_FILE.write_text(json.dumps({"updatedAt": meta["updatedAt"], "papers": papers}, ensure_ascii=False, indent=1), encoding="utf-8")
     UPDATES_FILE.write_text(json.dumps({"updatedAt": meta["updatedAt"], "updates": upd_list}, ensure_ascii=False, indent=1), encoding="utf-8")
     JOBS_FILE.write_text(json.dumps({"updatedAt": meta["updatedAt"], "jobs": live}, ensure_ascii=False, indent=1), encoding="utf-8")
     NEW_FILE.write_text(json.dumps({"updatedAt": meta["updatedAt"], "jobs": new}, ensure_ascii=False, indent=1), encoding="utf-8")
