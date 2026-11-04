@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PakJobs Daily – Search Jobs in Pakistan</title>
+<meta name="description" content="Search the latest private and government jobs across Pakistan by city and category. Free job search by PakJobs Daily.">
+<link rel="icon" href="/icon.png">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <a class="brand" href="/"><img src="/icon.png" alt="">PakJobs Daily</a>
+  <div class="links"><a href="/" aria-current="page">Jobs</a><a href="/about">About</a><a href="/privacy">Privacy</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <h1>Find jobs in Pakistan</h1>
+  <p>Latest private and government vacancies from across the web, updated every day. Search by job title and city.</p>
+  <form id="search" class="search" role="search">
+    <input id="kw" name="keywords" placeholder="Job title or skill, e.g. sales, driver, teacher" autocomplete="off">
+    <select id="loc" name="location" aria-label="City">
+      <option value="">All Pakistan</option>
+    </select>
+    <button type="submit">Search</button>
+  </form>
+  <div class="chips" id="chips"></div>
+</div></header>
+
+<main class="wrap">
+  <div class="bar"><h2 id="heading">Latest jobs</h2><span id="count" class="muted"></span></div>
+  <div id="results" aria-live="polite"></div>
+  <div class="pager" id="pager"></div>
+  <p class="credit"><a href="https://www.careerjet.com.pk" rel="nofollow noopener" target="_blank">Jobs by Careerjet</a>. Clicking a job opens the full advert on the employer's or job board's site, where you apply.</p>
+
+  <section class="app">
+    <div>
+      <h2>Get the PakJobs Daily app</h2>
+      <p>Job alerts for your district, results, roll number slips, mock tests, past papers and a free CV maker – in English and Urdu. Coming soon on Google Play.</p>
+    </div>
+    <img src="/icon.png" alt="PakJobs Daily app icon" width="88" height="88">
+  </section>
+</main>
+
+<footer class="wrap">© 2026 PakJobs Daily · <a href="/about">About</a> · <a href="/privacy">Privacy Policy</a> · <a href="mailto:shahidjabbarpk@gmail.com">Contact</a></footer>
+
+<script>
+const CITIES = ['Karachi','Lahore','Islamabad','Rawalpindi','Faisalabad','Multan','Peshawar','Quetta','Hyderabad','Gujranwala','Sialkot','Bahawalpur','Sargodha','Abbottabad','Mardan','Sukkur','Gujrat','Sahiwal','Muzaffarabad','Gilgit'];
+const CATS = [['Sales','sales'],['IT & Software','developer'],['Office / Admin','admin'],['Teaching','teacher'],['Driver','driver'],['Accounts','accountant'],['Factory','factory'],['Construction','construction'],['Health','pharmacy'],['Hotel & Restaurant','restaurant'],['Security Guard','security guard']];
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+for (const c of CITIES) $('loc').insertAdjacentHTML('beforeend', `<option>${c}</option>`);
+for (const [label, kw] of CATS) $('chips').insertAdjacentHTML('beforeend', `<button type="button" data-kw="${esc(kw)}">${esc(label)}</button>`);
+
+// search state lives in the URL so results can be shared and the back button works
+function state() {
+  const p = new URLSearchParams(location.search);
+  return { keywords: p.get('keywords') || '', location: p.get('location') || '', page: Math.max(1, Math.min(10, +p.get('page') || 1)) };
+}
+function go(s) {
+  const p = new URLSearchParams();
+  if (s.keywords) p.set('keywords', s.keywords);
+  if (s.location) p.set('location', s.location);
+  if (s.page > 1) p.set('page', s.page);
+  history.pushState(null, '', p.toString() ? `/?${p}` : '/');
+  load();
+}
+
+$('search').addEventListener('submit', (e) => { e.preventDefault(); go({ keywords: $('kw').value.trim(), location: $('loc').value, page: 1 }); });
+$('chips').addEventListener('click', (e) => {
+  const kw = e.target.dataset?.kw;
+  if (kw) { $('kw').value = kw; go({ keywords: kw, location: $('loc').value, page: 1 }); }
+});
+addEventListener('popstate', load);
+
+function message(text) { $('results').innerHTML = `<div class="note">${text}</div>`; $('pager').innerHTML = ''; $('count').textContent = ''; }
+
+async function load() {
+  const s = state();
+  $('kw').value = s.keywords; $('loc').value = s.location;
+  for (const b of $('chips').children) b.classList.toggle('on', b.dataset.kw === s.keywords);
+  $('heading').textContent = s.keywords || s.location ? `${s.keywords || 'Jobs'}${s.location ? ' in ' + s.location : ' in Pakistan'}` : 'Latest jobs';
+  message('Loading jobs…');
+  const q = new URLSearchParams({ page: s.page });
+  if (s.keywords) q.set('keywords', s.keywords);
+  if (s.location) q.set('location', s.location);
+  try {
+    const r = await fetch(`/api/jobs?${q}`);
+    const body = await r.json();
+    if (body.type === 'OFF') return message('Job search is being set up and will be available very soon. Please check back shortly.');
+    if (body.type === 'LOCATIONS') return message('We could not find that city. Please pick one from the list.');
+    if (body.type !== 'JOBS') return message('Jobs could not be loaded right now. Please try again in a minute.');
+    const jobs = body.jobs || [];
+    if (!jobs.length) return message('No jobs found. Try a different job title or city.');
+    $('count').textContent = `${body.hits ?? jobs.length} jobs`;
+    $('results').innerHTML = jobs.map((j) => `
+      <a class="job" href="${esc(j.url)}" target="_blank" rel="nofollow noopener">
+        <h3>${esc(j.title)}</h3>
+        ${j.company ? `<div class="co">${esc(j.company)}</div>` : ''}
+        <div class="meta">
+          ${j.locations ? `<span>📍 ${esc(j.locations)}</span>` : ''}
+          ${j.salary ? `<span>💰 ${esc(j.salary)}</span>` : ''}
+          ${j.date ? `<span>🗓️ ${esc(new Date(j.date).toDateString().slice(4))}</span>` : ''}
+        </div>
+        ${j.description ? `<p>${esc(j.description.replace(/<[^>]+>/g, ''))}</p>` : ''}
+      </a>`).join('');
+    const last = Math.min(body.pages || 1, 10);
+    $('pager').innerHTML = last > 1
+      ? `${s.page > 1 ? `<button data-p="${s.page - 1}">‹ Previous</button>` : ''}<span class="muted">Page ${s.page} of ${last}</span>${s.page < last ? `<button data-p="${s.page + 1}">Next ›</button>` : ''}`
+      : '';
+  } catch {
+    message('Jobs could not be loaded right now. Please check your connection and try again.');
+  }
+}
+$('pager').addEventListener('click', (e) => {
+  const p = +e.target.dataset?.p;
+  if (p) { go({ ...state(), page: p }); scrollTo({ top: 0, behavior: 'smooth' }); }
+});
+load();
+</script>
+</body>
+</html>

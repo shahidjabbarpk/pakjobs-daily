@@ -2,7 +2,8 @@
 // Keeps the Careerjet API key out of the APK and forwards the real user's IP and user agent,
 // which Careerjet requires on every call (the user whose action triggered it). Nothing is stored.
 const API = 'https://search.api.careerjet.net/v4/query';
-const REFERER = 'https://shahidjabbarpk.github.io/pakjobs-daily/';
+// the public PakJobs Daily website (this same Vercel project) registered with Careerjet
+const REFERER = 'https://pakjobs-daily.vercel.app/';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
