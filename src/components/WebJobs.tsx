@@ -18,7 +18,8 @@ export function WebJobs({ industry, area }: { industry: string | null; area: str
   const [jobs, setJobs] = useState<WebJob[]>([]);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
-  const [off, setOff] = useState(false);
+  // shown only once Careerjet has actually answered with jobs; off / offline / errors keep it hidden
+  const [live, setLive] = useState(false);
   const [loading, setLoading] = useState(false);
   const keywords = industry ? INDUSTRY_KEYWORDS[industry] : undefined;
   const location = area ? (PROVINCE_NAMES as Record<string, string>)[area] ?? area : undefined;
@@ -27,12 +28,13 @@ export function WebJobs({ industry, area }: { industry: string | null; area: str
     setLoading(true);
     try {
       const res = await fetchWebJobs({ keywords, location, page: p });
-      if (!res) { setOff(true); return; }
+      if (!res) { setLive(false); return; }
+      setLive(true);
       setJobs((prev) => (p === 1 ? res.jobs : [...prev, ...res.jobs]));
       setPages(res.pages);
       setPage(p);
     } catch {
-      if (p === 1) setJobs([]);
+      if (p === 1) { setJobs([]); setLive(false); }
     } finally {
       setLoading(false);
     }
@@ -41,7 +43,7 @@ export function WebJobs({ industry, area }: { industry: string | null; area: str
   // a new industry or area starts again from page 1
   useEffect(() => { load(1); }, [keywords, location]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (off) return null;
+  if (!live) return null;
   return (
     <View>
       <SectionTitle title={`🌐 ${t('webJobs')}`} />
