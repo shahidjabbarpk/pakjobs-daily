@@ -321,6 +321,10 @@ const en = {
   practicePaper: 'practice paper',
   practicePapersHint: 'Fresh questions with answer key - save as PDF, print or share.',
   officialPapers: 'Official past papers',
+  pages: 'pages',
+  loading: 'Loading…',
+  paperFailed: 'This paper could not be shown here. You can download the PDF instead.',
+  downloadPdf: 'Download PDF',
 };
 
 type Key = keyof typeof en;
@@ -644,6 +648,10 @@ const ur: Record<Key, string> = {
   practicePaper: 'پریکٹس پرچہ',
   practicePapersHint: 'نئے سوالات اور جوابات کے ساتھ - PDF میں محفوظ، پرنٹ یا شیئر کریں۔',
   officialPapers: 'سرکاری پرانے پرچے',
+  pages: 'صفحات',
+  loading: 'لوڈ ہو رہا ہے…',
+  paperFailed: 'یہ پرچہ یہاں نہیں کھل سکا۔ آپ PDF ڈاؤن لوڈ کر سکتے ہیں۔',
+  downloadPdf: 'PDF ڈاؤن لوڈ کریں',
 };
 
 export const QUAL_UR: Record<string, string> = {

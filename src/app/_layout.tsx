@@ -96,6 +96,7 @@ export default function RootLayout() {
         <Stack.Screen name="cv" />
         <Stack.Screen name="exam/[key]" />
         <Stack.Screen name="past-papers" />
+        <Stack.Screen name="paper" />
       </Stack>
     </GestureHandlerRootView>
   );

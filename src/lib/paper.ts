@@ -1,15 +1,14 @@
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
-import * as WebBrowser from 'expo-web-browser';
+import { router } from 'expo-router';
 import { Platform } from 'react-native';
 import { buildMock, type Exam } from '@/data/exams';
 import { adOnOpen } from './ads';
 import type { Paper } from './types';
 
-/** Opens an official past paper inside the app (PDF viewer in the in-app browser); every other open has an ad. */
+/** Opens an official past paper in the in-app PDF viewer (app/paper.tsx); every other open has an ad. */
 export function openPaper(p: Paper) {
-  const viewer = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(p.url)}`;
-  adOnOpen('paper', () => WebBrowser.openBrowserAsync(viewer, { toolbarColor: '#0E7490' }));
+  adOnOpen('paper', () => router.push({ pathname: '/paper', params: { url: p.url, title: p.title } }));
 }
 
 // Repeated on every printed page (position: fixed repeats per page when printing):
