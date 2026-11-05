@@ -74,6 +74,35 @@ service cloud.firestore {
       allow read: if true;
     }
 
+    // ---- Imtihan Hub (separate exam-prep app, same Firebase project) - opt-in weekly leaderboards.
+    // Weekly points: one doc per student per ISO week, points may only go up.
+    match /imtihan_points/{week}/u/{uid} {
+      allow read: if true;
+      allow create, update: if signedIn() && me() == uid
+        && week.matches('^20[0-9]{2}-W[0-9]{2}$')
+        && data().keys().hasOnly(['name', 'points', 'tests', 'at'])
+        && str(data().name, 2, 30)
+        && data().points is int && data().points >= 0 && data().points <= 5000
+        && data().tests is int && data().tests >= 0 && data().tests <= 500
+        && data().at == request.time
+        && (resource == null || data().points >= resource.data.points);
+      allow delete: if signedIn() && (me() == uid || isAdmin());
+    }
+    // Weekly grand test: only the first attempt counts, so it can be created but never changed.
+    match /imtihan_grand/{gid}/u/{uid} {
+      allow read: if true;
+      allow create: if signedIn() && me() == uid
+        && gid.matches('^20[0-9]{2}-W[0-9]{2}-(medical|engineering|general)$')
+        && data().keys().hasOnly(['name', 'score', 'total', 'seconds', 'at'])
+        && str(data().name, 2, 30)
+        && data().total is int && data().total >= 1 && data().total <= 200
+        && data().score is int && data().score >= 0 && data().score <= data().total
+        && data().seconds is int && data().seconds >= 0 && data().seconds <= 20000
+        && data().at == request.time;
+      allow update: if false;
+      allow delete: if signedIn() && (me() == uid || isAdmin());
+    }
+
     match /reports/{id} {
       allow create: if signedIn() && data().uid == me() && str(data().reason, 1, 200)
         && data().kind in ['job', 'comment'];

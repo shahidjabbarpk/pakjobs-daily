@@ -98,5 +98,24 @@ await t('user can list own posts', () => assertSucceeds(getDocs(query(collection
 await t('user can delete own profile', () => assertSucceeds(deleteDoc(doc(bob, 'profiles/bob'))));
 await t('cannot delete others profile', () => assertFails(deleteDoc(doc(alice, 'profiles/bob'))));
 
+console.log('imtihan hub leaderboards');
+const pts = (n, extra = {}) => ({ name: 'Ali (Lahore)', points: n, tests: 1, at: serverTimestamp(), ...extra });
+await t('guest can post own weekly points', () => assertSucceeds(setDoc(doc(guest, 'imtihan_points/2026-W45/u/guest'), pts(10))));
+await t('points can go up', () => assertSucceeds(setDoc(doc(guest, 'imtihan_points/2026-W45/u/guest'), pts(25))));
+await t('points cannot go down', () => assertFails(setDoc(doc(guest, 'imtihan_points/2026-W45/u/guest'), pts(5))));
+await t('cannot post points for someone else', () => assertFails(setDoc(doc(alice, 'imtihan_points/2026-W45/u/guest'), pts(99))));
+await t('points over the cap are refused', () => assertFails(setDoc(doc(alice, 'imtihan_points/2026-W45/u/alice'), pts(999999))));
+await t('extra fields are refused', () => assertFails(setDoc(doc(alice, 'imtihan_points/2026-W45/u/alice'), pts(3, { admin: true }))));
+await t('bad week id is refused', () => assertFails(setDoc(doc(alice, 'imtihan_points/hello/u/alice'), pts(3))));
+await t('not signed in cannot post points', () => assertFails(setDoc(doc(anon, 'imtihan_points/2026-W45/u/x'), pts(3))));
+await t('anyone can read the points board', () => assertSucceeds(getDocs(collection(anon, 'imtihan_points/2026-W45/u'))));
+const gt = (s, extra = {}) => ({ name: 'Sara', score: s, total: 60, seconds: 1800, at: serverTimestamp(), ...extra });
+await t('guest can submit a grand test once', () => assertSucceeds(setDoc(doc(guest, 'imtihan_grand/2026-W45-medical/u/guest'), gt(40))));
+await t('grand test cannot be changed', () => assertFails(setDoc(doc(guest, 'imtihan_grand/2026-W45-medical/u/guest'), gt(60))));
+await t('score above total is refused', () => assertFails(setDoc(doc(bob, 'imtihan_grand/2026-W45-medical/u/bob'), gt(61))));
+await t('unknown track is refused', () => assertFails(setDoc(doc(bob, 'imtihan_grand/2026-W45-arts/u/bob'), gt(10))));
+await t('anyone can read the grand board', () => assertSucceeds(getDocs(collection(anon, 'imtihan_grand/2026-W45-medical/u'))));
+await t('student can remove own score', () => assertSucceeds(deleteDoc(doc(guest, 'imtihan_points/2026-W45/u/guest'))));
+
 await env.cleanup();
 console.log(`\n${passed} passed${process.exitCode ? ' — SOME FAILED' : ''}`);
