@@ -27,7 +27,7 @@ export const INDUSTRY_KEYWORDS: Record<string, string> = {
 };
 
 /** One page (20) of web jobs; null when the feature is off (no proxy / no API key yet). */
-export async function fetchWebJobs(opts: { keywords?: string; location?: string; page?: number }): Promise<{ jobs: WebJob[]; pages: number } | null> {
+export async function fetchWebJobs(opts: { keywords?: string; location?: string; page?: number }): Promise<{ jobs: WebJob[]; pages: number; hits: number } | null> {
   if (!WEB_JOBS_URL) return null;
   const q = new URLSearchParams();
   if (opts.keywords) q.set('keywords', opts.keywords);
@@ -40,8 +40,8 @@ export async function fetchWebJobs(opts: { keywords?: string; location?: string;
     const body = await r.json();
     if (body.type === 'OFF') return null;
     // "LOCATIONS" = Careerjet didn't recognise the place; show nothing rather than wrong-city jobs
-    if (body.type !== 'JOBS') return { jobs: [], pages: 0 };
-    return { jobs: (body.jobs ?? []).filter((j: WebJob) => j.title && j.url), pages: body.pages ?? 1 };
+    if (body.type !== 'JOBS') return { jobs: [], pages: 0, hits: 0 };
+    return { jobs: (body.jobs ?? []).filter((j: WebJob) => j.title && j.url), pages: body.pages ?? 1, hits: body.hits ?? 0 };
   } finally {
     clearTimeout(timer);
   }

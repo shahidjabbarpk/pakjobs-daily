@@ -33,6 +33,8 @@ export default function PrivateJobs() {
   const [area, setArea] = useState<string | null>(homeCity);
   const [industry, setIndustry] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  // matching jobs from the web (Careerjet); null while that section is off or offline
+  const [webHits, setWebHits] = useState<number | null>(null);
   const syncing = useApp((s) => s.syncing);
   const tabSpace = useTabBarSpace();
 
@@ -71,7 +73,7 @@ export default function PrivateJobs() {
               <View style={styles.heroRow}>
                 <View style={{ flex: 1 }}>
                   <Text style={[styles.h1, tf('bold')]}>{t('privateJobs')}</Text>
-                  <Text style={[styles.sub, tf()]}>{list.length} {t('liveJobs').toLowerCase()}</Text>
+                  <Text style={[styles.sub, tf()]}>{list.length + (webHits ?? 0)} {t('liveJobs').toLowerCase()}</Text>
                 </View>
                 <Tap onPress={() => router.push('/my-posts')} style={styles.heroBtn}>
                   <Icon name="account-box-outline" size={22} color="#fff" />
@@ -103,10 +105,11 @@ export default function PrivateJobs() {
             </Animated.View>
           </View>
         }
+        // with no posts of our own the web jobs below fill the list, so only say "nothing here" when they are missing too
         ListEmptyComponent={syncing
           ? <View>{[0, 1, 2].map((k) => <JobCardSkeleton key={k} />)}</View>
-          : <EmptyState icon="briefcase-search-outline" title={t('nothingHere')} hint={communityReady() ? t('postJob') : t('communityOff')} />}
-        ListFooterComponent={<View><WebJobs industry={industry} area={area} /><View style={{ height: tabSpace }} /></View>}
+          : webHits ? null : <EmptyState icon="briefcase-search-outline" title={t('nothingHere')} hint={communityReady() ? t('postJob') : t('communityOff')} />}
+        ListFooterComponent={<View><WebJobs industry={industry} area={area} onHits={setWebHits} /><View style={{ height: tabSpace }} /></View>}
         showsVerticalScrollIndicator={false}
       />
       <BrandSpinner visible={refreshing} top={insets.top + 12} />

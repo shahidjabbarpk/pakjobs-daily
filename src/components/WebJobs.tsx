@@ -11,8 +11,9 @@ import { Icon, SectionTitle, Tap } from './ui';
 /**
  * Private-sector jobs from across the web (Careerjet), filtered by the Private tab's industry and area.
  * Renders nothing while the feature is off (no proxy URL or no API key yet).
+ * `onHits` reports how many web jobs match (null while off / offline), so the screen can count them.
  */
-export function WebJobs({ industry, area }: { industry: string | null; area: string | null }) {
+export function WebJobs({ industry, area, onHits }: { industry: string | null; area: string | null; onHits?: (hits: number | null) => void }) {
   const c = useTheme();
   const { t, tf } = useI18n();
   const [jobs, setJobs] = useState<WebJob[]>([]);
@@ -28,13 +29,14 @@ export function WebJobs({ industry, area }: { industry: string | null; area: str
     setLoading(true);
     try {
       const res = await fetchWebJobs({ keywords, location, page: p });
-      if (!res) { setLive(false); return; }
+      if (!res) { setLive(false); onHits?.(null); return; }
       setLive(true);
+      if (p === 1) onHits?.(res.hits);
       setJobs((prev) => (p === 1 ? res.jobs : [...prev, ...res.jobs]));
       setPages(res.pages);
       setPage(p);
     } catch {
-      if (p === 1) { setJobs([]); setLive(false); }
+      if (p === 1) { setJobs([]); setLive(false); onHits?.(null); }
     } finally {
       setLoading(false);
     }
