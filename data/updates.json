@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-05T14:15:04+05:00",
+ "updatedAt": "2026-11-05T15:22:13+05:00",
  "updates": [
+  {
+   "id": "b02de6d45a66fe45",
+   "source": "bpsc",
+   "kind": "result",
+   "title": "Press Release Date 05-11-2026, MCQs test results for the post of Health Management Cadre B-17, Lecturer Mass Communication B-17 Male and Staff Nurse B-16.",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1793874063.pdf",
+   "date": "2026-11-05",
+   "firstSeen": "2026-11-05T15:22:13+05:00"
+  },
   {
    "id": "64e8a6ee7e507429",
    "source": "kppsc",
@@ -268,15 +277,6 @@
    "kind": "result",
    "title": "Final result for the post of professor B-20 date 29-10-2026.",
    "url": "https://www.bpsc.gob.pk/uploads/Result/1793271178.jpeg",
-   "date": "2026-10-29",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "6f3513e6590e8689",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Final result for the posts of (Qari/Religious Education Teacher (B-17) Manager Detoxification and Rehabilitation Complex Drug addicts(B-17)",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1793265989.jpeg",
    "date": "2026-10-29",
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
