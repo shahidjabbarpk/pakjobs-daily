@@ -1,6 +1,98 @@
 {
- "updatedAt": "2026-11-05T11:13:24+05:00",
+ "updatedAt": "2026-11-05T12:35:52+05:00",
  "jobs": [
+  {
+   "id": "031587d0083178e6",
+   "source": "njp",
+   "title": "Lower Division Clerk",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10524",
+   "description": "(i) Matric\n(ii) Minimum Typing Speed of 30 WPM.\n(iii) The selected candidate shall have to undertake and qualify 3 weeks Basic IT Training Course (including MS Office) conducted by the NITB within one year.\n(iv) Place of posting: Islamabad",
+   "grade": "BPS-11",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10524",
+   "firstSeen": "2026-11-05T12:35:52+05:00"
+  },
+  {
+   "id": "081d5c3aa7dd2af7",
+   "source": "njp",
+   "title": "Upper Division Clerk",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10523",
+   "description": "(i) Intermediate.\n(ii) The selected candidates shall have to undertake and qualify 3 weeks Basic IT Training Course (including MS Office) conducted by the NITB within one year.\n(iii) Place of posting: Islamabad",
+   "grade": "BPS-13",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10523",
+   "firstSeen": "2026-11-05T12:35:52+05:00"
+  },
+  {
+   "id": "5803726eefa0662f",
+   "source": "njp",
+   "title": "Stenotypist",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10522",
+   "description": "(i) Intermediate.\n(ii) A minimum speed of 80/40 w.p.m. in shorthand/typing respectively.\n(iii) Must be computer literate.\n(iv) Placed of Posting: Islamabad",
+   "grade": "BPS-14",
+   "jobType": "Regular",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10522",
+   "firstSeen": "2026-11-05T12:35:52+05:00"
+  },
+  {
+   "id": "ee7730ba273e8733",
+   "source": "njp",
+   "title": "Assistant",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10521",
+   "description": "(i) Minimum Bachelor degree from a university recognized by HEC\n(ii) The selected candidate shall have to undertake and qualify 6 weeks Basic IT Training Course (including MS Office) conducted by the NITB within one year.\n(iii) Place of posting: Islamabad",
+   "grade": "BPS-15",
+   "jobType": "Regular",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 33 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-12",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10521",
+   "firstSeen": "2026-11-05T12:35:52+05:00"
+  },
   {
    "id": "984c914caf4bd7f4",
    "source": "njp",
