@@ -6,6 +6,7 @@
  */
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   EmailAuthProvider,
   linkWithCredential,
   onAuthStateChanged,
@@ -20,6 +21,7 @@ import {
 import {
   addDoc,
   collection,
+  collectionGroup,
   deleteDoc,
   doc,
   getDoc,
@@ -33,6 +35,7 @@ import {
   Timestamp,
   updateDoc,
   where,
+  writeBatch,
   type DocumentData,
 } from 'firebase/firestore';
 import { FIREBASE_CONFIG, POST_LIFETIME_DAYS } from './config';
@@ -134,6 +137,32 @@ export const resetPassword = (email: string) => sendPasswordResetEmail(fb().auth
 /** Back to a fresh guest session. */
 export async function signOutUser() {
   await signOut(fb().auth);
+  await googleSignOut();
+  await ensureUser().catch(() => {});
+}
+
+/**
+ * Permanently deletes the logged-in account: every comment and job post it made, its profile, then
+ * the login itself, and starts a fresh guest session. Firebase refuses to delete a login that was
+ * not used recently; that surfaces as 'auth/requires-recent-login' (log out, log in, try again).
+ */
+export async function deleteAccount() {
+  const { auth, db } = fb();
+  const user = auth.currentUser;
+  if (!user || user.isAnonymous) throw new Error('not-logged-in');
+  const uid = user.uid;
+  const refs = [
+    ...(await getDocs(query(collectionGroup(db, 'comments'), where('uid', '==', uid)))).docs.map((d) => d.ref),
+    ...(await getDocs(query(collection(db, 'posts'), where('ownerUid', '==', uid)))).docs.map((d) => d.ref),
+    doc(db, 'profiles', uid),
+  ];
+  // a batch holds at most 500 writes
+  for (let i = 0; i < refs.length; i += 450) {
+    const batch = writeBatch(db);
+    refs.slice(i, i + 450).forEach((r) => batch.delete(r));
+    await batch.commit();
+  }
+  await deleteUser(user);
   await googleSignOut();
   await ensureUser().catch(() => {});
 }

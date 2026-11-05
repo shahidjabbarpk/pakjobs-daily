@@ -25,8 +25,9 @@ service cloud.firestore {
 
     match /profiles/{uid} {
       allow read: if signedIn() && (me() == uid || isAdmin());
-      allow write: if signedIn() && me() == uid
+      allow create, update: if signedIn() && me() == uid
         && str(data().name, 2, 60) && str(data().whatsapp, 0, 20);
+      allow delete: if signedIn() && me() == uid;
     }
 
     // Private job posts: created as "pending", only an admin can approve or feature them.
@@ -66,6 +67,11 @@ service cloud.firestore {
         && str(data().text, 1, 500)
         && data().createdAt == request.time;
       allow delete: if isAdmin() || (signedIn() && resource.data.uid == me());
+    }
+
+    // lets "delete my account" find a user's comments across all threads
+    match /{path=**}/comments/{cid} {
+      allow read: if true;
     }
 
     match /reports/{id} {

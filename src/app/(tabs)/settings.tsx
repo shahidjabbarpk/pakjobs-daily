@@ -2,7 +2,7 @@ import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useState } from 'react';
-import { ActivityIndicator, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuthCard, isLoggedIn, useAuthUser } from '@/components/AuthCard';
@@ -12,7 +12,7 @@ import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
 import { PRIVACY_URL } from '@/lib/config';
-import { currentUid, ensureUser, signOutUser } from '@/lib/community';
+import { currentUid, deleteAccount, ensureUser, signOutUser } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { useI18n } from '@/lib/i18n';
 import { notifyNewJobs, setupNotifications } from '@/lib/notify';
@@ -60,6 +60,28 @@ export default function Settings() {
     s.set({ profile: null, admin: false });
     setUid(currentUid());
   };
+  const [deleting, setDeleting] = useState(false);
+  const confirmDelete = () =>
+    Alert.alert(t('deleteAccount'), t('deleteAccountWarn'), [
+      { text: t('cancel'), style: 'cancel' },
+      {
+        text: t('deleteForever'),
+        style: 'destructive',
+        onPress: async () => {
+          setDeleting(true);
+          try {
+            await deleteAccount();
+            s.set({ profile: null, admin: false });
+            setUid(currentUid());
+            Alert.alert(t('deleteAccount'), t('accountDeleted'));
+          } catch (e: any) {
+            Alert.alert(t('deleteAccount'), e?.code === 'auth/requires-recent-login' ? t('deleteRelogin') : t('deleteFailed'));
+          } finally {
+            setDeleting(false);
+          }
+        },
+      },
+    ]);
   const copyId = async () => {
     const id = uid ?? (await ensureUser().catch(() => null));
     if (!id) return;
@@ -113,6 +135,7 @@ export default function Settings() {
       <Card>
         <Label icon="shield-account-outline" text={t('account')} />
         {isLoggedIn(user) ? (
+          <>
           <View style={[styles.row, { backgroundColor: c.cardAlt }]}>
             <Icon name={user!.email?.endsWith('@gmail.com') ? 'google' : 'email-outline'} size={18} color={c.primary} />
             <Text style={[styles.rowText, { color: c.text }]} numberOfLines={1}>{user!.email ?? user!.name}</Text>
@@ -120,6 +143,11 @@ export default function Settings() {
               <Text style={[tf('bold'), { color: c.danger, fontSize: 12.5 }]}>{t('logout')}</Text>
             </Tap>
           </View>
+          <Tap onPress={confirmDelete} disabled={deleting} style={styles.deleteAcc}>
+            {deleting ? <ActivityIndicator size="small" color={c.danger} /> : <Icon name="account-remove-outline" size={16} color={c.danger} />}
+            <Text style={[tf('bold'), { color: c.danger, fontSize: 12.5 }]}>{t('deleteAccount')}</Text>
+          </Tap>
+          </>
         ) : login ? (
           <View style={{ marginHorizontal: -16, marginTop: -14 }}><AuthCard onDone={() => { setLogin(false); setUid(currentUid()); }} /></View>
         ) : (
@@ -254,7 +282,7 @@ export default function Settings() {
             {t('yourId')}: {uid ?? '—'} {copied ? `✓ ${t('copied')}` : '⧉'}
           </Text>
         </Tap>
-        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.3</Text>
+        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.4</Text>
       </Card>
     </ScrollView>
   );
@@ -279,6 +307,7 @@ function Label({ icon, text }: { icon: IconName; text: string }) {
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, height: 48, borderRadius: 12 },
   rowText: { flex: 1, fontFamily: font.medium, fontSize: 14 },
+  deleteAcc: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', marginTop: 10, paddingVertical: 4 },
   logout: { paddingHorizontal: 12, height: 32, borderRadius: 10, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
   h1: { fontSize: 26, paddingHorizontal: 16, marginBottom: 12 },
   card: { marginHorizontal: 16, marginBottom: 12, borderRadius: 20, padding: 16, borderWidth: 1 },

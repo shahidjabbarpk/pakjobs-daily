@@ -1,7 +1,7 @@
 // Firestore security-rules tests. Run from the repo root:
 //   npx firebase-tools emulators:exec --only firestore "node firebase/test/rules.test.mjs"
 import { assertFails, assertSucceeds, initializeTestEnvironment } from '@firebase/rules-unit-testing';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, collectionGroup, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
 import { readFileSync } from 'node:fs';
 
 const env = await initializeTestEnvironment({
@@ -91,6 +91,12 @@ await t('cannot read others profile', () => assertFails(getDoc(doc(alice, 'profi
 await t('cannot make yourself admin', () => assertFails(setDoc(doc(bob, 'admins/bob'), {})));
 await t('non-admin cannot ban', () => assertFails(setDoc(doc(bob, 'banned/alice'), {})));
 await t('admin can ban', () => assertSucceeds(setDoc(doc(boss, 'banned/alice'), {})));
+
+console.log('delete account');
+await t('user can find own comments across threads', () => assertSucceeds(getDocs(query(collectionGroup(bob, 'comments'), where('uid', '==', 'bob')))));
+await t('user can list own posts', () => assertSucceeds(getDocs(query(collection(alice, 'posts'), where('ownerUid', '==', 'alice')))));
+await t('user can delete own profile', () => assertSucceeds(deleteDoc(doc(bob, 'profiles/bob'))));
+await t('cannot delete others profile', () => assertFails(deleteDoc(doc(alice, 'profiles/bob'))));
 
 await env.cleanup();
 console.log(`\n${passed} passed${process.exitCode ? ' — SOME FAILED' : ''}`);
