@@ -1,6 +1,98 @@
 {
- "updatedAt": "2026-11-05T15:22:13+05:00",
+ "updatedAt": "2026-11-05T17:06:27+05:00",
  "jobs": [
+  {
+   "id": "d90456abe3688f85",
+   "source": "njp",
+   "title": "LDC- Directorate General of Intelligence & Risk Management-Customs, Islamabad",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10526",
+   "description": "(i) Matric\n(ii) Minimum Typing Speed of 30 WPM.\n(iii) Successful completion of a 03 weeks Basic IT Training Course (including MS Office) conducted by the NITB shall be mandatory before expiry of the probation period; otherwise, the services of the appointee(s) shall be terminated without any notice. 18 25+5=30",
+   "grade": "BPS-11",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-15",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10526",
+   "firstSeen": "2026-11-05T17:06:27+05:00"
+  },
+  {
+   "id": "42a30073317df9e3",
+   "source": "njp",
+   "title": "UDC- Directorate General of Intelligence & Risk Management-Customs, Islamabad",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10525",
+   "description": "(i) Intermediate\n(ii) Successful completion of a 03 weeks Basic IT Training Course (including MS Office) conducted by the NITB shall be mandatory before expiry of the probation period; otherwise, the services of the appointee(s) shall be terminated without any notice.",
+   "grade": "BPS-13",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-15",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10525",
+   "firstSeen": "2026-11-05T17:06:27+05:00"
+  },
+  {
+   "id": "9cbc3f13270b3a3d",
+   "source": "njp",
+   "title": "UDC- Directorate General of Customs Valuation, Karachi",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10528",
+   "description": "(i) Intermediate\n(ii) Successful completion of a 03 weeks Basic IT Training Course (including MS Office) conducted by the NITB shall be mandatory before expiry of the probation period; otherwise, the services of the appointee(s) shall be terminated without any notice.",
+   "grade": "BPS-13",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-15",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10528",
+   "firstSeen": "2026-11-05T15:22:13+05:00"
+  },
+  {
+   "id": "af51243e397ea093",
+   "source": "njp",
+   "title": "Wireless OPerator- Directorate General of Intelligence & Risk Management-Customs, Islamabad",
+   "organization": "Pakistan Customs Departement (FBR)",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10527",
+   "description": "Matric with three years’ experience in the relevant field\nOR\nDiploma of Associate Engineer (DAE) in Telecommunication or Electronics from a recognized Technical Board.",
+   "grade": "BPS-09",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-15",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10527",
+   "firstSeen": "2026-11-05T15:22:13+05:00"
+  },
   {
    "id": "5882c5e776ebdf2d",
    "source": "njp",
@@ -183,52 +275,6 @@
    "lastDate": "2026-11-20",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-National-Aerospace-Science-&-Technology-Park-(NASTP),-Aviation-City-Pakistan-(ACP)-1719832801220346.jpg",
    "applyUrl": "https://www.njp.gov.pk/jobs/10529",
-   "firstSeen": "2026-11-05T15:22:13+05:00"
-  },
-  {
-   "id": "9cbc3f13270b3a3d",
-   "source": "njp",
-   "title": "UDC- Directorate General of Customs Valuation, Karachi",
-   "organization": "Pakistan Customs Departement (FBR)",
-   "category": "govt",
-   "cities": [
-    "Karachi",
-    "Balochistan"
-   ],
-   "qualification": "Intermediate",
-   "url": "https://www.njp.gov.pk/jobs/10528",
-   "description": "(i) Intermediate\n(ii) Successful completion of a 03 weeks Basic IT Training Course (including MS Office) conducted by the NITB shall be mandatory before expiry of the probation period; otherwise, the services of the appointee(s) shall be terminated without any notice.",
-   "grade": "BPS-13",
-   "jobType": "Regular",
-   "vacancies": 1,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-11-05",
-   "lastDate": "2026-11-15",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10528",
-   "firstSeen": "2026-11-05T15:22:13+05:00"
-  },
-  {
-   "id": "af51243e397ea093",
-   "source": "njp",
-   "title": "Wireless OPerator- Directorate General of Intelligence & Risk Management-Customs, Islamabad",
-   "organization": "Pakistan Customs Departement (FBR)",
-   "category": "govt",
-   "cities": [
-    "Islamabad",
-    "Balochistan"
-   ],
-   "qualification": "Matric",
-   "url": "https://www.njp.gov.pk/jobs/10527",
-   "description": "Matric with three years’ experience in the relevant field\nOR\nDiploma of Associate Engineer (DAE) in Telecommunication or Electronics from a recognized Technical Board.",
-   "grade": "BPS-09",
-   "jobType": "Regular",
-   "vacancies": 1,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-11-05",
-   "lastDate": "2026-11-15",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10527",
    "firstSeen": "2026-11-05T15:22:13+05:00"
   },
   {
