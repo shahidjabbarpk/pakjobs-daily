@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-06T16:16:28+05:00",
+ "updatedAt": "2026-11-06T17:06:36+05:00",
  "updates": [
+  {
+   "id": "2fb3d01490a34f57",
+   "source": "nts",
+   "kind": "result",
+   "title": "Lasbela University Uthal (Admission Test) (Answer Keys)",
+   "url": "https://nts.org.pk/Test&Products/Lists/Lasbela_01Nov2026_Keys/Posts.php",
+   "date": null,
+   "firstSeen": "2026-11-06T17:06:36+05:00"
+  },
   {
    "id": "b02de6d45a66fe45",
    "source": "bpsc",
@@ -241,15 +250,6 @@
    "kind": "result",
    "title": "Punjab Pharmacy Council - PPC (45th Supply Examination of Pharmacy Assistant 2026) (Answer Keys)",
    "url": "https://nts.org.pk/Test&Products/Lists/PPC_04Oct26_Keys/Posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "d9224de790210592",
-   "source": "nts",
-   "kind": "result",
-   "title": "Balochistan University of Information Technology, Engineering & Management Sciences BUITEMS, Quetta Employment Test Zhob Campus (Answer Key)",
-   "url": "https://nts.org.pk/Test&Products/Lists/BUITEMS_27Sep26_Keys/posts.php",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
