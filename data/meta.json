@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-07T09:01:50+05:00",
+ "updatedAt": "2026-11-07T10:01:48+05:00",
  "sources": {
   "njp": {
    "count": 90,
@@ -8,7 +8,7 @@
   "ppsc": {
    "count": 0,
    "ok": false,
-   "error": "HTTPSConnectionPool(host='www.ppsc.gop.pk', port=443): Max retries exceeded with url: /Jobs.aspx (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ppsc.gop.pk', port=443) at 0x7f8c8ba0a120>, '"
+   "error": "HTTPSConnectionPool(host='www.ppsc.gop.pk', port=443): Max retries exceeded with url: /Jobs.aspx (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ppsc.gop.pk', port=443) at 0x7f4da99f96d0>, '"
   },
   "fpsc": {
    "count": 0,
@@ -21,7 +21,7 @@
   "army": {
    "count": 1,
    "ok": false,
-   "error": "HTTPSConnectionPool(host='joinpakarmy.gov.pk', port=443): Max retries exceeded with url: /api/course_list/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='joinpakarmy.gov.pk', port=443) at 0x7f8"
+   "error": "HTTPSConnectionPool(host='joinpakarmy.gov.pk', port=443): Max retries exceeded with url: /api/course_list/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='joinpakarmy.gov.pk', port=443) at 0x7f4"
   },
   "navy": {
    "count": 3,
@@ -43,8 +43,7 @@
   },
   "nts": {
    "count": 6,
-   "ok": false,
-   "error": "403 Client Error: Forbidden for url: https://www.nts.org.pk/new/projectsnew.php"
+   "ok": true
   }
  },
  "total": 194,
@@ -58,7 +57,7 @@
    "kppsc": true,
    "spsc": true,
    "bpsc": true,
-   "nts": false
+   "nts": true
   }
  }
 }
