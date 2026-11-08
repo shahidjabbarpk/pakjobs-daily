@@ -1,4 +1,93 @@
 {
- "updatedAt": "2026-11-08T10:58:54+05:00",
- "jobs": []
+ "updatedAt": "2026-11-08T12:16:17+05:00",
+ "jobs": [
+  {
+   "id": "d112cf36d332cb5f",
+   "source": "njp",
+   "title": "Assistant Lineman",
+   "organization": "NationalGrid Pakistan",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10593",
+   "description": "Qualification: Matriculate\nNote: Grade-07 shall be granted upon satisfactory completion of the one-year contractual period.",
+   "grade": "Grade-7",
+   "jobType": "Contract",
+   "vacancies": 18,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-08",
+   "lastDate": "2026-11-23",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10593",
+   "firstSeen": "2026-11-08T12:16:17+05:00"
+  },
+  {
+   "id": "94b6414a96090e93",
+   "source": "njp",
+   "title": "Assistant Sub Station Attendant",
+   "organization": "NationalGrid Pakistan",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10592",
+   "description": "Qualification: Matric (At least 2nd Division).",
+   "grade": "Grade-7",
+   "jobType": "Contract",
+   "vacancies": 23,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-08",
+   "lastDate": "2026-11-23",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10592",
+   "firstSeen": "2026-11-08T12:16:17+05:00"
+  },
+  {
+   "id": "87971dd3b84a3ffc",
+   "source": "njp",
+   "title": "Sub Station Attendant",
+   "organization": "NationalGrid Pakistan",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10591",
+   "description": "Qualification: Matric with 02 years Diploma / Certificate from any Govt. Polytechnic Institute.",
+   "grade": "Grade-9",
+   "jobType": "Contract",
+   "vacancies": 9,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-08",
+   "lastDate": "2026-11-23",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10591",
+   "firstSeen": "2026-11-08T12:16:17+05:00"
+  },
+  {
+   "id": "5ba0a00c1f98654a",
+   "source": "njp",
+   "title": "Electrician-I",
+   "organization": "NationalGrid Pakistan",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10590",
+   "description": "Qualification:\nMatric with 2 years' relevant certificate from Govt. Technical Vocational School or T.T.C. Diploma.\nor\nMatric with Electrical Supervisor Certificate from a Govt. recognized Institute.\nExperience:\nAt least (02) two years' experience.\nAt least (03) three years' experience",
+   "grade": "Grade-11",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-08",
+   "lastDate": "2026-11-23",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10590",
+   "firstSeen": "2026-11-08T12:16:17+05:00"
+  }
+ ]
 }
