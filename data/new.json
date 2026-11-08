@@ -1,4 +1,25 @@
 {
- "updatedAt": "2026-11-08T18:58:14+05:00",
- "jobs": []
+ "updatedAt": "2026-11-08T19:51:06+05:00",
+ "jobs": [
+  {
+   "id": "f64d7c812796c9bd",
+   "source": "njp",
+   "title": "Financial / Banking Analyst",
+   "organization": "Engineering Development Board",
+   "category": "banking",
+   "cities": [],
+   "qualification": "Masters",
+   "url": "https://www.njp.gov.pk/jobs/10617",
+   "description": "Minimum 16 years education in Finance, Economics, Business, CA/ACCA or relevant discipline with 2–5 years relevant experience.",
+   "grade": "Lump-sum pay",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "ageLimit": "Max: 45 years",
+   "postedDate": "2026-11-08",
+   "lastDate": "2026-11-23",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Engineering-Development-Board-3013360403220124.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10617",
+   "firstSeen": "2026-11-08T19:51:06+05:00"
+  }
+ ]
 }
