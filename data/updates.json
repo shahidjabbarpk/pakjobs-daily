@@ -1,6 +1,42 @@
 {
- "updatedAt": "2026-11-10T09:02:19+05:00",
+ "updatedAt": "2026-11-10T10:05:31+05:00",
  "updates": [
+  {
+   "id": "07bad4fb45860173",
+   "source": "kppsc",
+   "kind": "result",
+   "title": "Interview Result: Civil Judge-Cum-Judicial Magistrate / Illaqa Qazi (BPS-18) advertised vide Advertisement No.03/2026",
+   "url": "https://www.kppsc.gov.pk/interview/interview_details/3465",
+   "date": null,
+   "firstSeen": "2026-11-10T10:05:31+05:00"
+  },
+  {
+   "id": "dc40cf17fddecb81",
+   "source": "kppsc",
+   "kind": "schedule",
+   "title": "Computer Based Test (CBT) 18th Schedule, November 2026 [Revised]",
+   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/Computer_Based_Test_18th_Schedule_November_2026_Revised.pdf",
+   "date": null,
+   "firstSeen": "2026-11-10T10:05:31+05:00"
+  },
+  {
+   "id": "cbaa6c5506d4eb1b",
+   "source": "kppsc",
+   "kind": "result",
+   "title": "Result of Written Examination for the Posts of PMS Officer & AETO (Adv No. 02/2025 Sr. No. 1 & 2)",
+   "url": "https://kppsc.gov.pk/public/assets/downloads/files/PMS_Officers_AETO_Written_Exam_Result_02_2025_04092026.pdf",
+   "date": null,
+   "firstSeen": "2026-11-10T10:05:31+05:00"
+  },
+  {
+   "id": "a01fb348adaa62b6",
+   "source": "spsc",
+   "kind": "interview",
+   "title": "Dear Candidates, The Admission Letters For Pre-Interview Written Test of Various Posts in College Education Department, to be held on 16th of November, 2026. are now available in your accounts.",
+   "url": "https://spsc.gov.pk/candidate_portal/login",
+   "date": null,
+   "firstSeen": "2026-11-10T10:05:31+05:00"
+  },
   {
    "id": "2fb3d01490a34f57",
    "source": "nts",
@@ -18,15 +54,6 @@
    "url": "https://www.bpsc.gob.pk/uploads/Result/1793874063.pdf",
    "date": "2026-11-05",
    "firstSeen": "2026-11-05T15:22:13+05:00"
-  },
-  {
-   "id": "64e8a6ee7e507429",
-   "source": "kppsc",
-   "kind": "result",
-   "title": "Interview Result: Civil Judge-Cum-Judicial Magistrate / Illaqa Qazi (BPS-18) advertised vide Advertisement No.03/2026 New",
-   "url": "https://www.kppsc.gov.pk/interview/interview_details/3465",
-   "date": null,
-   "firstSeen": "2026-11-04T17:00:23+05:00"
   },
   {
    "id": "5ec153747c523efd",
@@ -74,15 +101,6 @@
    "firstSeen": "2026-11-02T17:04:22+05:00"
   },
   {
-   "id": "37dde747d4f29c76",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "Computer Based Test (CBT) 18th Schedule, November 2026 [Revised] New",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/Computer_Based_Test_18th_Schedule_November_2026_Revised.pdf",
-   "date": null,
-   "firstSeen": "2026-11-02T13:31:09+05:00"
-  },
-  {
    "id": "58c6f0474e06e3a7",
    "source": "bpsc",
    "kind": "result",
@@ -115,33 +133,6 @@
    "kind": "interview",
    "title": "1: Interview Call up / Shall stand rejected / Rejection e-Letters",
    "url": "https://www.kppsc.gov.pk/interview_calls",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "1265660b26206aac",
-   "source": "kppsc",
-   "kind": "interview",
-   "title": "Interview Programme for the Month of November, 2026 [Revised]",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/Interview_Program_November_Revised_2026_28102026.pdf",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "617b3f5f0eae64cd",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "2nd Schedule: Written Examination for Sub Inspector [Fast Track Promotion] (Adv# 05/2026 S#2)",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/2nd_schedule_2027_Written_Examination_Sub_Inspector_FTP_05_2026_2.pdf",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "64e44e8cc9a9feb2",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "1st Schedule: Written Examination for Deputy Superintendent of Police [Fast Track Promotion] (Adv# 05/2026 S#1)",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/1st_schedule_2027_Written_Examination_Deputy_Superintendent_Police_FTP_05_2026_1.pdf",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
