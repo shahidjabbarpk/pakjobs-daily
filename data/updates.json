@@ -1,6 +1,51 @@
 {
- "updatedAt": "2026-11-10T16:02:01+05:00",
+ "updatedAt": "2026-11-10T16:59:48+05:00",
  "updates": [
+  {
+   "id": "f0c0fec0f95dd09b",
+   "source": "bpsc",
+   "kind": "result",
+   "title": "Press Release Date 10-11-2026 MCQ's Test result.",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1794310617.pdf",
+   "date": "2026-11-10",
+   "firstSeen": "2026-11-10T16:59:48+05:00"
+  },
+  {
+   "id": "022f60b98234c21a",
+   "source": "bpsc",
+   "kind": "result",
+   "title": "Press Release Dated 10-11-2026 Written Test result in the Colleges, Higher and Technical Education Department.",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1794310508.pdf",
+   "date": "2026-11-10",
+   "firstSeen": "2026-11-10T16:59:48+05:00"
+  },
+  {
+   "id": "772d7aedb39e5f55",
+   "source": "bpsc",
+   "kind": "interview",
+   "title": "Press Release Dated 10-11-2026 interview schedule for the post of Information Teacher Male B-17.",
+   "url": "https://www.bpsc.gob.pk/uploads/Interview/1794311290.jpeg",
+   "date": "2026-11-10",
+   "firstSeen": "2026-11-10T16:59:48+05:00"
+  },
+  {
+   "id": "5c32a4a94b224134",
+   "source": "bpsc",
+   "kind": "interview",
+   "title": "Press Release Date 10-11-2026 Interview Schedule for the post of Information Teacher Female B-17",
+   "url": "https://www.bpsc.gob.pk/uploads/Interview/1794311139.jpeg",
+   "date": "2026-11-10",
+   "firstSeen": "2026-11-10T16:59:48+05:00"
+  },
+  {
+   "id": "3a135409e270477c",
+   "source": "bpsc",
+   "kind": "interview",
+   "title": "Press Release Dated 10-11-2026 interview schedule for the post of Assistant Excise and Taxation Officer B-16",
+   "url": "https://www.bpsc.gob.pk/uploads/Interview/1794310766.jpeg",
+   "date": "2026-11-10",
+   "firstSeen": "2026-11-10T16:59:48+05:00"
+  },
   {
    "id": "8c2f51d94267358e",
    "source": "kppsc",
@@ -254,24 +299,6 @@
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
-   "id": "4479dd6b15cfe7ae",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Result of the various posts. Sales Manager (B-17) and Research & Investigation officer (B-16), and Sales & Purchase officer (B-16)",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1793345830.pdf",
-   "date": "2026-10-30",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "3f51985c74c9a28c",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Final result for the post of professor B-20 date 29-10-2026.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1793271178.jpeg",
-   "date": "2026-10-29",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
    "id": "c7dd07c62326ecc6",
    "source": "ppsc",
    "kind": "result",
@@ -350,33 +377,6 @@
    "title": "Press Release - Interview Schedule against various posts (11-09-2026)",
    "url": "https://www.bpsc.gob.pk/uploads/Interview/1789132406.pdf",
    "date": "2026-09-11",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "c623225769857dd1",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule for the post of Assistant Engineer / SDO (B-17) in the Irrigation Department (31-08-2026).",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1788167490.pdf",
-   "date": "2026-08-31",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "d42e00ac2228908e",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release for postponment of Interviews against the post of Tehsildar (B-16) in the Board of Revenue Department (22-08-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1787901177.pdf",
-   "date": "2026-08-22",
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "1674bd6b30478b55",
-   "source": "bpsc",
-   "kind": "interview",
-   "title": "Press Release - Interview Schedule for various posts (13-07-2026)",
-   "url": "https://www.bpsc.gob.pk/uploads/Interview/1783937101.pdf",
-   "date": "2026-07-13",
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
