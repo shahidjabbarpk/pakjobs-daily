@@ -1,4 +1,28 @@
 {
- "updatedAt": "2026-11-10T07:18:37+05:00",
- "jobs": []
+ "updatedAt": "2026-11-10T09:02:19+05:00",
+ "jobs": [
+  {
+   "id": "dd8678653f8f09cd",
+   "source": "njp",
+   "title": "Chowkidar",
+   "organization": "Wafaqi Mohtasib Ombudsmans Secretariat",
+   "category": "govt",
+   "cities": [
+    "Quetta",
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/10626",
+   "description": "Applications are invited for filling following vacant post under Balochistan share\n(6%) at Office of the Wafaqi Mohtasib (OWM), Regional Office, Quetta from citizens of\nPakistan holding domicile or valid residence certificate of Balochistan\nPosition: Chowkidar\nBPS: 01\nNo. of Vacancies: 01\nPlace of Posting: Quetta, Balochitan\nAge Limit: 18-35 (including 05 Years General Age Relaxation+ 05 Years additional relaxation for candidates from Balochistan)\nQualification: Primary\nTERMS AND CONDITIONS/GENERAL INFORMATION\nThe subject recruitment shall be made on criteria/mechanism defined by the Establishment Division vide their Office Memorandums F.No.2/5/2026-BEFC/001 dated 22.10.2026 and 27.10.2026.\nInterested Candidates are required to apply online via National Job Portal (https://njp.gov.pk) within fifteen days of publication of advertisement.\nGovernment Servants must apply through proper channel after obtaining NOC.\nOnly shortlisted candidates will be called for walk-in-interviews and no TA/DA will be admissible in this regard.\nApplicants must bring original documents and domicile/ valid residence certificate at the time of walk-in-interviews alongwith the attested copies of same.\nFurther age relaxation will be applicable as per prevailing Government Policy/ Rules",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-10",
+   "lastDate": "2026-11-23",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10626",
+   "firstSeen": "2026-11-10T09:02:19+05:00"
+  }
+ ]
 }
