@@ -1,4 +1,123 @@
 {
- "updatedAt": "2026-11-10T22:56:37+05:00",
- "jobs": []
+ "updatedAt": "2026-11-11T00:10:09+05:00",
+ "jobs": [
+  {
+   "id": "491765e0450dced2",
+   "source": "njp",
+   "title": "Assistant (BS-15) - DGTO",
+   "organization": "Ministry of Commerce",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/9962",
+   "description": "Applications are invited from candidates holding Local/Domicile Certificate of Balochistan to fill the vacancies on regular basis in the Directorate General of Trade Organizations (DGTO) working under the administrative control of Ministry of Commerce\nJob Details\nEducation : 2nd Class Bachelors Degree from HEC recognized University.\nExperience : 05 Years’ experience of dealing official matters, maintenance of office record (Preferable).\nSkills : Basic IT skills (MS Office etc.) Preferable\nPlace of Posting : Islamabad / Karachi",
+   "grade": "BPS-15",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Commerce-2282051502221142.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9962",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
+   "id": "17b267c191ad24ab",
+   "source": "njp",
+   "title": "Stenotypist (S-II/BS-14) - EDF",
+   "organization": "Ministry of Commerce",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/9963",
+   "description": "Applications are invited from candidates holding Local/Domicile Certificate of Balochistan to fill the vacancies on regular basis in the Export Development Fund (EDF), an Autonomous Body working under the administrative control of Ministry of Commerce\nJob Details\nAge Limit : 18–25 years + 05 years general relaxation + 05 years specific additional relaxation for candidates from Balochistan\nEducation : Intermediate\nExperience : 05 years post qualification experience in administrative matters, tendering, accounts, ERP systems and proficiency in MS Office etc. (Preferable)\nPlace of Posting : Islamabad",
+   "grade": "BPS-14",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Commerce-2282051502221142.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9963",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
+   "id": "43b022c854b38ecc",
+   "source": "njp",
+   "title": "Lower Division Clerk (LDC)",
+   "organization": "Ministry of Railways",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/9959",
+   "description": "Matriculation.\nMinimum typing speed of 30 wpm.\nBasic computer/MS Office literacy",
+   "grade": "BPS-11",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-10-27",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Railways-1043712409211148.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9959",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
+   "id": "973c7b5c72e79fbe",
+   "source": "njp",
+   "title": "Staff Car Driver",
+   "organization": "Ministry of Railways",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/9960",
+   "description": "Primary pass school certificate.\nMust hold a valid driving license (LTV/HTV).\nFully conversant with traffic rules and medically fit.",
+   "grade": "BPS-04",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-10-27",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Railways-1043712409211148.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9960",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
+   "id": "0b0a05d7b2ffc3f1",
+   "source": "njp",
+   "title": "Naib Qasid",
+   "organization": "Ministry of Railways",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/9961",
+   "description": "Primary Pass",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-10-27",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Railways-1043712409211148.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9961",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  }
+ ]
 }

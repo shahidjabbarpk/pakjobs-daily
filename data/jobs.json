@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-10T22:56:37+05:00",
+ "updatedAt": "2026-11-11T00:10:09+05:00",
  "jobs": [
   {
    "id": "dd8678653f8f09cd",
@@ -4037,6 +4037,55 @@
    "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
+   "id": "491765e0450dced2",
+   "source": "njp",
+   "title": "Assistant (BS-15) - DGTO",
+   "organization": "Ministry of Commerce",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/9962",
+   "description": "Applications are invited from candidates holding Local/Domicile Certificate of Balochistan to fill the vacancies on regular basis in the Directorate General of Trade Organizations (DGTO) working under the administrative control of Ministry of Commerce\nJob Details\nEducation : 2nd Class Bachelors Degree from HEC recognized University.\nExperience : 05 Years’ experience of dealing official matters, maintenance of office record (Preferable).\nSkills : Basic IT skills (MS Office etc.) Preferable\nPlace of Posting : Islamabad / Karachi",
+   "grade": "BPS-15",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Commerce-2282051502221142.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9962",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
+   "id": "17b267c191ad24ab",
+   "source": "njp",
+   "title": "Stenotypist (S-II/BS-14) - EDF",
+   "organization": "Ministry of Commerce",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/9963",
+   "description": "Applications are invited from candidates holding Local/Domicile Certificate of Balochistan to fill the vacancies on regular basis in the Export Development Fund (EDF), an Autonomous Body working under the administrative control of Ministry of Commerce\nJob Details\nAge Limit : 18–25 years + 05 years general relaxation + 05 years specific additional relaxation for candidates from Balochistan\nEducation : Intermediate\nExperience : 05 years post qualification experience in administrative matters, tendering, accounts, ERP systems and proficiency in MS Office etc. (Preferable)\nPlace of Posting : Islamabad",
+   "grade": "BPS-14",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-10-28",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Commerce-2282051502221142.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9963",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
    "id": "8e423756e975a8dc",
    "source": "njp",
    "title": "Stenotypist",
@@ -4437,6 +4486,75 @@
    "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
+   "id": "43b022c854b38ecc",
+   "source": "njp",
+   "title": "Lower Division Clerk (LDC)",
+   "organization": "Ministry of Railways",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/9959",
+   "description": "Matriculation.\nMinimum typing speed of 30 wpm.\nBasic computer/MS Office literacy",
+   "grade": "BPS-11",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-10-27",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Railways-1043712409211148.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9959",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
+   "id": "973c7b5c72e79fbe",
+   "source": "njp",
+   "title": "Staff Car Driver",
+   "organization": "Ministry of Railways",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/9960",
+   "description": "Primary pass school certificate.\nMust hold a valid driving license (LTV/HTV).\nFully conversant with traffic rules and medically fit.",
+   "grade": "BPS-04",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-10-27",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Railways-1043712409211148.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9960",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
+   "id": "0b0a05d7b2ffc3f1",
+   "source": "njp",
+   "title": "Naib Qasid",
+   "organization": "Ministry of Railways",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/9961",
+   "description": "Primary Pass",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-10-27",
+   "lastDate": "2026-11-11",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Railways-1043712409211148.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/9961",
+   "firstSeen": "2026-11-11T00:10:09+05:00"
+  },
+  {
    "id": "8ba1d33f46f6c5b6",
    "source": "njp",
    "title": "Project Manager Software (Information Technology) (MP-III Scale)",
@@ -4522,50 +4640,6 @@
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Secretariat-Training-Institute-(STI)-1335181111210400.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9941",
    "firstSeen": "2026-11-09T00:54:44+05:00"
-  },
-  {
-   "id": "c8348e76a858573f",
-   "source": "njp",
-   "title": "Accountant",
-   "organization": "Higher Education Commission",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Bachelor",
-   "url": "https://www.njp.gov.pk/jobs/9925",
-   "description": "B.COM / BBA from a recognized university with three (03) years service experience in the relevant field in any Government / Semi-Government / Autonomous Body.",
-   "grade": "BPS-16",
-   "jobType": "Regular",
-   "vacancies": 1,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 40 years",
-   "postedDate": "2026-10-27",
-   "lastDate": "2026-11-10",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9925",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "d639915cc0f13b4e",
-   "source": "njp",
-   "title": "Lower Division Clerk",
-   "organization": "Higher Education Commission",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Matric",
-   "url": "https://www.njp.gov.pk/jobs/9926",
-   "description": "Matric with minimum typing speed of 30 w.p.m. Compulsory: 03 weeks basic IT training course from NITB (including MS Office) after recruitment.",
-   "grade": "BPS-11",
-   "jobType": "Regular",
-   "vacancies": 1,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 35 years",
-   "postedDate": "2026-10-27",
-   "lastDate": "2026-11-10",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9926",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "1afe29316cd11340",
@@ -4695,74 +4769,6 @@
    "lastDate": "2026-11-15",
    "logo": "https://www.njp.gov.pk/images/profiles/insg-Pakistan-National-Shipping-corporation-(PNSC)-1127392510210315.png",
    "applyUrl": "https://www.njp.gov.pk/jobs/9852",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "f9b5abb0ad466243",
-   "source": "njp",
-   "title": "Stenotypist- PID (I) 3765/26",
-   "organization": "Cabinet Division",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Intermediate",
-   "url": "https://www.njp.gov.pk/jobs/9854",
-   "description": "Intermediate with Minimum speed of 80 words per minute in Shorthand and 40 words per minute in Typing respectively, must be computer literate.\nTaking dictation, rendering transcripts and doing general typing work;\nAttending to receipt and issue work during the absence of the Section Assistant; and\nAny other ancillary function and work that may be assigned by the officer, e.g. reproduction of documents, arranging office amenities etc.",
-   "grade": "BPS-14",
-   "jobType": "Regular",
-   "vacancies": 2,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-10-25",
-   "lastDate": "2026-11-10",
-   "logo": "https://www.njp.gov.pk/images/profiles/insg-Cabinet-Division-7685942212230111.png",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9854",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "21ba06310ff8a374",
-   "source": "njp",
-   "title": "Staff Car Driver - PID (I) 3766/26",
-   "organization": "Cabinet Division",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Middle",
-   "url": "https://www.njp.gov.pk/jobs/9855",
-   "description": "Primary Pass with Valid Driving license holder and well versed in traffic rules.\nSafely drive official vehicles to transport officers, staff and guests for official duties.\nEnsure the cleanliness and proper upkeep of the vehicle.\nCheck fuel, engine oil, coolant, tyres, brakes, battery and other essential components before undertaking journeys.\nMaintain the vehicle logbook and provide accurate details of journeys, mileage, fuel consumption and timings.\nComply with traffic laws, departmental instructions and road-safety requirements.\nReport mechanical faults, defects or maintenance requirements promptly to the competent authority.\nEnsure that the vehicle is parked at the designated place after duty and is kept secure.\nPerform any other duty assigned by the competent authority in connection with official transport.",
-   "grade": "BPS-04",
-   "jobType": "Regular",
-   "vacancies": 5,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 35 years",
-   "postedDate": "2026-10-25",
-   "lastDate": "2026-11-10",
-   "logo": "https://www.njp.gov.pk/images/profiles/insg-Cabinet-Division-7685942212230111.png",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9855",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "7f72435e95959405",
-   "source": "njp",
-   "title": "Engineering Supervisor",
-   "organization": "Frequency Allocation Board",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "DAE",
-   "url": "https://www.njp.gov.pk/jobs/9856",
-   "description": "Three-year diploma of associate engineering in electrical or radio or electronics or telecommunication or computer from a reputed institution or technical board with minimum 75% marks under the annual examination system. Computer skilled with two years' experience in relevant field in Government, Public or Private Sector.",
-   "grade": "BPS-11",
-   "jobType": "Regular",
-   "vacancies": 1,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-10-25",
-   "lastDate": "2026-11-10",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9856",
    "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
