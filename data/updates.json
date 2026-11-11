@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-11T15:12:28+05:00",
+ "updatedAt": "2026-11-11T16:12:28+05:00",
  "updates": [
+  {
+   "id": "930d6e05c7ffa49f",
+   "source": "bpsc",
+   "kind": "result",
+   "title": "Press Release Date 11-11-2026 final result for the post of Proof Reader B-16.",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1794395885.jpeg",
+   "date": "2026-11-11",
+   "firstSeen": "2026-11-11T16:12:28+05:00"
+  },
   {
    "id": "b5150a1d343eae8c",
    "source": "kppsc",
@@ -162,15 +171,6 @@
    "url": "https://nts.org.pk/Test&Products/Results/11_26/ETS_TOEIC_14Oct26_Result/search.php",
    "date": null,
    "firstSeen": "2026-11-02T17:04:22+05:00"
-  },
-  {
-   "id": "58c6f0474e06e3a7",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Final Result for the Posts of Associate Professor (B-19) (Men's Section) in the Colleges, Higher and Technical Education Department.",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1793608978.jpeg",
-   "date": "2026-11-02",
-   "firstSeen": "2026-11-02T13:31:09+05:00"
   },
   {
    "id": "7299bebcccee607d",
