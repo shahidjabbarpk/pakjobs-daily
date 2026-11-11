@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-11T04:46:49+05:00",
+ "updatedAt": "2026-11-11T06:19:55+05:00",
  "updates": [
   {
    "id": "f0c0fec0f95dd09b",
@@ -326,13 +326,13 @@
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
-   "id": "2715e0495e29fdd6",
+   "id": "4180caf33e070afb",
    "source": "fpsc",
    "kind": "schedule",
-   "title": "CE-2026 Tentative Program For Psychological Assessment And Viva Voce (Updated 23-10-2026) NEW",
+   "title": "CE-2026 Tentative Program For Psychological Assessment And Viva Voce (Updated 23-10-2026)",
    "url": "https://www.fpsc.gov.pk/tende/198",
    "date": "2026-10-23",
-   "firstSeen": "2026-11-06T12:29:51+05:00"
+   "firstSeen": "2026-11-11T06:19:55+05:00"
   },
   {
    "id": "fbe176c26d0b76bd",
