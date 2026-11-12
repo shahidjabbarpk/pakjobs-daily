@@ -1,6 +1,24 @@
 {
- "updatedAt": "2026-11-12T13:26:27+05:00",
+ "updatedAt": "2026-11-12T15:16:50+05:00",
  "updates": [
+  {
+   "id": "6e9d5e4641885fea",
+   "source": "kppsc",
+   "kind": "result",
+   "title": "Result of Written Examination for the Posts of AETO (Adv No. 02/2025 Sr. No. 2) New",
+   "url": "https://kppsc.gov.pk/public/assets/downloads/files/AETO_written_exam_result_02_2025_12112026.pdf",
+   "date": null,
+   "firstSeen": "2026-11-12T15:16:50+05:00"
+  },
+  {
+   "id": "d25b986acd0894e1",
+   "source": "kppsc",
+   "kind": "result",
+   "title": "Result of Written Examination for the Posts of PMS Officer (Adv No. 02/2025 Sr. No. 1) New",
+   "url": "https://kppsc.gov.pk/public/assets/downloads/files/PMS_written_exam_result_02_2025_12112026.pdf",
+   "date": null,
+   "firstSeen": "2026-11-12T15:16:50+05:00"
+  },
   {
    "id": "5ec9a019d30cccd6",
    "source": "kppsc",
@@ -196,15 +214,6 @@
    "kind": "interview",
    "title": "1: Interview Call up / Shall stand rejected / Rejection e-Letters",
    "url": "https://www.kppsc.gov.pk/interview_calls",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "358497ce6b0f5c80",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "Written Examination Schedule for the post of PMS Officer (Adv#01/2026,S#01)",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/20ith_Schedule_Written_Examination_PMS_Officer_01_2026_01_Rescheduled_22102026.pdf",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
