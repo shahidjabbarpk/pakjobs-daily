@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-12T09:08:05+05:00",
+ "updatedAt": "2026-11-12T10:14:06+05:00",
  "sources": {
   "njp": {
    "count": 90,
@@ -8,7 +8,7 @@
   "ppsc": {
    "count": 0,
    "ok": false,
-   "error": "HTTPSConnectionPool(host='www.ppsc.gop.pk', port=443): Max retries exceeded with url: /Jobs.aspx (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ppsc.gop.pk', port=443) at 0x7fb05a3bb890>, '"
+   "error": "HTTPSConnectionPool(host='www.ppsc.gop.pk', port=443): Max retries exceeded with url: /Jobs.aspx (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ppsc.gop.pk', port=443) at 0x7fbaf08df5f0>, '"
   },
   "fpsc": {
    "count": 0,
@@ -47,7 +47,7 @@
   }
  },
  "total": 220,
- "new": 0,
+ "new": 1,
  "updates": {
   "total": 44,
   "new": 0,

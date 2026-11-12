@@ -1,6 +1,24 @@
 {
- "updatedAt": "2026-11-12T09:08:05+05:00",
+ "updatedAt": "2026-11-12T10:14:06+05:00",
  "jobs": [
+  {
+   "id": "42693bf6ec616b7f",
+   "source": "spsc",
+   "title": "SPSC Advertisement 07/26 - Various Posts",
+   "organization": "Sindh Public Service Commission",
+   "category": "psc",
+   "cities": [
+    "Sindh"
+   ],
+   "qualification": null,
+   "url": "https://spsc.gov.pk/advertisement/2026/adv-07-2026.pdf",
+   "advertImage": "https://spsc.gov.pk/advertisement/2026/adv-07-2026.pdf",
+   "advertNo": "07/26",
+   "lastDate": "2026-12-14",
+   "applyUrl": "https://spsc.gov.pk/",
+   "description": "Sindh Public Service Commission advertisement. Open the official advertisement PDF for posts, eligibility, age limit and how to apply.",
+   "firstSeen": "2026-11-12T10:14:06+05:00"
+  },
   {
    "id": "e5d327622871fbf7",
    "source": "njp",
@@ -2609,24 +2627,6 @@
    "lastDate": "2026-11-16",
    "applyUrl": "https://www.njp.gov.pk/jobs/10418",
    "firstSeen": "2026-11-02T13:31:09+05:00"
-  },
-  {
-   "id": "aaf0fdca773f8f1e",
-   "source": "spsc",
-   "title": "SPSC Advertisement 06/26 - Various Posts",
-   "organization": "Sindh Public Service Commission",
-   "category": "psc",
-   "cities": [
-    "Sindh"
-   ],
-   "qualification": null,
-   "url": "https://spsc.gov.pk/advertisement/2026/adv-06-2026.pdf",
-   "advertImage": "https://spsc.gov.pk/advertisement/2026/adv-06-2026.pdf",
-   "advertNo": "06/26",
-   "lastDate": "2026-11-11",
-   "applyUrl": "https://spsc.gov.pk/",
-   "description": "Sindh Public Service Commission advertisement. Open the official advertisement PDF for posts, eligibility, age limit and how to apply.",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
   },
   {
    "id": "d117e852cddd2251",
