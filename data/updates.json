@@ -1,6 +1,42 @@
 {
- "updatedAt": "2026-11-12T06:27:19+05:00",
+ "updatedAt": "2026-11-12T08:01:57+05:00",
  "updates": [
+  {
+   "id": "5ec9a019d30cccd6",
+   "source": "kppsc",
+   "kind": "result",
+   "title": "Result of written examination: Provincial Management Service Officer (In-Service) (Bps-17) (Advt: No. 04/2026 (Sr. No. 1) New",
+   "url": "https://kppsc.gov.pk/public/assets/downloads/files/PMS_IN-SERVICE 04-2026 ANNOUNCEMENT.pdf",
+   "date": null,
+   "firstSeen": "2026-11-12T08:01:57+05:00"
+  },
+  {
+   "id": "3c104b50f20db19c",
+   "source": "kppsc",
+   "kind": "schedule",
+   "title": "4th Schedule 2027: Computer Based Test CBT (Ability Test)",
+   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/4th_schedule_2027_Computer_based_testing_ability_february_2027.pdf",
+   "date": null,
+   "firstSeen": "2026-11-12T08:01:57+05:00"
+  },
+  {
+   "id": "43bb0f637f398c28",
+   "source": "kppsc",
+   "kind": "schedule",
+   "title": "3rd Schedule 2027: Written examination for the post of Assistant Sub Inspector (Traffic Warden System) (Adv# 07/2026 S# 01)",
+   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/3rd_Schedule_2027_Assistant_Sub_Inspector_Traffic_Warden_System_February_07_2026_01.pdf",
+   "date": null,
+   "firstSeen": "2026-11-12T08:01:57+05:00"
+  },
+  {
+   "id": "85d08aa990f076d6",
+   "source": "kppsc",
+   "kind": "schedule",
+   "title": "19th Schedule, Computer Based Test (CBT), December 2026",
+   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/19th_schedule_2026_Computer_Based_Ability_Tests_12-12-2026.pdf",
+   "date": null,
+   "firstSeen": "2026-11-12T08:01:57+05:00"
+  },
   {
    "id": "930d6e05c7ffa49f",
    "source": "bpsc",
@@ -9,15 +45,6 @@
    "url": "https://www.bpsc.gob.pk/uploads/Result/1794395885.jpeg",
    "date": "2026-11-11",
    "firstSeen": "2026-11-11T16:12:28+05:00"
-  },
-  {
-   "id": "b5150a1d343eae8c",
-   "source": "kppsc",
-   "kind": "result",
-   "title": "Result Of Written Examination For Twenty-Nine (29) Posts Of Provincial Management Service Officer (In-Service) (Bps-17) In Human Resource Management Department Advt: No. 04/2026 (Sr. No. 1). New",
-   "url": "https://kppsc.gov.pk/public/assets/downloads/files/PMS_IN-SERVICE 04-2026 ANNOUNCEMENT.pdf",
-   "date": null,
-   "firstSeen": "2026-11-11T11:13:44+05:00"
   },
   {
    "id": "f0c0fec0f95dd09b",
@@ -63,33 +90,6 @@
    "url": "https://www.bpsc.gob.pk/uploads/Interview/1794310766.jpeg",
    "date": "2026-11-10",
    "firstSeen": "2026-11-10T16:59:48+05:00"
-  },
-  {
-   "id": "8c2f51d94267358e",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "4th Schedule 2027: Computer Based Test CBT (Ability Test) New",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/4th_schedule_2027_Computer_based_testing_ability_february_2027.pdf",
-   "date": null,
-   "firstSeen": "2026-11-10T14:03:58+05:00"
-  },
-  {
-   "id": "6767f8d0562bd5f2",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "3rd Schedule 2027: Written examination for the post of Assistant Sub Inspector (Traffic Warden System) (Adv# 07/2026 S# 01) New",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/3rd_Schedule_2027_Assistant_Sub_Inspector_Traffic_Warden_System_February_07_2026_01.pdf",
-   "date": null,
-   "firstSeen": "2026-11-10T14:03:58+05:00"
-  },
-  {
-   "id": "a97aa376276a2fc6",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "19th Schedule, Computer Based Test (CBT), December 2026 New",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/19th_schedule_2026_Computer_Based_Ability_Tests_12-12-2026.pdf",
-   "date": null,
-   "firstSeen": "2026-11-10T14:03:58+05:00"
   },
   {
    "id": "07bad4fb45860173",
