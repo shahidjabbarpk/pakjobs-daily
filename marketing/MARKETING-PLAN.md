@@ -12,8 +12,8 @@ Goal: "Govt jobs" category mein Play Store par top. Seedhi baat: #1 rank ki koi 
 ## ⏳ Aap ki ijazat / account chahiye
 | Kaam | Kyun | Kaun |
 |---|---|---|
-| Google Search Console mein site add + sitemap submit | Google ko 260 pages jaldi index karwana, Google Jobs mein aana | Main Chrome se kar sakta hoon (shahidjabbarpk) |
-| Play Console: title/short desc/full desc v2 + Urdu translation | Play search ranking ka sab se bara factor | Main Chrome se, aap ki "haan" ke baad |
+| ~~Search Console~~ ✅ 13 Nov: verified + sitemap submit | | |
+| ~~Play listing v2 + Urdu~~ ✅ 13 Nov: review ke liye submit | | |
 | Telegram channel + bot token | Rozana jobs auto-post (GitHub Actions se, free) | Aap channel banayein, main bot laga doon |
 | WhatsApp Channel "PakJobs Daily" | Pakistan mein sab se zyada reach | Sirf aap ke phone se ban sakta hai; rozana `daily-post.txt` paste |
 | Facebook Page | Groups mein share ke liye | Aap ka FB account |
