@@ -58,3 +58,31 @@ footer { text-align: center; color: var(--sub); font-size: 13.5px; padding: 24px
   .links a { margin-left: 12px; font-size: 14px; }
   .app img { width: 64px; height: 64px; }
 }
+
+/* SEO pages */
+.play { display: inline-block; margin-top: 12px; background: var(--green); color: #fff; text-decoration: none; font-weight: 700; padding: 10px 18px; border-radius: 12px; }
+.crumbs { font-size: 13.5px; color: var(--sub); margin-bottom: 10px; }
+.crumbs a { color: var(--sub); }
+.page .co { font-weight: 600; margin: -4px 0 10px; color: var(--text); }
+.deadline { background: #fff7d6; color: #5a4300; border-radius: 12px; padding: 10px 14px; }
+.deadline.hot, .meta .hot { color: #b3261e; font-weight: 600; }
+.deadline.hot { background: #fde8e6; }
+.facts { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.facts th, .facts td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--border); font-size: 15px; vertical-align: top; }
+.facts th { width: 38%; color: var(--sub); font-weight: 600; }
+.pre { white-space: pre-line; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-block; background: var(--gold); color: #1a1300; font-weight: 700; text-decoration: none; padding: 11px 18px; border-radius: 12px; }
+.btn.ghost { background: transparent; border: 1.5px solid var(--green); color: var(--green); }
+.btn.wa { background: #25D366; color: #fff; }
+.related h2 { font-size: 17px; }
+.chipset { display: flex; flex-wrap: wrap; gap: 8px; }
+.chipset a { border: 1px solid var(--border); background: var(--card); border-radius: 999px; padding: 4px 12px; font-size: 14px; text-decoration: none; }
+.updates { padding-left: 0; list-style: none; }
+.updates li { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; }
+.tag { background: var(--accent); color: #fff; font-size: 12px; border-radius: 6px; padding: 1px 7px; }
+.govt .bar a { font-weight: 600; }
+.article p, .article li { color: var(--text); }
+.sticky-app { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); background: var(--green); color: #fff; text-decoration: none; font-weight: 700; padding: 11px 20px; border-radius: 999px; box-shadow: 0 6px 20px rgba(0,0,0,.25); white-space: nowrap; z-index: 9; font-size: 15px; }
+footer { padding-bottom: 80px; }
+@media (prefers-color-scheme: dark) { .deadline { background: #2b2410; color: #f5dc8a; } .deadline.hot { background: #3a1513; } }
