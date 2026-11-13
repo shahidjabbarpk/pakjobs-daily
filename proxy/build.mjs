@@ -4,7 +4,7 @@
 //   node build.mjs          -> writes jobs/, jobs-in/, ... sitemap.xml, robots.txt into this folder
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SITE = 'https://pakjobs-daily.vercel.app';
@@ -214,6 +214,9 @@ const GUIDES = [
 
 // ---------- build ----------
 async function main() {
+  // extra guides: proxy/content/*.mjs, each `export default (utm) => [[slug, title, description, html], ...]`
+  const cdir = path.join(HERE, 'content');
+  if (fs.existsSync(cdir)) for (const f of fs.readdirSync(cdir).filter((f) => f.endsWith('.mjs')).sort()) GUIDES.push(...(await import(pathToFileURL(path.join(cdir, f)).href)).default(utm));
   const [{ jobs: all }, upd, pap] = await Promise.all([data('jobs.json'), data('updates.json').catch(() => ({ updates: [] })), data('papers.json').catch(() => ({ papers: [] }))]);
   for (const d of GENERATED) fs.rmSync(path.join(HERE, d), { recursive: true, force: true });
 
