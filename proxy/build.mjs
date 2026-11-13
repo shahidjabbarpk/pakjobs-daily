@@ -63,7 +63,7 @@ ${ld}
 </div></nav>
 ${body}
 <a class="sticky-app" href="${utm('sticky')}" rel="noopener">📲 Get free job alerts in the app</a>
-<footer class="wrap">© 2026 PakJobs Daily · <a href="/govt-jobs">Govt jobs</a> · <a href="/last-date-soon">Last date soon</a> · <a href="/past-papers">Past papers</a> · <a href="https://pakjobs-daily-govt-jobs.blogspot.com/">Blog</a> · <a href="/about">About</a> · <a href="/privacy">Privacy Policy</a> · <a href="mailto:shahidjabbarpk@gmail.com">Contact</a><br><span class="muted">PakJobs Daily is independent and not affiliated with any government body. Always confirm details and apply on the official website. Never pay anyone for a job.</span></footer>
+<footer class="wrap">© 2026 PakJobs Daily · <a href="/govt-jobs">Govt jobs</a> · <a href="/last-date-soon">Last date soon</a> · <a href="/past-papers">Past papers</a> · <a href="https://pakjobs-daily-govt-jobs.blogspot.com/">Blog</a> · <a href="https://whatsapp.com/channel/0029VbEVConCnA7mPJEYhb3X" rel="noopener">WhatsApp Channel</a> · <a href="https://www.facebook.com/profile.php?id=61596636206817" rel="noopener">Facebook</a> · <a href="/about">About</a> · <a href="/privacy">Privacy Policy</a> · <a href="mailto:shahidjabbarpk@gmail.com">Contact</a><br><span class="muted">PakJobs Daily is independent and not affiliated with any government body. Always confirm details and apply on the official website. Never pay anyone for a job.</span></footer>
 </body>
 </html>`;
 }

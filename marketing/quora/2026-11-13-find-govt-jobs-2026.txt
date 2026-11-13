@@ -1,0 +1,26 @@
+Most government jobs in Pakistan are now advertised online, so the trick is knowing the official sources and checking them regularly. Here is what works:
+
+1. Official recruitment portals (check these first)
+- National Jobs Portal (NJP) – most federal ministries and departments post vacancies here and you apply with your CNIC.
+- FPSC (fpsc.gov.pk) – federal BPS-16 and above posts and CSS.
+- Provincial commissions: PPSC (Punjab), SPSC (Sindh), KPPSC (KP), BPSC (Balochistan), AJKPSC.
+- NTS, OTS, PTS and similar testing services – many departments hire through them.
+- Armed forces: joinpakarmy.gov.pk, joinpaknavy.gov.pk, joinpaf.gov.pk.
+
+2. Newspapers
+Jang, Express, Dawn and Nawa-i-Waqt still carry many department adverts, especially on Sundays. Always note the advertisement number.
+
+3. Match the job to your eligibility before applying
+Check qualification, age limit (and any age relaxation), domicile/quota and the last date. A lot of applications get rejected only because of domicile or age.
+
+4. Keep your documents ready
+CNIC, domicile, attested degrees, photos and a short CV. Deadlines are often only 2–3 weeks after the advert.
+
+5. Avoid scams
+A real government job never asks you to pay someone to "confirm" the job. Verify every advert on the official website.
+
+Disclosure: I work on a free app called PakJobs Daily that collects new government job adverts from these official sources into one list and sends alerts for your district and qualification. You don't need it, as all of the above is free to check yourself, but it can save time:
+Website (no install): https://pakjobs-daily.vercel.app/govt-jobs
+Android app: https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza
+
+Good luck with your applications!
