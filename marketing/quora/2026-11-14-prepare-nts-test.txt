@@ -1,0 +1,29 @@
+NTS (and similar testing services like OTS, PTS, ETEA) papers for government jobs follow a fairly predictable pattern, so a focused plan works better than reading random books. Here is a method that works for most candidates:
+
+1. Read the advertisement and the test details first
+Every NTS project has its own page with the post, the test pattern and the syllabus. Most job tests are MCQ-based and usually cover English, General Knowledge / Pakistan Affairs, Islamiat, Basic Maths / Analytical reasoning, and sometimes subject-specific questions for the post. Note the number of questions, time and whether there is negative marking.
+
+2. Build the basics, subject by subject
+- English: synonyms/antonyms, correct the sentence, prepositions, tenses, short comprehension.
+- General Knowledge & Pakistan Studies: history of Pakistan, constitution basics, geography, current affairs of the last 6–12 months.
+- Islamiat: basic Quran and Hadith facts, Islamic history.
+- Maths/Analytical: percentages, ratios, averages, simple equations, series and logical reasoning.
+- Subject part: revise your degree's core topics if the post asks for it.
+
+3. Solve past papers and MCQ books under time
+Past papers show which topics repeat. Solve full papers with a timer – speed matters as much as knowledge, because you usually get less than a minute per question.
+
+4. Daily routine
+1–2 hours a day for 3–4 weeks is enough for most job tests if you are consistent: one subject for theory, then 30–50 MCQs, then check mistakes and keep a small "mistakes notebook".
+
+5. On test day
+Carry your roll number slip and original CNIC, reach early, attempt easy questions first, and do not guess blindly if there is negative marking.
+
+6. Stay away from fake "guaranteed pass" offers
+No one can sell you the paper or a seat. Download roll number slips and results only from the official testing service website.
+
+Disclosure: I work on a free app called PakJobs Daily that lists new government job adverts (including NTS/OTS/PTS projects) from official sources and alerts you by district and qualification. It is optional – everything above you can do yourself:
+Website: https://pakjobs-daily.vercel.app/govt-jobs
+Android app: https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza
+
+Best of luck with your test!

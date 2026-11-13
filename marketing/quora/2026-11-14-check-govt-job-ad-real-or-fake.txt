@@ -1,0 +1,28 @@
+Fake government job adverts are very common in Pakistan, especially on Facebook and WhatsApp. You can check almost any advert yourself in 5 minutes with these steps:
+
+1. Find the same advert on an official source
+A real federal or provincial job is published by the department itself or the body that recruits for it: National Jobs Portal, FPSC, PPSC/SPSC/KPPSC/BPSC, the department's own .gov.pk website, or a known testing service (NTS, OTS, PTS etc.). If you cannot find it on any official site, treat it as suspicious.
+
+2. Check the advertisement details
+Real adverts normally have the department's name, an advertisement number or reference, a clear list of posts with BPS grade, eligibility (qualification, age, domicile) and a last date. Many government adverts are also printed in major newspapers. Vague adverts like "1000+ jobs in all departments, apply now" with no department name are a red flag.
+
+3. Look at how you are asked to apply
+Official recruitment happens through a website, a testing service form or by post to a government office address. If the only way to apply is a personal WhatsApp number or a Gmail address, be careful.
+
+4. Never pay to "confirm" a job
+Some tests have an official application or test fee, and it is paid through the method written on the official website (bank challan or the portal). Anyone asking for money to "secure your seat", "pass your interview" or for a "joining letter fee" is a scammer.
+
+5. Protect your data
+Do not send copies of your CNIC, degrees or bank details to random numbers. They can be misused.
+
+6. Check the website address carefully
+Scam sites copy logos and names. Official Pakistani government sites usually end in .gov.pk. Look at the full URL, not just the logo.
+
+7. When in doubt, call the department
+Use the phone number from the department's official website (not the one in the advert) and ask whether the recruitment is genuine.
+
+Disclosure: I work on a free app called PakJobs Daily, which only lists government jobs taken from official sources and links back to the original advert, so you can verify it yourself. You don't need it to follow the steps above:
+Website: https://pakjobs-daily.vercel.app/govt-jobs
+Android app: https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza
+
+Stay safe, and good luck with your applications!
