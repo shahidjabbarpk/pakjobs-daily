@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { startAds } from '@/lib/ads';
+import { track } from '@/lib/analytics';
 import { registerBackgroundDetector } from '@/lib/background';
 import { isAdmin } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
@@ -26,7 +27,10 @@ function useNotificationTaps() {
     const openJob = (r: Notifications.NotificationResponse | null) => {
       const data = r?.notification.request.content.data;
       // handled once: otherwise the same tap re-opens the job whenever the app restarts its JS
-      if (r) Notifications.clearLastNotificationResponse();
+      if (r) {
+        Notifications.clearLastNotificationResponse();
+        track('notification_open', { kind: typeof data?.jobId === 'string' ? 'job' : 'other' });
+      }
       if (typeof data?.jobId === 'string') router.push(`/job/${data.jobId}`);
       else if (typeof data?.screen === 'string') router.push(data.screen as any);
     };

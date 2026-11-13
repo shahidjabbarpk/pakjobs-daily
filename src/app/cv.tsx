@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Field } from '@/components/community';
 import { Icon, Tap, useStatusBar } from '@/components/ui';
 import { maybeShowInterstitial } from '@/lib/ads';
+import { track } from '@/lib/analytics';
 import { type CvData, type CvRow, EMPTY_CV, exportCv, formatCnic, validateCv } from '@/lib/cv';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
@@ -59,6 +60,7 @@ export default function CvBuilder() {
     setBusy(true);
     try {
       await exportCv(cv);
+      track('cv_created', { photo: !!cv.photo });
       setTimeout(maybeShowInterstitial, 800);
     } catch {
       setErr(t('errorGeneric'));

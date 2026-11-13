@@ -8,6 +8,8 @@ import { haptic, Icon, Tap, useStatusBar } from '@/components/ui';
 import { buildMock, examByKey, shuffleOptions } from '@/data/exams';
 import { type Mcq, SUBJECTS } from '@/data/mcqs';
 import { maybeShowInterstitial, withAd } from '@/lib/ads';
+import { track } from '@/lib/analytics';
+import { maybeAskReview } from '@/lib/engagement';
 import { useI18n } from '@/lib/i18n';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
@@ -70,8 +72,9 @@ export default function Quiz() {
     setDone(true);
     const { quizBest, set } = useApp.getState();
     if ((quizBest[sub.key] ?? -1) < pct) set({ quizBest: { ...quizBest, [sub.key]: pct } });
-    // the result is on screen first, then one ad
-    setTimeout(maybeShowInterstitial, 1500);
+    track(exam ? 'mock_test_complete' : 'practice_complete', { subject: subject ?? '', score: pct });
+    // the result is on screen first, then one ad; a good score is a happy moment to ask for a rating
+    setTimeout(() => maybeShowInterstitial(pct >= 60 ? maybeAskReview : undefined), 1500);
   };
   const next = () => {
     if (idx + 1 < questions.length) { setIdx(idx + 1); return; }

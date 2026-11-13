@@ -35,6 +35,8 @@ interface AppState {
   lastInterstitial: number;
   syncing: boolean;           // a job refresh is in flight (not persisted) - drives skeleton loaders
   alertsSeenAt: number;       // last time the Alerts tab was opened; newer updates show a badge
+  savesTotal: number;         // jobs ever saved, for the in-app review prompt (lib/engagement.ts)
+  reviewAskedAt: number | null;
 
   /** Merge a fresh feed in; returns the jobs never seen before on this device. */
   ingest: (feed: Feed) => Job[];
@@ -53,6 +55,8 @@ export const useApp = create<AppState>()(
       seenIds: seedFeed.jobs.map((j) => j.id),
       saved: {},
       reminders: {},
+      savesTotal: 0,
+      reviewAskedAt: null,
       lang: 'en',
       theme: 'light',
       notify: true,

@@ -11,6 +11,7 @@ export const FEED_URL =
 export const WEB_JOBS_URL = process.env.EXPO_PUBLIC_WEB_JOBS_URL ?? 'https://pakjobs-daily-proxy.vercel.app/api/jobs';
 
 export const STORE_URL = 'https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza';
+export const SITE_URL = 'https://pakjobs-daily.vercel.app';
 export const PRIVACY_URL = 'https://shahidjabbarpk.github.io/pakjobs-daily/privacy.html';
 
 export const BACKGROUND_TASK = 'pakjobs-detect-new-jobs';

@@ -11,7 +11,9 @@ import { Dropdown } from '@/components/Dropdown';
 import { ProfileForm } from '@/components/community';
 import { Chip, Icon, type IconName, Tap, useStatusBar, useTabBarSpace } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
+import { track } from '@/lib/analytics';
 import { PRIVACY_URL } from '@/lib/config';
+import { openStoreListing, shareApp } from '@/lib/engagement';
 import { currentUid, deleteAccount, ensureUser, signOutUser } from '@/lib/community';
 import { refreshJobs } from '@/lib/feed';
 import { useI18n } from '@/lib/i18n';
@@ -129,7 +131,7 @@ export default function Settings() {
 
       <Card>
         <Label icon="map-marker-radius" text={t('pickCity')} />
-        <CityPicker value={s.homeCity} onChange={(city) => s.set({ homeCity: city, alertCity: city })} />
+        <CityPicker value={s.homeCity} onChange={(city) => { s.set({ homeCity: city, alertCity: city }); if (city) track('alert_setup', { city, from: 'profile' }); }} />
       </Card>
 
       <Card>
@@ -216,7 +218,7 @@ export default function Settings() {
               ))}
             </View>
             <Text style={[styles.sub, tf('bold'), { color: c.sub }]}>{t('city')}</Text>
-            <CityPicker value={s.alertCity} onChange={(v) => s.set({ alertCity: v })} />
+            <CityPicker value={s.alertCity} onChange={(v) => { s.set({ alertCity: v }); if (v) track('alert_setup', { city: v, from: 'alerts' }); }} />
           </Animated.View>
         )}
       </Card>
@@ -272,7 +274,19 @@ export default function Settings() {
       <Card>
         <Label icon="information-outline" text={t('disclaimerTitle')} />
         <Text style={[styles.disclaimer, tf(), { color: c.sub }]}>{t('disclaimer')}</Text>
-        <Tap onPress={() => WebBrowser.openBrowserAsync(PRIVACY_URL)} style={[styles.row, { backgroundColor: c.cardAlt, marginTop: 12 }]}>
+        <Tap onPress={() => shareApp(t('shareAppMsg'))} style={[styles.row, { backgroundColor: c.cardAlt, marginTop: 12 }]}>
+          <Icon name="share-variant-outline" size={18} color={c.primary} />
+          <Text style={[styles.rowText, tf(), { color: c.text }]}>{t('shareApp')}</Text>
+          <Icon name="chevron-right" size={18} color={c.faint} />
+        </Tap>
+        {Platform.OS === 'android' && (
+          <Tap onPress={openStoreListing} style={[styles.row, { backgroundColor: c.cardAlt, marginTop: 8 }]}>
+            <Icon name="star-outline" size={18} color={c.gold} />
+            <Text style={[styles.rowText, tf(), { color: c.text }]}>{t('rateApp')}</Text>
+            <Icon name="open-in-new" size={16} color={c.faint} />
+          </Tap>
+        )}
+        <Tap onPress={() => WebBrowser.openBrowserAsync(PRIVACY_URL)} style={[styles.row, { backgroundColor: c.cardAlt, marginTop: 8 }]}>
           <Icon name="shield-lock-outline" size={18} color={c.primary} />
           <Text style={[styles.rowText, tf(), { color: c.text }]}>{t('privacy')}</Text>
           <Icon name="open-in-new" size={16} color={c.faint} />
@@ -282,7 +296,7 @@ export default function Settings() {
             {t('yourId')}: {uid ?? '—'} {copied ? `✓ ${t('copied')}` : '⧉'}
           </Text>
         </Tap>
-        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.5</Text>
+        <Text style={[styles.version, { color: c.faint }]}>PakJobs Daily v1.0.6</Text>
       </Card>
     </ScrollView>
   );

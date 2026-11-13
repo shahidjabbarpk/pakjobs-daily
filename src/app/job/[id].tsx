@@ -16,7 +16,8 @@ import { useI18n } from '@/lib/i18n';
 import { cancelReminder, scheduleDeadlineReminder } from '@/lib/notify';
 import { useApp } from '@/lib/store';
 import { CATEGORY_META, font, useTheme } from '@/lib/theme';
-import { STORE_URL } from '@/lib/config';
+import { track } from '@/lib/analytics';
+import { jobPageUrl, jobSaveToggled, storeLink } from '@/lib/engagement';
 import type { Job } from '@/lib/types';
 
 const SOURCE_NAME: Record<string, string> = {
@@ -37,6 +38,9 @@ export default function JobDetail() {
     const timer = setTimeout(() => adOnOpen('job'), 450);
     return () => clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    if (job) track('job_view', { source: job.source, category: job.category });
+  }, [job?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!job) {
     return (
@@ -80,17 +84,23 @@ function Detail({ job }: { job: Job }) {
     flash((await scheduleDeadlineReminder(job)) ? t('remindSet3') : t('reminderPast'));
   };
 
+  // the website's page for the job when it has one (full details + app link), else the official advert
+  const shareLink = jobPageUrl(job) ?? job.applyUrl ?? job.url;
   const shareText = () =>
-    `📢 ${job.title}\n🏢 ${job.organization}\n${job.lastDate ? `⏳ ${t('lastDate')}: ${prettyDate(job.lastDate)}\n` : ''}🔗 ${job.applyUrl ?? job.url}\n\n📲 PakJobs Daily app: ${STORE_URL}`;
+    `📢 ${job.title}\n🏢 ${job.organization}\n${job.lastDate ? `⏳ ${t('lastDate')}: ${prettyDate(job.lastDate)}\n` : ''}🔗 ${shareLink}\n\n📲 PakJobs Daily app: ${storeLink('job_share')}`;
   const shareTo = (app: 'whatsapp' | 'facebook' | 'telegram') => {
+    track('job_share', { method: app, source: job.source });
     const text = encodeURIComponent(shareText());
-    const link = encodeURIComponent(job.applyUrl ?? job.url);
+    const link = encodeURIComponent(shareLink);
     const url = app === 'whatsapp' ? `whatsapp://send?text=${text}`
       : app === 'telegram' ? `https://t.me/share/url?url=${link}&text=${text}`
       : `https://www.facebook.com/sharer/sharer.php?u=${link}`;
     Linking.openURL(url).catch(() => (app === 'whatsapp' ? Linking.openURL(`https://wa.me/?text=${text}`) : onShare()));
   };
-  const onShare = () => Share.share({ message: shareText() });
+  const onShare = () => {
+    track('job_share', { method: 'system', source: job.source });
+    Share.share({ message: shareText() });
+  };
 
   const info: [IconName, string, string | undefined][] = [
     ['school-outline', t('qualification'), qual(job.qualification)],
@@ -119,7 +129,7 @@ function Detail({ job }: { job: Job }) {
             <View style={{ flexDirection: 'row', gap: 10 }}>
               {isUser && <Tap onPress={() => setReporting(true)} style={styles.navBtn}><Icon name="flag-outline" size={20} color="#fff" /></Tap>}
               <Tap onPress={onShare} style={styles.navBtn}><Icon name="share-variant-outline" size={20} color="#fff" /></Tap>
-              <View style={styles.navBtn}><BookmarkButton active={saved} onPress={() => toggleSave(job)} light /></View>
+              <View style={styles.navBtn}><BookmarkButton active={saved} onPress={() => jobSaveToggled(job, toggleSave(job))} light /></View>
             </View>
           </View>
           <Animated.View style={styles.heroBody}>
@@ -253,7 +263,7 @@ function Detail({ job }: { job: Job }) {
             </LinearGradient>
           </Tap>
         ) : (
-          <Tap onPress={() => open(job.applyUrl ?? job.url)} style={{ flex: 1 }}>
+          <Tap onPress={() => { track('job_apply_click', { source: job.source, category: job.category }); open(job.applyUrl ?? job.url); }} style={{ flex: 1 }}>
             <LinearGradient colors={[c.primaryDark, c.primary]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.apply}>
               <Text style={[styles.applyText, tf('bold')]}>{t('applyNow')}</Text>
               <Icon name="arrow-right" size={20} color="#fff" />

@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { isNew, prettyDate, safeUrl, windowProgress } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
+import { jobSaveToggled } from '@/lib/engagement';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
 import type { Job } from '@/lib/types';
@@ -46,7 +47,7 @@ function JobCardBase({ job, index = 0 }: { job: Job; index?: number }) {
             <Text style={[styles.title, { color: c.text }]} numberOfLines={2}>{job.title}</Text>
             <Text style={[styles.org, { color: c.sub }]} numberOfLines={1}>{job.organization}</Text>
           </View>
-          <BookmarkButton active={saved} onPress={() => toggleSave(job)} />
+          <BookmarkButton active={saved} onPress={() => jobSaveToggled(job, toggleSave(job))} />
         </View>
 
         <View style={styles.tags}>

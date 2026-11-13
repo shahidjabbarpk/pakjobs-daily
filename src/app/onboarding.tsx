@@ -8,6 +8,7 @@ import { CityPicker } from '@/components/CityPicker';
 import { Icon, Tap, useStatusBar } from '@/components/ui';
 import { openBatterySettings } from '@/lib/battery';
 import { useI18n } from '@/lib/i18n';
+import { track } from '@/lib/analytics';
 import { setupNotifications } from '@/lib/notify';
 import { useApp } from '@/lib/store';
 import { font, useTheme } from '@/lib/theme';
@@ -28,7 +29,9 @@ export default function Onboarding() {
 
   const next = async () => {
     if (step === 0) {
-      if (Platform.OS !== 'web') await setupNotifications().catch(() => {});
+      // asked here, right after picking the district the alerts are for
+      const granted = Platform.OS !== 'web' && (await setupNotifications().catch(() => false));
+      if (city) track('alert_setup', { city, from: 'onboarding', notifications: !!granted });
       if (Platform.OS === 'android') { setStep(1); return; }
     }
     finish();
@@ -86,7 +89,7 @@ export default function Onboarding() {
         </Tap>
         <Tap onPress={next} style={{ flex: 1 }}>
           <LinearGradient colors={[c.primaryDark, c.primary]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.btn}>
-            <Text style={[styles.btnText, tf('bold')]}>{t('continueBtn')}</Text>
+            <Text style={[styles.btnText, tf('bold')]}>{step === 0 ? t('turnOnAlerts') : t('continueBtn')}</Text>
             <Icon name="arrow-right" size={20} color="#fff" />
           </LinearGradient>
         </Tap>

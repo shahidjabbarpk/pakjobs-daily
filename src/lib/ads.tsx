@@ -88,8 +88,9 @@ function showFullScreen(then?: () => void): boolean {
 }
 
 /** An ad right now if the safety nets allow it (quiz/mock result, CV made). */
-export function maybeShowInterstitial() {
-  showFullScreen();
+/** Shows an interstitial if one may show now; `then` runs after it closes, or straight away. */
+export function maybeShowInterstitial(then?: () => void) {
+  if (!showFullScreen(then)) then?.();
 }
 
 /** Runs `then` after an ad if one may show now, otherwise straight away (before a quiz / mock test). */
