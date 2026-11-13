@@ -1,5 +1,8 @@
 # PakJobs Daily — Govt & Private Job Alerts (React Native / Expo 57)
 
+[![Get it on Google Play](https://img.shields.io/badge/Google_Play-PakJobs_Daily-green?logo=googleplay)](https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza&referrer=utm_source%3Dgithub)
+&nbsp;🌐 **Website:** [pakjobs-daily.vercel.app](https://pakjobs-daily.vercel.app) — [latest govt jobs in Pakistan](https://pakjobs-daily.vercel.app/govt-jobs) · [jobs closing soon](https://pakjobs-daily.vercel.app/last-date-soon) · [results & roll no slips](https://pakjobs-daily.vercel.app/results) · [guides](https://pakjobs-daily.vercel.app/guides)
+
 Pakistan job alerts app. It detects new vacancies from official sites on its own, notifies users, and is set up for AdMob.
 
 ## How auto-detection works
