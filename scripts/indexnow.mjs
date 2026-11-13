@@ -6,5 +6,5 @@ const id = fs.readFileSync(new URL('../indexnow-id.txt', import.meta.url), 'utf8
 const xml = await (await fetch(`https://${HOST}/sitemap.xml`)).text();
 const urlList = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 const body = { host: HOST, key: id, keyLocation: `https://${HOST}/${id}.txt`, urlList };
-const r = await fetch('https://api.indexnow.org/indexnow', { method: 'POST', headers: { 'content-type': 'application/json; charset=utf-8' }, body: JSON.stringify(body) });
+const r = await fetch('https://www.bing.com/indexnow', { method: 'POST', headers: { 'content-type': 'application/json; charset=utf-8' }, body: JSON.stringify(body) });
 console.log(`IndexNow: ${urlList.length} urls -> HTTP ${r.status}`);
