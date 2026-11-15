@@ -1,50 +1,41 @@
 {
- "updatedAt": "2026-11-15T14:58:05+05:00",
+ "updatedAt": "2026-11-15T22:13:07+05:00",
  "updates": [
   {
-   "id": "6e9d5e4641885fea",
+   "id": "ab02e1bcc06a0564",
+   "source": "kppsc",
+   "kind": "interview",
+   "title": "Interview Programme for the Month of December, 2026",
+   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/Interview_programme_December_2026.pdf",
+   "date": null,
+   "firstSeen": "2026-11-15T22:13:07+05:00"
+  },
+  {
+   "id": "a9131950093c0c01",
    "source": "kppsc",
    "kind": "result",
-   "title": "Result of Written Examination for the Posts of AETO (Adv No. 02/2025 Sr. No. 2) New",
+   "title": "Result of Written Examination for the Posts of AETO (Adv No. 02/2025 Sr. No. 2)",
    "url": "https://kppsc.gov.pk/public/assets/downloads/files/AETO_written_exam_result_02_2025_12112026.pdf",
    "date": null,
-   "firstSeen": "2026-11-12T15:16:50+05:00"
+   "firstSeen": "2026-11-15T22:13:07+05:00"
   },
   {
-   "id": "d25b986acd0894e1",
+   "id": "b8bfa078420c40ad",
    "source": "kppsc",
    "kind": "result",
-   "title": "Result of Written Examination for the Posts of PMS Officer (Adv No. 02/2025 Sr. No. 1) New",
+   "title": "Result of Written Examination for the Posts of PMS Officer (Adv No. 02/2025 Sr. No. 1)",
    "url": "https://kppsc.gov.pk/public/assets/downloads/files/PMS_written_exam_result_02_2025_12112026.pdf",
    "date": null,
-   "firstSeen": "2026-11-12T15:16:50+05:00"
+   "firstSeen": "2026-11-15T22:13:07+05:00"
   },
   {
-   "id": "5ec9a019d30cccd6",
+   "id": "52e079fb7a5726fa",
    "source": "kppsc",
    "kind": "result",
-   "title": "Result of written examination: Provincial Management Service Officer (In-Service) (Bps-17) (Advt: No. 04/2026 (Sr. No. 1) New",
+   "title": "Result of written examination: Provincial Management Service Officer (In-Service) (Bps-17) (Advt: No. 04/2026 (Sr. No. 1)",
    "url": "https://kppsc.gov.pk/public/assets/downloads/files/PMS_IN-SERVICE 04-2026 ANNOUNCEMENT.pdf",
    "date": null,
-   "firstSeen": "2026-11-12T08:01:57+05:00"
-  },
-  {
-   "id": "3c104b50f20db19c",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "4th Schedule 2027: Computer Based Test CBT (Ability Test)",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/4th_schedule_2027_Computer_based_testing_ability_february_2027.pdf",
-   "date": null,
-   "firstSeen": "2026-11-12T08:01:57+05:00"
-  },
-  {
-   "id": "43bb0f637f398c28",
-   "source": "kppsc",
-   "kind": "schedule",
-   "title": "3rd Schedule 2027: Written examination for the post of Assistant Sub Inspector (Traffic Warden System) (Adv# 07/2026 S# 01)",
-   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/3rd_Schedule_2027_Assistant_Sub_Inspector_Traffic_Warden_System_February_07_2026_01.pdf",
-   "date": null,
-   "firstSeen": "2026-11-12T08:01:57+05:00"
+   "firstSeen": "2026-11-15T22:13:07+05:00"
   },
   {
    "id": "85d08aa990f076d6",
@@ -108,15 +99,6 @@
    "url": "https://www.bpsc.gob.pk/uploads/Interview/1794310766.jpeg",
    "date": "2026-11-10",
    "firstSeen": "2026-11-10T16:59:48+05:00"
-  },
-  {
-   "id": "07bad4fb45860173",
-   "source": "kppsc",
-   "kind": "result",
-   "title": "Interview Result: Civil Judge-Cum-Judicial Magistrate / Illaqa Qazi (BPS-18) advertised vide Advertisement No.03/2026",
-   "url": "https://www.kppsc.gov.pk/interview/interview_details/3465",
-   "date": null,
-   "firstSeen": "2026-11-10T10:05:31+05:00"
   },
   {
    "id": "a01fb348adaa62b6",
