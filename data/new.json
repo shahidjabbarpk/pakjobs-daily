@@ -1,4 +1,166 @@
 {
- "updatedAt": "2026-11-15T22:13:07+05:00",
- "jobs": []
+ "updatedAt": "2026-11-16T02:52:09+05:00",
+ "jobs": [
+  {
+   "id": "d5544bd660e3eb06",
+   "source": "njp",
+   "title": "Nurse Aid KPT PS-5",
+   "organization": "Karachi Port Trust",
+   "category": "health",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": null,
+   "url": "https://www.njp.gov.pk/jobs/10489",
+   "description": "\"Qualification and Experience\nNurse Aid Course from Govt. or recognized Institute.\n01 year experience in relevant field with Basic Computer Literacy.\nNote:\nBPS-10 is equal to KPT PS-05\"",
+   "grade": "BPS-10",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-04",
+   "lastDate": "2026-11-25",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10489",
+   "firstSeen": "2026-11-16T02:52:09+05:00"
+  },
+  {
+   "id": "096a2aa9b1feca2a",
+   "source": "njp",
+   "title": "Midwife KPT PS-5",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "DAE",
+   "url": "https://www.njp.gov.pk/jobs/10490",
+   "description": "\"Qualification and Experience\nDiploma in Midwifery from a recognized institute.\n1 year experience in relevant field with Basic Computer Literacy.\nNote:\nBPS-10 is equal to KPT PS-05\"",
+   "grade": "BPS-10",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-04",
+   "lastDate": "2026-11-25",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10490",
+   "firstSeen": "2026-11-16T02:52:09+05:00"
+  },
+  {
+   "id": "f2369d372d3c24a0",
+   "source": "njp",
+   "title": "Telephone Operator KPT PS-5",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10491",
+   "description": "\"Qualification and Experience\nIntermediate having\n1 year experience in office work with Basic Computer Literacy.\nNote:\nBPS-10 is equal to KPT PS-05\"",
+   "grade": "BPS-10",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-04",
+   "lastDate": "2026-11-25",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10491",
+   "firstSeen": "2026-11-16T02:52:09+05:00"
+  },
+  {
+   "id": "5aada1dc05dfc5d6",
+   "source": "njp",
+   "title": "Junior Out Door Clerk KPT PS-4",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10492",
+   "description": "Qualification\nIntermediate with one year Diploma in Information Technology (DIT).\nNote:\nBPS-8 is equal to KPT PS-04",
+   "grade": "BPS-08",
+   "jobType": "Contract",
+   "vacancies": 7,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-04",
+   "lastDate": "2026-11-25",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10492",
+   "firstSeen": "2026-11-16T02:52:09+05:00"
+  },
+  {
+   "id": "8672dc035a06ccf5",
+   "source": "njp",
+   "title": "Junior Clerk KPT PS-4",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10493",
+   "description": "Qualification\nIntermediate with one year Diploma in Information Technology (DIT).\nNote:\nBPS-08 is equal to KPT PS-04",
+   "grade": "BPS-08",
+   "jobType": "Contract",
+   "vacancies": 5,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-04",
+   "lastDate": "2026-11-25",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10493",
+   "firstSeen": "2026-11-16T02:52:09+05:00"
+  },
+  {
+   "id": "a30d8c3caee7c15e",
+   "source": "njp",
+   "title": "Auto Electrician KPT PS-4",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": null,
+   "url": "https://www.njp.gov.pk/jobs/10494",
+   "description": "Qualification and Experience\nCertificate Course in relevant field.\n02 years experience in relevant field and subject to passing Trade Test.\nNote:\nBPS-08 is equal to KPT PS-04",
+   "grade": "BPS-08",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-04",
+   "lastDate": "2026-11-25",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10494",
+   "firstSeen": "2026-11-16T02:52:09+05:00"
+  },
+  {
+   "id": "0db294982b5cac44",
+   "source": "njp",
+   "title": "Engine Driver-II KPT PS-4",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Intermediate",
+   "url": "https://www.njp.gov.pk/jobs/10495",
+   "description": "Qualification and Experience\nIntermediate having Certificate of Inland Engineer Class-II from MMD.\n2 years experience as Greaser with Basic Computer Literacy.\nNote:\nBPS-08 is equal to KPT PS-04",
+   "grade": "BPS-08",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-04",
+   "lastDate": "2026-11-25",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10495",
+   "firstSeen": "2026-11-16T02:52:09+05:00"
+  }
+ ]
 }
