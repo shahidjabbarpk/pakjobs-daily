@@ -1,0 +1,24 @@
+Q: How do I apply for WAPDA jobs in Pakistan?
+
+First, a point that confuses many people: today "WAPDA job" is used for almost every job in the power sector, but the power sector is now split into different organisations. WAPDA itself mainly handles water and hydropower projects (dams, power houses). Electricity supply to homes is handled by separate distribution companies (DISCOs) such as LESCO (Lahore), FESCO (Faisalabad), IESCO (Islamabad), MEPCO (Multan), GEPCO (Gujranwala), PESCO (Peshawar), HESCO (Hyderabad) and QESCO (Quetta). Each one recruits for its own area, so first decide which organisation and area you want.
+
+How to apply, step by step:
+
+1. Find the real advertisement. Genuine ads are published in national newspapers, on the official website of WAPDA or the specific company, and often on the National Jobs Portal. Ignore WhatsApp forwards that have no newspaper or website reference.
+
+2. Read the ad completely: post name, BPS, required education/diploma, age limit, domicile/quota (many DISCO posts are filled circle-wise or district-wise), last date and the testing service named in the ad.
+
+3. Apply only through the method written in the ad, usually an online form on the testing service's website. Pay any test fee only through the official method (bank challan or the payment option in the official portal), never to a person's mobile wallet.
+
+4. Keep your documents ready: CNIC, domicile, educational certificates, diploma or trade certificate (for technical posts), experience letters and photos.
+
+5. Prepare for the test. Common areas are general knowledge, Pakistan Studies, English, basic maths and, for technical posts like Lineman or Sub-Engineer, basic electrical concepts (Ohm's law, current, voltage) and electrical safety. Lineman posts often include a physical test such as pole climbing.
+
+6. Save your application ID and fee receipt, and keep checking the testing service's website for roll number slips and results.
+
+Red flag: anyone who asks for money to "confirm" a WAPDA or LESCO job is a scammer. Real recruitment never works that way. Always confirm details on the official website because rules and dates change for every advertisement.
+
+I've written a longer guide here: https://pakjobs-daily.vercel.app/guides/wapda-electricity-company-jobs-guide
+
+Disclosure: I work on PakJobs Daily.
+👉 Download the free PakJobs Daily app to get new govt job alerts (including WAPDA and electricity company jobs) for your district: https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza — or browse open jobs at https://pakjobs-daily.vercel.app

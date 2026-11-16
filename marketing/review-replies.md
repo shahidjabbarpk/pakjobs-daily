@@ -22,3 +22,7 @@ Note for Danish: one reviewer name ("Tahir Jabbar") matches the family name on t
    > Thank you, Nasreen! We're happy you like PakJobs Daily. Set your district in alerts to get new govt jobs and last-date reminders on time. Best of luck!
 
 (Reviews 1–4 from 2026-11-14 are still unanswered in Play Console — waiting for Shahid's OK.)
+
+## 2026-11-16 run — no new reviews (still 5 total, all 5★)
+
+Drafts 1–5 above are still unanswered in Play Console — waiting for Shahid's OK.

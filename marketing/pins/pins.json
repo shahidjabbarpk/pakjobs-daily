@@ -1,110 +1,134 @@
 [
-  {
-    "slug": "how-to-apply-on-national-jobs-portal",
-    "headline": "How to Apply on National Jobs Portal (NJP)",
-    "title": "How to Apply for Govt Jobs on National Jobs Portal (NJP) – Step by Step",
-    "points": [
-      "Create account with CNIC",
-      "Complete profile & education",
-      "Apply before last date",
-      "Track status online"
-    ],
-    "desc": "Step-by-step guide to applying for federal government jobs in Pakistan on the National Jobs Portal (NJP): account, profile, documents and tips. Free PakJobs Daily app sends new job alerts for your district. #govtjobs #pakistanjobs #njp"
-  },
-  {
-    "slug": "ppsc-jobs-preparation-guide",
-    "headline": "PPSC Jobs: Apply & Prepare",
-    "title": "PPSC Jobs – How to Apply and Prepare for the Test",
-    "points": [
-      "Online application steps",
-      "Test pattern & syllabus",
-      "Past papers practice",
-      "Interview tips"
-    ],
-    "desc": "Punjab Public Service Commission (PPSC) jobs guide: how to apply online, test pattern and preparation tips. Get new PPSC job alerts free in the PakJobs Daily app. #ppsc #punjabjobs #govtjobs"
-  },
-  {
-    "slug": "how-to-avoid-fake-job-scams-pakistan",
-    "headline": "5 Signs of a Fake Job in Pakistan",
-    "title": "How to Spot Fake Jobs and Job Scams in Pakistan",
-    "points": [
-      "They ask for money",
-      "No advert number",
-      "Only a WhatsApp number",
-      "Job without test/interview"
-    ],
-    "desc": "Protect yourself from fake job scams in Pakistan. Learn the warning signs and how to verify a government job advert on official websites. #jobscam #pakistanjobs #govtjobs"
-  },
-  {
-    "slug": "bps-pay-scale-explained",
-    "headline": "BPS-1 to BPS-22 Explained",
-    "title": "BPS Pay Scale Explained – What BPS-1 to BPS-22 Means",
-    "points": [
-      "What BPS means",
-      "Support staff vs officer grades",
-      "How salary is made",
-      "Check latest notification"
-    ],
-    "desc": "Simple explanation of Basic Pay Scale (BPS) for government jobs in Pakistan, from BPS-1 to BPS-22. #bps #govtjobs #pakistan"
-  },
-  {
-    "slug": "join-pak-army-navy-paf-guide",
-    "headline": "Join Pak Army, Navy or PAF",
-    "title": "How to Join Pak Army, Navy or PAF – Eligibility and Registration",
-    "points": [
-      "Eligibility & age",
-      "Online registration",
-      "Initial tests & medical",
-      "Preparation tips"
-    ],
-    "desc": "Guide to joining Pakistan Army, Navy or Air Force: eligibility, online registration and test preparation. Get armed forces job alerts free with PakJobs Daily. #pakarmy #paknavy #paf #jobs"
-  },
-  {
-    "slug": "documents-checklist-for-govt-jobs-pakistan",
-    "headline": "Documents Checklist for Govt Jobs",
-    "title": "Documents Checklist for Govt Jobs in Pakistan – CNIC, Degrees, Domicile",
-    "points": [
-      "Valid CNIC & domicile",
-      "Degrees + DMCs",
-      "Attested copies ready",
-      "Same name spelling everywhere"
-    ],
-    "desc": "Checklist of documents you need for government jobs in Pakistan and how to keep your file ready for test, interview and verification. Free job alerts in the PakJobs Daily app. #govtjobs #pakistanjobs #cnic"
-  },
-  {
-    "slug": "computer-operator-typing-test-preparation",
-    "headline": "Typing Test Preparation",
-    "title": "Computer Operator & Data Entry Jobs – Typing Test Preparation Plan",
-    "points": [
-      "Home-row technique",
-      "Accuracy before speed",
-      "MS Word & Excel basics",
-      "30-day practice plan"
-    ],
-    "desc": "How to prepare for the typing / skill test for computer operator, data entry operator and clerk jobs in Pakistan. Free job alerts with PakJobs Daily. #computeroperator #typingtest #govtjobs"
-  },
-  {
-    "slug": "pakistan-railways-jobs-guide",
-    "headline": "Pakistan Railways Jobs Guide",
-    "title": "Pakistan Railways Jobs – How to Find and Apply",
-    "points": [
-      "Types of posts",
-      "Where real ads appear",
-      "Apply step by step",
-      "Avoid fake bharti"
-    ],
-    "desc": "How Pakistan Railways jobs are advertised, eligibility basics and how to apply safely. Get new govt job alerts free with PakJobs Daily. #pakistanrailways #govtjobs #pakistan"
-  },
-  {
-    "slug": "overseas-jobs-oec-bureau-of-emigration-guide",
-    "headline": "Overseas Jobs: Stay Safe",
-    "title": "Overseas Jobs from Pakistan – OEC, Bureau of Emigration & Licensed Agents",
-    "points": [
-      "OEC & Bureau of Emigration",
-      "Check agent licence",
-      "Written contract first",
-      "Visit visa = red flag"
-    ],
-    "desc": "How to find jobs abroad safely from Pakistan: OEC, Bureau of Emigration, licensed agents, Protector stamp and fake agent warning signs. #overseasjobs #pakistan #jobs"
-  }
+ {
+  "slug": "how-to-apply-on-national-jobs-portal",
+  "headline": "How to Apply on National Jobs Portal (NJP)",
+  "title": "How to Apply for Govt Jobs on National Jobs Portal (NJP) – Step by Step",
+  "points": [
+   "Create account with CNIC",
+   "Complete profile & education",
+   "Apply before last date",
+   "Track status online"
+  ],
+  "desc": "Step-by-step guide to applying for federal government jobs in Pakistan on the National Jobs Portal (NJP): account, profile, documents and tips. Free PakJobs Daily app sends new job alerts for your district. #govtjobs #pakistanjobs #njp"
+ },
+ {
+  "slug": "ppsc-jobs-preparation-guide",
+  "headline": "PPSC Jobs: Apply & Prepare",
+  "title": "PPSC Jobs – How to Apply and Prepare for the Test",
+  "points": [
+   "Online application steps",
+   "Test pattern & syllabus",
+   "Past papers practice",
+   "Interview tips"
+  ],
+  "desc": "Punjab Public Service Commission (PPSC) jobs guide: how to apply online, test pattern and preparation tips. Get new PPSC job alerts free in the PakJobs Daily app. #ppsc #punjabjobs #govtjobs"
+ },
+ {
+  "slug": "how-to-avoid-fake-job-scams-pakistan",
+  "headline": "5 Signs of a Fake Job in Pakistan",
+  "title": "How to Spot Fake Jobs and Job Scams in Pakistan",
+  "points": [
+   "They ask for money",
+   "No advert number",
+   "Only a WhatsApp number",
+   "Job without test/interview"
+  ],
+  "desc": "Protect yourself from fake job scams in Pakistan. Learn the warning signs and how to verify a government job advert on official websites. #jobscam #pakistanjobs #govtjobs"
+ },
+ {
+  "slug": "bps-pay-scale-explained",
+  "headline": "BPS-1 to BPS-22 Explained",
+  "title": "BPS Pay Scale Explained – What BPS-1 to BPS-22 Means",
+  "points": [
+   "What BPS means",
+   "Support staff vs officer grades",
+   "How salary is made",
+   "Check latest notification"
+  ],
+  "desc": "Simple explanation of Basic Pay Scale (BPS) for government jobs in Pakistan, from BPS-1 to BPS-22. #bps #govtjobs #pakistan"
+ },
+ {
+  "slug": "join-pak-army-navy-paf-guide",
+  "headline": "Join Pak Army, Navy or PAF",
+  "title": "How to Join Pak Army, Navy or PAF – Eligibility and Registration",
+  "points": [
+   "Eligibility & age",
+   "Online registration",
+   "Initial tests & medical",
+   "Preparation tips"
+  ],
+  "desc": "Guide to joining Pakistan Army, Navy or Air Force: eligibility, online registration and test preparation. Get armed forces job alerts free with PakJobs Daily. #pakarmy #paknavy #paf #jobs"
+ },
+ {
+  "slug": "documents-checklist-for-govt-jobs-pakistan",
+  "headline": "Documents Checklist for Govt Jobs",
+  "title": "Documents Checklist for Govt Jobs in Pakistan – CNIC, Degrees, Domicile",
+  "points": [
+   "Valid CNIC & domicile",
+   "Degrees + DMCs",
+   "Attested copies ready",
+   "Same name spelling everywhere"
+  ],
+  "desc": "Checklist of documents you need for government jobs in Pakistan and how to keep your file ready for test, interview and verification. Free job alerts in the PakJobs Daily app. #govtjobs #pakistanjobs #cnic"
+ },
+ {
+  "slug": "computer-operator-typing-test-preparation",
+  "headline": "Typing Test Preparation",
+  "title": "Computer Operator & Data Entry Jobs – Typing Test Preparation Plan",
+  "points": [
+   "Home-row technique",
+   "Accuracy before speed",
+   "MS Word & Excel basics",
+   "30-day practice plan"
+  ],
+  "desc": "How to prepare for the typing / skill test for computer operator, data entry operator and clerk jobs in Pakistan. Free job alerts with PakJobs Daily. #computeroperator #typingtest #govtjobs"
+ },
+ {
+  "slug": "pakistan-railways-jobs-guide",
+  "headline": "Pakistan Railways Jobs Guide",
+  "title": "Pakistan Railways Jobs – How to Find and Apply",
+  "points": [
+   "Types of posts",
+   "Where real ads appear",
+   "Apply step by step",
+   "Avoid fake bharti"
+  ],
+  "desc": "How Pakistan Railways jobs are advertised, eligibility basics and how to apply safely. Get new govt job alerts free with PakJobs Daily. #pakistanrailways #govtjobs #pakistan"
+ },
+ {
+  "slug": "overseas-jobs-oec-bureau-of-emigration-guide",
+  "headline": "Overseas Jobs: Stay Safe",
+  "title": "Overseas Jobs from Pakistan – OEC, Bureau of Emigration & Licensed Agents",
+  "points": [
+   "OEC & Bureau of Emigration",
+   "Check agent licence",
+   "Written contract first",
+   "Visit visa = red flag"
+  ],
+  "desc": "How to find jobs abroad safely from Pakistan: OEC, Bureau of Emigration, licensed agents, Protector stamp and fake agent warning signs. #overseasjobs #pakistan #jobs"
+ },
+ {
+  "slug": "rescue-1122-jobs-guide",
+  "headline": "Rescue 1122 Jobs",
+  "title": "Rescue 1122 Jobs in Pakistan – Posts, Eligibility & Preparation Tips",
+  "points": [
+   "Rescuer, EMT, Driver posts",
+   "Physical + written test",
+   "Learn basic first aid",
+   "Never pay an agent"
+  ],
+  "desc": "How Rescue 1122 jobs are advertised, common posts (Rescuer, EMT, Driver), selection steps and preparation tips for the physical and written test. #rescue1122 #govtjobs #pakistan"
+ },
+ {
+  "slug": "wapda-electricity-company-jobs-guide",
+  "headline": "WAPDA & DISCO Jobs",
+  "title": "WAPDA, LESCO, MEPCO & Other Electricity Company Jobs – How to Apply",
+  "points": [
+   "Lineman, Meter Reader, SDO",
+   "Check your company's area",
+   "Electrical safety basics",
+   "Beware fake bharti fees"
+  ],
+  "desc": "How jobs in WAPDA and electricity companies (LESCO, FESCO, IESCO, MEPCO, GEPCO, PESCO) are advertised, common posts, eligibility and test preparation. #wapdajobs #govtjobs #pakistan"
+ }
 ]
