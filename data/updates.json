@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-16T02:52:09+05:00",
+ "updatedAt": "2026-11-16T07:11:27+05:00",
  "updates": [
   {
    "id": "ab02e1bcc06a0564",
@@ -324,15 +324,6 @@
    "url": "https://www.ppsc.gop.pk/FinalResultMeritList.aspx",
    "date": "2026-10-26",
    "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "4180caf33e070afb",
-   "source": "fpsc",
-   "kind": "schedule",
-   "title": "CE-2026 Tentative Program For Psychological Assessment And Viva Voce (Updated 23-10-2026)",
-   "url": "https://www.fpsc.gov.pk/tende/198",
-   "date": "2026-10-23",
-   "firstSeen": "2026-11-11T06:19:55+05:00"
   },
   {
    "id": "fbe176c26d0b76bd",
