@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-17T08:55:27+05:00",
+ "updatedAt": "2026-11-17T18:29:58+05:00",
  "updates": [
+  {
+   "id": "958f274e4291131c",
+   "source": "nts",
+   "kind": "result",
+   "title": "Balochistan University of Engineering and Technology, Khuzdar (Entry Test for Admission in Undergrauate Prorgams) (Answer Keys)",
+   "url": "https://nts.org.pk/Test&Products/Lists/BUET_Khuzdar_08Nov2026_Keys/Posts.php",
+   "date": null,
+   "firstSeen": "2026-11-17T18:29:58+05:00"
+  },
   {
    "id": "ab02e1bcc06a0564",
    "source": "kppsc",
@@ -277,15 +286,6 @@
    "kind": "result",
    "title": "University of Balochistan (Admission Test for DPT & Pharm-D) (Answer Keys)",
    "url": "https://nts.org.pk/Test&Products/Lists/UOB_04Oct26_Keys/Posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "8f46d0eebb45202c",
-   "source": "nts",
-   "kind": "result",
-   "title": "Punjab Pharmacy Council - PPC (45th Supply Examination of Pharmacy Assistant 2026) (Answer Keys)",
-   "url": "https://nts.org.pk/Test&Products/Lists/PPC_04Oct26_Keys/Posts.php",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
