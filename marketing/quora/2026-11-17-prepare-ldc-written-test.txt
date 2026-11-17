@@ -1,0 +1,27 @@
+Question: How do I prepare for the lower division clerk LDC written test in Pakistan MCS?
+
+LDC (Lower Division Clerk) tests in Pakistan follow a fairly similar pattern across departments and institutions, so you can prepare in a structured way even if the exact paper is not published. First, read the advertisement carefully: it tells you the testing body, the age limit, the required education and whether there is a typing test. The exact pass marks and typing speed are written there, so confirm them from the official ad.
+
+What is usually asked in the written test (MCQs):
+- General knowledge and Pakistan Studies: history of Pakistan, geography, constitution basics and current affairs.
+- Islamiat (or Ethics for non-Muslim candidates).
+- English: grammar, synonyms/antonyms, correct the sentence, sometimes writing an application or letter.
+- Urdu: grammar, meanings and idioms.
+- Basic maths: percentages, averages, ratios and simple word problems.
+- Computer basics: MS Word, Excel, keyboard shortcuts, email and internet terms.
+
+A simple 6-week plan:
+- Weeks 1–2: Pakistan Studies, Islamiat and GK for 1–2 hours a day. Make short notes you can revise quickly.
+- Weeks 3–4: English and Urdu grammar, plus about 20 maths questions daily.
+- Weeks 5–6: computer basics, past papers and timed mock tests. Re-do every question you got wrong.
+- Every day: 20–30 minutes of typing practice, because many clerk posts also have a typing test and speed builds slowly.
+
+Other tips:
+- Keep your documents (CNIC, domicile, certificates, photos) attested and ready before applying.
+- Practise under time pressure; most candidates lose marks by running out of time, not from lack of knowledge.
+- Never pay anyone who promises a "guaranteed" clerk job. Selection is only through the official test and merit.
+
+I wrote a longer free guide with the syllabus and study plan here: https://pakjobs-daily.vercel.app/guides/ldc-udc-clerk-test-preparation
+
+Disclosure: I work on PakJobs Daily.
+👉 Download the free PakJobs Daily app to practise mock tests and get new clerk and govt job alerts for your district: https://play.google.com/store/apps/details?id=com.pakjobs.daily.mza (website: https://pakjobs-daily.vercel.app)

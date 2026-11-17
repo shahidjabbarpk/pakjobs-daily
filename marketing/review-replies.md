@@ -26,3 +26,10 @@ Note for Danish: one reviewer name ("Tahir Jabbar") matches the family name on t
 ## 2026-11-16 run — no new reviews (still 5 total, all 5★)
 
 Drafts 1–5 above are still unanswered in Play Console — waiting for Shahid's OK.
+
+## 2026-11-17 run — 1 new unanswered review (5★, English)
+
+6. **Maria Siddique** (Nov 17, 5★, v1.0.4): "Thank you for your platform..I can easily find all jobs in Pakistan on one page"
+   > Thank you, Maria! That's exactly why we built PakJobs Daily – all jobs in one place. Please update to the latest version and turn on alerts for your district so you never miss a last date. Best of luck!
+
+Drafts 1–5 are still unanswered in Play Console — all 6 wait for Shahid's OK (never auto-posted).
