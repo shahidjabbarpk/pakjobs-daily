@@ -1,29 +1,28 @@
 {
- "updatedAt": "2026-11-17T18:29:58+05:00",
+ "updatedAt": "2026-11-18T03:26:01+05:00",
  "jobs": [
   {
-   "id": "1c9fdcb9a1c54903",
+   "id": "8146fb83a2074a0e",
    "source": "njp",
-   "title": "Lower Division Clerk (LDC)",
-   "organization": "Pakistan Tobacco Board",
+   "title": "Project Manager",
+   "organization": "National Aerospace Science & Technology Park (NASTP), Aviation City Pakistan (ACP)",
    "category": "govt",
    "cities": [
-    "Peshawar",
-    "KPK",
-    "Balochistan"
+    "AJK"
    ],
-   "qualification": "Matric",
-   "url": "https://www.njp.gov.pk/jobs/10656",
-   "description": "Qualification: Matric (Second Division), with typing speed of thirty (30) words per minute.\nJob Location: Peshawar, Khyber Pakhtunkhwa, Pakistan.",
-   "grade": "BPS-11",
-   "jobType": "Regular",
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10505",
+   "description": "Bachelor’s degree in Civil Engineering, Construction Management, Project Management, or a related discipline; a master’s degree shall be preferred.\nMinimum 15 years of progressively responsible experience in construction or infrastructure project management.\nDemonstrated experience in multidisciplinary coordination, contract administration, project controls, and senior stakeholder management\nLead the PMU and establish project execution, reporting, coordination, risk-management, and escalation arrangements.\nCoordinate activities across both project locations and maintain liaison with senior management, client representatives, consultants, contractors, and relevant authorities.\nMonitor physical and financial progress against approved scope, milestones, budgets, contracts, and implementation plans.\nEnsure timely resolution of technical, contractual, financial, procurement, quality, safety, and site-interface issues. e. Review management reports, critical risks, delays, variations, claims, and corrective actions, and submit recommendations to the competent authority.\nEnsure orderly testing, commissioning, documentation, handover, and project close-out in accordance with approved requirements",
+   "grade": "PPS-9",
+   "jobType": "Contract",
    "vacancies": 1,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-11-17",
-   "lastDate": "2026-12-01",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10656",
-   "firstSeen": "2026-11-17T18:29:58+05:00"
+   "domicile": "AJK",
+   "ageLimit": "Max: 45 years",
+   "postedDate": "2026-11-05",
+   "lastDate": "2026-11-20",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-National-Aerospace-Science-&-Technology-Park-(NASTP),-Aviation-City-Pakistan-(ACP)-1719832801220346.jpg",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10505",
+   "firstSeen": "2026-11-18T03:26:01+05:00"
   }
  ]
 }
