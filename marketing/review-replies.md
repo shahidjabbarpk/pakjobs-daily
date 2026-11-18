@@ -33,3 +33,5 @@ Drafts 1–5 above are still unanswered in Play Console — waiting for Shahid's
    > Thank you, Maria! That's exactly why we built PakJobs Daily – all jobs in one place. Please update to the latest version and turn on alerts for your district so you never miss a last date. Best of luck!
 
 Drafts 1–5 are still unanswered in Play Console — all 6 wait for Shahid's OK (never auto-posted).
+
+## 2026-11-18 run — no new reviews (still 6 total, all 5★; Maria Siddique draft from 11-17 still unposted)
