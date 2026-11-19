@@ -1,6 +1,24 @@
 {
- "updatedAt": "2026-11-19T18:14:02+05:00",
+ "updatedAt": "2026-11-20T02:38:44+05:00",
  "updates": [
+  {
+   "id": "ee6efc1554ef62d2",
+   "source": "fpsc",
+   "kind": "schedule",
+   "title": "Public Notice - Revision of Schedule of General Recruitment (GR) Tests (Phase-IV/2026) NEW",
+   "url": "https://www.fpsc.gov.pk/tende/206",
+   "date": null,
+   "firstSeen": "2026-11-20T02:38:44+05:00"
+  },
+  {
+   "id": "8fa76a06b1d51527",
+   "source": "kppsc",
+   "kind": "result",
+   "title": "Interview Result: Provincial Planning Service Officers (Advertisement No. 03/2025, Serial No.01) New",
+   "url": "https://www.kppsc.gov.pk/interview/interview_details/3473",
+   "date": null,
+   "firstSeen": "2026-11-20T02:38:44+05:00"
+  },
   {
    "id": "d42a136e340135bd",
    "source": "spsc",
