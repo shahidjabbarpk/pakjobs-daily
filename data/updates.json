@@ -1,6 +1,33 @@
 {
- "updatedAt": "2026-11-19T08:31:57+05:00",
+ "updatedAt": "2026-11-19T18:14:02+05:00",
  "updates": [
+  {
+   "id": "d42a136e340135bd",
+   "source": "spsc",
+   "kind": "schedule",
+   "title": "New: Assistant Collector Part-I of Departmental Examination.",
+   "url": "https://spsc.gov.pk/written-result/Nov2026/Assistant_Collector_P-I.pdf",
+   "date": null,
+   "firstSeen": "2026-11-19T18:14:02+05:00"
+  },
+  {
+   "id": "2e257a191f92c8f2",
+   "source": "spsc",
+   "kind": "schedule",
+   "title": "New: Assistant Collector Part-II of Departmental Examination.",
+   "url": "https://spsc.gov.pk/written-result/Nov2026/Assistant_Collector_P-II.pdf",
+   "date": null,
+   "firstSeen": "2026-11-19T18:14:02+05:00"
+  },
+  {
+   "id": "1dcdc4efd9b0b70a",
+   "source": "spsc",
+   "kind": "schedule",
+   "title": "New: Sub-Ordinate Treasury Accounts Service (Accounts Clerk) of Departmental Examination.",
+   "url": "https://spsc.gov.pk/written-result/Nov2026/Sub_Ordinate _Treasury_AccountsClerk.pdf",
+   "date": null,
+   "firstSeen": "2026-11-19T18:14:02+05:00"
+  },
   {
    "id": "958f274e4291131c",
    "source": "nts",
@@ -108,15 +135,6 @@
    "url": "https://www.bpsc.gob.pk/uploads/Interview/1794310766.jpeg",
    "date": "2026-11-10",
    "firstSeen": "2026-11-10T16:59:48+05:00"
-  },
-  {
-   "id": "a01fb348adaa62b6",
-   "source": "spsc",
-   "kind": "interview",
-   "title": "Dear Candidates, The Admission Letters For Pre-Interview Written Test of Various Posts in College Education Department, to be held on 16th of November, 2026. are now available in your accounts.",
-   "url": "https://spsc.gov.pk/candidate_portal/login",
-   "date": null,
-   "firstSeen": "2026-11-10T10:05:31+05:00"
   },
   {
    "id": "2fb3d01490a34f57",
