@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20T02:38:44+05:00",
+ "updatedAt": "2026-11-20T08:19:45+05:00",
  "sources": {
   "njp": {
    "count": 90,
@@ -8,7 +8,7 @@
   "ppsc": {
    "count": 0,
    "ok": false,
-   "error": "HTTPSConnectionPool(host='www.ppsc.gop.pk', port=443): Max retries exceeded with url: /Jobs.aspx (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ppsc.gop.pk', port=443) at 0x7743d0b973e0>, '"
+   "error": "HTTPSConnectionPool(host='www.ppsc.gop.pk', port=443): Max retries exceeded with url: /Jobs.aspx (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ppsc.gop.pk', port=443) at 0x742de0722bd0>, '"
   },
   "fpsc": {
    "count": 0,
@@ -21,7 +21,7 @@
   "army": {
    "count": 1,
    "ok": false,
-   "error": "HTTPSConnectionPool(host='joinpakarmy.gov.pk', port=443): Max retries exceeded with url: /api/course_list/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='joinpakarmy.gov.pk', port=443) at 0x774"
+   "error": "HTTPSConnectionPool(host='joinpakarmy.gov.pk', port=443): Max retries exceeded with url: /api/course_list/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='joinpakarmy.gov.pk', port=443) at 0x742"
   },
   "navy": {
    "count": 3,
@@ -33,7 +33,7 @@
    "ok": true
   },
   "bpsc": {
-   "count": 1,
+   "count": 0,
    "ok": true
   },
   "paf": {
@@ -46,11 +46,11 @@
    "ok": true
   }
  },
- "total": 137,
- "new": 6,
+ "total": 136,
+ "new": 0,
  "updates": {
   "total": 46,
-  "new": 2,
+  "new": 0,
   "ok": {
    "ppsc": false,
    "fpsc": true,
