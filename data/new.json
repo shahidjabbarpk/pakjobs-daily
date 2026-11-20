@@ -1,4 +1,49 @@
 {
- "updatedAt": "2026-11-20T08:19:45+05:00",
- "jobs": []
+ "updatedAt": "2026-11-20T17:57:24+05:00",
+ "jobs": [
+  {
+   "id": "ca9c5a1456b0d92e",
+   "source": "njp",
+   "title": "Watchman (SDC), Hub",
+   "organization": "Pakistan Standards and Quality Control Authority - PSQCA",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/10658",
+   "description": "Qualification: Primary Pass\nExperience: Will be preferred\nJob Location: Hub, Baluchistan\nDomocile: District Hub, Baluchistan",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-20",
+   "lastDate": "2026-11-23",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10658",
+   "firstSeen": "2026-11-20T17:57:24+05:00"
+  },
+  {
+   "id": "45341ae85741a0ba",
+   "source": "njp",
+   "title": "Khalasi (SDC), Hub",
+   "organization": "Pakistan Standards and Quality Control Authority - PSQCA",
+   "category": "police",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/10657",
+   "description": "Qualification: Primary Pass\nExperience: Not required but will be preferred\nJob Location: Hub, Baluchistan\nDomicile: District Hub, Baluchistan",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-20",
+   "lastDate": "2026-11-23",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10657",
+   "firstSeen": "2026-11-20T17:57:24+05:00"
+  }
+ ]
 }
