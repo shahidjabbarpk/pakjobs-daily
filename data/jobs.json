@@ -1,6 +1,27 @@
 {
- "updatedAt": "2026-11-22T04:20:45+05:00",
+ "updatedAt": "2026-11-22T11:52:59+05:00",
  "jobs": [
+  {
+   "id": "bddf8b8781b50ded",
+   "source": "njp",
+   "title": "Chief Medical Officer",
+   "organization": "Pakistan Reinsurance Company Limited",
+   "category": "health",
+   "cities": [
+    "Karachi"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10662",
+   "description": "Job Specification:\nMinimum Qualification: MBBS from a recognized and well reputed institute recognized by the Higher Education Commission of Pakistan.\nMCPS in Family Medicine or equivalent foreign qualification, or higher qualification in Internal Medicine or Family Medicine, will be a plus.\nExperience:\nPlace of Posting: Karachi Head Office\nConsultancy Fee Range: Rs. 250,000 – 300,000\nMinimum three (10) years' experience in healthcare administration in a corporate set up, company or hospital as on the last date of submission of application.\nJob Type: Contract (02 years), extendable further as per the need of the Company by mutual agreement of both parties and subject to approval of the competent authority.\nVacancies/Slots: 01\nMax. Age Limit Required: Maximum 50 years of age as on the closing date of applications.\nAge Relaxation: Not applicable\nIMPORTANT NOTE: Applications that do not comply with the above instructions and fail to upload all relevant documents as specified in the advertisement shall not be considered.\nKEY RESPONSIBILITIES:\nThe Chief Medical Officer will be responsible for, but not limited to, the following duties:\nTo visit PRCL Head Office daily for five (05) hours to scrutinize medical files, bills submitted by panel hospitals, etc.\nTo check, verify and countersign medical reimbursement claims submitted by employees and their families.\nTo attend to patients for consultations as envisaged in the PRCL HR Manual and issue reference letters and/or provide any other advice as prescribed under the treatment clause of the PRCL HR Manual.\nTo conduct medical examinations of all newly recruited employees.\nTo refer patients to panel hospitals and/or approved specialists, as the case may be.\nTo conduct random visits to panel hospitals where employees or their family members are admitted and liaise with hospital authorities to ensure the best possible treatment.\nTo provide technical assistance to the Administration Department of PRCL in matters relating to the provision of medical facilities.\nTo assist PRCL in implementing medical rules, regulations and policies relating to medical attendance.\nTo perform any other task assigned by the Chief Executive Officer (CEO) of PRCL or any authorized officer.\nTERMS, CONDITIONS & OTHER IMPORTANT POINTS:\nSelection shall be made strictly on merit in accordance with the criteria prescribed in this advertisement.\nThe Interview Committee shall be the competent authority to finalize the order of merit based on candidate",
+   "grade": "Consultant",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "ageLimit": "Max: 50 years",
+   "postedDate": "2026-11-22",
+   "lastDate": "2026-12-06",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10662",
+   "firstSeen": "2026-11-22T11:52:59+05:00"
+  },
   {
    "id": "a7678c5debcff386",
    "source": "njp",
@@ -285,28 +306,6 @@
    "firstSeen": "2026-11-13T12:37:20+05:00"
   },
   {
-   "id": "3d072c42d1105727",
-   "source": "njp",
-   "title": "Driver BS-04 — FBS Wing",
-   "organization": "Ministry of Planning, Development & Special Initiatives",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Bachelor",
-   "url": "https://www.njp.gov.pk/jobs/10650",
-   "description": "Total Posts: 03\nQuota: Open Merit 3\nEducation: Must be able to read simple Urdu.\nExperience: Minimum two years' driving experience of operational vehicles meant for field duty.\nMust be a competent licensed driver.\nMust be well versed in traffic rules.\nMust possess working knowledge of vehicle mechanisms and engines.\nDrive official vehicles for authorized departmental and field assignments.\nEnsure safe transportation of officers and authorized personnel.\nMaintain vehicle logbooks, mileage and fuel records.\nConduct routine checks of assigned vehicles.\nReport mechanical faults and maintenance requirements.\nEnsure cleanliness and proper upkeep of official vehicles.\nComply with traffic regulations and departmental instructions.\nPerform other duties assigned by the competent authority.\nAge Limit: 18–30 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
-   "grade": "BPS-04",
-   "jobType": "Regular",
-   "vacancies": 3,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 35 years",
-   "postedDate": "2026-11-13",
-   "lastDate": "2026-11-27",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10650",
-   "firstSeen": "2026-11-13T12:37:20+05:00"
-  },
-  {
    "id": "4eb7b5f22862aed7",
    "source": "njp",
    "title": "Statistical Assistant BS-15 — PCO Wing",
@@ -414,6 +413,28 @@
    "postedDate": "2026-11-13",
    "lastDate": "2026-11-27",
    "applyUrl": "https://www.njp.gov.pk/jobs/10648",
+   "firstSeen": "2026-11-13T12:37:20+05:00"
+  },
+  {
+   "id": "3d072c42d1105727",
+   "source": "njp",
+   "title": "Driver BS-04 — FBS Wing",
+   "organization": "Ministry of Planning, Development & Special Initiatives",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10650",
+   "description": "Total Posts: 03\nQuota: Open Merit 3\nEducation: Must be able to read simple Urdu.\nExperience: Minimum two years' driving experience of operational vehicles meant for field duty.\nMust be a competent licensed driver.\nMust be well versed in traffic rules.\nMust possess working knowledge of vehicle mechanisms and engines.\nDrive official vehicles for authorized departmental and field assignments.\nEnsure safe transportation of officers and authorized personnel.\nMaintain vehicle logbooks, mileage and fuel records.\nConduct routine checks of assigned vehicles.\nReport mechanical faults and maintenance requirements.\nEnsure cleanliness and proper upkeep of official vehicles.\nComply with traffic regulations and departmental instructions.\nPerform other duties assigned by the competent authority.\nAge Limit: 18–30 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
+   "grade": "BPS-04",
+   "jobType": "Regular",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-13",
+   "lastDate": "2026-11-27",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10650",
    "firstSeen": "2026-11-13T12:37:20+05:00"
   },
   {
