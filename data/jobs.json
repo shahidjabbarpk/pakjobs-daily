@@ -1,6 +1,75 @@
 {
- "updatedAt": "2026-11-23T07:48:22+05:00",
+ "updatedAt": "2026-11-23T17:50:32+05:00",
  "jobs": [
+  {
+   "id": "f03db722b0fd7b7a",
+   "source": "njp",
+   "title": "Naib Qasid",
+   "organization": "Workers Welfare Fund",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/10661",
+   "description": "Qualification: Middle pass\nPlace of Posting: Islamabad",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-23",
+   "lastDate": "2026-12-08",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10661",
+   "firstSeen": "2026-11-23T17:50:32+05:00"
+  },
+  {
+   "id": "aeb63eb46ffda77a",
+   "source": "njp",
+   "title": "Driver",
+   "organization": "Workers Welfare Fund",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/10660",
+   "description": "Qualification:\nPrimary pass\nValid driving license holder and well versed in the traffic rules\nPlace of Posting: Islamabad",
+   "grade": "BPS-04",
+   "jobType": "Regular",
+   "vacancies": 2,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-23",
+   "lastDate": "2026-12-08",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10660",
+   "firstSeen": "2026-11-23T17:50:32+05:00"
+  },
+  {
+   "id": "250f594128314eff",
+   "source": "njp",
+   "title": "Assistant",
+   "organization": "Workers Welfare Fund",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10659",
+   "description": "Job Details\nQualification: Bachelor degree from HEC recognized university/institution;\nSkill: Six weeks basic I.T. training course including MS Office; Typing speed of 30 W.P.M.\nPlace of Posting: Islamabad",
+   "grade": "BPS-15",
+   "jobType": "Regular",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 33 years",
+   "postedDate": "2026-11-23",
+   "lastDate": "2026-12-08",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10659",
+   "firstSeen": "2026-11-23T17:50:32+05:00"
+  },
   {
    "id": "bddf8b8781b50ded",
    "source": "njp",
@@ -240,72 +309,6 @@
    "firstSeen": "2026-11-13T16:13:35+05:00"
   },
   {
-   "id": "dc3acee9633e6044",
-   "source": "njp",
-   "title": "Sanitary Worker BS-01 — FBS - PCO Wings",
-   "organization": "Ministry of Planning, Development & Special Initiatives",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Middle",
-   "url": "https://www.njp.gov.pk/jobs/10653",
-   "description": "Total Posts: 02\nWing Distribution: FBS Wing 1, PCO Wing 1\nQuota: Open Merit 2\nEducation: Primary.\nExperience: No minimum years of experience specified.\nClean offices, corridors, washrooms and assigned government premises.\nCollect and dispose of waste in designated areas.\nMaintain hygiene and sanitation standards.\nClean furniture, fixtures and other assigned areas.\nEnsure regular cleaning and upkeep of washrooms.\nReport sanitation and maintenance issues to the supervisor.\nFollow workplace hygiene and safety instructions.\nPerform other cleaning-related duties assigned by the administration.\n-Age Limit: 18–25 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
-   "grade": "BPS-01",
-   "jobType": "Regular",
-   "vacancies": 2,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-11-13",
-   "lastDate": "2026-11-27",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10653",
-   "firstSeen": "2026-11-13T12:37:20+05:00"
-  },
-  {
-   "id": "41bc7974a0d6ce84",
-   "source": "njp",
-   "title": "Chowkidar BS-01 — FBS Wing",
-   "organization": "Ministry of Planning, Development & Special Initiatives",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Middle",
-   "url": "https://www.njp.gov.pk/jobs/10652",
-   "description": "Total Posts: 02\nQuota: Open Merit 2\nEducation: Primary.\nExperience: No minimum years of experience specified.\nEx-servicemen will be preferred.\nGuard and monitor assigned government premises.\nMaintain vigilance over entry and exit points.\nSafeguard government property, equipment and official premises.\nReport suspicious activities or security incidents to the concerned authority.\nConduct routine security checks of assigned premises.\nMaintain discipline and vigilance during assigned duty hours.\nPerform other security-related duties assigned by the administration.\nAge Limit: 18–25 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
-   "grade": "BPS-01",
-   "jobType": "Regular",
-   "vacancies": 2,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-11-13",
-   "lastDate": "2026-11-27",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10652",
-   "firstSeen": "2026-11-13T12:37:20+05:00"
-  },
-  {
-   "id": "a904209435cd0440",
-   "source": "njp",
-   "title": "Dark Room Assistant BS-03 — FBS Wing",
-   "organization": "Ministry of Planning, Development & Special Initiatives",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Bachelor",
-   "url": "https://www.njp.gov.pk/jobs/10651",
-   "description": "Total Posts: 02\nQuota: Open Merit 2\nEducation: Must be able to read and write Urdu.\nExperience: Minimum two years' experience in photographic processing and developing.\nAssist in processing and developing photographic materials.\nOperate and maintain darkroom equipment.\nHandle photographic films, prints and related materials.\nAssist in preparation and reproduction of photographs.\nMaintain cleanliness and proper arrangement of darkroom facilities.\nEnsure safe handling and storage of photographic chemicals and equipment.\nMaintain relevant records and photographic materials.\nPerform other duties assigned by the competent authority.\nAge Limit: 18–25 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
-   "grade": "BPS-03",
-   "jobType": "Regular",
-   "vacancies": 2,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-11-13",
-   "lastDate": "2026-11-27",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10651",
-   "firstSeen": "2026-11-13T12:37:20+05:00"
-  },
-  {
    "id": "4eb7b5f22862aed7",
    "source": "njp",
    "title": "Statistical Assistant BS-15 — PCO Wing",
@@ -457,6 +460,72 @@
    "postedDate": "2026-11-13",
    "lastDate": "2026-11-27",
    "applyUrl": "https://www.njp.gov.pk/jobs/10650",
+   "firstSeen": "2026-11-13T12:37:20+05:00"
+  },
+  {
+   "id": "a904209435cd0440",
+   "source": "njp",
+   "title": "Dark Room Assistant BS-03 — FBS Wing",
+   "organization": "Ministry of Planning, Development & Special Initiatives",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10651",
+   "description": "Total Posts: 02\nQuota: Open Merit 2\nEducation: Must be able to read and write Urdu.\nExperience: Minimum two years' experience in photographic processing and developing.\nAssist in processing and developing photographic materials.\nOperate and maintain darkroom equipment.\nHandle photographic films, prints and related materials.\nAssist in preparation and reproduction of photographs.\nMaintain cleanliness and proper arrangement of darkroom facilities.\nEnsure safe handling and storage of photographic chemicals and equipment.\nMaintain relevant records and photographic materials.\nPerform other duties assigned by the competent authority.\nAge Limit: 18–25 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
+   "grade": "BPS-03",
+   "jobType": "Regular",
+   "vacancies": 2,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-13",
+   "lastDate": "2026-11-27",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10651",
+   "firstSeen": "2026-11-13T12:37:20+05:00"
+  },
+  {
+   "id": "41bc7974a0d6ce84",
+   "source": "njp",
+   "title": "Chowkidar BS-01 — FBS Wing",
+   "organization": "Ministry of Planning, Development & Special Initiatives",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/10652",
+   "description": "Total Posts: 02\nQuota: Open Merit 2\nEducation: Primary.\nExperience: No minimum years of experience specified.\nEx-servicemen will be preferred.\nGuard and monitor assigned government premises.\nMaintain vigilance over entry and exit points.\nSafeguard government property, equipment and official premises.\nReport suspicious activities or security incidents to the concerned authority.\nConduct routine security checks of assigned premises.\nMaintain discipline and vigilance during assigned duty hours.\nPerform other security-related duties assigned by the administration.\nAge Limit: 18–25 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 2,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-13",
+   "lastDate": "2026-11-27",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10652",
+   "firstSeen": "2026-11-13T12:37:20+05:00"
+  },
+  {
+   "id": "dc3acee9633e6044",
+   "source": "njp",
+   "title": "Sanitary Worker BS-01 — FBS - PCO Wings",
+   "organization": "Ministry of Planning, Development & Special Initiatives",
+   "category": "govt",
+   "cities": [
+    "Balochistan"
+   ],
+   "qualification": "Middle",
+   "url": "https://www.njp.gov.pk/jobs/10653",
+   "description": "Total Posts: 02\nWing Distribution: FBS Wing 1, PCO Wing 1\nQuota: Open Merit 2\nEducation: Primary.\nExperience: No minimum years of experience specified.\nClean offices, corridors, washrooms and assigned government premises.\nCollect and dispose of waste in designated areas.\nMaintain hygiene and sanitation standards.\nClean furniture, fixtures and other assigned areas.\nEnsure regular cleaning and upkeep of washrooms.\nReport sanitation and maintenance issues to the supervisor.\nFollow workplace hygiene and safety instructions.\nPerform other cleaning-related duties assigned by the administration.\n-Age Limit: 18–25 years. Five years' general age relaxation and five years' additional relaxation for candidates from Balochistan shall apply.\nDomicile: Balochistan.",
+   "grade": "BPS-01",
+   "jobType": "Regular",
+   "vacancies": 2,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 30 years",
+   "postedDate": "2026-11-13",
+   "lastDate": "2026-11-27",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10653",
    "firstSeen": "2026-11-13T12:37:20+05:00"
   },
   {

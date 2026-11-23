@@ -1,6 +1,24 @@
 {
- "updatedAt": "2026-11-23T07:48:22+05:00",
+ "updatedAt": "2026-11-23T17:50:32+05:00",
  "updates": [
+  {
+   "id": "10910594e35f0b98",
+   "source": "bpsc",
+   "kind": "result",
+   "title": "Press Release Dated 23-11-2026. Written Evaluation Test Result For the post of Headmistress/ SS (B-17) Female.",
+   "url": "https://www.bpsc.gob.pk/uploads/Result/1795415965.pdf",
+   "date": "2026-11-23",
+   "firstSeen": "2026-11-23T17:50:32+05:00"
+  },
+  {
+   "id": "5759e3a12de26f5e",
+   "source": "nts",
+   "kind": "result",
+   "title": "Lasbela University Uthal (Hiring of Faculty Members and Administrative Officers/Officials for Sub-Campus Awaran) (Answer Keys)",
+   "url": "https://nts.org.pk/Test&Products/Lists/Lasbela_15Nov2026_Keys/Posts.php",
+   "date": null,
+   "firstSeen": "2026-11-23T17:50:32+05:00"
+  },
   {
    "id": "ee6efc1554ef62d2",
    "source": "fpsc",
@@ -263,24 +281,6 @@
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
   {
-   "id": "4c3aa9f2b593a99d",
-   "source": "spsc",
-   "kind": "rollno",
-   "title": "The Sindh Public Service Commission (SPSC) is hereby informs all candidates appearing in the upcoming Departmental Examinations, commencing from 12th October, 2026, that their Admission Slips are now available online.",
-   "url": "https://spsc.gov.pk/recent-announcements/Oct2026/PR_Departmentalonlineadmissionslip.jpg",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "fe09ab9e5bcbef62",
-   "source": "spsc",
-   "kind": "rollno",
-   "title": "The Sindh Public Service Commission hereby informs all candidates appearing in the upcoming Departmental Examinations, commencing from 5th October, 2026, that their Admission Slips are now available online.",
-   "url": "https://spsc.gov.pk/recent-announcements/Oct2026/PR_Admissionslip_Departmental.jpg",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
    "id": "3796ff8081d5f36a",
    "source": "nts",
    "kind": "result",
@@ -313,15 +313,6 @@
    "kind": "result",
    "title": "Shifa Tameer-e-Milat University, MBBS/BDS (Session-26-27) (Answer Keys)",
    "url": "https://nts.org.pk/Test&Products/Lists/STMU_04Oct26_Keys/Posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "c2817dcdb305b95e",
-   "source": "nts",
-   "kind": "result",
-   "title": "University of Balochistan (Admission Test for DPT & Pharm-D) (Answer Keys)",
-   "url": "https://nts.org.pk/Test&Products/Lists/UOB_04Oct26_Keys/Posts.php",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
@@ -405,15 +396,6 @@
    "url": "https://www.bpsc.gob.pk/uploads/Interview/1789132406.pdf",
    "date": "2026-09-11",
    "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "18612a6ea348f588",
-   "source": "bpsc",
-   "kind": "result",
-   "title": "Final result for post of Research Officer B-17, Database Administrator B-17 and Accountant B-16 Dated 02-1-2026",
-   "url": "https://www.bpsc.gob.pk/uploads/Result/1793615570.jpeg",
-   "date": "2026-01-02",
-   "firstSeen": "2026-11-02T15:18:53+05:00"
   }
  ]
 }
