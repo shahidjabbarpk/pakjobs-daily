@@ -1,6 +1,24 @@
 {
- "updatedAt": "2026-11-23T17:50:32+05:00",
+ "updatedAt": "2026-11-24T05:54:26+05:00",
  "updates": [
+  {
+   "id": "bd556319078454df",
+   "source": "fpsc",
+   "kind": "schedule",
+   "title": "Public Notice - Revision of Schedule of General Recruitment (GR) Tests (Phase-IV/2026)",
+   "url": "https://www.fpsc.gov.pk/tende/206",
+   "date": null,
+   "firstSeen": "2026-11-24T05:54:26+05:00"
+  },
+  {
+   "id": "e2ea3ffc245306a8",
+   "source": "spsc",
+   "kind": "schedule",
+   "title": "New: Screening Test for Combined Competitive Examination (Executive Cadre) CCE-2026.",
+   "url": "https://spsc.gov.pk/written-and-interview-schedule/Nov2026/Screening_Timetable_CCE2026.pdf",
+   "date": null,
+   "firstSeen": "2026-11-24T05:54:26+05:00"
+  },
   {
    "id": "10910594e35f0b98",
    "source": "bpsc",
@@ -18,15 +36,6 @@
    "url": "https://nts.org.pk/Test&Products/Lists/Lasbela_15Nov2026_Keys/Posts.php",
    "date": null,
    "firstSeen": "2026-11-23T17:50:32+05:00"
-  },
-  {
-   "id": "ee6efc1554ef62d2",
-   "source": "fpsc",
-   "kind": "schedule",
-   "title": "Public Notice - Revision of Schedule of General Recruitment (GR) Tests (Phase-IV/2026) NEW",
-   "url": "https://www.fpsc.gov.pk/tende/206",
-   "date": null,
-   "firstSeen": "2026-11-20T02:38:44+05:00"
   },
   {
    "id": "8fa76a06b1d51527",
