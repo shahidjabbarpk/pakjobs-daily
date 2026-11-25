@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-25T09:16:57+05:00",
+ "updatedAt": "2026-11-25T19:36:52+05:00",
  "updates": [
+  {
+   "id": "7cca13d77701ec7e",
+   "source": "nts",
+   "kind": "schedule",
+   "title": "Shaheed Zulfikar Ali Bhutto Institute of Science and Technology SZABIST(Special Test for MS Programs-I))",
+   "url": "https://portal.nts.org.pk/login",
+   "date": null,
+   "firstSeen": "2026-11-25T19:36:52+05:00"
+  },
   {
    "id": "c8ea714f553a299a",
    "source": "bpsc",
@@ -304,15 +313,6 @@
    "kind": "result",
    "title": "Sindh High Court (Recruitment Test For the Post of Junior Office Associate) (Answer Keys)",
    "url": "https://nts.org.pk/Test&Products/Lists/SHC_22_23_08_2026_Keys/Posts.php",
-   "date": null,
-   "firstSeen": "2026-11-02T03:51:49+05:00"
-  },
-  {
-   "id": "81ff07c93d076349",
-   "source": "nts",
-   "kind": "result",
-   "title": "Sindh High Court (Recruitment Test For the Post of Junior Office Associate (Larkana)) (Answer Keys)",
-   "url": "https://nts.org.pk/Test&Products/Lists/SHC_23_11_08_2026_Keys/Posts.php",
    "date": null,
    "firstSeen": "2026-11-02T03:51:49+05:00"
   },
