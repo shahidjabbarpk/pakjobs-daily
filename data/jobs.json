@@ -1,6 +1,66 @@
 {
- "updatedAt": "2026-11-26T13:23:47+05:00",
+ "updatedAt": "2026-11-27T00:03:37+05:00",
  "jobs": [
+  {
+   "id": "34f5559dc8bb7f16",
+   "source": "njp",
+   "title": "Legal Advisor (Petroleum Concessions Directorate) (SPPS IV)",
+   "organization": "Petroleum Division (Ministry of Energy)",
+   "category": "govt",
+   "cities": [],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10681",
+   "description": "Legal Advisor (Petroleum Concessions Directorate) (SPPS-IV)\nEducation: Bachelor’s or Master’s degree in Law (LLB/ LLM) from an HEC recognized local or international university. Additional certifications in oil & gas law, international arbitration, or energy law will be an asset.\nExperience: Minimum 3 years of experience in legal advisory, contract negotiation, or regulatory affairs in the petroleum, energy, or extractive sectors. Prior experience working with public sector entities, exploration & production companies, or international oil and gas firms preferred.\nJob Description; As per TORs",
+   "grade": "SPPS-IV",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "postedDate": "2026-11-26",
+   "lastDate": "2026-12-13",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Petroleum-Division-(Ministry-of-Energy)-1127132510211139.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10681",
+   "firstSeen": "2026-11-27T00:03:37+05:00"
+  },
+  {
+   "id": "f4d7ca1c3d19e4a6",
+   "source": "njp",
+   "title": "Energy Strategy and Technical Advisor (SPPS-I)",
+   "organization": "Petroleum Division (Ministry of Energy)",
+   "category": "govt",
+   "cities": [
+    "Islamabad"
+   ],
+   "qualification": "Masters",
+   "url": "https://www.njp.gov.pk/jobs/10680",
+   "description": "Education: Minimum 16 years of education in Engineering, Energy Management, Business Administration, or related fields.\nExperience: i) Minimum of 15 years of experience in the oil and gas sector, with at least 5 years in a senior position, ii) Extensive experience in strategic planning, operational optimization, and regulatory compliance within the oil and gas industry, iii) Expertise in managing and executing large-scale oil and gas projects and navigating complex energy sector challenges.\nJob Location: Islamabad\nJob description: As per TORs of the position",
+   "grade": "SPPS-I",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "postedDate": "2026-11-26",
+   "lastDate": "2026-12-13",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Petroleum-Division-(Ministry-of-Energy)-1127132510211139.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10680",
+   "firstSeen": "2026-11-27T00:03:37+05:00"
+  },
+  {
+   "id": "90d0082dee8d74ce",
+   "source": "njp",
+   "title": "Project Director - Solar Works",
+   "organization": "Private Power & Infrastructure Board (PPIB)",
+   "category": "govt",
+   "cities": [],
+   "qualification": "Bachelor",
+   "url": "https://www.njp.gov.pk/jobs/10679",
+   "description": "Role purpose\nHead the PPIB Project Management Unit for Solar Works (PMU-Solar) and be accountable for planning, coordination and timely delivery of the solar components of the 100 MWp GB project within the sanctioned scope, budget and implementation arrangements.\nKey responsibilities\nLead the PMU-Solar, establish the integrated execution programme, monitor milestones, expenditure, quality, risks and corrective actions for rooftop and utility-scale PV, associated BESS and plant-level C&C/SCADA.\nOversee formal takeover of solar-project records, ongoing procurements and contractual obligations from W&PD GB, including Rooftop Lots I & II, Lot III and applicable consultancy contracts, through duly approved arrangements.\nCoordinate procurement and contract administration for the remaining solar packages, including the utility-scale plants, in collaboration with the relevant PPIB sections and the appointed consultants.\nDirect and coordinate the inputs of EPC contractors, NESPAK and the independent TPV consultant; ensure that review findings, non-conformities, milestone verification and payment-related conditions are resolved and recorded.\nMaintain an integrated interface schedule with W&PD GB/PMU Non-Solar for site access, grid interconnections, transmission/distribution facilities and project-wide C&C/SCADA without assuming execution of those non-solar packages.\nOversee project financial planning, PSDP reporting and approved payment processing, contract risks, stakeholder coordination, O&M transition and final handover, through competent/authorized officers.\nPrepare or coordinate reporting to PPIB, Power Division, the Steering Committee and Planning Commission, including progress, PC-III/RBM information, completion/PC-IV inputs and audit responses.\nPrepare annual cash and work plans before commencement of each financial year and oversee the operation and management of project accounts in accordance with applicable financial rules and approved arrangements.\nRegularly update project progress in the prescribed Planning Commission reporting systems, including PMES/iPAS, as applicable, and prepare quarterly and annual progress reports.\nEstablish performance indicators for PMU-Solar personnel and periodically evaluate their performance.\nEnsure proper maintenance and custody of all project documents, accounts, assets, contractual records and audit reports.\nExercise delegated administrative, functional and financial powers in accordance with applicable rules and remain ",
+   "grade": "PPS-11",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "ageLimit": "Max: 62 years",
+   "postedDate": "2026-11-26",
+   "lastDate": "2026-12-09",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Private-Power-&-Infrastructure-Board-(PPIB)-3196292904221132.jpg",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10679",
+   "firstSeen": "2026-11-27T00:03:37+05:00"
+  },
   {
    "id": "46b7befde1488f07",
    "source": "njp",
@@ -160,75 +220,6 @@
    "firstSeen": "2026-11-25T02:14:33+05:00"
   },
   {
-   "id": "30fb4e8a7348b169",
-   "source": "njp",
-   "title": "Driver (KPT PS-03)",
-   "organization": "Karachi Port Trust",
-   "category": "govt",
-   "cities": [
-    "Karachi",
-    "Balochistan"
-   ],
-   "qualification": "Matric",
-   "url": "https://www.njp.gov.pk/jobs/10671",
-   "description": "Required Qualification:\nMatriculate, subject to passing Trade Test and possessing Heavy Duty Licence\nRequired Experience:\n02 years experience in relevant field.\nBPS-06 is equal to KPT PS-3.",
-   "grade": "BPS-06",
-   "jobType": "Contract",
-   "vacancies": 3,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 35 years",
-   "postedDate": "2026-11-24",
-   "lastDate": "2026-12-07",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10671",
-   "firstSeen": "2026-11-25T02:14:33+05:00"
-  },
-  {
-   "id": "e4c425bc348abd4e",
-   "source": "njp",
-   "title": "Fire Driver (KPT PS-03)",
-   "organization": "Karachi Port Trust",
-   "category": "govt",
-   "cities": [
-    "Karachi",
-    "Balochistan"
-   ],
-   "qualification": "Matric",
-   "url": "https://www.njp.gov.pk/jobs/10670",
-   "description": "Required Qualification:\nMatriculate, subject to passing Trade Test Heavy Duty License\nRequired Experience:\n02 years experience in relevant field.\nBPS-06 is equal to KPT PS-03.",
-   "grade": "BPS-06",
-   "jobType": "Contract",
-   "vacancies": 6,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 35 years",
-   "postedDate": "2026-11-24",
-   "lastDate": "2026-12-07",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10670",
-   "firstSeen": "2026-11-25T02:14:33+05:00"
-  },
-  {
-   "id": "cd39abdbd880b367",
-   "source": "njp",
-   "title": "Syrang (KPT PS-04)",
-   "organization": "Karachi Port Trust",
-   "category": "govt",
-   "cities": [
-    "Karachi",
-    "Balochistan"
-   ],
-   "qualification": "Matric",
-   "url": "https://www.njp.gov.pk/jobs/10669",
-   "description": "Required Qualification:\nMatriculate having Syrang certificate from MMD\nRequired Experience:\n03 years experience in relevant field with Basic Computer Literacy.\nBPS-08 is equal to KPT PS-04",
-   "grade": "BPS-08",
-   "jobType": "Contract",
-   "vacancies": 1,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 35 years",
-   "postedDate": "2026-11-24",
-   "lastDate": "2026-12-07",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10669",
-   "firstSeen": "2026-11-25T02:14:33+05:00"
-  },
-  {
    "id": "56e6d67e6fda3374",
    "source": "njp",
    "title": "Diver Cum under water",
@@ -272,6 +263,75 @@
    "postedDate": "2026-11-24",
    "lastDate": "2026-12-07",
    "applyUrl": "https://www.njp.gov.pk/jobs/10668",
+   "firstSeen": "2026-11-25T02:14:33+05:00"
+  },
+  {
+   "id": "cd39abdbd880b367",
+   "source": "njp",
+   "title": "Syrang (KPT PS-04)",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10669",
+   "description": "Required Qualification:\nMatriculate having Syrang certificate from MMD\nRequired Experience:\n03 years experience in relevant field with Basic Computer Literacy.\nBPS-08 is equal to KPT PS-04",
+   "grade": "BPS-08",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-24",
+   "lastDate": "2026-12-07",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10669",
+   "firstSeen": "2026-11-25T02:14:33+05:00"
+  },
+  {
+   "id": "e4c425bc348abd4e",
+   "source": "njp",
+   "title": "Fire Driver (KPT PS-03)",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10670",
+   "description": "Required Qualification:\nMatriculate, subject to passing Trade Test Heavy Duty License\nRequired Experience:\n02 years experience in relevant field.\nBPS-06 is equal to KPT PS-03.",
+   "grade": "BPS-06",
+   "jobType": "Contract",
+   "vacancies": 6,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-24",
+   "lastDate": "2026-12-07",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10670",
+   "firstSeen": "2026-11-25T02:14:33+05:00"
+  },
+  {
+   "id": "30fb4e8a7348b169",
+   "source": "njp",
+   "title": "Driver (KPT PS-03)",
+   "organization": "Karachi Port Trust",
+   "category": "govt",
+   "cities": [
+    "Karachi",
+    "Balochistan"
+   ],
+   "qualification": "Matric",
+   "url": "https://www.njp.gov.pk/jobs/10671",
+   "description": "Required Qualification:\nMatriculate, subject to passing Trade Test and possessing Heavy Duty Licence\nRequired Experience:\n02 years experience in relevant field.\nBPS-06 is equal to KPT PS-3.",
+   "grade": "BPS-06",
+   "jobType": "Contract",
+   "vacancies": 3,
+   "domicile": "Balochistan",
+   "ageLimit": "Max: 35 years",
+   "postedDate": "2026-11-24",
+   "lastDate": "2026-12-07",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10671",
    "firstSeen": "2026-11-25T02:14:33+05:00"
   },
   {
@@ -1051,25 +1111,6 @@
    "firstSeen": "2026-11-20T02:38:44+05:00"
   },
   {
-   "id": "e5d327622871fbf7",
-   "source": "njp",
-   "title": "Executive Director Underwriting",
-   "organization": "Pakistan Reinsurance Company Limited",
-   "category": "private",
-   "cities": [],
-   "qualification": "Bachelor",
-   "url": "https://www.njp.gov.pk/jobs/10631",
-   "description": "Executive Director Underwriting\nMinimum Qualification and Experience:\nACII or FCII, with at least fifteen years of relevant post qualification experience with an insurer/reinsurer, out of which five years must be as a Key Officer of an insurer/reinsurer.\nOR\nMaster's degree or 16 years of education in Insurance, Risk Management, Finance, or M.Com Insurance from an HEC recognized university, with at least twenty years of post qualification experience with an insurer/reinsurer, out of which five years must be as a Key Officer of an insurer/reinsurer.\nOR\nFellow or Associate Member of the Casualty Actuarial Society, the Institute of Actuaries in England, or the Society of Actuaries in the United States of America, with at least fifteen years of relevant post qualification experience, out of which five years must be as a Key Officer of an insurer/reinsurer.\nJob Type: Performance based contract for a period of three years, with a competitive market based compensation package, to be mutually decided during the interview, commensurate with the candidate's relevant and verifiable experience.\nVacancies/Slots: 01\nMax. Age Limit Required: Maximum 57 years of age as on the closing date of the advertisement.\nIMPORTANT NOTES\nPakistan Reinsurance Company Limited PRCL is an Equal Opportunity Employer.\nThe appointment will be on a performance-based contract for a period of three years. The selected candidate will be paid a competitive market-based compensation package, to be mutually decided during the interview, commensurate with the candidate's relevant and verifiable experience.\nInterested applicants may apply online at https://www.njp.gov.pk within fifteen days of the publication of this advertisement by uploading their updated CV/resume along with a copy of CNIC, academic/professional degrees and transcripts, and experience certificates. In case of any difficulty encountered in online application, please contact the HR Department at the phone number or email address stated below.\nOriginal documents along with HEC verified testimonials will be required at the time of the interview.\nThe candidate shall not be entitled to any TA/DA while appearing for the interview.\nPRCL reserves the right to stop the hiring process at any stage without assigning any reason.\nOnly shortlisted applicants will be invited for an interview, and selection will be finalized as per the approved policy of PRCL.\nAny efforts made to influence the recruitment and selection process will lead to the dis",
-   "grade": "BPS-20",
-   "jobType": "Contract",
-   "vacancies": 1,
-   "ageLimit": "Max: 57 years",
-   "postedDate": "2026-11-11",
-   "lastDate": "2026-11-25",
-   "applyUrl": "https://www.njp.gov.pk/jobs/10631",
-   "firstSeen": "2026-11-11T11:13:44+05:00"
-  },
-  {
    "id": "d117e852cddd2251",
    "source": "paf",
    "title": "Join PAF - Officers Induction (8 courses open)",
@@ -1221,47 +1262,6 @@
    "postedDate": "2026-10-30",
    "applyUrl": "https://www.joinpaknavy.gov.pk/registrationform",
    "description": "Pakistan Navy has announced induction as M Cadet. See the official advertisement and selection criteria for age, height and qualification requirements.",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "1afe29316cd11340",
-   "source": "njp",
-   "title": "Junior Auditors",
-   "organization": "Office of the Controller General of Accounts",
-   "category": "govt",
-   "cities": [
-    "Balochistan"
-   ],
-   "qualification": "Middle",
-   "url": "https://www.njp.gov.pk/jobs/9862",
-   "description": "Primary Role: Handles initial document entry and basic pre-audit compilation.\nCore Job Duties:\nPost and maintain initial work registers, cash books, and ledger entries for public funds.\nProcess, sort, and perform initial checks on payment claims, pension files, public works/contractor bills, and revenue refunds.\nAssist in compiling monthly civil accounts and bank reconciliation statements.\nPrepare draft objection statements and gather supporting vouchers for review by Senior Auditors or Assistant Accounts Officers.\nHandle routine data entry, file maintenance, and inter-departmental dispatch of receipts and schedules",
-   "grade": "BPS-11",
-   "jobType": "Regular",
-   "vacancies": 39,
-   "domicile": "Balochistan",
-   "ageLimit": "Max: 30 years",
-   "postedDate": "2026-10-26",
-   "lastDate": "2026-11-26",
-   "logo": "https://www.njp.gov.pk/images/profiles/insg-Office-of-the-Controller-General-of-Accounts-5112112909220224.png",
-   "applyUrl": "https://www.njp.gov.pk/jobs/9862",
-   "firstSeen": "2026-11-02T03:50:38+05:00"
-  },
-  {
-   "id": "881e3a8066d102e6",
-   "source": "army",
-   "title": "Pak Army Soldier Recruitment - Recruitment as a Soldier - پاک فوج میں بطور سپاہی بھرتی",
-   "organization": "Pakistan Army",
-   "category": "armed",
-   "cities": [
-    "All Pakistan"
-   ],
-   "qualification": "Matric",
-   "url": "https://joinpakarmy.gov.pk/",
-   "postedDate": "2026-09-01",
-   "lastDate": "2026-11-23",
-   "description": "Registration: 2026-09-01 to 2026-11-23. Tests: 2026-09-01 to 2026-11-23. Date of birth between 2003-11-24 and 2009-05-24 (age cut-off 2026-11-24).",
-   "applyUrl": "https://joinpakarmy.gov.pk/course?com_type=sldr_recruitment",
-   "ageLimit": "Born 2003-11-24 – 2009-05-24",
    "firstSeen": "2026-11-02T03:50:38+05:00"
   }
  ]
