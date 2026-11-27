@@ -1,6 +1,15 @@
 {
- "updatedAt": "2026-11-27T07:12:46+05:00",
+ "updatedAt": "2026-11-27T15:55:27+05:00",
  "updates": [
+  {
+   "id": "9c240f5dac4a72b2",
+   "source": "kppsc",
+   "kind": "interview",
+   "title": "Interview Programme for the Month of January, 2027 New",
+   "url": "https://www.kppsc.gov.pk/public/assets/schedule/files/Interview_Program_January_2027.pdf",
+   "date": null,
+   "firstSeen": "2026-11-27T15:55:27+05:00"
+  },
   {
    "id": "f31e9ef372e5ddac",
    "source": "fpsc",
