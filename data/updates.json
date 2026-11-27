@@ -1,6 +1,24 @@
 {
- "updatedAt": "2026-11-27T15:55:27+05:00",
+ "updatedAt": "2026-11-28T00:59:00+05:00",
  "updates": [
+  {
+   "id": "a07b642e8b5079f8",
+   "source": "spsc",
+   "kind": "schedule",
+   "title": "Sub-Ordinate Treasury Accounts Service (Accounts Clerk) of Departmental Examination.",
+   "url": "https://spsc.gov.pk/written-result/Nov2026/Sub_Ordinate _Treasury_AccountsClerk.pdf",
+   "date": null,
+   "firstSeen": "2026-11-28T00:59:00+05:00"
+  },
+  {
+   "id": "ba48911f9df5f4f9",
+   "source": "spsc",
+   "kind": "schedule",
+   "title": "Screening Test for Combined Competitive Examination (Executive Cadre) CCE-2026.",
+   "url": "https://spsc.gov.pk/written-and-interview-schedule/Nov2026/Screening_Timetable_CCE2026.pdf",
+   "date": null,
+   "firstSeen": "2026-11-28T00:59:00+05:00"
+  },
   {
    "id": "9c240f5dac4a72b2",
    "source": "kppsc",
@@ -56,15 +74,6 @@
    "firstSeen": "2026-11-24T05:54:26+05:00"
   },
   {
-   "id": "e2ea3ffc245306a8",
-   "source": "spsc",
-   "kind": "schedule",
-   "title": "New: Screening Test for Combined Competitive Examination (Executive Cadre) CCE-2026.",
-   "url": "https://spsc.gov.pk/written-and-interview-schedule/Nov2026/Screening_Timetable_CCE2026.pdf",
-   "date": null,
-   "firstSeen": "2026-11-24T05:54:26+05:00"
-  },
-  {
    "id": "10910594e35f0b98",
    "source": "bpsc",
    "kind": "result",
@@ -81,33 +90,6 @@
    "url": "https://nts.org.pk/Test&Products/Lists/Lasbela_15Nov2026_Keys/Posts.php",
    "date": null,
    "firstSeen": "2026-11-23T17:50:32+05:00"
-  },
-  {
-   "id": "d42a136e340135bd",
-   "source": "spsc",
-   "kind": "schedule",
-   "title": "New: Assistant Collector Part-I of Departmental Examination.",
-   "url": "https://spsc.gov.pk/written-result/Nov2026/Assistant_Collector_P-I.pdf",
-   "date": null,
-   "firstSeen": "2026-11-19T18:14:02+05:00"
-  },
-  {
-   "id": "2e257a191f92c8f2",
-   "source": "spsc",
-   "kind": "schedule",
-   "title": "New: Assistant Collector Part-II of Departmental Examination.",
-   "url": "https://spsc.gov.pk/written-result/Nov2026/Assistant_Collector_P-II.pdf",
-   "date": null,
-   "firstSeen": "2026-11-19T18:14:02+05:00"
-  },
-  {
-   "id": "1dcdc4efd9b0b70a",
-   "source": "spsc",
-   "kind": "schedule",
-   "title": "New: Sub-Ordinate Treasury Accounts Service (Accounts Clerk) of Departmental Examination.",
-   "url": "https://spsc.gov.pk/written-result/Nov2026/Sub_Ordinate _Treasury_AccountsClerk.pdf",
-   "date": null,
-   "firstSeen": "2026-11-19T18:14:02+05:00"
   },
   {
    "id": "958f274e4291131c",
