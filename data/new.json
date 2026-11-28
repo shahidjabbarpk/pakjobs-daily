@@ -1,4 +1,29 @@
 {
- "updatedAt": "2026-11-28T07:43:30+05:00",
- "jobs": []
+ "updatedAt": "2026-11-28T16:50:36+05:00",
+ "jobs": [
+  {
+   "id": "385ee40bd2ae99d1",
+   "source": "njp",
+   "title": "Director General Co-ordination (MP-II Scale)",
+   "organization": "Ministry of Railways",
+   "category": "govt",
+   "cities": [
+    "Islamabad",
+    "Lahore",
+    "Quetta"
+   ],
+   "qualification": "PhD",
+   "url": "https://www.njp.gov.pk/jobs/10682",
+   "description": "Qualification and Experience:\nPh.D. in National Security/Criminology with 05 years professional experience in the field of Defence-Public Sector Logistics Coordination and Right of Way Policy matters\nOR\nMaster's degree in National Security/Criminology with 07 years professional experience in the field of Defence-Public Sector Logistics Coordination and Right of Way Policy matters\nJob Location: Place of posting shall be Islamabad with frequent travelling all over the Pakistan Railways.\nJob Description:\nTo monitor ongoing projects in coordination with Logistics Directorate of Army in consultation with respective Director General in the Ministry of Railways.\nJoint ventures undertaken by Railways with NLC, FWO, etc., in line with Pakistan Railways policy and instructions of the Secretary/Chairman and Chief Executive Officer/Sr. General Manager.\nMilitary movements through Railways.\nAll defense related sidings (PAF and Army).\nLand issues related to Defense in consultation with Director/P&L, Pakistan Railways, Lahore and Director General Technical in the Ministry of Railways.\nSecurity of CPEC related projects as per policy circulated by Ministry of Railways.\nSecurity of Operations on Bolan Sections (Quetta).\nAny other assignment assigned by Secretary/Chairman Railways.",
+   "grade": "MP-II",
+   "jobType": "Contract",
+   "vacancies": 1,
+   "ageLimit": "Max: 62 years",
+   "postedDate": "2026-11-28",
+   "lastDate": "2026-12-12",
+   "logo": "https://www.njp.gov.pk/images/profiles/insg-Ministry-of-Railways-1043712409211148.png",
+   "applyUrl": "https://www.njp.gov.pk/jobs/10682",
+   "firstSeen": "2026-11-28T16:50:36+05:00"
+  }
+ ]
 }
